@@ -1,7 +1,4 @@
-E-co: A Brand Client Profile
-Company Overview
-Brand Name: E-co
-
+E-co: A Brand Client ProfileCompany Overview
 
 # E-co
 
