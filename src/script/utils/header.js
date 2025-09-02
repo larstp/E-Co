@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const isIndexPage = window.location.pathname.endsWith("index.html");
   const isLoggedIn = false;
 
-  const header = document.createElement("header");
-  header.className = "header-mobile";
+  const mobileHeader = document.createElement("header");
+  mobileHeader.className = "header-mobile";
 
   const upper = document.createElement("div");
   upper.className = "header-mobile__upper";
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (isIndexPage) {
     const searchContainer = document.createElement("form");
-    searchContainer.className = "header-mobile__search";
+    searchContainer.className = "site-search";
     searchContainer.setAttribute("role", "search");
     searchContainer.setAttribute("aria-label", "Site search");
     searchContainer.action = "#";
@@ -78,14 +78,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const searchInput = document.createElement("input");
     searchInput.type = "search";
-    searchInput.className = "header-mobile__search-input";
+    searchInput.className = "site-search__input";
     searchInput.placeholder = "Search";
     searchInput.setAttribute("aria-label", "Search");
     searchInput.autocomplete = "off";
 
     const searchBtn = document.createElement("button");
     searchBtn.type = "submit";
-    searchBtn.className = "header-mobile__search-btn";
+    searchBtn.className = "site-search__btn";
     searchBtn.setAttribute("aria-label", "Submit search");
     const searchBtnImg = document.createElement("img");
     searchBtnImg.src = "/public/assets/icons/icons-svg/black/search.svg";
@@ -165,21 +165,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  header.appendChild(upper);
-  header.appendChild(lower);
-
-  document.body.insertAdjacentElement("afterbegin", header);
-
-  if (!isLoggedIn) {
-    const adBanner = document.createElement("div");
-    adBanner.className = "header-mobile__ad";
-    adBanner.innerHTML = `
-      <p>
-        <a href="/src/pages/register.html">Sign up now</a> and get 20% off your first order
-      </p>
-    `;
-    document.body.insertAdjacentElement("afterbegin", adBanner);
-  }
+  mobileHeader.appendChild(upper);
+  mobileHeader.appendChild(lower);
 
   const navMenu = document.createElement("nav");
   navMenu.className = "mobile-nav";
@@ -295,16 +282,13 @@ document.addEventListener("DOMContentLoaded", function () {
   navMenu.appendChild(navHeader);
   navMenu.appendChild(navBody);
 
-  document.body.appendChild(navMenu);
-
   const navOverlay = document.createElement("div");
   navOverlay.className = "mobile-nav-overlay";
-  document.body.appendChild(navOverlay);
 
   const openMenu = () => {
     navMenu.classList.add("is-open");
     navOverlay.classList.add("is-open");
-    const adBanner = document.querySelector(".header-mobile__ad");
+    const adBanner = document.querySelector(".site-ad");
     const adBannerHeight = adBanner ? adBanner.offsetHeight : 0;
     navMenu.style.top = `${adBannerHeight}px`;
     navMenu.style.height = `calc(100% - ${adBannerHeight}px)`;
@@ -319,11 +303,9 @@ document.addEventListener("DOMContentLoaded", function () {
   closeButton.addEventListener("click", closeMenu);
   navOverlay.addEventListener("click", closeMenu);
 
-  // Desktop Header
   const desktopHeader = document.createElement("header");
   desktopHeader.className = "header-desktop";
 
-  // -- Upper Desktop Header --
   const desktopUpper = document.createElement("div");
   desktopUpper.className = "header-desktop__upper";
 
@@ -412,9 +394,97 @@ document.addEventListener("DOMContentLoaded", function () {
   // -- Lower Desktop Header --
   const desktopLower = document.createElement("div");
   desktopLower.className = "header-desktop__lower";
-  // Lower part will be built in the next step
+
+  // Left side: Category browser
+  const categoryBrowser = document.createElement("button");
+  categoryBrowser.className = "header-desktop__category-browser";
+
+  const categoryIcon = document.createElement("img");
+  categoryIcon.src =
+    "/public/assets/icons/icons-svg/black/desktop-hamburger.svg";
+  categoryIcon.alt = "Categories";
+
+  const categoryText = document.createElement("span");
+  categoryText.textContent = "Browse by category";
+
+  const categoryArrow = document.createElement("img");
+  categoryArrow.src = "/public/assets/icons/icons-svg/black/down-arrow.svg";
+  categoryArrow.alt = "";
+  categoryArrow.className = "header-desktop__category-arrow";
+
+  categoryBrowser.appendChild(categoryIcon);
+  categoryBrowser.appendChild(categoryText);
+  categoryBrowser.appendChild(categoryArrow);
+
+  // Center: Search bar
+  const desktopSearchContainer = document.createElement("form");
+  desktopSearchContainer.className = "site-search";
+  desktopSearchContainer.action = "#";
+  desktopSearchContainer.onsubmit = (e) => e.preventDefault();
+
+  const desktopSearchInput = document.createElement("input");
+  desktopSearchInput.type = "search";
+  desktopSearchInput.className = "site-search__input";
+  desktopSearchInput.placeholder = "Search";
+  desktopSearchInput.autocomplete = "off";
+
+  const desktopSearchBtn = document.createElement("button");
+  desktopSearchBtn.type = "submit";
+  desktopSearchBtn.className = "site-search__btn";
+  const desktopSearchBtnImg = document.createElement("img");
+  desktopSearchBtnImg.src = "/public/assets/icons/icons-svg/black/search.svg";
+  desktopSearchBtnImg.alt = "Search";
+  desktopSearchBtn.appendChild(desktopSearchBtnImg);
+
+  desktopSearchContainer.appendChild(desktopSearchInput);
+  desktopSearchContainer.appendChild(desktopSearchBtn);
+
+  // Right side: Contact info
+  const contactInfo = document.createElement("div");
+  contactInfo.className = "header-desktop__contact-info";
+
+  const contactIcon = document.createElement("img");
+  contactIcon.src = "/public/assets/icons/icons-svg/black/line-phone.svg";
+  contactIcon.alt = "";
+
+  const contactTextContainer = document.createElement("div");
+  contactTextContainer.className = "header-desktop__contact-text-container";
+  const contactText = document.createElement("span");
+  contactText.className = "header-desktop__contact-text";
+  contactText.textContent = "Questions? Give us a call!";
+  const contactNumber = document.createElement("span");
+  contactNumber.className = "header-desktop__contact-number";
+  contactNumber.textContent = "+47 45612378";
+
+  contactTextContainer.appendChild(contactText);
+  contactTextContainer.appendChild(contactNumber);
+
+  contactInfo.appendChild(contactIcon);
+  contactInfo.appendChild(contactTextContainer);
+
+  desktopLower.appendChild(categoryBrowser);
+  desktopLower.appendChild(desktopSearchContainer);
+  desktopLower.appendChild(contactInfo);
 
   desktopHeader.appendChild(desktopLower);
 
+  let adBanner = null;
+  if (!isLoggedIn) {
+    adBanner = document.createElement("div");
+    adBanner.className = "site-ad";
+    adBanner.innerHTML = `
+      <p>
+        <a href="/src/pages/register.html">Sign up now</a> and get 20% off your first order
+      </p>
+    `;
+  }
+
+  document.body.appendChild(navMenu);
+  document.body.appendChild(navOverlay);
+  document.body.insertAdjacentElement("afterbegin", mobileHeader);
   document.body.insertAdjacentElement("afterbegin", desktopHeader);
+
+  if (adBanner) {
+    document.body.insertAdjacentElement("afterbegin", adBanner);
+  }
 });

@@ -6,4 +6,12 @@
   .header-desktop {
     display: flex;
   }
+
+  .footer-mobile {
+    display: none;
+  }
+
+  .footer-desktop {
+    display: flex;
+  }
 }
