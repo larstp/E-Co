@@ -1,4 +1,25 @@
-/* Mobile Header Styles */
+/* Mobile Header Ad - this is hopefully only shown if the user is NOT logged in */
+.header-mobile__ad {
+  background-color: #0d47a1;
+  color: #fff;
+  text-align: center;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+}
+
+.header-mobile__ad p {
+  margin: 0;
+}
+
+.header-mobile__ad a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Mobile Header */
 
 .header-mobile {
   width: 100%;
@@ -26,6 +47,7 @@
   cursor: pointer;
   height: 40px;
   width: 70px;
+  z-index: 2;
 }
 
 .header-mobile__hamburger svg {
@@ -41,12 +63,20 @@
   height: 100%;
   display: flex;
   align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 .header-mobile__icons {
   display: flex;
   align-items: center;
   gap: 8px;
+  z-index: 2;
+  min-width: 70px;
+  justify-content: flex-end;
 }
 
 .header-mobile__icon {
@@ -73,6 +103,10 @@
   align-items: center;
   justify-content: center;
   padding: 0 16px;
+}
+
+.header-mobile__lower--breadcrumb {
+  justify-content: flex-start;
 }
 
 .header-mobile__search {
@@ -118,4 +152,276 @@
   display: block;
 }
 
-/* Mobile Header Styles */
+/* Breadcrumbs */
+
+.header-mobile__breadcrumbs {
+  width: 100%;
+  max-width: 670px;
+  color: #fff;
+  padding-left: 8px;
+}
+
+.header-mobile__breadcrumbs-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
+}
+
+.header-mobile__breadcrumbs-list li {
+  display: flex;
+  align-items: center;
+}
+
+.header-mobile__breadcrumbs-list li:not(:last-child)::after {
+  content: "/";
+  margin: 0 8px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.header-mobile__breadcrumbs-list a {
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.header-mobile__breadcrumbs-list a:hover {
+  opacity: 0.8;
+}
+
+.header-mobile__breadcrumbs-list li[aria-current="page"] {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Mobile nav menu */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100%;
+  background: #fff;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: left 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-nav.is-open {
+  left: 0;
+}
+
+.mobile-nav__header {
+  padding: 16px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-nav__close {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-nav__logo {
+  margin-top: 20px;
+}
+
+.mobile-nav__logo img {
+  width: 100px;
+  height: 100px;
+}
+
+.mobile-nav__logo h1 {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  font-size: 2rem;
+  margin: 8px 0 0;
+}
+
+.mobile-nav__body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding-top: 16px;
+}
+
+.mobile-nav__links {
+  list-style: none;
+  margin: 0;
+  padding: 0 16px;
+}
+
+.mobile-nav__links li {
+  margin-bottom: 8px;
+}
+
+.mobile-nav__links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  text-decoration: none;
+  color: #222;
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 18pt;
+  border-radius: 10px 0px 0px 10px;
+  transition: background-color 0.2s, color 0.2s;
+  width: 260px;
+}
+
+.mobile-nav__links a img {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.2s;
+}
+
+.mobile-nav__links a:hover {
+  background-color: #1976d2;
+  color: #fff;
+}
+
+.mobile-nav__links a:hover img {
+  filter: brightness(0) invert(1);
+}
+
+.mobile-nav__lower-section {
+  background-color: #1976d2;
+  margin-top: 8px;
+  flex-grow: 1;
+  padding: 16px 0;
+}
+
+.mobile-nav__lower-section .mobile-nav__links a {
+  color: #ffffff;
+}
+
+.mobile-nav__lower-section .mobile-nav__links a img {
+  filter: brightness(0) invert(1);
+}
+
+.mobile-nav__lower-section .mobile-nav__links a:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.mobile-nav__lower-section .mobile-nav__links a:hover img {
+  filter: none;
+}
+
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.mobile-nav-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Desktop header */
+.header-desktop {
+  display: none; /* Hidden by default, shown in media.css */
+  width: 100%;
+  flex-direction: column;
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+.header-desktop__upper,
+.header-desktop__lower {
+  height: 65px; /* User requested 35px, but mobile is 65px. Using 65px for consistency. This can be changed. */
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.header-desktop__upper {
+  background-color: #fff;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.header-desktop__lower {
+  background-color: #1976d2;
+}
+
+/* Logo */
+.header-desktop__logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.header-desktop__logo-img {
+  width: 42px;
+  height: 42px;
+}
+
+.header-desktop__logo-text {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  font-size: 2.2rem;
+  color: #222;
+  line-height: 1;
+}
+
+/* Navigation */
+.header-desktop__nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 32px;
+}
+
+.header-desktop__nav-list a {
+  text-decoration: none;
+  color: #222;
+  font-size: 15pt; /* Approx 20px */
+  font-weight: 400; /* Regular */
+  transition: color 0.2s;
+}
+
+.header-desktop__nav-list a:hover {
+  color: #1976d2;
+}
+
+/* Icons */
+.header-desktop__icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-desktop__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.header-desktop__icon:hover {
+  background-color: #f0f0f0;
+}
+
+.header-desktop__icon img {
+  width: 24px;
+  height: 24px;
+}
