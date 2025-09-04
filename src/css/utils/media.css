@@ -14,4 +14,55 @@
   .footer-desktop {
     display: flex;
   }
+
+  .storefront-sort-btn {
+    display: none;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+  }
+
+  .product-card {
+    max-width: 130px;
+    min-width: 130px;
+    min-height: 300px;
+  }
+
+  .product-card .product-img {
+    max-width: 100px;
+    height: 100px;
+    font-size: 1.1rem;
+  }
+
+  .product-card .product-title {
+    font-size: 17px;
+    min-height: 38px;
+    max-height: 38px;
+  }
+
+  .product-card .product-rating {
+    font-size: 12px;
+    min-height: 16px;
+    max-height: 16px;
+  }
+
+  .product-card .review-count {
+    font-size: 14px;
+    min-height: 14px;
+    max-height: 14px;
+  }
+
+  .product-card .product-prices,
+  .product-card .old-price,
+  .product-card .discounted-price {
+    font-size: 17px;
+    min-height: 20px;
+    max-height: 20px;
+  }
+
+  .product-card-spacer {
+    height: 10px;
+  }
 }
