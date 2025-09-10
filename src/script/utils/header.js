@@ -24,7 +24,7 @@ const MOBILE_UPPER_LINKS = [
 
 const MOBILE_NAV_UPPER = [
   {
-    href: "/public/index.html",
+    href: "/index.html",
     icon: "/public/assets/icons/icons-svg/black/line-home.svg",
     text: "Home",
   },
@@ -64,7 +64,7 @@ const MOBILE_NAV_LOWER = [
 ];
 
 const DESKTOP_NAV_ITEMS = [
-  { text: "Home", href: "/public/index.html" },
+  { text: "Home", href: "/index.html" },
   { text: "Shop", href: "/src/pages/storefront.html" },
   { text: "Sale", href: "/src/pages/storefront.html?sale=true" },
   { text: "About", href: "/src/pages/about.html" },
@@ -166,7 +166,7 @@ function buildMobileHeader() {
   const logoLink = createLogo({
     tag: "a",
     className: "header-mobile__logo site-logo-text",
-    href: "/public/index.html",
+    href: "/index.html",
     text: "E.CO",
     aria: "Go to homepage",
   });
@@ -251,7 +251,7 @@ function buildBreadcrumbs(parts) {
   breadcrumbsList.className = "header-mobile__breadcrumbs-list";
   const homeItem = document.createElement("li");
   const homeLink = document.createElement("a");
-  homeLink.href = "/public/index.html";
+  homeLink.href = "/index.html";
   homeLink.textContent = "Home";
   homeItem.appendChild(homeLink);
   breadcrumbsList.appendChild(homeItem);
@@ -342,7 +342,7 @@ function buildDesktopHeader() {
   desktopUpper.className = "header-desktop__upper";
   const desktopLogoContainer = document.createElement("a");
   desktopLogoContainer.className = "header-desktop__logo-container";
-  desktopLogoContainer.href = "/public/index.html";
+  desktopLogoContainer.href = "/index.html";
   const desktopLogoImg = document.createElement("img");
   desktopLogoImg.src = "/public/assets/img/logo/logo.webp";
   desktopLogoImg.alt = "E.CO Logo";
