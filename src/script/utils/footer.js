@@ -1,6 +1,5 @@
-// =============================
 // Constants (to make stuff easier to reuse)
-// =============================
+
 const FOOTER_NAV_ITEMS = [
   { text: "About us", href: "/src/pages/about.html" },
   { text: "Contact", href: "/src/pages/contact.html" },
@@ -20,9 +19,6 @@ const FOOTER_LEGAL = {
   copyright: "© 2025 E.CO inc.",
 };
 
-// =============================
-// Helper Functions (Not sure if its more or less confusing to separate things like this but I'll try)
-// =============================
 function createFooterNavItem({ text, href }, isDesktop = false) {
   const li = document.createElement("li");
   const a = document.createElement("a");
@@ -67,9 +63,8 @@ function createFooterLogo(tag = "h1") {
   return logo;
 }
 
-// =============================
 // Builder Functions
-// =============================
+
 function buildMobileFooter() {
   const mobileFooter = document.createElement("div");
   mobileFooter.className = "footer-mobile";
@@ -138,7 +133,7 @@ function buildDesktopFooter() {
   );
   desktopNav.appendChild(desktopNavList);
 
-  // Center: img Logo (CHANGE THIS?)
+  // Center: img Logo ------------------------------------------------------(CHANGE THIS?)
 
   const desktopCenter = document.createElement("div");
   desktopCenter.className = "footer-desktop__center";
@@ -189,14 +184,10 @@ function buildDesktopFooter() {
   return desktopFooter;
 }
 
-// =============================
-// Main
-// =============================
-
-document.addEventListener("DOMContentLoaded", function () {
+export function buildFooter() {
   const footer = document.createElement("footer");
   footer.className = "site-footer";
   footer.appendChild(buildMobileFooter());
   footer.appendChild(buildDesktopFooter());
-  document.body.appendChild(footer);
-});
+  return footer;
+}

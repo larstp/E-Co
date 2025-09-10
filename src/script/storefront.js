@@ -260,7 +260,9 @@ async function loadProducts() {
       productsShown = allProducts.length;
       renderProductsPage(
         allProducts.filter(
-          (p) => (p.category || "").toLowerCase() === cat.toLowerCase()
+          (p) =>
+            Array.isArray(p.tags) &&
+            p.tags.map((t) => t.toLowerCase()).includes(cat.toLowerCase())
         )
       );
     } else if (params.has("tag")) {
@@ -291,3 +293,8 @@ async function loadProducts() {
 }
 
 document.addEventListener("DOMContentLoaded", loadProducts);
+
+import("./utils/footer.js").then((mod) => {
+  const footer = mod.buildFooter();
+  document.body.appendChild(footer);
+});

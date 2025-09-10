@@ -1,3 +1,259 @@
+/* ========== PRODUCT CARD ========== */
+.product-card {
+  max-width: 110px;
+  min-width: 90px;
+  min-height: 200px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.1), 0 1.5px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0.9rem 0.5rem 0.9rem 0.5rem;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+  overflow: visible;
+}
+.product-card:hover {
+  box-shadow: 0 8px 24px rgba(25, 118, 210, 0.18),
+    0 3px 16px rgba(0, 0, 0, 0.13);
+  transform: translateY(-2px) scale(1.03);
+  z-index: 2;
+}
+.product-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+}
+.product-img {
+  width: 100%;
+  max-width: 70px;
+  height: 60px;
+  object-fit: cover;
+  margin: 0 auto 0.4rem auto;
+  border-radius: 8px;
+  background: #f6f6f6;
+  display: block;
+}
+.product-title {
+  min-height: 32px;
+  max-height: 32px;
+  display: -webkit-box;
+  overflow: hidden;
+}
+.product-rating {
+  min-height: 14px;
+  max-height: 14px;
+}
+.review-count {
+  min-height: 12px;
+  max-height: 12px;
+}
+.product-prices {
+  min-height: 18px;
+  max-height: 18px;
+}
+.product-title {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0 0 0.12rem 0;
+  text-align: left;
+  line-height: 1.1;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+}
+.product-rating {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 9px;
+  margin: 0 0 0.05rem 0;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.product-rating .star {
+  color: #fbc02d;
+  font-size: 10pt;
+  margin-right: 2px;
+}
+.product-rating .rating-number {
+  color: #111;
+  font-size: 10pt;
+  font-family: inherit;
+  font-weight: 500;
+}
+.add-to-cart-btn.btn-small,
+.add-to-cart-btn.btn-xsmall {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin-top: 1.1rem;
+  margin-bottom: 0;
+  font-size: 13px;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+.review-count {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 0.12rem;
+  text-align: left;
+}
+.product-prices {
+  font-size: 15px;
+  font-family: "Roboto", Arial, sans-serif;
+  margin-bottom: 0.15rem;
+  text-align: left;
+  font-weight: 700;
+}
+.old-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 15px;
+  margin-right: 0.25em;
+}
+.discounted-price {
+  color: #d32f2f;
+  font-weight: bold;
+  font-size: 15px;
+}
+/* ========== BUTTONS ========== */
+
+.btn-xsmall {
+  min-width: 80px;
+  height: 36px;
+  padding: 0 1rem;
+  border-radius: 25px;
+  background: #1976d2;
+  color: #fff;
+  font-size: 0.85rem;
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.1);
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.btn-xsmall:hover,
+.btn-xsmall:focus {
+  background: #1251a3;
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.18);
+}
+
+.btn-small {
+  min-width: 80px;
+  height: 48px;
+  padding: 0 1.5rem;
+  border-radius: 25px;
+  background: #1976d2;
+  color: #fff;
+  font-size: 1rem;
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.1);
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.btn-small:hover,
+.btn-small:focus {
+  background: #1251a3;
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.18);
+}
+
+.btn-large {
+  min-width: 312px;
+  height: 48px;
+  padding: 0 2rem;
+  border-radius: 25px;
+  background: #1976d2;
+  color: #fff;
+  font-size: 1.1rem;
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.1);
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.btn-large:hover,
+.btn-large:focus {
+  background: #1251a3;
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.18);
+}
+
+.btn-large-white {
+  min-width: 112px;
+  height: 48px;
+  padding: 0 2rem;
+  border-radius: 25px;
+  background: #f0f2f5;
+  color: #222;
+  font-size: 1.1rem;
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.btn-large-white:hover,
+.btn-large-white:focus {
+  background: #e2e6ed;
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.13);
+}
+
+.btn-contrast {
+  min-width: 124px;
+  height: 48px;
+  padding: 0 1.5rem;
+  border-radius: 25px;
+  background: #d32f2f;
+  color: #fff;
+  font-size: 1rem;
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 2px 8px rgba(211, 47, 47, 0.1);
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.btn-contrast:hover,
+.btn-contrast:focus {
+  background: #a32121;
+  box-shadow: 0 4px 16px rgba(211, 47, 47, 0.18);
+}
 html {
   overflow-y: scroll;
 }
@@ -891,6 +1147,25 @@ Desktop Filter menu
   flex-direction: column;
   gap: 0.7rem;
   margin-bottom: 1.2rem;
+}
+
+/* ========== BREADCRUMB GLOBAL STYLES ========== */
+.breadcrumb {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.7rem 0 0.7rem 0;
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 1rem;
+  color: #888;
+  background: rgba(255, 0, 0, 0.2); /* DEBUG WHY CANT I SEE IT AAAAAH */
+  box-sizing: border-box;
+  z-index: 1000;
+  position: relative;
+}
+
+body.landing-page .breadcrumb {
+  display: none !important;
 }
 
 /*  And this time I remembered the __ in the class names woohoo! */

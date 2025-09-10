@@ -1,4 +1,14 @@
+@media (min-width: 700px) {
+  .summer-ad-content {
+    margin-right: 10%;
+    margin-top: 10%;
+  }
+}
+
 @media (min-width: 900px) {
+  h2 {
+    font-size: 70px;
+  }
   .header-mobile {
     display: none;
   }
@@ -13,6 +23,34 @@
 
   .footer-desktop {
     display: flex;
+  }
+
+  .breadcrumb {
+    position: relative;
+    margin-top: 65px; /* height of desktop header */
+    background: none;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    max-width: 1200px;
+    margin: 0 auto 0 0;
+    padding-left: 32px;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    font-size: 1.05rem;
+    color: #444;
+    background: none;
+    display: block;
+  }
+
+  .info-list {
+    padding-left: 180px;
+  }
+  .info-main {
+    font-size: 70px;
+  }
+  .info-detail {
+    font-size: 40px;
   }
 
   .storefront-sort-btn {
@@ -64,5 +102,52 @@
 
   .product-card-spacer {
     height: 10px;
+  }
+
+  .storefront-header-row {
+    max-width: 695px;
+  }
+
+  .landing-category-section {
+    display: none;
+  }
+
+  .category-heading {
+    display: none;
+  }
+
+  .landing-bestseller-section {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .bestseller-footer {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 0.5rem;
+  }
+
+  .bestseller-footer span {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+  }
+
+  .bestseller-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .landing-newsletter-section {
+    background-size: 100%;
+  }
+
+  .summer-ad-content {
+    margin-right: 10%;
+    margin-top: 100px;
+  }
+
+  .newsletter-heading {
+    display: block;
   }
 }

@@ -92,10 +92,6 @@ const DESKTOP_ICONS = [
   },
 ];
 
-// =============================
-// Helper Functions
-// =============================
-
 function createIconLink({ href, icon, alt, aria }) {
   const a = document.createElement("a");
   a.href = href;
@@ -135,10 +131,6 @@ function createLogo({
   el.textContent = text;
   return el;
 }
-
-// =============================
-// Builder Functions
-// =============================
 
 function buildMobileHeader() {
   const mobileHeader = document.createElement("header");
@@ -335,7 +327,6 @@ function buildMobileNavMenu() {
 function buildDesktopHeader() {
   const desktopHeader = document.createElement("header");
   desktopHeader.className = "header-desktop";
-  // Ad banner always at the top
   const adBanner = document.createElement("div");
   adBanner.className = "site-ad";
   adBanner.style.minHeight = "35px";
@@ -456,10 +447,6 @@ function buildDesktopHeader() {
   return desktopHeader;
 }
 
-// =============================
-// Main
-// =============================
-
 document.addEventListener("DOMContentLoaded", function () {
   const { mobileHeader, hamburgerBtn } = buildMobileHeader();
   const { navMenu, closeButton } = buildMobileNavMenu();
@@ -505,8 +492,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("click", function (e) {
     const target = e.target.closest(".header-desktop__category-browser");
     if (target) {
-      // Toggle the desktop filter menu
-
       if (desktopFilterMenu.classList.contains("is-open")) {
         closeDesktopFilterMenu();
       } else {

@@ -1,0 +1,363 @@
+/* --- Carousel  --- */
+
+.carousel-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 1.2rem;
+}
+.carousel-indicators {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0;
+}
+.carousel-arrow {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-main {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  font-size: 1.5em;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-weight: normal;
+  display: inline;
+}
+.info-detail {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 100;
+  display: inline;
+}
+.carousel-popout {
+  position: relative;
+  margin-top: -120px !important; /* Pull up to overlap summer ad */
+  z-index: 2;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18), 0 1.5px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* --- Summer Ad Section --- */
+.landing-summer-ad {
+  width: 100vw;
+  height: 540px;
+  min-height: 405px;
+  background-size: cover;
+  background-position: 20% 30%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  position: relative;
+  margin-bottom: 0;
+  z-index: 1;
+}
+.summer-ad-content {
+  padding: 1.2rem 1.2rem 1.2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+}
+.summer-ad-text {
+  color: #fff;
+  font-size: 1.1rem;
+  font-family: "Roboto", Arial, sans-serif;
+  margin-bottom: 0.7rem;
+  max-width: 20ch;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  text-align: left;
+}
+
+/* --- Carousel Section --- */
+.landing-carousel-section {
+  background: #fff;
+  border-radius: 1.5rem;
+  margin: -120px auto 2.5rem auto;
+  padding: 2.5rem 0.5rem 1.2rem 0.5rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18), 0 1.5px 8px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  max-width: 1070px;
+  max-height: 660px;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  border: 1.5px solid rgba(0, 0, 0, 0.04);
+}
+.carousel-heading {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 0.7rem;
+}
+.carousel-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 0.7rem;
+}
+.carousel-arrow {
+  background: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  font-size: 2rem;
+  color: #1976d2;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.carousel-arrow:active {
+  opacity: 1;
+}
+
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  width: 100%;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 0.7rem;
+}
+.carousel-indicators > span {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #bbb;
+}
+.carousel-indicators > .active {
+  background: #1976d2;
+}
+.carousel-view-all {
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+/* --- Info Section --- */
+.landing-info-section {
+  background: #0d47a1;
+  color: #fff;
+  padding: 5rem 0.5rem 2.5rem 0.5rem;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+.info-list {
+  list-style: none;
+  padding-left: 10px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1rem;
+  text-align: left;
+}
+
+/* --- Category Section --- */
+
+.category-heading {
+  padding-left: 20%;
+}
+
+.landing-category-section {
+  background: #fff;
+  color: #111;
+  margin: 0 0.7rem 1.5rem 0.7rem;
+  padding: 1.2rem 0.5rem;
+  align-self: center;
+  max-width: 600px;
+}
+.landing-category-section h2 {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  margin-bottom: 0.7rem;
+}
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.category-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  width: 100%;
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 125px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 0.7rem 1.2rem 0.7rem 0.7rem;
+  gap: 1.5rem;
+  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.04);
+  cursor: pointer;
+  transition: box-shadow 0.18s, transform 0.18s;
+  text-decoration: none;
+}
+.category-card:hover {
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.13);
+  transform: translateY(-2px) scale(1.03);
+}
+.category-card .btn_small {
+  margin-right: 1.2rem;
+}
+.category-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f6f6f6;
+}
+.category-card .btn_small {
+  flex: 1;
+  min-width: 0;
+  margin: auto;
+}
+
+/* --- Bestseller Section --- */
+
+.bestseller-heading {
+  padding-left: 20%;
+}
+
+.landing-bestseller-section {
+  background: #1976d2;
+  color: #fff;
+}
+
+.bestseller-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  width: 100%;
+  max-width: 770px;
+  margin: 20px auto 2rem auto;
+  justify-items: center;
+  align-items: stretch;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+  gap: 3rem;
+}
+
+.bestseller-footer {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.bestseller-footer span {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+.landing-bestseller-section h2 {
+  background-color: #fff;
+  color: #000;
+}
+
+.bestseller-footer .btn-large-white {
+  margin-bottom: 20px;
+}
+
+/* --- Newsletter Section --- */
+
+.landing-newsletter-section {
+  width: 100vw;
+  min-height: 500px;
+  background-size: 150%;
+  background-position: top left;
+  background-repeat: no-repeat;
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.landing-newsletter-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.38);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.newsletter-heading {
+  display: none;
+}
+
+.newsletter-content p {
+  font-size: 1rem;
+  margin: 0 0 1.2rem 0;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.newsletter-form input[type="email"] {
+  min-width: 180px;
+  flex: 1 1 180px;
+}
+
+.newsletter-form button.btn-small {
+  flex: 0 0 auto;
+}
+
+.newsletter-form input[type="email"] {
+  /* I just did this since it shouldn't be functional anyway */
+  padding: 0.7rem 1.2rem;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: "Roboto", Arial, sans-serif;
+  outline: none;
+  min-width: 0;
+  flex: 1 1 180px;
+}
+
+.newsletter-form button.btn-small {
+  height: 48px;
+  min-width: 80px;
+  padding: 0 1.5rem;
+}
+
+.newsletter-content {
+  padding: 9rem 0 0 2rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  position: relative;
+  z-index: 2;
+}
