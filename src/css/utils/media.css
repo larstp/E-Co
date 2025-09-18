@@ -9,6 +9,7 @@
   h2 {
     font-size: 70px;
   }
+
   .header-mobile {
     display: none;
   }
@@ -46,9 +47,11 @@
   .info-list {
     padding-left: 180px;
   }
+
   .info-main {
     font-size: 70px;
   }
+
   .info-detail {
     font-size: 40px;
   }
@@ -149,5 +152,43 @@
 
   .newsletter-heading {
     display: block;
+  }
+
+  .login-container {
+    box-shadow: none;
+  }
+
+  .login-logo {
+    width: 200px;
+    height: 200px;
+  }
+
+  .login-container {
+    width: 500px;
+    max-width: none;
+  }
+
+  .register-container {
+    box-shadow: none;
+    width: 500px;
+    max-width: none;
+  }
+
+  .register-logo {
+    width: 200px;
+    height: 200px;
+  }
+
+  .user-container {
+    box-shadow: none;
+    width: 500px;
+    max-width: none;
+  }
+
+  .user-welcome h2,
+  .user-welcome h3,
+  .user-welcome h4 {
+    font-size: 2.5rem;
+    padding-top: 30px;
   }
 }

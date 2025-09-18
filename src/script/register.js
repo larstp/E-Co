@@ -1,0 +1,166 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const root = document.getElementById("register-container");
+  if (!root) return;
+
+  const welcomeSection = document.createElement("section");
+  welcomeSection.className = "register-welcome";
+
+  const logoImg = document.createElement("img");
+  logoImg.src = "../../public/assets/img/logo/logo.webp";
+  logoImg.alt = "E.CO Logo";
+  logoImg.className = "register-logo";
+  logoImg.width = 100;
+  logoImg.height = 100;
+
+  const welcomeText = document.createElement("div");
+  welcomeText.className = "register-welcome-text";
+
+  const h2 = document.createElement("h2");
+  h2.textContent = "Welcome to e.co!";
+  const pWelcome = document.createElement("p");
+  pWelcome.textContent = "Let the shopping begin!";
+
+  welcomeText.appendChild(h2);
+  welcomeText.appendChild(pWelcome);
+
+  welcomeSection.appendChild(logoImg);
+  welcomeSection.appendChild(welcomeText);
+
+  const h3 = document.createElement("h3");
+  h3.className = "register-heading";
+  h3.textContent = "Create account";
+
+  const form = document.createElement("form");
+  form.className = "form register-form";
+  form.autocomplete = "on";
+
+  // E-Mail
+  const labelEmail = document.createElement("label");
+  labelEmail.htmlFor = "register-email";
+  labelEmail.textContent = "E-Mail";
+  const asteriskEmail = document.createElement("span");
+  asteriskEmail.className = "required-asterisk";
+  asteriskEmail.textContent = "*";
+  labelEmail.appendChild(asteriskEmail);
+  const inputEmail = document.createElement("input");
+  inputEmail.type = "email";
+  inputEmail.id = "register-email";
+  inputEmail.name = "email";
+  inputEmail.autocomplete = "email";
+  inputEmail.required = true;
+  inputEmail.placeholder = "john-doe@email.com";
+
+  // Username
+  const labelUser = document.createElement("label");
+  labelUser.htmlFor = "register-username";
+  labelUser.textContent = "Username";
+  const inputUser = document.createElement("input");
+  inputUser.type = "text";
+  inputUser.id = "register-username";
+  inputUser.name = "username";
+  inputUser.autocomplete = "username";
+  inputUser.required = true;
+  inputUser.placeholder = "johnny-boy";
+
+  // Phone
+  const labelPhone = document.createElement("label");
+  labelPhone.htmlFor = "register-phone";
+  labelPhone.textContent = "Phone";
+  const asteriskPhone = document.createElement("span");
+  asteriskPhone.className = "required-asterisk";
+  asteriskPhone.textContent = "*";
+  labelPhone.appendChild(asteriskPhone);
+  const inputPhone = document.createElement("input");
+  inputPhone.type = "text";
+  inputPhone.id = "register-phone";
+  inputPhone.name = "phone";
+  inputPhone.autocomplete = "tel";
+  inputPhone.required = true;
+  inputPhone.placeholder = "+47 123 45 678";
+
+  // Password
+  const labelPass = document.createElement("label");
+  labelPass.htmlFor = "register-password";
+  labelPass.textContent = "Password";
+  const asteriskPass = document.createElement("span");
+  asteriskPass.className = "required-asterisk";
+  asteriskPass.textContent = "*";
+  labelPass.appendChild(asteriskPass);
+  const inputPass = document.createElement("input");
+  inputPass.type = "password";
+  inputPass.id = "register-password";
+  inputPass.name = "password";
+  inputPass.autocomplete = "new-password";
+  inputPass.required = true;
+  inputPass.placeholder = "*******";
+
+  // Repeat Password
+  const labelRepeat = document.createElement("label");
+  labelRepeat.htmlFor = "register-repeat-password";
+  labelRepeat.textContent = "Repeat Password";
+  const asteriskRepeat = document.createElement("span");
+  asteriskRepeat.className = "required-asterisk";
+  asteriskRepeat.textContent = "*";
+  labelRepeat.appendChild(asteriskRepeat);
+  const inputRepeat = document.createElement("input");
+  inputRepeat.type = "password";
+  inputRepeat.id = "register-repeat-password";
+  inputRepeat.name = "repeat-password";
+  inputRepeat.autocomplete = "new-password";
+  inputRepeat.required = true;
+  inputRepeat.placeholder = "*******";
+
+  // Checkboxes
+  const checkboxTermsContainer = document.createElement("div");
+  checkboxTermsContainer.className = "register-checkbox-container";
+  const checkboxTerms = document.createElement("input");
+  checkboxTerms.type = "checkbox";
+  checkboxTerms.id = "register-terms";
+  checkboxTerms.name = "terms";
+  const labelTerms = document.createElement("label");
+  labelTerms.htmlFor = "register-terms";
+  labelTerms.textContent = "I accept the Terms & Conditions";
+  checkboxTermsContainer.appendChild(checkboxTerms);
+  checkboxTermsContainer.appendChild(labelTerms);
+
+  const checkboxNewsletterContainer = document.createElement("div");
+  checkboxNewsletterContainer.className = "register-checkbox-container";
+  const checkboxNewsletter = document.createElement("input");
+  checkboxNewsletter.type = "checkbox";
+  checkboxNewsletter.id = "register-newsletter";
+  checkboxNewsletter.name = "newsletter";
+  const labelNewsletter = document.createElement("label");
+  labelNewsletter.htmlFor = "register-newsletter";
+  labelNewsletter.textContent = "Subscribe to the newsletter (optional)";
+  checkboxNewsletterContainer.appendChild(checkboxNewsletter);
+  checkboxNewsletterContainer.appendChild(labelNewsletter);
+
+  // Button
+  const btnCreate = document.createElement("button");
+  btnCreate.type = "submit";
+  btnCreate.className = "btn-large";
+  btnCreate.textContent = "Create account";
+
+  form.appendChild(labelEmail);
+  form.appendChild(inputEmail);
+  form.appendChild(labelUser);
+  form.appendChild(inputUser);
+  form.appendChild(labelPhone);
+  form.appendChild(inputPhone);
+  form.appendChild(labelPass);
+  form.appendChild(inputPass);
+  form.appendChild(labelRepeat);
+  form.appendChild(inputRepeat);
+  form.appendChild(checkboxTermsContainer);
+  form.appendChild(checkboxNewsletterContainer);
+  form.appendChild(btnCreate);
+
+  root.appendChild(welcomeSection);
+  root.appendChild(h3);
+  root.appendChild(form);
+});
+
+import("../script/utils/footer.js").then((mod) => {
+  const footer = mod.buildFooter();
+  document.body.appendChild(footer);
+});

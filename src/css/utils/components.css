@@ -12,7 +12,6 @@
   justify-content: flex-start;
   padding: 0.9rem 0.5rem 0.9rem 0.5rem;
   box-sizing: border-box;
-  transition: box-shadow 0.2s, transform 0.2s;
   position: relative;
   overflow: visible;
 }
@@ -20,7 +19,6 @@
   box-shadow: 0 8px 24px rgba(25, 118, 210, 0.18),
     0 3px 16px rgba(0, 0, 0, 0.13);
   transform: translateY(-2px) scale(1.03);
-  z-index: 2;
 }
 .product-link {
   display: flex;
@@ -181,7 +179,9 @@
 }
 
 .btn-large {
+  width: 312px;
   min-width: 312px;
+  max-width: 312px;
   height: 48px;
   padding: 0 2rem;
   border-radius: 25px;
@@ -206,7 +206,8 @@
 }
 
 .btn-large-white {
-  min-width: 112px;
+  width: 312px;
+  max-width: 312px;
   height: 48px;
   padding: 0 2rem;
   border-radius: 25px;
@@ -216,7 +217,7 @@
   font-family: "Roboto", Arial, sans-serif;
   font-weight: 600;
   border: none;
-  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.1);
   cursor: pointer;
   transition: background 0.15s, box-shadow 0.15s;
   display: inline-flex;
@@ -224,10 +225,11 @@
   justify-content: center;
   white-space: nowrap;
 }
+
 .btn-large-white:hover,
 .btn-large-white:focus {
   background: #e2e6ed;
-  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.13);
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.18);
 }
 
 .btn-contrast {
@@ -314,6 +316,7 @@ html {
   background: #fff;
   padding: 0 16px;
   position: relative;
+  position: relative;
 }
 
 .header-mobile__hamburger {
@@ -328,15 +331,13 @@ html {
   width: 70px;
   z-index: 2;
 }
-.header-mobile__hamburger svg {
-  display: block;
-}
 
 .header-mobile__logo {
   text-decoration: none;
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -346,7 +347,6 @@ html {
 
 .header-mobile__icons {
   display: flex;
-  align-items: center;
   gap: 8px;
   z-index: 2;
   min-width: 70px;
@@ -1168,4 +1168,39 @@ body.landing-page .breadcrumb {
   display: none !important;
 }
 
-/*  And this time I remembered the __ in the class names woohoo! */
+/* ========== FORM GLOBAL STYLES ========== */
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form label {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"] {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 1.1rem;
+  border: 1px solid #e2e6ed;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  background: #f6f6f6;
+  color: #222;
+  outline: none !important;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form input:focus {
+  border-color: #1976d2;
+  outline: none !important;
+}

@@ -1,0 +1,96 @@
+/* -- I have to do separate button styling for some pages -- */
+
+.btn-large {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none !important;
+  height: 48px;
+}
+
+/*------------------------------------------------------------*/
+
+.register-container {
+  max-width: 350px;
+  margin: 40px auto;
+  padding: 2rem 1.5rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.register-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.register-welcome {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.register-welcome h2 {
+  font-family: "Bebas Neue", Arial, Helvetica, sans-serif;
+  padding-top: 20px;
+  font-size: 2rem;
+  margin: 0;
+  text-align: left;
+}
+
+.register-welcome p {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  margin: 0;
+  color: #555;
+  text-align: left;
+}
+
+.register-form {
+  margin-top: 15px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-form label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.15rem;
+  margin-top: 0.1rem;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.register-form input {
+  margin-bottom: 1.1rem;
+}
+
+.register-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  align-self: flex-start;
+}
+
+.register-checkbox-container input[type="checkbox"]:checked {
+  accent-color: #90caf9;
+}
+
+.register-form label .required-asterisk {
+  color: #d32f2f;
+  font-weight: bold;
+  margin-left: 2px;
+}
