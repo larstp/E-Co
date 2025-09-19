@@ -221,6 +221,7 @@
     box-shadow: none;
     align-items: flex-start;
   }
+
   .address-map-wrapper {
     flex: 0 0 350px;
     max-width: 350px;
@@ -231,7 +232,9 @@
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     background: #f6f6f6;
     display: block;
+    margin-top: 150px;
   }
+
   .address-map-wrapper gmp-map {
     width: 100% !important;
     height: 100% !important;

@@ -48,3 +48,7 @@
   font-weight: bold;
   margin-left: 2px;
 }
+
+.address-map-wrapper {
+  display: none;
+}
