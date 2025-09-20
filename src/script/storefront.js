@@ -108,7 +108,7 @@ function createProductCard(product) {
   const link = createEl("a", {
     className: "product-link product-card",
     attrs: {
-      href: `product-specific.html?id=${product.id}`,
+      href: `product.html?id=${product.id}`,
       style: "display:flex;flex-direction:column;align-items:flex-start;",
     },
   });

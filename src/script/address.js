@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const main = document.querySelector("main");
   if (!main) return;
 
-  // Outer flex container for desktop layout
   const flexContainer = document.createElement("div");
   flexContainer.className = "address-flex-container";
 
@@ -14,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   h1.textContent = "Create a new address";
   container.appendChild(h1);
 
-  // Form
+  // Form ----- (I'll name the fields that must be filled out with *)
   const form = document.createElement("form");
   form.className = "form address-form";
   form.autocomplete = "on";
@@ -110,7 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
   btnSave.className = "btn-large";
   btnSave.textContent = "Save address";
 
-  // Form append
   form.appendChild(labelName);
   form.appendChild(inputName);
   form.appendChild(labelStreet);
@@ -124,7 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
   form.appendChild(labelCountry);
   form.appendChild(inputCountry);
 
-  // Spacer
+  // Spacer because I'm DONE with padding UGH
+
   const spacer = document.createElement("div");
   spacer.style.height = "32px";
   form.appendChild(spacer);
@@ -133,10 +132,10 @@ document.addEventListener("DOMContentLoaded", () => {
   container.appendChild(form);
   flexContainer.appendChild(container);
 
-  // Google Maps embed (desktop only)
+  // GOOGLE MAPS API if it works. ---------------------- Test on GitHub Pages. Doesn't work in npm live server
+
   const mapWrapper = document.createElement("div");
   mapWrapper.className = "address-map-wrapper";
-  // Map markup
   mapWrapper.innerHTML = `
     <gmp-map center="59.9139,10.7522" zoom="12" map-id="DEMO_MAP_ID" style="width: 350px; height: 400px; border-radius: 18px;" loading="async">
       <gmp-advanced-marker position="59.9139,10.7522" title="Oslo"></gmp-advanced-marker>
@@ -146,7 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   main.appendChild(flexContainer);
 
-  // Add Google Maps API script
   if (!document.getElementById("google-maps-api")) {
     const script = document.createElement("script");
     script.id = "google-maps-api";

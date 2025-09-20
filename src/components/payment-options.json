@@ -1,0 +1,28 @@
+[
+  {
+    "id": "card-1",
+    "type": "Card",
+    "icon": "../../public/assets/icons/icons-svg/payment/visa.svg",
+    "info": {
+      "Card Number": "1234 5678 9098 7654",
+      "Name on Card": "John Doe",
+      "Expiry Date": "12/27"
+    }
+  },
+  {
+    "id": "vipps-1",
+    "type": "Vipps",
+    "icon": "../../public/assets/icons/icons-svg/payment/vipps.svg",
+    "info": {
+      "Number": "+47 12345678"
+    }
+  },
+  {
+    "id": "klarna-1",
+    "type": "Klarna",
+    "icon": "../../public/assets/icons/icons-svg/payment/klarna.svg",
+    "info": {
+      "E-Mail": "user@email.com"
+    }
+  }
+]

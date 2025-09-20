@@ -241,4 +241,38 @@
     border-radius: 18px;
     display: block;
   }
+
+  .payment-container {
+    box-shadow: none;
+    width: 500px;
+    max-width: none;
+  }
+
+  .payment-options-list {
+    margin: 2.5rem 0 2.5rem 0;
+  }
+
+  .payment-form-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .payment-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  #payment-flex-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .saved-payment-section {
+    display: block;
+  }
 }
