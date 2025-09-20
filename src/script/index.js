@@ -1,3 +1,6 @@
+import { fetchAllProducts } from "./api/api.js";
+import { shareUrl } from "./utils/share.js";
+
 function createEl(tag, options = {}) {
   const el = document.createElement(tag);
   if (options.class) el.className = options.class;
@@ -10,8 +13,6 @@ function createEl(tag, options = {}) {
   }
   return el;
 }
-
-import { fetchAllProducts } from "./api/api.js";
 
 function createProductCard(product, size = "bestseller") {
   // Use the same structure and classes as storefront.js

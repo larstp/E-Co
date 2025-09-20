@@ -1,4 +1,5 @@
 import { fetchAllProducts } from "./api/api.js";
+import { shareUrl } from "./utils/share.js";
 import { setupFilterMenu } from "./utils/menus.js";
 
 let allCategories = [];
@@ -6,6 +7,8 @@ let allTags = [];
 let allProducts = [];
 let productsShown = 0;
 const PRODUCTS_PER_PAGE = 16;
+
+// Man I needed help from chatgpt for this. I feel we have learned nothing regarding how to do this in JS.
 
 function getOrCreateProductGrid() {
   let grid = document.getElementById("product-grid");
@@ -185,6 +188,34 @@ function createProductCard(product) {
   [img, title, spacer, ratingDiv, reviewDiv, pricesDiv, btn].forEach((el) =>
     link.appendChild(el)
   );
+  // --------------------------------------------------  Share icon (added to each card) FIX DESIGN
+  const shareIcon = createEl("img", {
+    className: "product-share-icon",
+    attrs: {
+      src: "../../public/assets/icons/icons-svg/black/share.svg",
+      alt: "Share product",
+      tabIndex: 0,
+      style: "width:32px;height:32px;cursor:pointer;opacity:0.7;",
+    },
+  });
+  shareIcon.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const url = window.location.origin + "/product.html?id=" + product.id;
+    const title = product.title || "Product";
+    const result = await shareUrl(url, title, "Check out this product!");
+    if (result === "copied") {
+      shareIcon.title = "Link copied!";
+      setTimeout(() => (shareIcon.title = "Share product"), 1500);
+    } else if (result === "shared") {
+      shareIcon.title = "Shared!";
+      setTimeout(() => (shareIcon.title = "Share product"), 1500);
+    } else {
+      shareIcon.title = "Could not share";
+      setTimeout(() => (shareIcon.title = "Share product"), 1500);
+    }
+  });
+  link.appendChild(shareIcon);
   return link;
 }
 
