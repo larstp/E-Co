@@ -98,181 +98,20 @@
   .product-card .product-prices,
   .product-card .old-price,
   .product-card .discounted-price {
-    font-size: 17px;
-    min-height: 20px;
-    max-height: 20px;
+    font-size: 1.2rem;
   }
 
-  .product-card-spacer {
-    height: 10px;
-  }
-
-  .storefront-header-row {
-    max-width: 695px;
-  }
-
-  .landing-category-section {
+  .product-mobile {
     display: none;
   }
 
-  .category-heading {
-    display: none;
+  .product-desktop {
+    display: block;
   }
 
-  .landing-bestseller-section {
-    background: #ffffff;
-    color: #000000;
-  }
-
-  .bestseller-footer {
-    text-align: center;
-    color: #000000;
+  .product-desktop-header {
+    font-size: 3rem;
+    font-family: "Bebas Neue", sans-serif;
     margin-bottom: 0.5rem;
-  }
-
-  .bestseller-footer span {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
-  }
-
-  .bestseller-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .landing-newsletter-section {
-    background-size: 100%;
-  }
-
-  .summer-ad-content {
-    margin-right: 10%;
-    margin-top: 100px;
-  }
-
-  .newsletter-heading {
-    display: block;
-  }
-
-  .login-container {
-    box-shadow: none;
-  }
-
-  .login-logo {
-    width: 200px;
-    height: 200px;
-  }
-
-  .login-container {
-    width: 500px;
-    max-width: none;
-  }
-
-  .register-container {
-    box-shadow: none;
-    width: 500px;
-    max-width: none;
-  }
-
-  .register-logo {
-    width: 200px;
-    height: 200px;
-  }
-
-  .user-container {
-    box-shadow: none;
-    width: 500px;
-    max-width: none;
-  }
-
-  .user-welcome h2,
-  .user-welcome h3,
-  .user-welcome h4 {
-    font-size: 2.5rem;
-    padding-top: 30px;
-  }
-
-  .address-container {
-    box-shadow: none;
-    width: 500px;
-    max-width: none;
-    align-items: center;
-  }
-
-  .address-container h1 {
-    font-size: 2.5rem;
-    padding-top: 30px;
-  }
-
-  .address-flex-container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 2.5rem;
-    justify-content: center;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .address-container {
-    flex: 1 1 350px;
-    max-width: 500px;
-    min-width: 350px;
-    box-shadow: none;
-    align-items: flex-start;
-  }
-
-  .address-map-wrapper {
-    flex: 0 0 350px;
-    max-width: 350px;
-    min-width: 300px;
-    height: 400px;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-    background: #f6f6f6;
-    display: block;
-    margin-top: 150px;
-  }
-
-  .address-map-wrapper gmp-map {
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: 18px;
-    display: block;
-  }
-
-  .payment-container {
-    box-shadow: none;
-    width: 500px;
-    max-width: none;
-  }
-
-  .payment-options-list {
-    margin: 2.5rem 0 2.5rem 0;
-  }
-
-  .payment-form-container {
-    padding: 1.5rem 1rem;
-  }
-
-  .payment-icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  #payment-flex-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 2.5rem;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .saved-payment-section {
-    display: block;
   }
 }
