@@ -136,11 +136,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const mapWrapper = document.createElement("div");
   mapWrapper.className = "address-map-wrapper";
-  mapWrapper.innerHTML = `
-    <gmp-map center="59.9139,10.7522" zoom="12" map-id="DEMO_MAP_ID" style="width: 350px; height: 400px; border-radius: 18px;" loading="async">
-      <gmp-advanced-marker position="59.9139,10.7522" title="Oslo"></gmp-advanced-marker>
-    </gmp-map>
-  `;
+
+  const gmpMap = document.createElement("gmp-map");
+  gmpMap.setAttribute("center", "59.9139,10.7522");
+  gmpMap.setAttribute("zoom", "12");
+  gmpMap.setAttribute("map-id", "DEMO_MAP_ID");
+  gmpMap.style.width = "350px";
+  gmpMap.style.height = "400px";
+  gmpMap.style.borderRadius = "25px";
+  gmpMap.setAttribute("loading", "async");
+
+  const gmpAdvancedMarker = document.createElement("gmp-advanced-marker");
+  gmpAdvancedMarker.setAttribute("position", "59.9139,10.7522");
+  gmpAdvancedMarker.setAttribute("title", "Oslo");
+
+  gmpMap.appendChild(gmpAdvancedMarker);
+  mapWrapper.appendChild(gmpMap);
+
   flexContainer.appendChild(mapWrapper);
 
   main.appendChild(flexContainer);

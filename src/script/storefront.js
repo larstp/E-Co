@@ -238,7 +238,9 @@ function createProductCard(product) {
 
 function renderProductsPage(products = null) {
   const grid = getOrCreateProductGrid();
-  grid.innerHTML = "";
+  while (grid.firstChild) {
+    grid.removeChild(grid.firstChild);
+  }
   const fragment = document.createDocumentFragment();
   const toShow = (products || allProducts).slice(0, productsShown);
   toShow.forEach((product) => {
@@ -336,7 +338,15 @@ async function loadProducts() {
       filterMenu.renderContent(allCategories, allTags);
     }
   } catch (err) {
-    getOrCreateProductGrid().innerHTML = `<div class="error">Failed to load products. Please try again later.</div>`;
+    const grid = getOrCreateProductGrid();
+    while (grid.firstChild) {
+      grid.removeChild(grid.firstChild);
+    }
+    const errorDiv = createEl("div", {
+      className: "error",
+      text: "Failed to load products. Please try again later.",
+    });
+    grid.appendChild(errorDiv);
   }
 }
 

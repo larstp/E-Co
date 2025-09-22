@@ -1149,4 +1149,13 @@ body.landing-page .breadcrumb {
   outline: none !important;
 }
 
-/* ---------------------------- Product Cards -------------------------------*/
+/* ---------------------------- Product Cards Extra -------------------------------*/
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

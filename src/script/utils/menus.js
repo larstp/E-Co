@@ -11,7 +11,8 @@ export function setupFilterMenu({
   if (!container) return;
   const filterMenu = createEl("div", { className: "mobile-filter-menu" });
   filterMenu.style.display = "none";
-  filterMenu.innerHTML = "<div class='mobile-filter-menu__inner'></div>";
+  const innerDiv = createEl("div", { className: "mobile-filter-menu__inner" });
+  filterMenu.appendChild(innerDiv);
   const filterOverlay = createEl("div", {
     className: "mobile-filter-overlay",
   });
@@ -67,7 +68,9 @@ export function setupFilterMenu({
   });
   filterMenu.renderContent = function (categories, tags) {
     const inner = filterMenu.querySelector(".mobile-filter-menu__inner");
-    inner.innerHTML = "";
+    while (inner.firstChild) {
+      inner.removeChild(inner.firstChild);
+    }
     const headingRow = createEl("div", {
       className: "filter-menu-heading-row",
     });

@@ -1,10 +1,3 @@
-@media (min-width: 700px) {
-  .summer-ad-content {
-    margin-right: 10%;
-    margin-top: 10%;
-  }
-}
-
 @media (min-width: 900px) {
   h2 {
     font-size: 70px;
@@ -112,6 +105,51 @@
 
   .product-carousel-section {
     max-width: 740px;
+  }
+
+  .summer-ad-text {
+    font-size: 3rem;
+  }
+
+  .landing-summer-ad {
+    min-height: 500px;
+  }
+
+  .landing-newsletter-section {
+    background-size: 100%;
+    min-height: 600px;
+  }
+
+  .newsletter-content {
+    padding: 9rem 0 0 10rem;
+  }
+
+  .address-container {
+    max-width: 800px;
+    box-shadow: none;
+  }
+
+  .address-flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5rem;
+    margin-top: 2rem;
+    padding: 0 2rem;
+    max-width: 900px;
+    margin: 2rem auto;
+  }
+
+  .address-map-wrapper {
+    display: block;
+  }
+}
+
+@media (min-width: 1040px) {
+  .category-list {
+    flex-direction: row;
+    justify-content: center;
   }
 }
 

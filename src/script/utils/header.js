@@ -145,9 +145,19 @@ function buildMobileHeader() {
   adBanner.style.display = "flex";
   adBanner.style.alignItems = "center";
   adBanner.style.justifyContent = "center";
-  adBanner.innerHTML = IS_LOGGED_IN
-    ? "<p>Browse our summer sale!</p>"
-    : '<p><a href="/src/pages/register.html">Sign up now</a> and get 20% off your first order</p>';
+  if (IS_LOGGED_IN) {
+    const p = document.createElement("p");
+    p.textContent = "Browse our summer sale!";
+    adBanner.appendChild(p);
+  } else {
+    const p = document.createElement("p");
+    const a = document.createElement("a");
+    a.href = "/src/pages/register.html";
+    a.textContent = "Sign up now";
+    p.appendChild(a);
+    p.appendChild(document.createTextNode(" and get 20% off your first order"));
+    adBanner.appendChild(p);
+  }
   mobileHeader.appendChild(adBanner);
 
   // Upper header (White part)
@@ -334,9 +344,19 @@ function buildDesktopHeader() {
   adBanner.style.display = "flex";
   adBanner.style.alignItems = "center";
   adBanner.style.justifyContent = "center";
-  adBanner.innerHTML = IS_LOGGED_IN
-    ? "<p>Browse our summer sale!</p>"
-    : '<p><a href="/src/pages/register.html">Sign up now</a> and get 20% off your first order</p>';
+  if (IS_LOGGED_IN) {
+    const p = document.createElement("p");
+    p.textContent = "Browse our summer sale!";
+    adBanner.appendChild(p);
+  } else {
+    const p = document.createElement("p");
+    const a = document.createElement("a");
+    a.href = "/src/pages/register.html";
+    a.textContent = "Sign up now";
+    p.appendChild(a);
+    p.appendChild(document.createTextNode(" and get 20% off your first order"));
+    adBanner.appendChild(p);
+  }
   desktopHeader.appendChild(adBanner);
   const desktopUpper = document.createElement("div");
   desktopUpper.className = "header-desktop__upper";
@@ -473,7 +493,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Desktop filter menu (hamburger from left, no overlay. Hopefully it works as intended because I'm done fidgeting with this...)
   const desktopFilterMenu = document.createElement("div");
   desktopFilterMenu.className = "desktop-filter-menu";
-  desktopFilterMenu.innerHTML = `<div class="desktop-filter-menu__inner"></div>`;
+  const desktopFilterMenuInner = document.createElement("div");
+  desktopFilterMenuInner.className = "desktop-filter-menu__inner";
+  desktopFilterMenu.appendChild(desktopFilterMenuInner);
   document.body.appendChild(desktopFilterMenu);
 
   function openDesktopFilterMenu() {
@@ -504,7 +526,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const inner = desktopFilterMenu.querySelector(
       ".desktop-filter-menu__inner"
     );
-    inner.innerHTML = "";
+    while (inner.firstChild) {
+      inner.removeChild(inner.firstChild);
+    }
     const headingRow = document.createElement("div");
     headingRow.className = "filter-menu-heading-row-desktop";
     const heading = document.createElement("h1");

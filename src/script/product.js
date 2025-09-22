@@ -196,8 +196,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     circle.style.background = color;
     if (idx === 0) {
       circle.classList.add("selected");
-      circle.innerHTML =
-        "<svg width='18' height='18'><polyline points='4,10 8,14 14,6' style='fill:none;stroke:white;stroke-width:2'/></svg>";
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("width", "18");
+      svg.setAttribute("height", "18");
+      const polyline = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "polyline"
+      );
+      polyline.setAttribute("points", "4,10 8,14 14,6");
+      polyline.style.fill = "none";
+      polyline.style.stroke = "white";
+      polyline.style.strokeWidth = "2";
+      svg.appendChild(polyline);
+      circle.appendChild(svg);
     }
     circlesRow.appendChild(circle);
   });
@@ -388,7 +399,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sortBtn = document.createElement("button");
   sortBtn.className = "product-sort-btn";
   sortBtn.type = "button";
-  sortBtn.innerHTML = `<img src="../../public/assets/icons/icons-svg/black/sort.svg" alt="Sort" style="width:24px;height:24px;vertical-align:middle;">`;
+  const sortIcon = document.createElement("img");
+  sortIcon.src = "../../public/assets/icons/icons-svg/black/sort.svg";
+  sortIcon.alt = "Sort";
+  sortIcon.style.width = "24px";
+  sortIcon.style.height = "24px";
+  sortIcon.style.verticalAlign = "middle";
+  sortBtn.appendChild(sortIcon);
   // Dropdown (hidden by default)
   const sortDropdown = document.createElement("select");
   sortDropdown.className = "product-sort-dropdown";
@@ -438,7 +455,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let reviewsArr = Array.isArray(product.reviews) ? [...product.reviews] : [];
   function renderReviews(sort = "best") {
-    reviewsList.innerHTML = "";
+    while (reviewsList.firstChild) {
+      reviewsList.removeChild(reviewsList.firstChild);
+    }
     let sorted = [...reviewsArr];
     if (sort === "best") {
       sorted.sort((a, b) => (b.rating || 0) - (a.rating || 0));
@@ -777,8 +796,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     circle.style.background = color;
     if (idx === 0) {
       circle.classList.add("selected");
-      circle.innerHTML =
-        "<svg width='18' height='18'><polyline points='4,10 8,14 14,6' style='fill:none;stroke:white;stroke-width:2'/></svg>";
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("width", "18");
+      svg.setAttribute("height", "18");
+      const polyline = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "polyline"
+      );
+      polyline.setAttribute("points", "4,10 8,14 14,6");
+      polyline.style.fill = "none";
+      polyline.style.stroke = "white";
+      polyline.style.strokeWidth = "2";
+      svg.appendChild(polyline);
+      circle.appendChild(svg);
     }
     circlesRow.appendChild(circle);
   });
@@ -968,7 +998,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sortBtn = document.createElement("button");
   sortBtn.className = "product-sort-btn";
   sortBtn.type = "button";
-  sortBtn.innerHTML = `<img src="../../public/assets/icons/icons-svg/black/sort.svg" alt="Sort" style="width:24px;height:24px;vertical-align:middle;">`;
+  const sortIcon = document.createElement("img");
+  sortIcon.src = "../../public/assets/icons/icons-svg/black/sort.svg";
+  sortIcon.alt = "Sort";
+  sortIcon.style.width = "24px";
+  sortIcon.style.height = "24px";
+  sortIcon.style.verticalAlign = "middle";
+  sortBtn.appendChild(sortIcon);
   // Dropdown (hidden by default)
   const sortDropdown = document.createElement("select");
   sortDropdown.className = "product-sort-dropdown";
@@ -1018,7 +1054,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let reviewsArr = Array.isArray(product.reviews) ? [...product.reviews] : [];
   function renderReviews(sort = "best") {
-    reviewsList.innerHTML = "";
+    while (reviewsList.firstChild) {
+      reviewsList.removeChild(reviewsList.firstChild);
+    }
     let sorted = [...reviewsArr];
     if (sort === "best") {
       sorted.sort((a, b) => (b.rating || 0) - (a.rating || 0));

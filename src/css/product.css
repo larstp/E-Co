@@ -203,7 +203,7 @@ h2 {
   align-items: flex-start;
   gap: 1rem;
   overflow: hidden;
-  border-radius: 25px;
+  border-radius: 0 25px;
 }
 
 .product-top-section-images .product-thumbnails {

@@ -51,4 +51,6 @@
 
 .address-map-wrapper {
   display: none;
+  padding-top: 95px;
+  border-radius: 25px;
 }

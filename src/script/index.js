@@ -5,7 +5,6 @@ function createEl(tag, options = {}) {
   const el = document.createElement(tag);
   if (options.class) el.className = options.class;
   if (options.text) el.textContent = options.text;
-  if (options.html) el.innerHTML = options.html;
   if (options.attrs) {
     for (const [k, v] of Object.entries(options.attrs)) {
       el.setAttribute(k, v);
@@ -15,10 +14,9 @@ function createEl(tag, options = {}) {
 }
 
 function createProductCard(product, size = "bestseller") {
-  // Use the same structure and classes as storefront.js
   const link = document.createElement("a");
   link.className = "product-link product-card-base product-card-small";
-  link.href = `product-specific.html?id=${product.id}`;
+  link.href = `src/pages/product.html?id=${product.id}`;
 
   // Product image
   const img = document.createElement("img");
@@ -52,6 +50,11 @@ function createProductCard(product, size = "bestseller") {
   spacer.className = "product-card-spacer";
   link.appendChild(spacer);
 
+  // Rating and share Row
+  const ratingAndIconsRow = createEl("div", {
+    class: "product-card-rating-row",
+  });
+
   // Rating
   let ratingValue = product.rating;
   if (product.reviews && product.reviews.length > 0) {
@@ -71,10 +74,46 @@ function createProductCard(product, size = "bestseller") {
     ratingDiv.appendChild(star);
     ratingDiv.appendChild(ratingNum);
   } else {
-    ratingDiv.innerHTML =
-      '<span class="star">★</span><span class="rating-number">-</span>';
+    const star = document.createElement("span");
+    star.className = "star";
+    star.textContent = "★";
+    const ratingNum = document.createElement("span");
+    ratingNum.className = "rating-number";
+    ratingNum.textContent = "-";
+    ratingDiv.appendChild(star);
+    ratingDiv.appendChild(ratingNum);
   }
-  link.appendChild(ratingDiv);
+  ratingAndIconsRow.appendChild(ratingDiv);
+
+  // Share Icon
+  const iconsDiv = createEl("div", { class: "product-card-icon-row" });
+  const shareIcon = createEl("img", {
+    class: "product-share-icon",
+    attrs: {
+      src: "/public/assets/icons/icons-svg/black/share.svg",
+      alt: "Share product",
+    },
+  });
+  shareIcon.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const url = link.href;
+    const title = product.title || "Product";
+    const result = await shareUrl(url, title, "Check out this product!");
+    if (result === "copied") {
+      shareIcon.title = "Link copied!";
+      setTimeout(() => (shareIcon.title = "Share product"), 1500);
+    } else if (result === "shared") {
+      shareIcon.title = "Shared!";
+      setTimeout(() => (shareIcon.title = "Share product"), 1500);
+    } else {
+      shareIcon.title = "Could not share";
+      setTimeout(() => (shareIcon.title = "Share product"), 1500);
+    }
+  });
+  iconsDiv.appendChild(shareIcon);
+  ratingAndIconsRow.appendChild(iconsDiv);
+
+  link.appendChild(ratingAndIconsRow);
 
   // Review count
   const reviewCount = product.reviews?.length || 0;
@@ -142,6 +181,10 @@ document.addEventListener("DOMContentLoaded", () => {
     class: "btn-small",
     text: "Shop Now",
   });
+  summerAdBtn.addEventListener(
+    "click",
+    () => (window.location.href = "/src/pages/storefront.html?sale")
+  );
   summerAdContent.append(summerAdText, summerAdBtn);
   summerAd.appendChild(summerAdContent);
   body.appendChild(summerAd);
@@ -175,46 +218,169 @@ document.addEventListener("DOMContentLoaded", () => {
     infoList.appendChild(li);
   });
   infoSection.appendChild(infoList);
-
-  // Carousel Section (New Arrivals) as pop-out inside info section
-  const carouselSection = createEl("section", {
-    class: "landing-carousel-section carousel-popout",
-  });
-  carouselSection.appendChild(
-    createEl("h2", { class: "carousel-heading", text: "New Arrivals" })
-  );
-  const carouselContainer = createEl("div", { class: "carousel-container" });
-  const carouselTrack = createEl("div", { class: "carousel-track" });
-  carouselContainer.appendChild(carouselTrack);
-  carouselSection.appendChild(carouselContainer);
-
-  const carouselControls = createEl("div", { class: "carousel-controls" });
-  // Left arrow
-  const leftArrow = createEl("button", {
-    class: "carousel-arrow left",
-    attrs: { "aria-label": "Previous" },
-  });
-  leftArrow.innerHTML = `<img src="../public/assets/icons/icons-svg/black/left.svg" alt="Previous" style="width:32px;height:32px;">`;
-  carouselControls.appendChild(leftArrow);
-  // Dots
-  const carouselIndicators = createEl("div", { class: "carousel-indicators" });
-  carouselControls.appendChild(carouselIndicators);
-  // Right arrow
-  const rightArrow = createEl("button", {
-    class: "carousel-arrow right",
-    attrs: { "aria-label": "Next" },
-  });
-  rightArrow.innerHTML = `<img src="../public/assets/icons/icons-svg/black/right.svg" alt="Next" style="width:32px;height:32px;">`;
-  carouselControls.appendChild(rightArrow);
-  carouselSection.appendChild(carouselControls);
-  carouselSection.appendChild(
-    createEl("button", {
-      class: "btn-large-white",
-      text: "View All",
-    })
-  );
-  infoSection.insertBefore(carouselSection, infoSection.firstChild);
   body.appendChild(infoSection);
+
+  async function createNewArrivalsCarousel() {
+    const section = createEl("section", {
+      class: "landing-carousel-section carousel-popout",
+    });
+    section.appendChild(
+      createEl("h2", { class: "carousel-heading", text: "New Arrivals" })
+    );
+    const carouselContainer = createEl("div", { class: "carousel-container" });
+    const track = createEl("div", { class: "carousel-track no-scrollbar" });
+    carouselContainer.appendChild(track);
+    section.appendChild(carouselContainer);
+
+    const controls = createEl("div", {
+      class: "carousel-controls",
+      attrs: {
+        style:
+          "display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 1rem;",
+      },
+    });
+    const leftArrow = createEl("button", {
+      class: "carousel-arrow left",
+      attrs: { "aria-label": "Previous" },
+    });
+    const leftArrowImg = createEl("img", {
+      attrs: {
+        src: "/public/assets/icons/icons-svg/black/left.svg",
+        alt: "Previous",
+      },
+    });
+    leftArrowImg.style.width = "32px";
+    leftArrowImg.style.height = "32px";
+    leftArrow.appendChild(leftArrowImg);
+
+    const viewAllBtn = createEl("button", {
+      text: "View All",
+    });
+    viewAllBtn.addEventListener(
+      "click",
+      () => (window.location.href = "/src/pages/storefront.html?new")
+    );
+
+    const mediaQuery = window.matchMedia("(min-width: 900px)"); // haha, cant believe this worked..
+    function handleBtnClass(mq) {
+      if (mq.matches) {
+        viewAllBtn.className = "btn-large";
+      } else {
+        viewAllBtn.className = "btn-small";
+      }
+    }
+    mediaQuery.addEventListener("change", handleBtnClass);
+    handleBtnClass(mediaQuery); // Initial check
+
+    const rightArrow = createEl("button", {
+      class: "carousel-arrow right",
+      attrs: { "aria-label": "Next" },
+    });
+    const rightArrowImg = createEl("img", {
+      attrs: {
+        src: "/public/assets/icons/icons-svg/black/right.svg",
+        alt: "Next",
+      },
+    });
+    rightArrowImg.style.width = "32px";
+    rightArrowImg.style.height = "32px";
+    rightArrow.appendChild(rightArrowImg);
+
+    controls.appendChild(leftArrow);
+    controls.appendChild(viewAllBtn);
+    controls.appendChild(rightArrow);
+    section.appendChild(controls);
+
+    try {
+      const allProducts = await fetchAllProducts();
+
+      // Get products with no reviews
+      const newArrivals = allProducts.filter(
+        (p) => !p.reviews || p.reviews.length === 0
+      );
+
+      // Get other products, shuffle them, and take 5 (if it works)
+      const otherProducts = allProducts.filter(
+        (p) => p.reviews && p.reviews.length > 0
+      );
+      for (let i = otherProducts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [otherProducts[i], otherProducts[j]] = [
+          otherProducts[j],
+          otherProducts[i],
+        ];
+      }
+      const randomProducts = otherProducts.slice(0, 5);
+
+      // Combine the lists
+      const products = [...newArrivals, ...randomProducts];
+
+      function renderCarousel() {
+        while (track.firstChild) {
+          track.removeChild(track.firstChild);
+        }
+        products.forEach((prod) => {
+          track.appendChild(createProductCard(prod, "carousel"));
+        });
+        // Add a blank card to prevent items from being cut off
+        const blankCard = createEl("div", {
+          class: "product-link product-card-base product-card-small",
+        });
+        blankCard.style.visibility = "hidden";
+        track.appendChild(blankCard);
+      }
+
+      leftArrow.addEventListener("click", () => {
+        const card = track.querySelector(".product-card-base");
+        if (!card) return;
+        const cardStyle = getComputedStyle(card);
+        const cardWidth = card.offsetWidth;
+        const cardMargin =
+          parseFloat(cardStyle.marginLeft) + parseFloat(cardStyle.marginRight);
+        const gap = parseFloat(getComputedStyle(track).gap);
+        const scrollAmount = (cardWidth + cardMargin + gap) * 3;
+
+        if (track.scrollLeft <= 0) {
+          // If at the beginning, scroll to the end
+          track.scrollTo({ left: track.scrollWidth, behavior: "smooth" });
+        } else {
+          track.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+        }
+      });
+
+      rightArrow.addEventListener("click", () => {
+        const card = track.querySelector(".product-card-base");
+        if (!card) return;
+        const cardStyle = getComputedStyle(card);
+        const cardWidth = card.offsetWidth;
+        const cardMargin =
+          parseFloat(cardStyle.marginLeft) + parseFloat(cardStyle.marginRight);
+        const gap = parseFloat(getComputedStyle(track).gap);
+        const scrollAmount = (cardWidth + cardMargin + gap) * 3;
+
+        if (
+          track.scrollLeft + track.clientWidth >=
+          track.scrollWidth - cardWidth
+        ) {
+          // If at the end, scroll to the beginning
+          track.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          track.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        }
+      });
+
+      renderCarousel();
+    } catch (err) {
+      track.textContent = "Failed to load products.";
+    }
+
+    return section;
+  }
+
+  createNewArrivalsCarousel().then((carousel) => {
+    const infoSection = document.querySelector(".landing-info-section");
+    infoSection.insertBefore(carousel, infoSection.firstChild);
+  });
 
   // Shop By Category
   const categoryHeader = createEl("h2", {
@@ -355,80 +521,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetchAllProducts()
     .then((products) => {
-      const newArrivals = products.filter(
-        (p) => !p.reviews || p.reviews.length === 0
-      );
-      const carouselTrack = document.querySelector(".carousel-track");
-      newArrivals.slice(0, 9).forEach((product) => {
-        carouselTrack.appendChild(createProductCard(product, "carousel"));
-      });
-
-      const indicators = document.querySelector(".carousel-indicators");
-      indicators.innerHTML = "";
-      const groupCount = 3;
-      for (let i = 0; i < groupCount; i++) {
-        const dot = document.createElement("span");
-        if (i === 0) dot.classList.add("active");
-        dot.addEventListener("click", () => {
-          carouselTrack.scrollTo({
-            left: i * carouselTrack.offsetWidth,
-            behavior: "smooth",
-          });
-          setActiveDot(i);
-        });
-        indicators.appendChild(dot);
-      }
-
-      carouselTrack.style.scrollbarWidth = "none";
-      carouselTrack.style.msOverflowStyle = "none";
-      carouselTrack.style.overflowX = "auto";
-      carouselTrack.style.overflowY = "hidden";
-      carouselTrack.style.whiteSpace = "nowrap";
-      carouselTrack.style.scrollBehavior = "smooth";
-      carouselTrack.style.display = "flex";
-      carouselTrack.style.gap = "1rem";
-      carouselTrack.style.border = "none";
-      carouselTrack.style.background = "none";
-      carouselTrack.style.position = "relative";
-      carouselTrack.style.scrollSnapType = "x mandatory";
-      carouselTrack.style.WebkitOverflowScrolling = "touch";
-      carouselTrack.style.overflow = "-webkit-paged-x";
-      carouselTrack.style.setProperty("scrollbar-width", "none");
-      carouselTrack.style.setProperty("-ms-overflow-style", "none");
-      carouselTrack.style.setProperty("-webkit-overflow-scrolling", "touch");
-      carouselTrack.style.setProperty("overflow", "-webkit-paged-x");
-      Array.from(carouselTrack.children).forEach((card) => {
-        card.style.scrollSnapAlign = "start";
-      });
-
-      let currentGroup = 0;
-      function setActiveDot(idx) {
-        Array.from(indicators.children).forEach((dot, i) => {
-          dot.classList.toggle("active", i === idx);
-        });
-        currentGroup = idx;
-      }
-      document.querySelector(".carousel-arrow.left").onclick = () => {
-        if (currentGroup > 0) {
-          currentGroup--;
-          carouselTrack.scrollTo({
-            left: currentGroup * carouselTrack.offsetWidth,
-            behavior: "smooth",
-          });
-          setActiveDot(currentGroup);
-        }
-      };
-      document.querySelector(".carousel-arrow.right").onclick = () => {
-        if (currentGroup < groupCount - 1) {
-          currentGroup++;
-          carouselTrack.scrollTo({
-            left: currentGroup * carouselTrack.offsetWidth,
-            behavior: "smooth",
-          });
-          setActiveDot(currentGroup);
-        }
-      };
-
       // Bestsellers
       const bestsellers = products
         .filter((p) => p.reviews && p.reviews.length > 0)
@@ -438,8 +530,9 @@ document.addEventListener("DOMContentLoaded", () => {
             p.reviews.reduce((a, r) => a + (r.rating || 0), 0) /
             p.reviews.length,
         }))
+        .filter((p) => p.avgRating >= 4)
         .sort((a, b) => b.avgRating - a.avgRating)
-        .slice(0, 6);
+        .slice(0, 12);
       const bestsellerGrid = document.querySelector(".bestseller-grid");
       bestsellers.forEach((product) => {
         bestsellerGrid.appendChild(createProductCard(product, "bestseller"));
@@ -447,8 +540,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch((err) => {
       //I have no idea if this is how youre supposed to show error messages. Clicking inspect on random websites seems to confirm it but there were several different ways of doing it
-      const carouselTrack = document.querySelector(".carousel-track");
-      if (carouselTrack) carouselTrack.textContent = "Failed to load products.";
       const bestsellerGrid = document.querySelector(".bestseller-grid");
       if (bestsellerGrid)
         bestsellerGrid.textContent = "Failed to load products.";

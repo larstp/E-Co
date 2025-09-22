@@ -27,7 +27,12 @@ export async function createProductCarousel(options = {}) {
   leftArrow.style.border = "none";
   leftArrow.style.cursor = "pointer";
   leftArrow.style.padding = "0";
-  leftArrow.innerHTML = `<img src="../../public/assets/icons/icons-svg/black/left.svg" alt="Left" style="width:32px;height:32px;">`;
+  const leftArrowImg = document.createElement("img");
+  leftArrowImg.src = "../../public/assets/icons/icons-svg/black/left.svg";
+  leftArrowImg.alt = "Left";
+  leftArrowImg.style.width = "32px";
+  leftArrowImg.style.height = "32px";
+  leftArrow.appendChild(leftArrowImg);
   controls.appendChild(leftArrow);
 
   // Dots
@@ -43,7 +48,12 @@ export async function createProductCarousel(options = {}) {
   rightArrow.style.border = "none";
   rightArrow.style.cursor = "pointer";
   rightArrow.style.padding = "0";
-  rightArrow.innerHTML = `<img src="../../public/assets/icons/icons-svg/black/right.svg" alt="Right" style="width:32px;height:32px;">`;
+  const rightArrowImg = document.createElement("img");
+  rightArrowImg.src = "../../public/assets/icons/icons-svg/black/right.svg";
+  rightArrowImg.alt = "Right";
+  rightArrowImg.style.width = "32px";
+  rightArrowImg.style.height = "32px";
+  rightArrow.appendChild(rightArrowImg);
   controls.appendChild(rightArrow);
 
   const track = document.createElement("div");
@@ -206,7 +216,9 @@ export async function createProductCarousel(options = {}) {
 
   let currentIndex = 0;
   function renderCarousel() {
-    track.innerHTML = "";
+    while (track.firstChild) {
+      track.removeChild(track.firstChild);
+    }
     let cardsToShow = [];
     if (products.length < 3) {
       cardsToShow = products;
@@ -223,7 +235,9 @@ export async function createProductCarousel(options = {}) {
   }
 
   function renderDots() {
-    dots.innerHTML = "";
+    while (dots.firstChild) {
+      dots.removeChild(dots.firstChild);
+    }
     for (let i = 0; i < products.length; i++) {
       const dot = document.createElement("span");
       dot.className = "carousel-dot" + (i === currentIndex ? " active" : "");
