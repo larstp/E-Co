@@ -1,5 +1,6 @@
 // Carousel utility for product cards
 import { fetchAllProducts } from "../api/api.js";
+import { shareUrl } from "./share.js";
 
 export async function createProductCarousel(options = {}) {
   // options: { title, products, maxCards }
@@ -61,7 +62,7 @@ export async function createProductCarousel(options = {}) {
 
   function createProductCard(prod) {
     const card = document.createElement("a");
-    card.className = "product-link product-card";
+    card.className = "product-link product-card-base product-card";
     card.href = `product.html?id=${prod.id}`;
     const img = document.createElement("img");
     img.className = "product-img";
@@ -72,31 +73,103 @@ export async function createProductCarousel(options = {}) {
     title.className = "product-title-carousel";
     title.textContent = prod.title;
     card.appendChild(title);
-    const spacer = document.createElement("div");
-    spacer.className = "product-card-spacer";
-    card.appendChild(spacer);
-    const ratingDiv = document.createElement("div");
-    ratingDiv.className = "product-rating";
+
+    if (prod.tags && Array.isArray(prod.tags) && prod.tags.length > 0) {
+      const tagsDiv = document.createElement("div");
+      tagsDiv.className = "product-tags";
+      tagsDiv.textContent = prod.tags
+        .map((tag) => tag.charAt(0).toUpperCase() + tag.slice(1))
+        .join(", ");
+      card.appendChild(tagsDiv);
+    }
+
+    const ratingAndIconsRow = document.createElement("div");
+    ratingAndIconsRow.className = "product-card-rating-row";
+
+    const ratingContainer = document.createElement("div");
+    ratingContainer.style.display = "flex";
+    ratingContainer.style.alignItems = "center";
+    ratingContainer.style.gap = "0.5rem";
+
     let ratingValue = prod.rating;
     if (prod.reviews && prod.reviews.length > 0) {
       ratingValue =
         prod.reviews.reduce((a, r) => a + (r.rating || 0), 0) /
         prod.reviews.length;
     }
-    if (ratingValue) {
-      const star = document.createElement("span");
-      star.className = "star";
-      star.textContent = "★";
-      const ratingNum = document.createElement("span");
-      ratingNum.className = "rating-number";
-      ratingNum.textContent = ratingValue.toFixed(1);
-      ratingDiv.appendChild(star);
-      ratingDiv.appendChild(ratingNum);
-    } else {
-      ratingDiv.innerHTML =
-        '<span class="star">★</span><span class="rating-number">-</span>';
-    }
-    card.appendChild(ratingDiv);
+    ratingValue = ratingValue || 0;
+
+    const starContainer = document.createElement("div");
+    starContainer.className = "star-rating-container";
+
+    const starsBackground = document.createElement("div");
+    starsBackground.className = "stars-background";
+    starsBackground.textContent = "★★★★★";
+    starContainer.appendChild(starsBackground);
+
+    const starsForeground = document.createElement("div");
+    starsForeground.className = "stars-foreground";
+    starsForeground.textContent = "★★★★★";
+    const percentage = (ratingValue / 5) * 100;
+    starsForeground.style.width = `${percentage}%`;
+    starContainer.appendChild(starsForeground);
+
+    ratingContainer.appendChild(starContainer);
+
+    const ratingNum = document.createElement("span");
+    ratingNum.className = "rating-number";
+    ratingNum.textContent = ratingValue.toFixed(1);
+    ratingNum.style.fontFamily = `"Roboto", Arial, sans-serif`;
+    ratingNum.style.fontSize = "1rem";
+    ratingNum.style.color = "#555";
+    ratingContainer.appendChild(ratingNum);
+
+    ratingAndIconsRow.appendChild(ratingContainer);
+
+    const iconsDiv = document.createElement("div");
+    iconsDiv.className = "product-card-icon-row";
+
+    const wishlistIcon = document.createElement("img");
+    wishlistIcon.className = "product-card-wishlist-icon";
+    wishlistIcon.src =
+      "../../public/assets/icons/icons-svg/black/line-heart.svg";
+    wishlistIcon.alt = "Add to wishlist";
+    wishlistIcon.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (wishlistIcon.src.includes("line-heart")) {
+        wishlistIcon.src =
+          "../../public/assets/icons/icons-svg/black/filled-heart.svg";
+      } else {
+        wishlistIcon.src =
+          "../../public/assets/icons/icons-svg/black/line-heart.svg";
+      }
+    });
+    iconsDiv.appendChild(wishlistIcon);
+
+    const shareIcon = document.createElement("img");
+    shareIcon.className = "product-card-share-icon";
+    shareIcon.src = "../../public/assets/icons/icons-svg/black/share.svg";
+    shareIcon.alt = "Share product";
+    shareIcon.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const url = card.href;
+      const title = prod.title || "Product";
+      const result = await shareUrl(url, title, "Check out this product!");
+      if (result === "copied") {
+        shareIcon.title = "Link copied!";
+        setTimeout(() => (shareIcon.title = "Share product"), 1500);
+      } else if (result === "shared") {
+        shareIcon.title = "Shared!";
+        setTimeout(() => (shareIcon.title = "Share product"), 1500);
+      } else {
+        shareIcon.title = "Could not share";
+        setTimeout(() => (shareIcon.title = "Share product"), 1500);
+      }
+    });
+    iconsDiv.appendChild(shareIcon);
+    ratingAndIconsRow.appendChild(iconsDiv);
+    card.appendChild(ratingAndIconsRow);
+
     const reviewCount = prod.reviews?.length || 0;
     const reviewDiv = document.createElement("div");
     reviewDiv.className = "review-count";

@@ -1,0 +1,357 @@
+/* ====================================================== */
+/* ================== Product Card Base Styles ================= */
+/* ====================================================== */
+
+.product-card-base {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+/* ====================================================== */
+/* ================== Product Card (Large - Carousel) ================= */
+/* ====================================================== */
+
+.product-card {
+  min-height: 356px;
+  width: 232px;
+  min-width: 232px;
+  max-width: 232px;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem 0.7rem 0.7rem 0.7rem;
+}
+
+.product-card .btn-small {
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.1rem;
+  margin-bottom: 0;
+}
+
+.product-card .product-img {
+  width: 200px;
+  height: 200px;
+  max-width: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+}
+
+.product-card .product-title-carousel {
+  font-size: 1.5rem;
+  font-family: "Bebas Neue", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  color: #000000;
+  margin: 0.3rem 0 0.2rem 0;
+  text-align: left;
+  width: 100%;
+}
+
+.product-card .product-tags {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 0.3rem 0;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-card .product-card-rating-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0.2rem;
+}
+
+/* New Star Rating System Styles */
+.product-card .star-rating-container {
+  position: relative;
+  display: inline-block;
+  font-size: 1.2rem;
+  color: #e0e0e0; /* Empty stars color */
+  vertical-align: middle;
+}
+
+.product-card .stars-background,
+.product-card .stars-foreground {
+  white-space: nowrap;
+}
+
+.product-card .stars-foreground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fbc02d; /* Filled stars color */
+  overflow: hidden;
+  height: 100%;
+}
+/* End of New Styles */
+
+.product-card .product-card-icon-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.product-card .product-card-wishlist-icon,
+.product-card .product-card-share-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.product-card .product-card-wishlist-icon:hover,
+.product-card .product-card-share-icon:hover {
+  opacity: 1;
+}
+
+.product-card .review-count {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 1rem;
+  color: #555;
+}
+
+.product-card .product-prices {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+.product-card .product-price-carousel {
+  font-size: 1.8rem;
+  font-family: "Bebas Neue", Arial, Helvetica, sans-serif;
+  color: #222;
+  font-weight: 500;
+  margin-top: 0.2rem;
+  text-align: left;
+  width: 100%;
+}
+
+.product-card .old-price-carousel {
+  font-size: 1.8rem;
+  text-decoration: line-through;
+  color: #888;
+  margin-right: 0.3rem;
+}
+
+.product-card .discounted-price-carousel {
+  font-size: 1.8rem;
+  color: #d32f2f;
+  font-weight: 600;
+}
+
+/* ====================================================== */
+/* ================= Carousel Only Styles ================= */
+/* ====================================================== */
+
+.product-carousel-section {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 2rem auto 0 auto;
+}
+
+.product-carousel-track {
+  display: flex;
+  gap: 1.2rem;
+  overflow-x: auto;
+  padding-bottom: 0.7rem;
+  scrollbar-width: none;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #bdbdbd;
+  border: 1.5px solid #1976d2;
+  transition: background 0.2s, border 0.2s;
+  opacity: 1;
+}
+
+.carousel-dot.active {
+  background: #1976d2;
+  border-color: #1976d2;
+  opacity: 1;
+}
+
+/* ====================================================== */
+/* ================== Product Card (Small - Grid) ================= */
+/* ====================================================== */
+
+.product-card-small {
+  width: 155px;
+  min-width: 155px;
+  max-width: 155px;
+  min-height: 250px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  align-items: flex-start;
+  justify-content: space-between; /* Changed from flex-start */
+  padding: 0.7rem;
+  overflow: hidden; /* Changed from visible */
+}
+
+.product-card-small:hover {
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.15), 0 2px 8px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.product-card-small.product-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none !important;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+.product-card-small .product-img {
+  width: 100%;
+  height: 135px; /* Scaled down from 200px */
+  max-width: none;
+  object-fit: cover;
+  margin: 0 0 0.4rem 0;
+  border-radius: 8px;
+  background: #f6f6f6;
+  display: block;
+}
+
+.product-card-small .product-title {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 0.2rem 0;
+  text-align: left;
+  line-height: 1.2;
+  width: 100%;
+  min-height: 0;
+  max-height: none;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.product-card-small .product-tags {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 12px; /* Slightly smaller for the small card */
+  color: #666;
+  margin: 0 0 0.2rem 0;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-card-small .product-card-rating-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0.2rem;
+}
+
+.product-card-small .product-rating {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 0.9rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.product-card-small .product-rating .star {
+  color: #fbc02d;
+  font-size: 1rem;
+  margin-right: 0;
+}
+
+.product-card-small .product-rating .rating-number {
+  color: #111;
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.product-card-small .product-card-icon-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.product-card-small .product-share-icon {
+  width: 20px; /* Scaled down */
+  height: 20px; /* Scaled down */
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.product-card-small .product-share-icon:hover {
+  opacity: 1;
+}
+
+.product-card-small .review-count {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 0.8rem; /* Scaled down */
+  color: #888;
+  margin-bottom: 0.2rem;
+  text-align: left;
+  width: 100%;
+}
+
+.product-card-small .product-prices {
+  font-family: "Roboto", Arial, sans-serif;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  font-weight: 700;
+  width: 100%;
+  font-size: 1rem; /* Scaled down */
+}
+
+.product-card-small .old-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 1rem;
+  margin-right: 0.25em;
+  font-weight: 400;
+}
+
+.product-card-small .discounted-price {
+  color: #d32f2f;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.product-card-small .add-to-cart-btn {
+  width: 100%;
+  margin: 0 auto;
+}

@@ -17,7 +17,7 @@ function createEl(tag, options = {}) {
 function createProductCard(product, size = "bestseller") {
   // Use the same structure and classes as storefront.js
   const link = document.createElement("a");
-  link.className = "product-link product-card";
+  link.className = "product-link product-card-base product-card-small";
   link.href = `product-specific.html?id=${product.id}`;
 
   // Product image
@@ -36,6 +36,16 @@ function createProductCard(product, size = "bestseller") {
   title.className = "product-title";
   title.textContent = product.title;
   link.appendChild(title);
+
+  // Product tags
+  if (product.tags && Array.isArray(product.tags) && product.tags.length > 0) {
+    const tagsDiv = document.createElement("div");
+    tagsDiv.className = "product-tags";
+    tagsDiv.textContent = product.tags
+      .map((tag) => tag.charAt(0).toUpperCase() + tag.slice(1))
+      .join(", ");
+    link.appendChild(tagsDiv);
+  }
 
   // Spacer
   const spacer = document.createElement("div");

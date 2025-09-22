@@ -109,7 +109,7 @@ function createEl(tag, { className, attrs = {}, text, children = [] } = {}) {
 
 function createProductCard(product) {
   const link = createEl("a", {
-    className: "product-link product-card",
+    className: "product-link product-card-base product-card-small",
     attrs: {
       href: `product.html?id=${product.id}`,
       style: "display:flex;flex-direction:column;align-items:flex-start;",
@@ -131,13 +131,27 @@ function createProductCard(product) {
     text: product.title,
   });
 
+  const tagsDiv = createEl("div", {
+    className: "product-tags",
+    text:
+      product.tags && product.tags.length > 0
+        ? product.tags
+            .map((tag) => tag.charAt(0).toUpperCase() + tag.slice(1))
+            .join(", ")
+        : "",
+  });
+
   // Spacer
   const spacer = createEl("div", {
     className: "product-card-spacer",
     attrs: { style: "flex:1 1 auto;width:100%" },
   });
 
-  // Rating
+  // Rating and Icons Row
+  const ratingRow = createEl("div", {
+    className: "product-card-rating-row",
+  });
+
   const ratingValue = product.rating ? product.rating.toFixed(1) : "-";
   const ratingDiv = createEl("div", {
     className: "product-rating",
@@ -146,6 +160,36 @@ function createProductCard(product) {
       createEl("span", { className: "rating-number", text: ratingValue }),
     ],
   });
+  ratingRow.appendChild(ratingDiv);
+
+  const iconRow = createEl("div", { className: "product-card-icon-row" });
+  const shareIcon = createEl("img", {
+    className: "product-share-icon",
+    attrs: {
+      src: "../../public/assets/icons/icons-svg/black/share.svg",
+      alt: "Share product",
+      tabIndex: 0,
+    },
+  });
+  shareIcon.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const url = window.location.origin + "/product.html?id=" + product.id;
+    const title = product.title || "Product";
+    const result = await shareUrl(url, title, "Check out this product!");
+    if (result === "copied") {
+      shareIcon.title = "Link copied!";
+      setTimeout(() => (shareIcon.title = "Share product"), 1500);
+    } else if (result === "shared") {
+      shareIcon.title = "Shared!";
+      setTimeout(() => (shareIcon.title = "Share product"), 1500);
+    } else {
+      shareIcon.title = "Could not share";
+      setTimeout(() => (shareIcon.title = "Share product"), 1500);
+    }
+  });
+  iconRow.appendChild(shareIcon);
+  ratingRow.appendChild(iconRow);
 
   // Review count
   const reviewCount = product.reviews?.length || 0;
@@ -185,37 +229,10 @@ function createProductCard(product) {
     text: "Add to cart",
   });
 
-  [img, title, spacer, ratingDiv, reviewDiv, pricesDiv, btn].forEach((el) =>
+  [img, title, tagsDiv, ratingRow, reviewDiv, pricesDiv, btn].forEach((el) =>
     link.appendChild(el)
   );
-  // --------------------------------------------------  Share icon (added to each card) FIX DESIGN
-  const shareIcon = createEl("img", {
-    className: "product-share-icon",
-    attrs: {
-      src: "../../public/assets/icons/icons-svg/black/share.svg",
-      alt: "Share product",
-      tabIndex: 0,
-      style: "width:32px;height:32px;cursor:pointer;opacity:0.7;",
-    },
-  });
-  shareIcon.addEventListener("click", async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const url = window.location.origin + "/product.html?id=" + product.id;
-    const title = product.title || "Product";
-    const result = await shareUrl(url, title, "Check out this product!");
-    if (result === "copied") {
-      shareIcon.title = "Link copied!";
-      setTimeout(() => (shareIcon.title = "Share product"), 1500);
-    } else if (result === "shared") {
-      shareIcon.title = "Shared!";
-      setTimeout(() => (shareIcon.title = "Share product"), 1500);
-    } else {
-      shareIcon.title = "Could not share";
-      setTimeout(() => (shareIcon.title = "Share product"), 1500);
-    }
-  });
-  link.appendChild(shareIcon);
+
   return link;
 }
 
