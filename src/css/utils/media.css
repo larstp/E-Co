@@ -1,3 +1,25 @@
+@media (max-width: 600px) {
+  .product-card-huge {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .product-card-huge .product-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1.5 / 1;
+    margin-bottom: 1rem;
+  }
+
+  .product-card-huge .product-details-container {
+    height: auto;
+  }
+
+  .landing-carousel-section {
+    max-height: 815px;
+  }
+}
+
 @media (min-width: 900px) {
   h2 {
     font-size: 70px;

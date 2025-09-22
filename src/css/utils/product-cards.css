@@ -355,3 +355,119 @@
   width: 100%;
   margin: 0 auto;
 }
+
+/* ====================================================== */
+/* ================== Product Card (Huge - Carousel) ================= */
+/* ====================================================== */
+
+.product-card-huge {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.product-card-huge .product-details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  flex: 1;
+}
+
+.product-card-huge .product-img {
+  width: 250px;
+  height: 250px;
+  flex-shrink: 0;
+  border-radius: 25px;
+  object-fit: cover;
+}
+
+.product-card-huge .product-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.product-card-huge .product-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.product-card-huge .product-tags {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  text-decoration: none;
+  color: #929292;
+  font-family: "roboto", Arial, sans-serif;
+}
+
+.product-card-huge .product-description {
+  font-family: "roboto", Arial, sans-serif;
+  text-align: left;
+  color: #333;
+  margin-bottom: 1rem;
+  /* Truncate text to 3 lines */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.product-card-huge .product-card-rating-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.product-card-huge .product-rating {
+  font-size: 1.2rem;
+}
+
+.product-card-huge .review-count {
+  font-size: 1rem;
+  margin-bottom: 0;
+  font-family: "roboto", Arial, sans-serif;
+  color: #555;
+}
+
+.product-card-huge .product-prices {
+  margin-bottom: 1.5rem;
+  text-align: left;
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+.product-card-huge .product-price {
+  font-size: 1.8rem;
+  color: #000;
+  font-weight: bold;
+}
+
+.product-card-huge .old-price {
+  color: #888;
+  text-decoration: line-through;
+}
+
+.product-card-huge .discounted-price {
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+.product-card-huge .add-to-cart-btn,
+.product-card-huge .btn-large {
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  width: 100%;
+}
