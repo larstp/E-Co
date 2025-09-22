@@ -15,8 +15,19 @@ function createEl(tag, options = {}) {
 
 function createProductCard(product, size = "bestseller") {
   const link = document.createElement("a");
-  link.className = "product-link product-card-base product-card-small";
+  link.className = "product-link product-card-base";
+  if (size === "huge") {
+    link.classList.add("product-card-huge");
+  } else {
+    link.classList.add("product-card-small");
+  }
   link.href = `src/pages/product.html?id=${product.id}`;
+
+  // Create a container for all details for flex layout
+  const detailsContainer = document.createElement("div");
+  if (size === "huge") {
+    detailsContainer.className = "product-details-container";
+  }
 
   // Product image
   const img = document.createElement("img");
@@ -29,61 +40,12 @@ function createProductCard(product, size = "bestseller") {
   img.alt = product.image?.alt || product.title;
   link.appendChild(img);
 
-  // Product title
+  // Title and Share Icon Row
+  const titleRow = createEl("div", { class: "product-title-row" });
   const title = document.createElement("h2");
   title.className = "product-title";
   title.textContent = product.title;
-  link.appendChild(title);
-
-  // Product tags
-  if (product.tags && Array.isArray(product.tags) && product.tags.length > 0) {
-    const tagsDiv = document.createElement("div");
-    tagsDiv.className = "product-tags";
-    tagsDiv.textContent = product.tags
-      .map((tag) => tag.charAt(0).toUpperCase() + tag.slice(1))
-      .join(", ");
-    link.appendChild(tagsDiv);
-  }
-
-  // Spacer
-  const spacer = document.createElement("div");
-  spacer.className = "product-card-spacer";
-  link.appendChild(spacer);
-
-  // Rating and share Row
-  const ratingAndIconsRow = createEl("div", {
-    class: "product-card-rating-row",
-  });
-
-  // Rating
-  let ratingValue = product.rating;
-  if (product.reviews && product.reviews.length > 0) {
-    ratingValue =
-      product.reviews.reduce((a, r) => a + (r.rating || 0), 0) /
-      product.reviews.length;
-  }
-  const ratingDiv = document.createElement("div");
-  ratingDiv.className = "product-rating";
-  if (ratingValue) {
-    const star = document.createElement("span");
-    star.className = "star";
-    star.textContent = "★";
-    const ratingNum = document.createElement("span");
-    ratingNum.className = "rating-number";
-    ratingNum.textContent = ratingValue.toFixed(1);
-    ratingDiv.appendChild(star);
-    ratingDiv.appendChild(ratingNum);
-  } else {
-    const star = document.createElement("span");
-    star.className = "star";
-    star.textContent = "★";
-    const ratingNum = document.createElement("span");
-    ratingNum.className = "rating-number";
-    ratingNum.textContent = "-";
-    ratingDiv.appendChild(star);
-    ratingDiv.appendChild(ratingNum);
-  }
-  ratingAndIconsRow.appendChild(ratingDiv);
+  titleRow.appendChild(title);
 
   // Share Icon
   const iconsDiv = createEl("div", { class: "product-card-icon-row" });
@@ -97,8 +59,8 @@ function createProductCard(product, size = "bestseller") {
   shareIcon.addEventListener("click", async (e) => {
     e.preventDefault();
     const url = link.href;
-    const title = product.title || "Product";
-    const result = await shareUrl(url, title, "Check out this product!");
+    const productTitle = product.title || "Product";
+    const result = await shareUrl(url, productTitle, "Check out this product!");
     if (result === "copied") {
       shareIcon.title = "Link copied!";
       setTimeout(() => (shareIcon.title = "Share product"), 1500);
@@ -111,18 +73,88 @@ function createProductCard(product, size = "bestseller") {
     }
   });
   iconsDiv.appendChild(shareIcon);
-  ratingAndIconsRow.appendChild(iconsDiv);
+  if (size === "huge") {
+    titleRow.appendChild(iconsDiv);
+  }
+  detailsContainer.appendChild(titleRow);
 
-  link.appendChild(ratingAndIconsRow);
+  // Product tags
+  if (product.tags && Array.isArray(product.tags) && product.tags.length > 0) {
+    const tagsDiv = document.createElement("div");
+    tagsDiv.className = "product-tags";
+    tagsDiv.textContent = product.tags
+      .map((tag) => tag.charAt(0).toUpperCase() + tag.slice(1))
+      .join(", ");
+    detailsContainer.appendChild(tagsDiv);
+  }
 
-  // Review count
-  const reviewCount = product.reviews?.length || 0;
-  const reviewDiv = document.createElement("div");
-  reviewDiv.className = "review-count";
-  reviewDiv.textContent = `${reviewCount} review${
-    reviewCount === 1 ? "" : "s"
-  }`;
-  link.appendChild(reviewDiv);
+  // Spacer - only for non-huge cards now
+  if (size !== "huge") {
+    const spacer = document.createElement("div");
+    spacer.className = "product-card-spacer";
+    detailsContainer.appendChild(spacer);
+  }
+
+  // Description for huge cards, Rating for others
+  if (size === "huge") {
+    if (product.description) {
+      const description = createEl("p", {
+        class: "product-description",
+        text: product.description,
+      });
+      detailsContainer.appendChild(description);
+    }
+  } else {
+    // Rating and share Row
+    const ratingAndIconsRow = createEl("div", {
+      class: "product-card-rating-row",
+    });
+
+    // Rating
+    let ratingValue = product.rating;
+    if (product.reviews && product.reviews.length > 0) {
+      ratingValue =
+        product.reviews.reduce((a, r) => a + (r.rating || 0), 0) /
+        product.reviews.length;
+    }
+    const ratingDiv = document.createElement("div");
+    ratingDiv.className = "product-rating";
+    if (ratingValue) {
+      const star = document.createElement("span");
+      star.className = "star";
+      star.textContent = "★";
+      const ratingNum = document.createElement("span");
+      ratingNum.className = "rating-number";
+      ratingNum.textContent = ratingValue.toFixed(1);
+      ratingDiv.appendChild(star);
+      ratingDiv.appendChild(ratingNum);
+    } else {
+      const star = document.createElement("span");
+      star.className = "star";
+      star.textContent = "★";
+      const ratingNum = document.createElement("span");
+      ratingNum.className = "rating-number";
+      ratingNum.textContent = "-";
+      ratingDiv.appendChild(star);
+      ratingDiv.appendChild(ratingNum);
+    }
+    ratingAndIconsRow.appendChild(ratingDiv);
+
+    // Review count
+    const reviewCount = product.reviews?.length || 0;
+    const reviewDiv = document.createElement("div");
+    reviewDiv.className = "review-count";
+    reviewDiv.textContent = `(${reviewCount} review${
+      reviewCount === 1 ? "" : "s"
+    })`;
+    ratingAndIconsRow.appendChild(reviewDiv);
+
+    if (size !== "huge") {
+      ratingAndIconsRow.appendChild(iconsDiv);
+    }
+
+    detailsContainer.appendChild(ratingAndIconsRow);
+  }
 
   // Prices
   const priceSpan = document.createElement("span");
@@ -143,14 +175,25 @@ function createProductCard(product, size = "bestseller") {
   const pricesDiv = document.createElement("div");
   pricesDiv.className = "product-prices";
   pricesDiv.appendChild(priceSpan);
-  link.appendChild(pricesDiv);
+  detailsContainer.appendChild(pricesDiv);
 
   // Add to cart button
-  const btn = document.createElement("button");
-  btn.className = "add-to-cart-btn btn-xsmall";
-  btn.type = "button";
-  btn.textContent = "Add to cart";
-  link.appendChild(btn);
+  if (size !== "huge") {
+    const btn = document.createElement("button");
+    btn.className = "add-to-cart-btn btn-xsmall";
+    btn.type = "button";
+    btn.textContent = "Add to cart";
+    detailsContainer.appendChild(btn);
+  }
+
+  if (size === "huge") {
+    link.appendChild(detailsContainer);
+  } else {
+    // For smaller cards, append children of detailsContainer directly to link
+    while (detailsContainer.firstChild) {
+      link.appendChild(detailsContainer.firstChild);
+    }
+  }
 
   return link;
 }
@@ -261,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
       () => (window.location.href = "/src/pages/storefront.html?new")
     );
 
-    const mediaQuery = window.matchMedia("(min-width: 900px)"); // haha, cant believe this worked..
+    const mediaQuery = window.matchMedia("(min-width: 900px)");
     function handleBtnClass(mq) {
       if (mq.matches) {
         viewAllBtn.className = "btn-large";
@@ -293,83 +336,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const allProducts = await fetchAllProducts();
+      const newArrivals = allProducts
+        .filter((p) => !p.reviews || p.reviews.length === 0)
+        .slice(0, 3);
 
-      // Get products with no reviews
-      const newArrivals = allProducts.filter(
-        (p) => !p.reviews || p.reviews.length === 0
-      );
-
-      // Get other products, shuffle them, and take 5 (if it works)
-      const otherProducts = allProducts.filter(
-        (p) => p.reviews && p.reviews.length > 0
-      );
-      for (let i = otherProducts.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [otherProducts[i], otherProducts[j]] = [
-          otherProducts[j],
-          otherProducts[i],
-        ];
+      if (newArrivals.length === 0) {
+        track.textContent = "No new arrivals to show.";
+        return section;
       }
-      const randomProducts = otherProducts.slice(0, 5);
 
-      // Combine the lists
-      const products = [...newArrivals, ...randomProducts];
+      let currentIndex = 0;
 
-      function renderCarousel() {
-        while (track.firstChild) {
-          track.removeChild(track.firstChild);
-        }
-        products.forEach((prod) => {
-          track.appendChild(createProductCard(prod, "carousel"));
-        });
-        // Add a blank card to prevent items from being cut off
-        const blankCard = createEl("div", {
-          class: "product-link product-card-base product-card-small",
-        });
-        blankCard.style.visibility = "hidden";
-        track.appendChild(blankCard);
+      function renderCarousel(isInitial = false) {
+        const transitionDuration = isInitial ? 0 : 300;
+
+        track.style.opacity = 0;
+
+        setTimeout(() => {
+          while (track.firstChild) {
+            track.removeChild(track.firstChild);
+          }
+
+          const product = newArrivals[currentIndex];
+          const card = createProductCard(product, "huge");
+          track.appendChild(card);
+          track.style.justifyContent = "center";
+
+          track.style.opacity = 1;
+        }, transitionDuration);
       }
 
       leftArrow.addEventListener("click", () => {
-        const card = track.querySelector(".product-card-base");
-        if (!card) return;
-        const cardStyle = getComputedStyle(card);
-        const cardWidth = card.offsetWidth;
-        const cardMargin =
-          parseFloat(cardStyle.marginLeft) + parseFloat(cardStyle.marginRight);
-        const gap = parseFloat(getComputedStyle(track).gap);
-        const scrollAmount = (cardWidth + cardMargin + gap) * 3;
-
-        if (track.scrollLeft <= 0) {
-          // If at the beginning, scroll to the end
-          track.scrollTo({ left: track.scrollWidth, behavior: "smooth" });
-        } else {
-          track.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-        }
+        currentIndex =
+          (currentIndex - 1 + newArrivals.length) % newArrivals.length;
+        renderCarousel();
       });
 
       rightArrow.addEventListener("click", () => {
-        const card = track.querySelector(".product-card-base");
-        if (!card) return;
-        const cardStyle = getComputedStyle(card);
-        const cardWidth = card.offsetWidth;
-        const cardMargin =
-          parseFloat(cardStyle.marginLeft) + parseFloat(cardStyle.marginRight);
-        const gap = parseFloat(getComputedStyle(track).gap);
-        const scrollAmount = (cardWidth + cardMargin + gap) * 3;
-
-        if (
-          track.scrollLeft + track.clientWidth >=
-          track.scrollWidth - cardWidth
-        ) {
-          // If at the end, scroll to the beginning
-          track.scrollTo({ left: 0, behavior: "smooth" });
-        } else {
-          track.scrollBy({ left: scrollAmount, behavior: "smooth" });
-        }
+        currentIndex = (currentIndex + 1) % newArrivals.length;
+        renderCarousel();
       });
 
-      renderCarousel();
+      renderCarousel(true); // Initial render
     } catch (err) {
       track.textContent = "Failed to load products.";
     }
