@@ -197,68 +197,6 @@
     margin-bottom: 2rem;
   }
 
-  .desktop-step-container {
-    background: #fff;
-    border-radius: 1rem;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    transition: opacity 0.3s, filter 0.3s;
-  }
-
-  .desktop-step-container.disabled {
-    opacity: 0.5;
-    filter: grayscale(80%);
-    pointer-events: none;
-  }
-
-  .desktop-step-container.active {
-    opacity: 1;
-    filter: none;
-  }
-
-  .desktop-step-container.completed .desktop-step-content {
-    display: none;
-  }
-
-  .desktop-step-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .step-number {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: #1976d2;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-  }
-
-  .desktop-step-header h3 {
-    font-size: 1.5rem;
-    font-family: "Bebas Neue", sans-serif;
-    margin: 0;
-  }
-
-  .desktop-step-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .desktop-button-container {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
   .desktop-step-container[data-step="2"] .desktop-button-container {
     justify-content: flex-start;
   }
@@ -269,34 +207,8 @@
     padding-top: 104px;
   }
 
-  .checkout-desktop-right .your-cart-container {
-    background: #fff;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    margin-bottom: 1.5rem;
-  }
-
   .cart-item-card {
     grid-template-columns: 60px 1fr auto;
-  }
-
-  .cart-item-img-container img {
-    width: 60px;
-    height: 60px;
-  }
-
-  .cart-item-quantity {
-    font-family: "Roboto", sans-serif;
-    color: #666;
-  }
-
-  .newsletter-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: "Roboto", sans-serif;
-    margin-bottom: 1.5rem;
   }
 
   .cart-summary-wrapper {
