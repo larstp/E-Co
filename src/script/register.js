@@ -1,3 +1,5 @@
+import { registerUser } from "./api/api.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("register-container");
   if (!root) return;
@@ -141,6 +143,51 @@ document.addEventListener("DOMContentLoaded", () => {
   btnCreate.className = "btn-large";
   btnCreate.textContent = "Create account";
 
+  const messageContainer = document.createElement("div");
+  messageContainer.className = "message-container";
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    messageContainer.textContent = "";
+    messageContainer.classList.remove("success", "error");
+
+    if (inputPass.value !== inputRepeat.value) {
+      messageContainer.textContent = "Passwords do not match.";
+      messageContainer.classList.add("error");
+      return;
+    }
+
+    if (!checkboxTerms.checked) {
+      messageContainer.textContent = "You must accept the Terms & Conditions.";
+      messageContainer.classList.add("error");
+      return;
+    }
+
+    const userData = {
+      name: inputUser.value,
+      email: inputEmail.value,
+      password: inputPass.value,
+    };
+
+    try {
+      btnCreate.disabled = true;
+      btnCreate.textContent = "Creating account...";
+      await registerUser(userData);
+      messageContainer.textContent =
+        "Registration successful! Redirecting to login...";
+      messageContainer.classList.add("success");
+      setTimeout(() => {
+        window.location.href = "/src/pages/log-in.html";
+      }, 2000);
+    } catch (error) {
+      messageContainer.textContent = error.message;
+      messageContainer.classList.add("error");
+    } finally {
+      btnCreate.disabled = false;
+      btnCreate.textContent = "Create account";
+    }
+  });
+
   form.appendChild(labelEmail);
   form.appendChild(inputEmail);
   form.appendChild(labelUser);
@@ -154,6 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
   form.appendChild(checkboxTermsContainer);
   form.appendChild(checkboxNewsletterContainer);
   form.appendChild(btnCreate);
+  form.appendChild(messageContainer);
 
   root.appendChild(welcomeSection);
   root.appendChild(h3);

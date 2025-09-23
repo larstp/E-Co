@@ -1,0 +1,6 @@
+/* Make all checkboxes and radio buttons blue (#1976D2) when checked on the checkout page */
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #1976d2;
+}

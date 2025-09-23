@@ -1,34 +1,4 @@
-// =================================================================
-// MOCK DATA & SHARED UTILITIES
-// =================================================================
-
-// Mock data for cart items - will be replaced with real data later
-const mockCartItems = [
-  {
-    id: "c0d245f1-58fa-4b15-aa0c-a704772a122b",
-    title: "Radiant Glow Serum",
-    tags: ["Beauty", "Skincare"],
-    price: 89.99,
-    discountedPrice: 79.99,
-    image: {
-      url: "/public/assets/img/products/serum.jpg",
-      alt: "Radiant Glow Serum",
-    },
-    quantity: 1,
-  },
-  {
-    id: "159fdd2f-2b12-46de-9654-d9139525ba87",
-    title: "Eco-buds",
-    tags: ["Electronics", "Audio"],
-    price: 129.99,
-    discountedPrice: 129.99,
-    image: {
-      url: "/public/assets/img/products/buds.jpg",
-      alt: "Eco-buds",
-    },
-    quantity: 1,
-  },
-];
+import { getCart } from "./utils/cart.js";
 
 function createEl(tag, options = {}) {
   const el = document.createElement(tag);
@@ -42,40 +12,153 @@ function createEl(tag, options = {}) {
   return el;
 }
 
+function createOrderSummarySection(items) {
+  const section = createEl("div", { class: "order-summary-container" });
+  section.appendChild(createEl("h3", { text: "Order Summary" }));
+
+  const summaryDetails = createEl("div", { class: "summary-details" });
+
+  const subtotal = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const discount = items.reduce(
+    (sum, item) => sum + (item.price - item.discountedPrice) * item.quantity,
+    0
+  );
+  const deliveryFee = 250.0; // Mock fee
+  const total = subtotal - discount + deliveryFee;
+
+  const createRow = (label, value) => {
+    const row = createEl("div", { class: "summary-row" });
+    row.append(
+      createEl("span", { text: label }),
+      createEl("span", { text: value })
+    );
+    return row;
+  };
+
+  summaryDetails.append(
+    createRow("Subtotal", `${subtotal.toFixed(2)},-`),
+    createRow("Discount", `-${discount.toFixed(2)},-`),
+    createRow("Delivery Fee", `${deliveryFee.toFixed(2)},-`),
+    createEl("hr", { class: "separator" })
+  );
+
+  const totalRow = createRow("Total", `${total.toFixed(2)},-`);
+  totalRow.classList.add("total");
+  summaryDetails.appendChild(totalRow);
+
+  section.appendChild(summaryDetails);
+  return section;
+}
+
 // =================================================================
-// CHECKOUT STEP CONTENT BUILDERS
+// CHECKOUT STEP CONTENT
 // =================================================================
 
-function createAddressBox() {
-  const container = createEl("div", { class: "address-box" });
+async function createAddressBox() {
+  const container = createEl("div", { class: "address-box-list" });
+  let addresses = [];
+  let selectedIdx = parseInt(localStorage.getItem("selectedAddressIdx")) || 0;
+  let showAll = false;
+  try {
+    const res = await fetch("/src/components/address.json");
+    addresses = await res.json();
+  } catch (e) {
+    container.append(createEl("p", { text: "Failed to load addresses." }));
+    return container;
+  }
 
-  const name = createEl("p", { text: "John Doe" });
-  const street = createEl("p", { text: "Karl Johans gate 1" });
-  const city = createEl("p", { text: "0159 Oslo" });
-  const country = createEl("p", { text: "Norway" });
+  if (!Array.isArray(addresses) || addresses.length === 0) {
+    container.append(createEl("p", { text: "No addresses found." }));
+    return container;
+  }
 
-  const actions = createEl("div", { class: "address-actions" });
-  const editButton = createEl("button");
-  const editIcon = createEl("img", {
-    attrs: {
-      src: "/public/assets/icons/icons-svg/black/edit.svg",
-      alt: "Edit",
-    },
-  });
-  editButton.appendChild(editIcon);
+  function renderAddresses() {
+    container.innerHTML = "";
+    if (!showAll) {
+      const addr = addresses[selectedIdx];
+      const box = createEl("div", { class: "address-box selected" });
+      const label = createEl("label", { class: "address-label" });
+      label.append(
+        createEl("p", { text: addr.name }),
+        createEl("p", {
+          text: addr.street + (addr.apt ? ", " + addr.apt : ""),
+        }),
+        createEl("p", { text: `${addr.postal} ${addr.city}` }),
+        createEl("p", { text: addr.country })
+      );
+      box.append(label);
+      container.appendChild(box);
+    } else {
+      addresses.forEach((addr, idx) => {
+        const box = createEl("div", { class: "address-box" });
+        if (idx === selectedIdx) box.classList.add("selected");
+        const radio = createEl("input", {
+          class: "address-radio",
+          attrs: {
+            type: "radio",
+            name: "delivery-address",
+            value: idx,
+            ...(idx === selectedIdx ? { checked: true } : {}),
+          },
+        });
+        // Trash icon (bottom right)
+        const trash = createEl("img", {
+          class: "address-trash",
+          attrs: {
+            src: "/public/assets/icons/icons-svg/black/trash.svg",
+            alt: "Delete address (mock)",
+            tabindex: 0,
+          },
+        });
+        // No real delete, just mock hover/click! Dont know if we can save this to the API
+        trash.addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
+        trash.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            trash.click();
+          }
+        });
+        box.addEventListener("click", (e) => {
+          if (!radio.checked) {
+            radio.checked = true;
+            radio.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+        });
+        radio.addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
+        radio.addEventListener("change", () => {
+          localStorage.setItem("selectedAddressIdx", idx);
+          selectedIdx = idx;
+          showAll = false;
+          renderAddresses();
+        });
+        const label = createEl("label", { class: "address-label" });
+        label.append(
+          createEl("p", { text: addr.name }),
+          createEl("p", {
+            text: addr.street + (addr.apt ? ", " + addr.apt : ""),
+          }),
+          createEl("p", { text: `${addr.postal} ${addr.city}` }),
+          createEl("p", { text: addr.country })
+        );
+        box.append(label, radio, trash);
+        container.appendChild(box);
+      });
+    }
+  }
 
-  const deleteButton = createEl("button");
-  const deleteIcon = createEl("img", {
-    attrs: {
-      src: "/public/assets/icons/icons-svg/black/trash.svg",
-      alt: "Delete",
-    },
-  });
-  deleteButton.appendChild(deleteIcon);
+  container.showAllAddresses = () => {
+    showAll = true;
+    renderAddresses();
+  };
 
-  actions.append(editButton, deleteButton);
-  container.append(name, street, city, country, actions);
-
+  renderAddresses();
   return container;
 }
 
@@ -110,10 +193,10 @@ function createPaymentOptions() {
 }
 
 // =================================================================
-// MOBILE CHECKOUT BUILDER
+// MOBILE CHECKOUT
 // =================================================================
 
-function buildMobileCheckout() {
+async function buildMobileCheckout(cartItems) {
   const mainContainer = createEl("main", {
     class: "checkout-container-mobile",
   });
@@ -144,9 +227,16 @@ function buildMobileCheckout() {
     class: "checkout-step active-step",
     attrs: { "data-step": 1 },
   });
+  let addressBox;
+  try {
+    addressBox = await createAddressBox();
+  } catch (e) {
+    addressBox = createEl("p", { text: "Failed to load addresses." });
+  }
   addressStep.append(
     createEl("h3", { text: "Confirm Delivery Address" }),
-    createAddressBox(),
+    addressBox,
+    createOrderSummarySection(cartItems),
     createEl("button", {
       class: "btn-large continue-btn",
       text: "Continue",
@@ -155,10 +245,13 @@ function buildMobileCheckout() {
     createEl("button", {
       class: "btn-large-white",
       text: "Change Delivery Address",
+      attrs: { id: "change-address-btn-mobile" },
     })
   );
-  addressStep.querySelector(".btn-large-white").onclick = () =>
-    (window.location.href = "/src/pages/address.html");
+  addressStep.querySelector("#change-address-btn-mobile").onclick = () => {
+    if (addressBox && addressBox.showAllAddresses)
+      addressBox.showAllAddresses();
+  };
 
   // --- Step 2: Shipping ---
   const shippingStep = createEl("div", {
@@ -168,6 +261,7 @@ function buildMobileCheckout() {
   shippingStep.append(
     createEl("h3", { text: "Shipping Options" }),
     createShippingOptions(),
+    createOrderSummarySection(cartItems),
     createEl("p", {
       class: "shipping-note",
       text: "* Parcel will be delivered to nearest pickup point if it cannot fit in the mailbox",
@@ -197,6 +291,7 @@ function buildMobileCheckout() {
     createEl("h3", { text: "Select Payment Method" }),
     createEl("p", { class: "payment-sub", text: "Saved payment options" }),
     createPaymentOptions(),
+    createOrderSummarySection(cartItems),
     createEl("button", {
       class: "btn-large-white",
       text: "Add Payment Option",
@@ -209,7 +304,7 @@ function buildMobileCheckout() {
   stepsWrapper.append(addressStep, shippingStep, paymentStep);
   mainContainer.append(tabsContainer, stepsWrapper);
 
-  // --- Navigation Logic ---
+  // --- Navigation  ---
   let currentStep = 1;
 
   function updateTabs() {
@@ -257,17 +352,16 @@ function buildMobileCheckout() {
     });
   });
 
-  // Initial state
   showStep(1);
 
   return mainContainer;
 }
 
 // =================================================================
-// DESKTOP CHECKOUT BUILDER
+// DESKTOP CHECKOUT
 // =================================================================
 
-function buildDesktopCheckout() {
+async function buildDesktopCheckout(cartItems) {
   const mainContainer = createEl("main", {
     class: "checkout-container-desktop",
   });
@@ -277,10 +371,16 @@ function buildDesktopCheckout() {
   // --- Left Column ---
   leftColumn.appendChild(createEl("h2", { text: "Checkout" }));
 
+  let addressBox;
+  try {
+    addressBox = await createAddressBox();
+  } catch (e) {
+    addressBox = createEl("p", { text: "Failed to load addresses." });
+  }
   const steps = [
     {
       title: "Confirm Delivery Address",
-      content: createAddressBox(),
+      content: addressBox,
       buttonText: "Continue",
     },
     {
@@ -317,9 +417,12 @@ function buildDesktopCheckout() {
       const changeAddressBtn = createEl("button", {
         class: "btn-large-white",
         text: "Change Delivery Address",
+        attrs: { id: "change-address-btn-desktop" },
       });
-      changeAddressBtn.onclick = () =>
-        (window.location.href = "/src/pages/address.html");
+      changeAddressBtn.onclick = () => {
+        if (addressBox && addressBox.showAllAddresses)
+          addressBox.showAllAddresses();
+      };
       const continueBtn = createEl("button", {
         class: "btn-large continue-btn",
         text: step.buttonText,
@@ -358,8 +461,10 @@ function buildDesktopCheckout() {
     leftColumn.appendChild(stepContainer);
   });
 
-  // --- Right Column ---
-  rightColumn.appendChild(createYourCartSection(mockCartItems));
+  // ------------------------------ Right Column -------------------------
+
+  rightColumn.appendChild(createYourCartSection(cartItems));
+  rightColumn.appendChild(createOrderSummarySection(cartItems));
 
   const newsletter = createEl("label", { class: "newsletter-checkbox" });
   const checkbox = createEl("input", { attrs: { type: "checkbox" } });
@@ -376,7 +481,7 @@ function buildDesktopCheckout() {
   backBtn.onclick = () => (window.location.href = "/");
   rightColumn.appendChild(backBtn);
 
-  // --- Locking Logic ---
+  // --- Locking Logic -------------------------------------------------------------- Check if works
   let currentStep = 1;
   const stepContainers = leftColumn.querySelectorAll(".desktop-step-container");
 
@@ -407,7 +512,7 @@ function buildDesktopCheckout() {
   return mainContainer;
 }
 
-// --- Functions for Right Column (from cart.js) ---
+// --- Functions for Right Column (from cart.js) ------------------------------- !!
 function createYourCartSection(items) {
   const section = createEl("div", { class: "your-cart-container" });
   const heading = createEl("h3", { text: "Your Cart" });
@@ -471,8 +576,8 @@ function createConfirmationPopup() {
 
   const homeButton = createEl("button", { class: "btn-large", text: "Home" });
   homeButton.addEventListener("click", () => {
-    localStorage.removeItem("cart"); // Clear the cart
-    window.location.href = "/"; // Go to homepage
+    localStorage.removeItem("cart");
+    window.location.href = "/";
   });
 
   const logo = createEl("img", {
@@ -493,12 +598,14 @@ function createConfirmationPopup() {
 // =================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
-  const body = document.body;
-  body.appendChild(buildMobileCheckout());
-  body.appendChild(buildDesktopCheckout());
-
-  import("./utils/footer.js").then((mod) => {
-    const footer = mod.buildFooter();
-    document.body.appendChild(footer);
-  });
+  (async () => {
+    const body = document.body;
+    const cartItems = getCart();
+    body.appendChild(await buildMobileCheckout(cartItems));
+    body.appendChild(await buildDesktopCheckout(cartItems));
+    import("./utils/footer.js").then((mod) => {
+      const footer = mod.buildFooter();
+      document.body.appendChild(footer);
+    });
+  })();
 });

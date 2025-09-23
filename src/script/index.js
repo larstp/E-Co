@@ -1,5 +1,6 @@
 import { fetchAllProducts } from "./api/api.js";
 import { shareUrl } from "./utils/share.js";
+import { addToCart } from "./utils/cart.js";
 
 function createEl(tag, options = {}) {
   const el = document.createElement(tag);
@@ -183,6 +184,17 @@ function createProductCard(product, size = "bestseller") {
     btn.className = "add-to-cart-btn btn-xsmall";
     btn.type = "button";
     btn.textContent = "Add to cart";
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      addToCart(product);
+      btn.textContent = "Added!";
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = "Add to cart";
+        btn.disabled = false;
+      }, 1000);
+    });
     detailsContainer.appendChild(btn);
   }
 

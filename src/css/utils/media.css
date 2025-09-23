@@ -1,3 +1,5 @@
+/* Hide order summary on mobile, show only on desktop */
+
 @media (max-width: 600px) {
   .product-card-huge {
     flex-direction: column;
@@ -23,6 +25,10 @@
 @media (min-width: 900px) {
   h2 {
     font-size: 70px;
+  }
+
+  .order-summary-container {
+    display: block;
   }
 
   .header-mobile {

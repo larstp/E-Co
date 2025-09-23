@@ -1,4 +1,11 @@
+import { isLoggedIn, getUserProfile, logout } from "./utils/user.js";
+
 document.addEventListener("DOMContentLoaded", () => {
+  if (!isLoggedIn()) {
+    window.location.href = "/src/pages/log-in.html";
+    return;
+  }
+
   const main = document.querySelector("main");
   if (!main) return;
 
@@ -10,7 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
   welcomeSection.className = "user-welcome";
 
   const h2 = document.createElement("h2");
-  h2.textContent = "Hi, user"; // Replace with dynamic username/email when available ---------------------!
+  const user = getUserProfile();
+  h2.textContent = `Hi, ${user?.name || "user"}`;
   const pWelcome = document.createElement("p");
   pWelcome.textContent = "Use this page to change your account settings";
 
@@ -41,9 +49,18 @@ document.addEventListener("DOMContentLoaded", () => {
   paymentSection.appendChild(h4Payment);
   paymentSection.appendChild(btnPayment);
 
+  const logoutSection = document.createElement("section");
+  logoutSection.className = "user-logout-section";
+  const btnLogout = document.createElement("button");
+  btnLogout.className = "btn-large-white";
+  btnLogout.textContent = "Log Out";
+  btnLogout.addEventListener("click", logout);
+  logoutSection.appendChild(btnLogout);
+
   container.appendChild(welcomeSection);
   container.appendChild(addressSection);
   container.appendChild(paymentSection);
+  container.appendChild(logoutSection);
 
   main.appendChild(container);
 });

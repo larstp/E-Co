@@ -1,13 +1,21 @@
 body {
-  background-color: #f4f6f8;
-  overflow-x: hidden; /* Prevents horizontal scroll from slideshow */
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #1976d2;
 }
 
 .checkout-container-mobile {
   padding: 1rem;
 }
 
-/* --- Tabs and Progress --- */
+.order-summary-container {
+  display: none;
+}
+
 .checkout-tabs {
   display: flex;
   justify-content: space-between;
@@ -75,7 +83,7 @@ body {
 .checkout-step > .btn-large,
 .checkout-step > .btn-large-white {
   width: 100%;
-  max-width: 400px; /* Optional: prevent buttons from being too wide on tablets */
+  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -85,8 +93,50 @@ body {
   font-size: 2.5rem;
   margin-bottom: 0;
 }
+.order-summary-container h3 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
 
-/* --- Content Sections --- */
+.order-summary-container {
+  font-family: "Roboto", sans-serif;
+}
+
+.summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0.2rem 0;
+}
+.summary-row span:first-child {
+  text-align: left;
+}
+.summary-row span:last-child {
+  text-align: right;
+  min-width: 70px;
+  font-variant-numeric: tabular-nums;
+}
+.summary-row.total {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.summary-details .separator {
+  border: none;
+  border-top: 1.5px solid #e0e0e0;
+  margin: 0.5rem 0 0.2rem 0;
+}
+
 .address-box {
   background: #fff;
   border-radius: 1rem;
@@ -94,8 +144,20 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   position: relative;
   font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border 0.2s;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
+.address-label {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
 .address-box p {
   margin: 0 0 0.5rem 0;
 }
@@ -133,10 +195,6 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-input[type="radio"] {
-  /* Add if you want custom radio buttons */
-}
-
 .shipping-note {
   font-family: "Roboto", sans-serif;
   font-size: 0.9rem;
@@ -154,6 +212,7 @@ input[type="radio"] {
 /* =================================================================
 DESKTOP STYLES
 ================================================================= */
+
 .checkout-container-desktop {
   display: none; /* Hidden by default */
 }
@@ -234,11 +293,60 @@ DESKTOP STYLES
   gap: 0.5rem;
   font-family: "Roboto", sans-serif;
   margin-bottom: 1.5rem;
+  padding-top: 15px;
+}
+
+.address-box {
+  cursor: pointer;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+.address-box:hover {
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.1), 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1.5px solid #1976d2;
+}
+
+.address-radio {
+  margin-left: 1.5rem;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.address-trash {
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
+  transition: opacity 0.2s, filter 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.address-trash:hover {
+  opacity: 1;
+  filter: drop-shadow(0 2px 6px #1976d2aa);
+  transform: scale(1.08) rotate(-8deg);
+}
+
+.shipping-option:hover {
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1.5px solid #1976d2;
+  background: #f5faff;
+  transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+}
+
+.payment-option:hover {
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1.5px solid #1976d2;
+  background: #f5faff;
+  transition: box-shadow 0.2s, border 0.2s, background 0.2s;
 }
 
 /* =================================================================
-CONFIRMATION POP-UP
+CONFIRMATION POP-UP :D
 ================================================================= */
+
 .confirmation-popup-overlay {
   position: fixed;
   top: 0px;

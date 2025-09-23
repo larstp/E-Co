@@ -1,3 +1,5 @@
+import { loginUser } from "./api/api.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("login-container");
   if (!root) return;
@@ -61,11 +63,49 @@ document.addEventListener("DOMContentLoaded", () => {
   btnLogin.className = "btn-large";
   btnLogin.textContent = "Log in";
 
+  const messageContainer = document.createElement("div");
+  messageContainer.className = "message-container";
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    messageContainer.textContent = "";
+    messageContainer.classList.remove("success", "error");
+
+    const credentials = {
+      email: inputUser.value,
+      password: inputPass.value,
+    };
+
+    try {
+      btnLogin.disabled = true;
+      btnLogin.textContent = "Logging in...";
+      const userData = await loginUser(credentials);
+
+      // Save to localStorage
+      localStorage.setItem("accessToken", userData.accessToken);
+      localStorage.setItem("userProfile", JSON.stringify(userData));
+
+      messageContainer.textContent = "Login successful! Redirecting...";
+      messageContainer.classList.add("success");
+
+      setTimeout(() => {
+        window.location.href = "/"; // Redirect to homepage i think
+      }, 1500);
+    } catch (error) {
+      messageContainer.textContent = error.message;
+      messageContainer.classList.add("error");
+    } finally {
+      btnLogin.disabled = false;
+      btnLogin.textContent = "Log in";
+    }
+  });
+
   form.appendChild(labelUser);
   form.appendChild(inputUser);
   form.appendChild(labelPass);
   form.appendChild(inputPass);
   form.appendChild(btnLogin);
+  form.appendChild(messageContainer);
 
   const orText = document.createElement("p");
   orText.textContent = "or";

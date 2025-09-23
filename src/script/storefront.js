@@ -1,6 +1,7 @@
 import { fetchAllProducts } from "./api/api.js";
 import { shareUrl } from "./utils/share.js";
 import { setupFilterMenu } from "./utils/menus.js";
+import { addToCart } from "./utils/cart.js";
 
 let allCategories = [];
 let allTags = [];
@@ -227,6 +228,17 @@ function createProductCard(product) {
     className: "add-to-cart-btn btn-xsmall",
     attrs: { type: "button" },
     text: "Add to cart",
+  });
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(product);
+    btn.textContent = "Added!";
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = "Add to cart";
+      btn.disabled = false;
+    }, 1000);
   });
 
   [img, title, tagsDiv, ratingRow, reviewDiv, pricesDiv, btn].forEach((el) =>

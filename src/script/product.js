@@ -5,6 +5,7 @@ import("./utils/footer.js").then((mod) => {
 import { fetchProductById, fetchAllProducts } from "./api/api.js";
 import { shareUrl } from "./utils/share.js";
 import { createStarRating } from "./utils/stars.js";
+import { addToCart } from "./utils/cart.js";
 
 // ------------------------------------------------------- Mobile Version -------------------
 
@@ -297,6 +298,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   btnAdd.type = "button";
   btnAdd.className = "btn-small product-add-to-cart-btn";
   btnAdd.textContent = "Add to cart";
+  btnAdd.addEventListener("click", () => {
+    const quantity = parseInt(counterVal.textContent);
+    addToCart(product, quantity);
+    btnAdd.textContent = "Added!";
+    btnAdd.disabled = true;
+    setTimeout(() => {
+      btnAdd.textContent = "Add to cart";
+      btnAdd.disabled = false;
+    }, 1000);
+  });
   actionRow.appendChild(btnAdd);
   topSection.appendChild(actionRow);
 
@@ -897,6 +908,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   btnAdd.type = "button";
   btnAdd.className = "btn-small product-add-to-cart-btn";
   btnAdd.textContent = "Add to cart";
+  btnAdd.addEventListener("click", () => {
+    const quantity = parseInt(counterVal.textContent);
+    addToCart(product, quantity);
+    btnAdd.textContent = "Added!";
+    btnAdd.disabled = true;
+    setTimeout(() => {
+      btnAdd.textContent = "Add to cart";
+      btnAdd.disabled = false;
+    }, 1000);
+  });
   actionRow.appendChild(btnAdd);
   productTopSectionText.appendChild(actionRow);
 

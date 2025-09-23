@@ -1,3 +1,5 @@
+import { isLoggedIn } from "./user.js";
+
 // Note: I'm using caps to differentiate a bit because my brain gets fried by this...
 
 // =============================
@@ -5,7 +7,7 @@
 // =============================
 
 const IS_INDEX_PAGE = window.location.pathname.endsWith("index.html");
-const IS_LOGGED_IN = false;
+const IS_LOGGED_IN = isLoggedIn();
 
 const MOBILE_UPPER_LINKS = [
   {

@@ -1,5 +1,13 @@
 import { fetchAllProducts } from "./api/api.js";
 import { createProductCarousel } from "./utils/carousel.js";
+import {
+  getCart,
+  addToCart,
+  removeFromCart,
+  updateItemQuantity,
+  clearCart,
+} from "./utils/cart.js";
+import { getUserProfile } from "./utils/user.js";
 
 function createEl(tag, options = {}) {
   const el = document.createElement(tag);
@@ -12,34 +20,6 @@ function createEl(tag, options = {}) {
   }
   return el;
 }
-
-// --------------------------------Mock data for cart items - we will replace this with real data later!
-const mockCartItems = [
-  {
-    id: "c0d245f1-58fa-4b15-aa0c-a704772a122b",
-    title: "Radiant Glow Serum",
-    tags: ["Beauty", "Skincare"],
-    price: 89.99,
-    discountedPrice: 79.99,
-    image: {
-      url: "/public/assets/img/products/serum.jpg",
-      alt: "Radiant Glow Serum",
-    },
-    quantity: 1,
-  },
-  {
-    id: "159fdd2f-2b12-46de-9654-d9139525ba87",
-    title: "Eco-buds",
-    tags: ["Electronics", "Audio"],
-    price: 129.99,
-    discountedPrice: 129.99,
-    image: {
-      url: "/public/assets/img/products/buds.jpg",
-      alt: "Eco-buds",
-    },
-    quantity: 1,
-  },
-];
 
 function createCartItemCard(item) {
   const card = createEl("div", { class: "cart-item-card" });
@@ -59,7 +39,7 @@ function createCartItemCard(item) {
   const title = createEl("h4", { class: "cart-item-title", text: item.title });
   const tags = createEl("p", {
     class: "cart-item-tags",
-    text: item.tags.join(", "),
+    text: item.tags ? item.tags.join(", ") : "",
   });
   const price = createEl("p", { class: "cart-item-price" });
   if (item.discountedPrice < item.price) {
@@ -89,6 +69,10 @@ function createCartItemCard(item) {
     },
   });
   deleteBtn.appendChild(deleteIcon);
+  deleteBtn.addEventListener("click", () => {
+    removeFromCart(item.id);
+    renderCart();
+  });
 
   const quantitySelector = createEl("div", { class: "product-counter-row" });
   const minusBtn = createEl("button", {
@@ -105,29 +89,21 @@ function createCartItemCard(item) {
   });
 
   plusBtn.addEventListener("click", () => {
-    item.quantity++;
-    quantityDisplay.textContent = item.quantity;
-    const summaryDetails = document.querySelector(".summary-details");
-    if (summaryDetails) {
-      updateOrderSummary(mockCartItems, summaryDetails);
-    }
+    updateItemQuantity(item.id, item.quantity + 1);
+    renderCart();
   });
 
   minusBtn.addEventListener("click", () => {
     if (item.quantity > 1) {
-      item.quantity--;
-      quantityDisplay.textContent = item.quantity;
-      const summaryDetails = document.querySelector(".summary-details");
-      if (summaryDetails) {
-        updateOrderSummary(mockCartItems, summaryDetails);
-      }
+      updateItemQuantity(item.id, item.quantity - 1);
+    } else {
+      removeFromCart(item.id);
     }
+    renderCart();
   });
 
   quantitySelector.append(minusBtn, quantityDisplay, plusBtn);
-
   actionsContainer.append(deleteBtn, quantitySelector);
-
   card.append(imgContainer, infoContainer, actionsContainer);
   return card;
 }
@@ -154,14 +130,15 @@ function createOrderSummarySection(items) {
   const summaryDetails = createEl("div", { class: "summary-details" });
   section.appendChild(summaryDetails);
 
-  // Initial render
   updateOrderSummary(items, summaryDetails);
 
   const deliveryInfo = createEl("div", { class: "delivery-info" });
   const mapIcon = createEl("img", {
     attrs: { src: "/public/assets/icons/icons-svg/black/map.svg" },
   });
-  deliveryInfo.append(mapIcon, "Deliver to USER, ADDRESS"); //------------------------------ Placeholder
+  const user = getUserProfile();
+  const userName = user?.name || "Guest";
+  deliveryInfo.append(mapIcon, `Deliver to ${userName}, ADDRESS`);
   section.appendChild(deliveryInfo);
 
   const changeAddressBtn = createEl("button", {
@@ -183,16 +160,22 @@ function createOrderSummarySection(items) {
   const checkoutBtn = createEl("button", {
     class: "btn-large",
     text: "Go to Checkout",
+    attrs: { type: "button" },
   });
-  checkoutBtn.onclick = () =>
-    (window.location.href = "/src/pages/checkout.html");
+  checkoutBtn.onclick = () => {
+    const isLoggedIn = !!localStorage.getItem("accessToken");
+    if (isLoggedIn) {
+      window.location.href = "/src/pages/checkout.html";
+    } else {
+      window.location.href = "/src/pages/log-in.html";
+    }
+  };
   section.appendChild(checkoutBtn);
 
   return section;
 }
 
 function updateOrderSummary(items, summaryDetailsElement) {
-  // Clear previous content
   while (summaryDetailsElement.firstChild) {
     summaryDetailsElement.removeChild(summaryDetailsElement.firstChild);
   }
@@ -222,17 +205,7 @@ function updateOrderSummary(items, summaryDetailsElement) {
   const totalRow = createRow("Total", `${total.toFixed(2)},-`);
   totalRow.classList.add("total");
 
-  const separator1 = createEl("hr", { class: "separator" });
-  const separator2 = createEl("hr", { class: "separator" });
-
-  summaryDetailsElement.append(
-    subtotalRow,
-    discountRow,
-    deliveryRow,
-    separator1,
-    totalRow,
-    separator2
-  );
+  summaryDetailsElement.append(subtotalRow, discountRow, deliveryRow, totalRow);
 }
 
 async function createRecommendationsSection() {
@@ -243,12 +216,40 @@ async function createRecommendationsSection() {
   return carouselSection;
 }
 
+function renderCart() {
+  const cartItems = getCart();
+  let mainContainer = document.querySelector("main");
+  if (!mainContainer) {
+    mainContainer = createEl("main");
+    document.body.insertBefore(
+      mainContainer,
+      document.querySelector(".recommendations-section") ||
+        document.querySelector("footer")
+    );
+  }
+  mainContainer.innerHTML = "";
+
+  const cartAndSummaryWrapper = createEl("div", {
+    class: "cart-summary-wrapper",
+  });
+
+  const yourCartSection = createYourCartSection(cartItems);
+  const orderSummarySection = createOrderSummarySection(cartItems);
+
+  cartAndSummaryWrapper.append(yourCartSection, orderSummarySection);
+  mainContainer.append(cartAndSummaryWrapper);
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const body = document.body;
 
+  if (!document.querySelector("header")) {
+    const headerModule = await import("./utils/header.js");
+  }
+
   const breadcrumb = document.querySelector(".breadcrumb");
   if (breadcrumb) {
-    breadcrumb.innerHTML = ""; // Clear existing
+    breadcrumb.innerHTML = "";
     const homeLink = createEl("a", { href: "/index.html", text: "Home" });
     const separator = createEl("span", { text: " / " });
     const currentPage = createEl("span", {
@@ -258,22 +259,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     breadcrumb.append(homeLink, separator, currentPage);
   }
 
-  const mainContainer = createEl("main");
-  const cartAndSummaryWrapper = createEl("div", {
-    class: "cart-summary-wrapper",
-  });
-
-  const yourCartSection = createYourCartSection(mockCartItems);
-  const orderSummarySection = createOrderSummarySection(mockCartItems);
-  cartAndSummaryWrapper.append(yourCartSection, orderSummarySection);
+  renderCart();
 
   const recommendationsSection = await createRecommendationsSection();
+  body.appendChild(recommendationsSection);
 
-  mainContainer.append(cartAndSummaryWrapper, recommendationsSection);
-  body.appendChild(mainContainer);
-
-  import("./utils/footer.js").then((mod) => {
-    const footer = mod.buildFooter();
-    body.appendChild(footer);
-  });
+  if (!document.querySelector("footer")) {
+    import("./utils/footer.js").then((mod) => {
+      const footer = mod.buildFooter();
+      document.body.appendChild(footer);
+    });
+  }
 });

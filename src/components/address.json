@@ -1,0 +1,26 @@
+[
+  {
+    "name": "John Doe",
+    "street": "Karl Johans gate 1",
+    "apt": "",
+    "postal": "0159",
+    "city": "Oslo",
+    "country": "Norway"
+  },
+  {
+    "name": "Jane Smith",
+    "street": "Storgata 5",
+    "apt": "Apt. 12B",
+    "postal": "0182",
+    "city": "Oslo",
+    "country": "Norway"
+  },
+  {
+    "name": "Ola Nordmann",
+    "street": "Dronningens gate 15",
+    "apt": "3rd floor",
+    "postal": "7011",
+    "city": "Trondheim",
+    "country": "Norway"
+  }
+]
