@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const summerAd = createEl("section", {
     class: "landing-summer-ad",
     attrs: {
-      style: "background-image: url('../public/assets/img/summer-sale.jpg')",
+      style: "background-image: url('../public/assets/img/summer-sale.webp')",
     },
   });
   const summerAdContent = createEl("div", { class: "summer-ad-content" });
@@ -455,6 +455,42 @@ document.addEventListener("DOMContentLoaded", () => {
   categorySection.appendChild(categoryList);
   body.appendChild(categorySection);
 
+  // Cleaning Ad Section
+  const cleaningAdSection = createEl("section", { class: "cleaning-ad" });
+  const cleaningAdLeft = createEl("div", { class: "cleaning-ad-left" });
+  const cleaningAdImg = createEl("img", {
+    attrs: {
+      src: "/public/assets/img/clean-living.webp",
+      alt: "Clean living products",
+    },
+  });
+  cleaningAdLeft.appendChild(cleaningAdImg);
+
+  const cleaningAdRight = createEl("div", { class: "cleaning-ad-right" });
+  const cleaningAdHeading = createEl("h2");
+  cleaningAdHeading.textContent = "CLEAN LIVING ";
+  const saleSpan = createEl("span", { class: "sale-text", text: "SALE" });
+  cleaningAdHeading.appendChild(saleSpan);
+
+  const p1 = createEl("p", {
+    text: "Stock up and save on a cleaner home with Clean Living's sale section.",
+  });
+  const p2 = createEl("p", {
+    text: "Refresh your home with this bio-enzymatic odor and spot remover. Made with non-toxic, plant-based ingredients, it's safe for your family and pets. Tackle even the toughest messes without harsh chemicals. \n\nShop our sale section today and discover the power of a truly clean home.",
+  });
+  const cleaningAdBtn = createEl("button", {
+    class: "btn-large-white",
+    text: "Shop Sale",
+  });
+  cleaningAdBtn.addEventListener(
+    "click",
+    () => (window.location.href = "/src/pages/storefront.html?tag=beauty")
+  );
+
+  cleaningAdRight.append(cleaningAdHeading, p1, p2, cleaningAdBtn);
+  cleaningAdSection.append(cleaningAdLeft, cleaningAdRight);
+  body.appendChild(cleaningAdSection);
+
   // Bestseller Section
   const bestsellersHeading = createEl("h2", {
     class: "bestseller-heading",
@@ -488,7 +524,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const newsletterSection = createEl("section", {
     class: "landing-newsletter-section",
     attrs: {
-      style: "background-image: url('../public/assets/img/newsletter.jpg')",
+      style: "background-image: url('../public/assets/img/newsletter.webp')",
     },
   });
   const newsletterContent = createEl("div", { class: "newsletter-content" });
