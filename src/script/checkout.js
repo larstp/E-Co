@@ -48,16 +48,34 @@ function createEl(tag, options = {}) {
 
 function createAddressBox() {
   const container = createEl("div", { class: "address-box" });
-  container.innerHTML = `
-        <p>John Doe</p>
-        <p>Karl Johans gate 1</p>
-        <p>0159 Oslo</p>
-        <p>Norway</p>
-        <div class="address-actions">
-            <button><img src="/public/assets/icons/icons-svg/black/edit.svg" alt="Edit"></button>
-            <button><img src="/public/assets/icons/icons-svg/black/trash.svg" alt="Delete"></button>
-        </div>
-    `;
+
+  const name = createEl("p", { text: "John Doe" });
+  const street = createEl("p", { text: "Karl Johans gate 1" });
+  const city = createEl("p", { text: "0159 Oslo" });
+  const country = createEl("p", { text: "Norway" });
+
+  const actions = createEl("div", { class: "address-actions" });
+  const editButton = createEl("button");
+  const editIcon = createEl("img", {
+    attrs: {
+      src: "/public/assets/icons/icons-svg/black/edit.svg",
+      alt: "Edit",
+    },
+  });
+  editButton.appendChild(editIcon);
+
+  const deleteButton = createEl("button");
+  const deleteIcon = createEl("img", {
+    attrs: {
+      src: "/public/assets/icons/icons-svg/black/trash.svg",
+      alt: "Delete",
+    },
+  });
+  deleteButton.appendChild(deleteIcon);
+
+  actions.append(editButton, deleteButton);
+  container.append(name, street, city, country, actions);
+
   return container;
 }
 
@@ -166,6 +184,15 @@ function buildMobileCheckout() {
     class: "checkout-step",
     attrs: { "data-step": 3 },
   });
+  const placeOrderBtn = createEl("button", {
+    class: "btn-large",
+    text: "Place Order",
+  });
+  placeOrderBtn.addEventListener("click", () => {
+    const popup = createConfirmationPopup();
+    document.body.appendChild(popup);
+  });
+
   paymentStep.append(
     createEl("h3", { text: "Select Payment Method" }),
     createEl("p", { class: "payment-sub", text: "Saved payment options" }),
@@ -174,7 +201,7 @@ function buildMobileCheckout() {
       class: "btn-large-white",
       text: "Add Payment Option",
     }),
-    createEl("button", { class: "btn-large", text: "Place Order" })
+    placeOrderBtn
   );
   paymentStep.querySelector(".btn-large-white").onclick = () =>
     (window.location.href = "/src/pages/payment.html");
@@ -280,15 +307,33 @@ function buildDesktopCheckout() {
 
     const content = createEl("div", { class: "desktop-step-content" });
     content.appendChild(step.content);
-    if (index < 2) {
-      // Add continue button for first two steps
+
+    const buttonContainer = createEl("div", {
+      class: "desktop-button-container",
+    });
+
+    if (index === 0) {
+      // Address step
+      const changeAddressBtn = createEl("button", {
+        class: "btn-large-white",
+        text: "Change Delivery Address",
+      });
+      changeAddressBtn.onclick = () =>
+        (window.location.href = "/src/pages/address.html");
       const continueBtn = createEl("button", {
         class: "btn-large continue-btn",
         text: step.buttonText,
       });
-      content.appendChild(continueBtn);
+      buttonContainer.append(continueBtn, changeAddressBtn);
+    } else if (index === 1) {
+      // Shipping step
+      const continueBtn = createEl("button", {
+        class: "btn-large continue-btn",
+        text: step.buttonText,
+      });
+      buttonContainer.appendChild(continueBtn);
     } else {
-      // Add extra buttons for payment step
+      // Payment step
       const addPaymentBtn = createEl("button", {
         class: "btn-large-white",
         text: "Add Payment Option",
@@ -299,8 +344,15 @@ function buildDesktopCheckout() {
         class: "btn-large",
         text: step.buttonText,
       });
-      content.append(addPaymentBtn, placeOrderBtn);
+      placeOrderBtn.addEventListener("click", () => {
+        if (!document.querySelector(".confirmation-popup-overlay")) {
+          const popup = createConfirmationPopup();
+          document.body.appendChild(popup);
+        }
+      });
+      buttonContainer.append(placeOrderBtn, addPaymentBtn);
     }
+    content.appendChild(buttonContainer);
 
     stepContainer.append(header, content);
     leftColumn.appendChild(stepContainer);
@@ -400,6 +452,43 @@ function createCartItemCard(item) {
 }
 
 // =================================================================
+// CONFIRMATION POP-UP
+// =================================================================
+
+function createConfirmationPopup() {
+  const overlay = createEl("div", { class: "confirmation-popup-overlay" });
+  const content = createEl("div", { class: "confirmation-popup-content" });
+
+  const heading = createEl("h2", { text: "Thank you for your order!" });
+
+  const checkIcon = createEl("img", {
+    class: "confirmation-icon",
+    attrs: {
+      src: "/public/assets/icons/icons-svg/payment/check.svg",
+      alt: "Order confirmed",
+    },
+  });
+
+  const homeButton = createEl("button", { class: "btn-large", text: "Home" });
+  homeButton.addEventListener("click", () => {
+    localStorage.removeItem("cart"); // Clear the cart
+    window.location.href = "/"; // Go to homepage
+  });
+
+  const logo = createEl("img", {
+    class: "confirmation-logo",
+    attrs: {
+      src: "/public/assets/img/logo/logo.webp",
+      alt: "E.CO Logo",
+    },
+  });
+
+  content.append(heading, checkIcon, homeButton, logo);
+  overlay.appendChild(content);
+  return overlay;
+}
+
+// =================================================================
 // DOMContentLoaded
 // =================================================================
 
@@ -407,4 +496,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
   body.appendChild(buildMobileCheckout());
   body.appendChild(buildDesktopCheckout());
+
+  import("./utils/footer.js").then((mod) => {
+    const footer = mod.buildFooter();
+    document.body.appendChild(footer);
+  });
 });

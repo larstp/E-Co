@@ -184,12 +184,19 @@ function createOrderSummarySection(items) {
     class: "btn-large",
     text: "Go to Checkout",
   });
+  checkoutBtn.onclick = () =>
+    (window.location.href = "/src/pages/checkout.html");
   section.appendChild(checkoutBtn);
 
   return section;
 }
 
 function updateOrderSummary(items, summaryDetailsElement) {
+  // Clear previous content
+  while (summaryDetailsElement.firstChild) {
+    summaryDetailsElement.removeChild(summaryDetailsElement.firstChild);
+  }
+
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -201,22 +208,31 @@ function updateOrderSummary(items, summaryDetailsElement) {
   const deliveryFee = 250.0;
   const total = subtotal - discount + deliveryFee;
 
-  summaryDetailsElement.innerHTML = `
-    <div class="summary-row"><span>Subtotal</span><span>${subtotal.toFixed(
-      2
-    )},-</span></div>
-    <div class="summary-row"><span>Discount</span><span>-${discount.toFixed(
-      2
-    )},-</span></div>
-    <div class="summary-row"><span>Delivery Fee</span><span>${deliveryFee.toFixed(
-      2
-    )},-</span></div>
-    <hr class="separator">
-    <div class="summary-row total"><span>Total</span><span>${total.toFixed(
-      2
-    )},-</span></div>
-    <hr class="separator">
-  `;
+  const createRow = (label, value) => {
+    const row = createEl("div", { class: "summary-row" });
+    const labelSpan = createEl("span", { text: label });
+    const valueSpan = createEl("span", { text: value });
+    row.append(labelSpan, valueSpan);
+    return row;
+  };
+
+  const subtotalRow = createRow("Subtotal", `${subtotal.toFixed(2)},-`);
+  const discountRow = createRow("Discount", `-${discount.toFixed(2)},-`);
+  const deliveryRow = createRow("Delivery Fee", `${deliveryFee.toFixed(2)},-`);
+  const totalRow = createRow("Total", `${total.toFixed(2)},-`);
+  totalRow.classList.add("total");
+
+  const separator1 = createEl("hr", { class: "separator" });
+  const separator2 = createEl("hr", { class: "separator" });
+
+  summaryDetailsElement.append(
+    subtotalRow,
+    discountRow,
+    deliveryRow,
+    separator1,
+    totalRow,
+    separator2
+  );
 }
 
 async function createRecommendationsSection() {

@@ -252,6 +252,17 @@
     gap: 1.5rem;
   }
 
+  .desktop-button-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .desktop-step-container[data-step="2"] .desktop-button-container {
+    justify-content: flex-start;
+  }
+
   .checkout-desktop-right {
     position: sticky;
     top: 80px;
@@ -307,6 +318,8 @@
     position: sticky;
     top: 80px;
   }
+
+  /* INSERT HERE*/
 }
 
 @media (min-width: 1040px) {

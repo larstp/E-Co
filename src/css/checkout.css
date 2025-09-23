@@ -1,10 +1,10 @@
 body {
   background-color: #f4f6f8;
+  overflow-x: hidden; /* Prevents horizontal scroll from slideshow */
 }
 
 .checkout-container-mobile {
   padding: 1rem;
-  overflow-x: hidden; /* Prevents horizontal scroll during slide */
 }
 
 /* --- Tabs and Progress --- */
@@ -70,6 +70,14 @@ body {
 
 .checkout-step.active-step {
   opacity: 1;
+}
+
+.checkout-step > .btn-large,
+.checkout-step > .btn-large-white {
+  width: 100%;
+  max-width: 400px; /* Optional: prevent buttons from being too wide on tablets */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .checkout-step h3 {
@@ -148,4 +156,41 @@ DESKTOP STYLES
 ================================================================= */
 .checkout-container-desktop {
   display: none; /* Hidden by default */
+}
+
+/* =================================================================
+CONFIRMATION POP-UP
+================================================================= */
+.confirmation-popup-overlay {
+  position: fixed;
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e1f5fe;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.confirmation-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+}
+
+.confirmation-popup-content h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  margin: 0;
+}
+
+.confirmation-icon,
+.confirmation-logo {
+  width: 115px;
+  height: 115px;
 }
