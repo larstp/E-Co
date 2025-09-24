@@ -32,11 +32,11 @@ h4 {
   margin: 10px 0px;
 }
 
-.site-footer {
-  margin-top: auto;
-}
-
 label {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-style: normal;
+}
+
+.site-footer {
+  margin-top: auto;
 }

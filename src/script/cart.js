@@ -1,4 +1,5 @@
 import { fetchAllProducts } from "./api/api.js";
+import { showLoader, hideLoader } from "./utils/loader.js";
 import { createProductCarousel } from "./utils/carousel.js";
 import {
   getCart,
@@ -191,16 +192,20 @@ function updateOrderSummary(items, summaryDetailsElement) {
   const deliveryFee = 250.0;
   const total = subtotal - discount + deliveryFee;
 
-  const createRow = (label, value) => {
+  const createRow = (label, value, valueClass = "") => {
     const row = createEl("div", { class: "summary-row" });
     const labelSpan = createEl("span", { text: label });
-    const valueSpan = createEl("span", { text: value });
+    const valueSpan = createEl("span", { text: value, class: valueClass });
     row.append(labelSpan, valueSpan);
     return row;
   };
 
   const subtotalRow = createRow("Subtotal", `${subtotal.toFixed(2)},-`);
-  const discountRow = createRow("Discount", `-${discount.toFixed(2)},-`);
+  const discountRow = createRow(
+    "Discount",
+    `-${discount.toFixed(2)},-`,
+    "discount-value"
+  );
   const deliveryRow = createRow("Delivery Fee", `${deliveryFee.toFixed(2)},-`);
   const totalRow = createRow("Total", `${total.toFixed(2)},-`);
   totalRow.classList.add("total");
@@ -242,9 +247,9 @@ function renderCart() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   const body = document.body;
-
+  showLoader();
   if (!document.querySelector("header")) {
-    const headerModule = await import("./utils/header.js");
+    await import("./utils/header.js");
   }
 
   const breadcrumb = document.querySelector(".breadcrumb");
@@ -272,4 +277,5 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.body.appendChild(footer);
     });
   }
+  hideLoader();
 });

@@ -1,5 +1,5 @@
 /**
- * Creates a star rating display element based on a given rating.
+ * Should create a star rating display element based on a given rating. Not sure how good it works when there are more than one review so should be checked!
  * @param {number} rating - The numerical rating (e.g., 3.5).
  * @param {number} reviewsCount - The number of reviews.
  * @param {number} [maxRating=5] - The maximum possible rating.

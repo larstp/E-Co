@@ -1,316 +1,347 @@
-ProjectExam1
-NOROFF FED01 Project Exam 01
+# ProjectExam1
 
-PE Exam 1 Brief Read Please read the following instructions carefully. If any part is unclear or you have questions, contact the designated teachers through Microsoft Teams direct message. Discussing the project exam in class channels is strictly prohibited. Additionally, discussions about the exam outside official teacher-student communications, including private messages or in-person conversations with classmates, are not allowed.
+## NOROFF FED01 Project Exam 01
+
+### PE Exam 1 Brief
+
+Read Please read the following instructions carefully. If any part is unclear or you have questions, contact the designated teachers through Microsoft Teams direct message. Discussing the project exam in class channels is strictly prohibited. Additionally, discussions about the exam outside official teacher-student communications, including private messages or in-person conversations with classmates, are not allowed.
 
 If you struggle to understand the Project Exam instructions, contacting your teachers for help is acceptable. Please understand that the teachers cannot give students the answers or step-by-step instructions on implementing the project requirements, as the Course Assignments, Projects, and Exams are graded assessments. Teachers can, however, clarify Course Assignment instructions if needed.
 
-The Project Exam 1 will be graded on an “A to F” scale.
+### The Project Exam 1 will be graded on an “A to F” scale.
 
-F - 0-39 - Failed the course and have to do a Resit.
+    F - 0-39 - Failed the course and have to do a Resit.
 
-E - 40-49
+    E - 40-49
 
-D - 50-59
+    D - 50-59
 
-C - 60-79
+    C - 60-79
 
-B - 80-89
+    B - 80-89
 
-A - 90-100
+    A - 90-100
 
-Learning Outcomes covered in Project Exam 1:
+### Learning Outcomes covered in Project Exam 1:
 
-I can plan a web application project.
+    I can plan a web application project.
 
-I can design a UI for a web application.
+    I can design a UI for a web application.
 
-I can use HTML and CSS to build a web application interface.
+    I can use HTML and CSS to build a web application interface.
 
-I can use JavaScript to interact with API data.
+    I can use JavaScript to interact with API data.
 
-I can use JavaScript to add UI functionality.
+    I can use JavaScript to add UI functionality.
 
-I can test a web application using online tools.
+    I can test a web application using online tools.
 
-I can deploy a web application to a static host.
+    I can deploy a web application to a static host.
 
-Submission Your application must be pushed to your GitHub Classroom repository BEFORE the exam deadline.
+## Submission
 
-The link to your repository and your GitHub username must be submitted on Moodle in a .txt file named the following: “FName_LName_PE1_ClassXXYY.txt”
+    Your application must be pushed to your GitHub Classroom repository BEFORE the exam deadline.
 
-(Replace ‘Class’ with your class, e.g. ‘Aug’, ‘Oct’, etc.)
+    The link to your repository and your GitHub username must be submitted on Moodle in a .txt file named the following: “FName_LName_PE1_ClassXXYY.txt”
 
-(Replace ‘XX’ with your class year, e.g. 22, 23)
+    (Replace ‘Class’ with your class, e.g. ‘Aug’, ‘Oct’, etc.)
 
-(Replace ‘YY’ with either FT for Fulltime, or PT for Parttime)
+    (Replace ‘XX’ with your class year, e.g. 22, 23)
 
-EXAMPLE: JOHN_DOE_PE1_JAN25FT.txt
+    (Replace ‘YY’ with either FT for Fulltime, or PT for Parttime)
 
-Commits or submissions past the deadline will not be considered for grading. Late submissions will not be accepted, and there will be no exceptions to this rule.
+    EXAMPLE: JOHN_DOE_PE1_JAN25FT.txt
 
-Failure to submit this file to Moodle OR push (commit) your code to the git classroom will result in a not-passed grade.
+    Commits or submissions past the deadline will not be considered for grading. Late submissions will not be accepted, and there will be no exceptions to this rule.
 
-Goal Put into practice the skills learned over the FED1 program. You will demonstrate your ability to:
+    Failure to submit this file to Moodle OR push (commit) your code to the git classroom will result in a not-passed grade.
 
-Interpret a brief
+## Goal
 
-Plan your solution
+    Put into practice the skills learned over the FED1 program. You will demonstrate your ability to:
 
-Design a user interface
+    Interpret a brief
 
-Build and test a responsive web application
+    Plan your solution
 
-You are required to use the skills learned this year, including design, HTML, CSS, JavaScript, and project methodology.
+    Design a user interface
 
-Learning Outcomes
+    Build and test a responsive web application
 
-I can plan a web application project
+    You are required to use the skills learned this year, including design, HTML, CSS, JavaScript, and project methodology.
 
-I can design a UI for a web application
+## Learning Outcomes
 
-I can use HTML, CSS, and JavaScript to build a web application interface
+    I can plan a web application project
 
-I can use JavaScript to interact with API data
+    I can design a UI for a web application
 
-I can use JavaScript to add UI functionality
+    I can use HTML, CSS, and JavaScript to build a web application interface
 
-I can test a web application using online tools
+    I can use JavaScript to interact with API data
 
-I can deploy a web application to a static host
+    I can use JavaScript to add UI functionality
 
-Restrictions
+    I can test a web application using online tools
 
-You may only use HTML, CSS, and JavaScript — no CSS or JavaScript frameworks are permitted (including Tailwind, Bootstrap, Vue, Svelte, React, or similar packages).
+    I can deploy a web application to a static host
 
-Permissions
+## Restrictions
 
-Code borrowed from external sources must be clearly marked with inline comments, including a link to the origin.
+    You may only use HTML, CSS, and JavaScript — no CSS or JavaScript frameworks are permitted (including Tailwind, Bootstrap, Vue, Svelte, React, or similar packages).
 
-Icon and font packs may be used in your project.
+## Permissions
 
-Brief Build a front-end user interface for an existing e-commerce API. The client requires a responsive web application that lets users view products (description, price, rating, and reviews when available), log in to purchase products, and log out after checking out.
+    Code borrowed from external sources must be clearly marked with inline comments, including a link to the origin.
 
-Use the owner account you created to test functionality. On submission, your client must be able to register, log in, and purchase products.
+    Icon and font packs may be used in your project.
 
-Time Commitment
+# Brief
 
-Full-Time: 6 weeks
+    Build a front-end user interface for an existing e-commerce API. The client requires a responsive web application that lets users view products (description, price, rating, and reviews when available), log in to purchase products, and log out after checking out.
 
-Part-Time: 12 weeks
+    Use the owner account you created to test functionality. On submission, your client must be able to register, log in, and purchase products.
 
-Client
+## Time Commitment
 
-You may create a fictional client (theme, backstory, and branding of your choosing). Alternatively, use the example below:
+    Full-Time: 6 weeks
 
-Example Client: HotView Labs
+    Part-Time: 12 weeks
 
-Size: 30 employees
+### Client
 
-Location: Worldwide
+    You may create a fictional client (theme, backstory, and branding of your choosing). Alternatively, use the example below:
 
-Mission: Provide the most accurate and up-to-date insights to tech leaders across the world.
+    Example Client: HotView Labs
 
-Terminology
+    Size: 30 employees
 
-User: a person visiting your site who is not logged in.
+    Location: Worldwide
 
-Owner: the logged-in manager of the shop.
+    Mission: Provide the most accurate and up-to-date insights to tech leaders across the world.
 
-Pages & User Stories
+### Terminology
 
-Product Feed Page
+    User: a person visiting your site who is not logged in.
 
-GET /online-shop • Path: /index.html
+    Owner: the logged-in manager of the shop.
 
-Requirements:
+# Pages & User Stories
 
-An interactive banner carousel showing the 3 latest products (with prev/next controls and looping).
+## Product Feed Page
 
-Each carousel item includes a button linking to the specific product page.
+    GET /online-shop • Path: /index.html
 
-A responsive thumbnail grid listing at least 12 latest products.
+### Requirements:
 
-Each product thumbnail is clickable and links to its product page.
+    An interactive banner carousel showing the 3 latest products (with prev/next controls and looping).
 
-Specific Product Page
+    Each carousel item includes a button linking to the specific product page.
 
-GET /online-shop/ • Path: /product.html
+    A responsive thumbnail grid listing at least 12 latest products.
 
-Show title, description, price, discounted price, rating, reviews, and tags (fetched from the API) in a responsive layout.
+    Each product thumbnail is clickable and links to its product page.
 
-Include a “share” icon that provides a shareable URL (query string or hash) containing the product ID.
+## Specific Product Page
 
-As an owner (when logged in), provide an Add to Cart button.
+    GET /online-shop/ • Path: /product.html
 
-Account Login Page
+### Requirements:
 
-POST /auth/login • Path: /account/login.html
+    Show title, description, price, discounted price, rating, reviews, and tags (fetched from the API) in a responsive layout.
 
-Validated login form that requests and saves a token to the browser.
+    Include a “share” icon that provides a shareable URL (query string or hash) containing the product ID.
 
-Account Register Page
+    As an owner (when logged in), provide an Add to Cart button.
 
-POST /auth/register • Path: /account/register.html
+## Account Login Page
 
-Validated register form to create a new account (email and password).
+    POST /auth/login • Path: /account/login.html
 
-Cart Page
+### Requirements:
 
-Path: /cart.html
+    Validated login form that requests and saves a token to the browser.
 
-View products in the cart and the total price.
+## Account Register Page
 
-Adjust quantities, clear the cart, and proceed to checkout.
+    POST /auth/register • Path: /account/register.html
 
-Checkout Page
+### Requirements:
 
-Path: /checkout.html
+    Validated register form to create a new account (email and password).
 
-Form with various payment methods (does not need to be functional).
+## Cart Page
 
-Form for delivery address.
+    Path: /cart.html
 
-Success Page
+### Requirements:
 
-Path: /success.html
+    View products in the cart and the total price.
 
-Display a success message after submitting payment and delivery address.
+    Adjust quantities, clear the cart, and proceed to checkout.
 
-Resources Make use of the API documentation and Swagger to inform your development process.
+## Checkout Page
 
-Swagger
+    Path: /checkout.html
 
-API Documentation
+### Requirements:
 
-Process Create a GitHub repository where you will commit and deploy your code.
+    Form with various payment methods (does not need to be functional).
 
-Create a Kanban plan using GitHub Projects (include a Roadmap view).
+    Form for delivery address.
 
-Create a Figma style guide and high-fidelity assets (logo, font pairings, color palette, form states, components such as buttons, list cards, forms, imagery, and icons).
+## Success Page
 
-Create a high-fidelity prototype in Figma for desktop and mobile (non-interactive, but representative of the final product with colors and web-optimized images).
+    Path: /success.html
 
-Use your plan and design documents to complete user stories; commit to GitHub frequently.
+### Requirements:
 
-Manually test each user story.
+    Display a success message after submitting payment and delivery address.
 
-Deploy using a static hosting platform such as GitHub Pages.
+# Resources
 
-Validate HTML, SEO, and WCAG using online tools.
+    Make use of the API documentation and Swagger to inform your development process.
 
-Deliver the required links to your work.
+    ### Swagger
 
-Submission
+    ### API Documentation
 
-Save the required links in a Word or .txt file and upload to Moodle:
+# Process
 
-Link to your GitHub repository
+    Create a GitHub repository where you will commit and deploy your code.
 
-Link to your deployed web application
+    Create a Kanban plan using GitHub Projects (include a Roadmap view).
 
-Link to your Figma style guide
+    Create a Figma style guide and high-fidelity assets (logo, font pairings, color palette, form states, components such as buttons, list cards, forms, imagery, and icons).
 
-Link to your public project planning board
+    Create a high-fidelity prototype in Figma for desktop and mobile (non-interactive, but representative of the final product with colors and web-optimized images).
 
-Admin user login details (email and password) used to test the web application
+    Use your plan and design documents to complete user stories; commit to GitHub frequently.
 
-Submission Access
+    Manually test each user story.
 
-Test all links in an Incognito window before submission. Inaccessible links will not be graded.
+    Deploy using a static hosting platform such as GitHub Pages.
 
-Grading Criteria Style Guide
+    Validate HTML, SEO, and WCAG using online tools.
 
-Font families are present
+    Deliver the required links to your work.
 
-Primary and secondary colors are defined
+# Submission
 
-Logo is present
+    Save the required links in a Word or .txt file and upload to Moodle:
 
-Buttons and common components are present
+    - Link to your GitHub repository
 
-Theme is well defined
+    - Link to your deployed web application
 
-Carefully considered and executed; acceptable at a professional establishment
+    - Link to your Figma style guide
 
-Design
+    - Link to your public project planning board
 
-Hi-fidelity prototype for desktop
+    - Admin user login details (email and password) used to test the web application
 
-Hi-fidelity prototype for mobile devices
+# Submission Access
 
-Exact replication of the final web application with images
+    Test all links in an Incognito window before submission. Inaccessible links will not be graded.
 
-Carefully considered and executed; acceptable at a professional establishment
+# Grading Criteria
 
-Planning Documents
+### Style Guide
 
-GitHub issues include a Kanban board
+    Font families are present
 
-Tasks have comprehensive titles and detailed descriptions or subtasks
+    Primary and secondary colors are defined
 
-Tasks include start and end dates
+    Logo is present
 
-Tasks include sizing or estimates
+    Buttons and common components are present
 
-Project meticulously planned, including a Roadmap view
+    Theme is well defined
 
-User Stories
+    Carefully considered and executed; acceptable at a professional establishment
 
-All user stories are completed to a high standard.
+### Design
 
-User Experience
+    Hi-fidelity prototype for desktop
 
-Forms have validation with helpful input guidelines
+    Hi-fidelity prototype for mobile devices
 
-Clear success/error feedback for actions
+    Exact replication of the final web application with images
 
-Easy to use and navigate (obvious usability)
+    Carefully considered and executed; acceptable at a professional establishment
 
-Loading indicators shown when users must wait
+### Planning Documents
 
-Sensible validation, error handling, and user feedback throughout
+    GitHub issues include a Kanban board
 
-Best Practice
+    Tasks have comprehensive titles and detailed descriptions or subtasks
 
-Semantic, valid HTML
+    Tasks include start and end dates
 
-SEO best practices applied
+    Tasks include sizing or estimates
 
-CSS is DRY
+    Project meticulously planned, including a Roadmap view
 
-Responsive styling replicates the design
+### User Stories
 
-Modular, clean JavaScript
+    All user stories are completed to a high standard.
 
-Error handling in place
+### User Experience
 
-HTML, JavaScript, and CSS best practices are widely observed
+    Forms have validation with helpful input guidelines
+
+    Clear success/error feedback for actions
+
+    Easy to use and navigate (obvious usability)
+
+    Loading indicators shown when users must wait
+
+    Sensible validation, error handling, and user feedback throughout
+
+### Best Practice
+
+    Semantic, valid HTML
+
+    SEO best practices applied
+
+    CSS is DRY
+
+    Responsive styling replicates the design
+
+    Modular, clean JavaScript
+
+    Error handling in place
+
+    HTML, JavaScript, and CSS best practices are widely observed
 
 Disclaimer – Appropriate Use of Course Assignments and Tools By participating in this exam project and utilizing its tools, resources, and assignments, you agree to the following to ensure a respectful, ethical, and legally compliant learning environment:
 
-Prohibited Content
+# Prohibited Content
+
 Hate speech, including but not limited to racism, sexism, and other discriminatory language
 
 References or promotions of illegal activities, such as drug use or trafficking
 
 Any content suggesting human trafficking, exploitation, pornography, or any form of harm to individuals
 
-Legal and Ethical Compliance
+# Legal and Ethical Compliance
+
 Use course-provided platforms (including APIs) in line with applicable laws, ethical standards, and the institution’s code of conduct.
 
-Consequences of Violations
+# Consequences of Violations
+
 Warnings and possible exclusion from the assignment
 
 Incidents may lead to disciplinary action, including removal from the course/institution and notification of relevant authorities
 
-Responsibility
+# Responsibility
+
 Students must exercise good judgment and professionalism. Misuse of tools undermines personal growth and program integrity.
 
-Reminder
+# Reminder
 
 Your work represents you and this institution. Creativity, critical thinking, and problem-solving are encouraged—within boundaries of respect, ethics, and legality. Contact your instructor with questions about appropriate use.
 
-Acknowledgment
+# Acknowledgment
 
 By continuing with this assignment, you acknowledge that you have read and understood this disclaimer and agree to comply with its terms.

@@ -1,4 +1,5 @@
 import { loginUser } from "./api/api.js";
+import { showLoader, hideLoader } from "./utils/loader.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("login-container");
@@ -79,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       btnLogin.disabled = true;
       btnLogin.textContent = "Logging in...";
+      showLoader();
       const userData = await loginUser(credentials);
 
       // Save to localStorage
@@ -97,6 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } finally {
       btnLogin.disabled = false;
       btnLogin.textContent = "Log in";
+      hideLoader();
     }
   });
 

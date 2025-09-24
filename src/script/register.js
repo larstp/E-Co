@@ -1,4 +1,5 @@
 import { registerUser } from "./api/api.js";
+import { showLoader, hideLoader } from "./utils/loader.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("register-container");
@@ -188,6 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       btnCreate.disabled = true;
       btnCreate.textContent = "Creating account...";
+      showLoader();
       await registerUser(userData);
       messageContainer.textContent =
         "Registration successful! Redirecting to login...";
@@ -209,6 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } finally {
       btnCreate.disabled = false;
       btnCreate.textContent = "Create account";
+      hideLoader();
     }
   });
 

@@ -214,9 +214,45 @@ input[type="radio"] {
   margin-top: -1rem;
 }
 
-/* =================================================================
-DESKTOP STYLES
-================================================================= */
+.add-new-address-box {
+  height: 70px !important;
+  min-height: 70px;
+  max-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f5faff;
+  border: 2px dashed #1976d2;
+  color: #1976d2;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 0.7rem;
+  margin-bottom: 0.2rem;
+  padding: 0 1.5rem;
+  box-shadow: none;
+  transition: background 0.18s, border 0.18s;
+}
+.add-new-address-box:hover,
+.add-new-address-box:focus {
+  background: #e3f2fd;
+  border-color: #1565c0;
+}
+.add-address-label {
+  color: #1976d2;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.add-address-plus-icon {
+  width: 32px;
+  height: 32px;
+  margin-left: 1.2rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ===========================DESKTOP STYLES=============================== */
 
 .checkout-container-desktop {
   display: none;
@@ -324,14 +360,13 @@ DESKTOP STYLES
   width: 24px;
   height: 24px;
   opacity: 0.7;
-  transition: opacity 0.2s, filter 0.2s, transform 0.2s;
+  transition: opacity 0.18s, transform 0.18s;
   cursor: pointer;
 }
 
 .address-trash:hover {
   opacity: 1;
-  filter: drop-shadow(0 2px 6px #1976d2aa);
-  transform: scale(1.08) rotate(-8deg);
+  transform: scale(1.08);
 }
 
 .shipping-option:hover {

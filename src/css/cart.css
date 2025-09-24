@@ -1,4 +1,11 @@
 /* CART SECTION*/
+
+h3 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
 .cart-summary-wrapper {
   display: flex;
   flex-direction: column;
@@ -12,12 +19,6 @@
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-h3 {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
 }
 
 /* cart product cards*/
@@ -101,6 +102,7 @@ h3 {
 }
 
 /* SUMMARY SECTION */
+
 .summary-details .summary-row {
   display: flex;
   justify-content: space-between;
@@ -155,6 +157,7 @@ h3 {
 }
 
 /* YOU MIGHT ALSO LIKE SECTION */
+
 .product-carousel-section {
   padding: 1rem;
 }
@@ -171,9 +174,9 @@ h3 {
   gap: 1rem;
   overflow-x: auto;
   padding-bottom: 1rem;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
 }
 
 .product-carousel-track::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  display: none;
 }

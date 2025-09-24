@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     script.async = true;
     script.setAttribute("loading", "async");
     script.src =
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyCJjm1cj6il__JSEZEsPNvop2a0VZ77YIc&callback=console.debug&libraries=maps,marker&v=beta";
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyCJjm1cj6il__JSEZEsPNvop2a0VZ77YIc&libraries=maps,marker&v=beta";
     document.head.appendChild(script);
   }
 });

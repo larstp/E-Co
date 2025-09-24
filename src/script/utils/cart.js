@@ -3,7 +3,7 @@ export function getCart() {
     const cartJson = localStorage.getItem("cart");
     return cartJson ? JSON.parse(cartJson) : [];
   } catch (error) {
-    console.error("Failed to parse cart from localStorage", error);
+    // Could not parse cart from localStorage
     return [];
   }
 }

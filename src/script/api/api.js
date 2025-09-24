@@ -1,15 +1,24 @@
 const API_BASE = "https://v2.api.noroff.dev";
 const PRODUCTS_ENDPOINT = "/online-shop";
+const API_KEY = "9f463d01-0fdc-41b4-8262-5fd8306ffdfb";
 
 export async function fetchAllProducts() {
-  const response = await fetch(`${API_BASE}${PRODUCTS_ENDPOINT}`);
+  const response = await fetch(`${API_BASE}${PRODUCTS_ENDPOINT}`, {
+    headers: {
+      "X-Noroff-API-Key": API_KEY,
+    },
+  });
   if (!response.ok) throw new Error("Failed to fetch products");
   const json = await response.json();
   return json.data;
 }
 
 export async function fetchProductById(id) {
-  const response = await fetch(`${API_BASE}${PRODUCTS_ENDPOINT}/${id}`);
+  const response = await fetch(`${API_BASE}${PRODUCTS_ENDPOINT}/${id}`, {
+    headers: {
+      "X-Noroff-API-Key": API_KEY,
+    },
+  });
   if (!response.ok) throw new Error("Failed to fetch product");
   const json = await response.json();
   return json.data;
@@ -20,6 +29,7 @@ export async function registerUser(userData) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "X-Noroff-API-Key": API_KEY,
     },
     body: JSON.stringify(userData),
   });
@@ -40,6 +50,7 @@ export async function loginUser(credentials) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "X-Noroff-API-Key": API_KEY,
     },
     body: JSON.stringify(credentials),
   });

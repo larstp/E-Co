@@ -15,7 +15,15 @@ export function initBreadcrumbs() {
       parts = data
         .split(/\s*[\/>]\s*/)
         .filter(Boolean)
-        .map((label) => ({ label, href: null }));
+        .map((label) => {
+          if (label === "Shop" || label === "Store") {
+            return { label: "Shop", href: "/src/pages/storefront.html" };
+          }
+          if (label === "Account") {
+            return { label: "Account", href: "/src/pages/user.html" };
+          }
+          return { label, href: null };
+        });
     } else if (document.title) {
       const t = document.title.split("|")[1] || document.title;
       parts = [{ label: t.trim(), href: null }];

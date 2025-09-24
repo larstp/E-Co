@@ -26,21 +26,21 @@ function createOrderSummarySection(items) {
     (sum, item) => sum + (item.price - item.discountedPrice) * item.quantity,
     0
   );
-  const deliveryFee = 250.0; // Mock fee
+  const deliveryFee = 250.0;
   const total = subtotal - discount + deliveryFee;
 
-  const createRow = (label, value) => {
+  const createRow = (label, value, valueClass = "") => {
     const row = createEl("div", { class: "summary-row" });
     row.append(
       createEl("span", { text: label }),
-      createEl("span", { text: value })
+      createEl("span", { text: value, class: valueClass })
     );
     return row;
   };
 
   summaryDetails.append(
     createRow("Subtotal", `${subtotal.toFixed(2)},-`),
-    createRow("Discount", `-${discount.toFixed(2)},-`),
+    createRow("Discount", `-${discount.toFixed(2)},-`, "discount-value"),
     createRow("Delivery Fee", `${deliveryFee.toFixed(2)},-`),
     createEl("hr", { class: "separator" })
   );
@@ -102,7 +102,6 @@ async function createAddressBox() {
             ...(idx === selectedIdx ? { checked: true } : {}),
           },
         });
-
         // Trash icon (bottom right HOPEFULLY)
         const trash = createEl("img", {
           class: "address-trash",
@@ -112,7 +111,6 @@ async function createAddressBox() {
             tabindex: 0,
           },
         });
-
         // No real delete, just mock hover/click! -----------------Dont know if we can save this to the API
         trash.addEventListener("click", (e) => {
           e.stopPropagation();
@@ -150,6 +148,32 @@ async function createAddressBox() {
         box.append(label, radio, trash);
         container.appendChild(box);
       });
+
+      const addBox = createEl("div", {
+        class: "address-box add-new-address-box",
+      });
+      addBox.style.height = "70px";
+      addBox.style.display = "flex";
+      addBox.style.alignItems = "center";
+      addBox.style.justifyContent = "space-between";
+      addBox.style.cursor = "pointer";
+      const addLabel = createEl("span", {
+        text: "Add new address",
+        class: "add-address-label",
+      });
+      const plusIcon = createEl("img", {
+        class: "add-address-plus-icon",
+        attrs: {
+          src: "/public/assets/icons/icons-svg/black/plus.svg",
+          alt: "Add new address",
+        },
+      });
+      addBox.appendChild(addLabel);
+      addBox.appendChild(plusIcon);
+      addBox.addEventListener("click", () => {
+        window.location.href = "/src/pages/address.html";
+      });
+      container.appendChild(addBox);
     }
   }
 
@@ -256,19 +280,36 @@ async function buildMobileCheckout(cartItems) {
     class: "checkout-step",
     attrs: { "data-step": 2 },
   });
+  const shippingOptions = createShippingOptions();
+  const shippingContinueBtn = createEl("button", {
+    class: "btn-large continue-btn",
+    text: "Continue",
+    attrs: { "data-next-step": 3 },
+  });
+  shippingContinueBtn.addEventListener("click", (e) => {
+    const selected = shippingOptions.querySelector(
+      'input[type="radio"]:checked'
+    );
+    if (!selected) {
+      shippingContinueBtn.disabled = true;
+      shippingContinueBtn.textContent = "Please select a shipping option";
+      setTimeout(() => {
+        shippingContinueBtn.disabled = false;
+        shippingContinueBtn.textContent = "Continue";
+      }, 1200);
+      e.preventDefault();
+      return;
+    }
+  });
   shippingStep.append(
     createEl("h3", { text: "Shipping Options" }),
-    createShippingOptions(),
+    shippingOptions,
     createOrderSummarySection(cartItems),
     createEl("p", {
       class: "shipping-note",
       text: "* Parcel will be delivered to nearest pickup point if it cannot fit in the mailbox",
     }),
-    createEl("button", {
-      class: "btn-large continue-btn",
-      text: "Continue",
-      attrs: { "data-next-step": 3 },
-    })
+    shippingContinueBtn
   );
 
   // --- Step 3: Payment ---
@@ -276,19 +317,49 @@ async function buildMobileCheckout(cartItems) {
     class: "checkout-step",
     attrs: { "data-step": 3 },
   });
+  const paymentOptions = createPaymentOptions();
   const placeOrderBtn = createEl("button", {
     class: "btn-large",
     text: "Place Order",
   });
-  placeOrderBtn.addEventListener("click", () => {
+  function updatePlaceOrderBtn() {
+    const selected = paymentOptions.querySelector(
+      'input[type="radio"]:checked'
+    );
+    if (
+      selected &&
+      selected.nextSibling &&
+      selected.nextSibling.textContent.trim() === "Vipps"
+    ) {
+      placeOrderBtn.textContent = "Go to Vipps";
+      placeOrderBtn.className = "btn-contrast";
+    } else {
+      placeOrderBtn.textContent = "Place Order";
+      placeOrderBtn.className = "btn-large";
+    }
+  }
+  paymentOptions.addEventListener("change", updatePlaceOrderBtn);
+  placeOrderBtn.addEventListener("click", (e) => {
+    const selected = paymentOptions.querySelector(
+      'input[type="radio"]:checked'
+    );
+    if (!selected) {
+      placeOrderBtn.disabled = true;
+      placeOrderBtn.textContent = "Please select a payment method";
+      setTimeout(() => {
+        placeOrderBtn.disabled = false;
+        updatePlaceOrderBtn();
+      }, 1200);
+      e.preventDefault();
+      return;
+    }
     const popup = createConfirmationPopup();
     document.body.appendChild(popup);
   });
-
   paymentStep.append(
     createEl("h3", { text: "Select Payment Method" }),
     createEl("p", { class: "payment-sub", text: "Saved payment options" }),
-    createPaymentOptions(),
+    paymentOptions,
     createOrderSummarySection(cartItems),
     createEl("button", {
       class: "btn-large-white",
@@ -373,6 +444,9 @@ async function buildDesktopCheckout(cartItems) {
   } catch (e) {
     addressBox = createEl("p", { text: "Failed to load addresses." });
   }
+  // Prepare shipping and payment options for validation
+  const shippingOptionsDesktop = createShippingOptions();
+  const paymentOptionsDesktop = createPaymentOptions();
   const steps = [
     {
       title: "Confirm Delivery Address",
@@ -381,12 +455,12 @@ async function buildDesktopCheckout(cartItems) {
     },
     {
       title: "Shipping Options",
-      content: createShippingOptions(),
+      content: shippingOptionsDesktop,
       buttonText: "Continue",
     },
     {
       title: "Select Payment Method",
-      content: createPaymentOptions(),
+      content: paymentOptionsDesktop,
       buttonText: "Place Order",
     },
   ];
@@ -430,6 +504,21 @@ async function buildDesktopCheckout(cartItems) {
         class: "btn-large continue-btn",
         text: step.buttonText,
       });
+      continueBtn.addEventListener("click", (e) => {
+        const selected = shippingOptionsDesktop.querySelector(
+          'input[type="radio"]:checked'
+        );
+        if (!selected) {
+          continueBtn.disabled = true;
+          continueBtn.textContent = "Please select a shipping option";
+          setTimeout(() => {
+            continueBtn.disabled = false;
+            continueBtn.textContent = "Continue";
+          }, 1200);
+          e.preventDefault();
+          return;
+        }
+      });
       buttonContainer.appendChild(continueBtn);
     } else {
       //-------------------------------------------------- Payment step
@@ -443,11 +532,50 @@ async function buildDesktopCheckout(cartItems) {
         class: "btn-large",
         text: step.buttonText,
       });
-      placeOrderBtn.addEventListener("click", () => {
-        if (!document.querySelector(".confirmation-popup-overlay")) {
-          const popup = createConfirmationPopup();
-          document.body.appendChild(popup);
+      function updatePlaceOrderBtnDesktop() {
+        const selected = paymentOptionsDesktop.querySelector(
+          'input[type="radio"]:checked'
+        );
+        if (
+          selected &&
+          selected.nextSibling &&
+          selected.nextSibling.textContent.trim() === "Vipps"
+        ) {
+          placeOrderBtn.textContent = "Go to Vipps";
+          placeOrderBtn.className = "btn-contrast";
+        } else {
+          placeOrderBtn.textContent = "Place Order";
+          placeOrderBtn.className = "btn-large";
         }
+      }
+      paymentOptionsDesktop.addEventListener(
+        "change",
+        updatePlaceOrderBtnDesktop
+      );
+      placeOrderBtn.addEventListener("click", async (e) => {
+        const selected = paymentOptionsDesktop.querySelector(
+          'input[type="radio"]:checked'
+        );
+        if (!selected) {
+          placeOrderBtn.disabled = true;
+          placeOrderBtn.textContent = "Please select a payment method";
+          setTimeout(() => {
+            placeOrderBtn.disabled = false;
+            updatePlaceOrderBtnDesktop();
+          }, 1200);
+          e.preventDefault();
+          return;
+        }
+        // Normal order flow
+        const { showLoader, hideLoader } = await import("./utils/loader.js");
+        showLoader();
+        setTimeout(() => {
+          if (!document.querySelector(".confirmation-popup-overlay")) {
+            const popup = createConfirmationPopup();
+            document.body.appendChild(popup);
+          }
+          hideLoader();
+        }, 1000);
       });
       buttonContainer.append(placeOrderBtn, addPaymentBtn);
     }

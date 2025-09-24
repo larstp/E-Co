@@ -96,7 +96,6 @@ export function setupFilterMenu({
     const catSection = createEl("div", { className: "filter-section" });
 
     // All Products
-
     const allBtn = createEl("button", {
       className: "filter-btn",
       text: "All Products",
@@ -114,7 +113,6 @@ export function setupFilterMenu({
     catSection.appendChild(allBtn);
 
     // SALE!
-
     const saleBtn = createEl("button", {
       className: "filter-sale-btn",
       text: "SALE!",
@@ -132,7 +130,6 @@ export function setupFilterMenu({
     catSection.appendChild(saleBtn);
 
     // New Arrivals
-
     const newBtn = createEl("button", {
       className: "filter-btn",
       text: "New Arrivals",
@@ -149,7 +146,6 @@ export function setupFilterMenu({
     catSection.appendChild(newBtn);
 
     // Most Popular
-
     const popBtn = createEl("button", {
       className: "filter-btn",
       text: "Most Popular",
@@ -172,6 +168,7 @@ export function setupFilterMenu({
     catSection.appendChild(popBtn);
     inner.appendChild(catSection);
     inner.appendChild(createEl("hr"));
+
     // Colours section (mockup)
     inner.appendChild(
       createEl("h1", { className: "storefront-title", text: "Colours" })
@@ -201,7 +198,6 @@ export function setupFilterMenu({
     inner.appendChild(createEl("hr"));
 
     // Sub-categories
-
     inner.appendChild(
       createEl("h1", {
         className: "storefront-title",
@@ -210,7 +206,6 @@ export function setupFilterMenu({
     );
     const subcatList = createEl("div", { className: "filter-subcat-list" });
     (tags || []).forEach((tag) => {
-      // Capitalize first letter for display
       const capTag = tag.charAt(0).toUpperCase() + tag.slice(1);
       const btn = createEl("button", {
         className: "filter-btn",

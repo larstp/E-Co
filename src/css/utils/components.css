@@ -112,17 +112,19 @@ html {
 }
 
 .btn-contrast {
-  min-width: 124px;
+  width: 312px;
+  min-width: 312px;
+  max-width: 312px;
   height: 48px;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
   border-radius: 25px;
-  background: #d32f2f;
+  background: #ff5b24;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-family: "Roboto", Arial, sans-serif;
   font-weight: 600;
   border: none;
-  box-shadow: 0 2px 8px rgba(211, 47, 47, 0.1);
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.1);
   cursor: pointer;
   transition: background 0.15s, box-shadow 0.15s;
   display: inline-flex;
@@ -253,6 +255,23 @@ html {
 
 .header-mobile__lower--breadcrumb {
   justify-content: flex-start;
+}
+
+.mobile-search-close-btn {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-search-close-btn img {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
 /* =================== Search Bar (Shared) ======================= */
@@ -1100,7 +1119,7 @@ html {
   padding: 0.7rem 0 0.7rem 0;
   font-family: "Roboto", Arial, sans-serif;
   font-size: 1rem;
-  color: #888;
+  color: #555;
   background: none;
   box-sizing: border-box;
   z-index: 1000;
@@ -1122,7 +1141,7 @@ html {
 .breadcrumb-list li {
   display: flex;
   align-items: center;
-  color: #888;
+  color: #555;
   font-family: inherit;
   font-weight: 200;
 }
@@ -1130,12 +1149,12 @@ html {
 .breadcrumb-list li:not(:last-child)::after {
   content: "/";
   margin: 0 8px;
-  color: #bbb;
+  color: #808080;
   font-weight: 100;
 }
 
 .breadcrumb-list a {
-  color: #888;
+  color: #808080;
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -1234,4 +1253,76 @@ html {
   min-width: 32px;
   text-align: center;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+.summary-row span.discount-value {
+  color: #d32f2f;
+  font-weight: 500;
+}
+
+/* ----------- LOADER ----------------*/
+
+/* ================ CSS FOR LOADER BORROWED FROM https://loading.io/css/ ================ */
+/* Their license says: 
+License
+All 12 CSS loading icons provided in this page are released under CC0 License, so just use them freely! We also provide advanced license and editor for premium loaders and animated icons, don't forget to check it out :) */
+
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 20000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.lds-ring,
+.lds-ring div {
+  box-sizing: border-box;
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #1976d2;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #1976d2 transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

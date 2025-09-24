@@ -55,7 +55,6 @@ export function createProductCard(product) {
   btn.addEventListener("click", (e) => {
     e.preventDefault(); // Prevent navigation
     // Add to cart logic will go here
-    console.log(`Added ${product.title} to cart.`);
   });
   card.appendChild(btn);
 

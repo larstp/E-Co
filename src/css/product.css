@@ -1,3 +1,7 @@
+h2 {
+  font-size: 3rem;
+}
+
 .product-desktop {
   display: none;
 }
@@ -73,6 +77,7 @@
   gap: 0.7rem;
   margin-bottom: 1rem;
 }
+
 .product-sort-btn {
   background: none;
   border: none;
@@ -81,9 +86,11 @@
   border-radius: 8px;
   transition: background 0.2s;
 }
+
 .product-sort-btn:hover {
   background: #e3e6ea;
 }
+
 .product-sort-dropdown {
   font-size: 1rem;
   border-radius: 8px;
@@ -92,11 +99,13 @@
   background: #fff;
   color: #444;
 }
+
 .product-reviews-list {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
+
 .product-review-box {
   background: #fff;
   border: 1px solid #e3e6ea;
@@ -105,6 +114,7 @@
   box-sizing: border-box;
   box-shadow: 0 2px 8px rgba(25, 118, 210, 0.05);
 }
+
 .product-review-stars {
   display: flex;
   gap: 0.2rem;
@@ -112,6 +122,7 @@
   color: #ffd600;
   margin-bottom: 0.3rem;
 }
+
 .product-review-name {
   font-size: 1rem;
   font-weight: bold;
@@ -126,6 +137,7 @@
   margin-bottom: 0.2rem;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
+
 .product-review-date {
   font-size: 0.9rem;
   color: #888;
@@ -158,10 +170,6 @@
   font-weight: 400;
   color: #555;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
-}
-
-h2 {
-  font-size: 3rem;
 }
 
 .product-top-section {

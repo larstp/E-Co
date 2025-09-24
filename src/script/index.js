@@ -201,7 +201,6 @@ function createProductCard(product, size = "bestseller") {
   if (size === "huge") {
     link.appendChild(detailsContainer);
   } else {
-    // For smaller cards, append children of detailsContainer directly to link
     while (detailsContainer.firstChild) {
       link.appendChild(detailsContainer.firstChild);
     }

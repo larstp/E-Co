@@ -20,7 +20,6 @@ export async function shareUrl(url, title = "Check this out!", text = "") {
       return "failed";
     }
   } else {
-    window.prompt("Copy this link:", url);
     return "failed";
   }
 }

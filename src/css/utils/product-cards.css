@@ -1,6 +1,4 @@
-/* ====================================================== */
 /* ================== Product Card Base Styles ================= */
-/* ====================================================== */
 
 .product-card-base {
   background: #fff;
@@ -12,9 +10,7 @@
   text-decoration: none;
 }
 
-/* ====================================================== */
 /* ================== Product Card (Large - Carousel) ================= */
-/* ====================================================== */
 
 .product-card {
   min-height: 356px;
@@ -75,12 +71,11 @@
   margin-bottom: 0.2rem;
 }
 
-/* New Star Rating System Styles */
 .product-card .star-rating-container {
   position: relative;
   display: inline-block;
   font-size: 1.2rem;
-  color: #e0e0e0; /* Empty stars color */
+  color: #e0e0e0;
   vertical-align: middle;
 }
 
@@ -93,11 +88,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  color: #fbc02d; /* Filled stars color */
+  color: #fbc02d;
   overflow: hidden;
   height: 100%;
 }
-/* End of New Styles */
 
 .product-card .product-card-icon-row {
   display: flex;
@@ -154,9 +148,7 @@
   font-weight: 600;
 }
 
-/* ====================================================== */
 /* ================= Carousel Only Styles ================= */
-/* ====================================================== */
 
 .product-carousel-section {
   position: relative;
@@ -202,9 +194,7 @@
   opacity: 1;
 }
 
-/* ====================================================== */
 /* ================== Product Card (Small - Grid) ================= */
-/* ====================================================== */
 
 .product-card-small {
   width: 155px;
@@ -262,7 +252,7 @@
 
 .product-card-small .product-tags {
   font-family: "Roboto", Arial, sans-serif;
-  font-size: 12px; /* Slightly smaller for the small card */
+  font-size: 12px;
   color: #666;
   margin: 0 0 0.2rem 0;
   width: 100%;
@@ -308,8 +298,8 @@
 }
 
 .product-card-small .product-share-icon {
-  width: 20px; /* Scaled down */
-  height: 20px; /* Scaled down */
+  width: 20px;
+  height: 20px;
   cursor: pointer;
   opacity: 0.7;
   transition: opacity 0.2s;
@@ -320,7 +310,7 @@
 
 .product-card-small .review-count {
   font-family: "Roboto", Arial, sans-serif;
-  font-size: 0.8rem; /* Scaled down */
+  font-size: 0.8rem;
   color: #888;
   margin-bottom: 0.2rem;
   text-align: left;
@@ -356,9 +346,7 @@
   margin: 0 auto;
 }
 
-/* ====================================================== */
 /* ================== Product Card (Huge - Carousel) ================= */
-/* ====================================================== */
 
 .product-card-huge {
   display: flex;
@@ -413,7 +401,6 @@
   text-align: left;
   color: #333;
   margin-bottom: 1rem;
-  /* Truncate text to 3 lines */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

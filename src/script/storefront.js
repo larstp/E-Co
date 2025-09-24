@@ -1,4 +1,5 @@
 import { fetchAllProducts } from "./api/api.js";
+import { showLoader, hideLoader } from "./utils/loader.js";
 import { shareUrl } from "./utils/share.js";
 import { setupFilterMenu } from "./utils/menus.js";
 import { addToCart } from "./utils/cart.js";
@@ -284,6 +285,7 @@ function renderProductsPage(products = null) {
 
 async function loadProducts() {
   try {
+    showLoader();
     allProducts = await fetchAllProducts();
     allCategories = Array.from(
       new Set(allProducts.map((p) => p.category).filter(Boolean))
@@ -362,7 +364,9 @@ async function loadProducts() {
     if (filterMenu && filterMenu.renderContent) {
       filterMenu.renderContent(allCategories, allTags);
     }
+    hideLoader();
   } catch (err) {
+    hideLoader();
     const grid = getOrCreateProductGrid();
     while (grid.firstChild) {
       grid.removeChild(grid.firstChild);

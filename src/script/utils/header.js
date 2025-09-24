@@ -136,7 +136,6 @@ function buildMobileHeader() {
   mobileHeader.className = "header-mobile";
 
   // Ad banner always at the top
-
   const adBanner = document.createElement("div");
   adBanner.className = "site-ad";
   adBanner.style.minHeight = "35px";
@@ -160,7 +159,6 @@ function buildMobileHeader() {
   mobileHeader.appendChild(adBanner);
 
   // Upper header (White part)
-
   const upper = document.createElement("div");
   upper.className = "header-mobile__upper";
 
@@ -182,15 +180,15 @@ function buildMobileHeader() {
 
   const icons = document.createElement("div");
   icons.className = "header-mobile__icons";
+  let mobileSearchIcon = null;
   if (!IS_INDEX_PAGE) {
-    icons.appendChild(
-      createIconLink({
-        href: "#",
-        icon: "/public/assets/icons/icons-svg/black/search.svg",
-        alt: "Search",
-        aria: "Search",
-      })
-    );
+    mobileSearchIcon = createIconLink({
+      href: "#",
+      icon: "/public/assets/icons/icons-svg/black/search.svg",
+      alt: "Search",
+      aria: "Search",
+    });
+    icons.appendChild(mobileSearchIcon);
   }
   MOBILE_UPPER_LINKS.forEach((link) => icons.appendChild(createIconLink(link)));
 
@@ -199,21 +197,28 @@ function buildMobileHeader() {
   upper.appendChild(icons);
 
   // Lower header (Blue part)
-
   const lower = document.createElement("div");
   lower.className = "header-mobile__lower";
-  if (IS_INDEX_PAGE) {
+
+  function buildMobileSearchForm() {
     const searchContainer = document.createElement("form");
-    searchContainer.className = "site-search";
+    searchContainer.className = "site-search mobile-toggle-search";
     searchContainer.setAttribute("role", "search");
     searchContainer.setAttribute("aria-label", "Site search");
     searchContainer.action = "#";
+    const searchLabel = document.createElement("label");
+    searchLabel.htmlFor = "mobile-site-search-input";
+    searchLabel.className = "visually-hidden";
+    searchLabel.textContent = "Search products";
+    searchContainer.appendChild(searchLabel);
     const searchInput = document.createElement("input");
     searchInput.type = "search";
     searchInput.className = "site-search__input";
     searchInput.placeholder = "Search";
     searchInput.setAttribute("aria-label", "Search");
     searchInput.autocomplete = "off";
+    searchInput.id = "mobile-site-search-input";
+    searchContainer.appendChild(searchInput);
     const searchBtn = document.createElement("button");
     searchBtn.type = "submit";
     searchBtn.className = "site-search__btn";
@@ -222,10 +227,16 @@ function buildMobileHeader() {
     searchBtnImg.src = "/public/assets/icons/icons-svg/black/search.svg";
     searchBtnImg.alt = "Search";
     searchBtn.appendChild(searchBtnImg);
-    searchContainer.appendChild(searchInput);
     searchContainer.appendChild(searchBtn);
-
-    //-------------------------------------------------------- Search handler that ACTUALLY WORKS?! :D
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "mobile-search-close-btn";
+    closeBtn.setAttribute("aria-label", "Close search");
+    const closeIcon = document.createElement("img");
+    closeIcon.src = "/public/assets/icons/icons-svg/black/x.svg";
+    closeIcon.alt = "Close";
+    closeBtn.appendChild(closeIcon);
+    searchContainer.appendChild(closeBtn);
     searchContainer.addEventListener("submit", (e) => {
       e.preventDefault();
       const query = searchInput.value.trim();
@@ -235,6 +246,16 @@ function buildMobileHeader() {
         )}`;
       }
     });
+    return { searchContainer, closeBtn };
+  }
+
+  let mobileSearchActive = false;
+  let mobileSearchForm = null;
+  let mobileBreadcrumbs = null;
+
+  if (IS_INDEX_PAGE) {
+    // On index, always show search
+    const { searchContainer } = buildMobileSearchForm();
     lower.appendChild(searchContainer);
   } else {
     lower.classList.add("header-mobile__lower--breadcrumb");
@@ -257,6 +278,33 @@ function buildMobileHeader() {
       breadcrumbs = buildBreadcrumbs([pageName]);
     }
     lower.appendChild(breadcrumbs);
+    mobileBreadcrumbs = breadcrumbs;
+  }
+
+  if (mobileSearchIcon) {
+    mobileSearchIcon.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (!mobileSearchActive) {
+        const { searchContainer, closeBtn } = buildMobileSearchForm();
+        if (mobileBreadcrumbs && lower.contains(mobileBreadcrumbs)) {
+          mobileBreadcrumbs.style.display = "none";
+        }
+        lower.appendChild(searchContainer);
+        closeBtn.addEventListener("click", () => {
+          searchContainer.remove();
+          if (mobileBreadcrumbs) mobileBreadcrumbs.style.display = "";
+          mobileSearchActive = false;
+        });
+        mobileSearchForm = searchContainer;
+        mobileSearchActive = true;
+      } else {
+        if (mobileSearchForm && lower.contains(mobileSearchForm)) {
+          mobileSearchForm.remove();
+        }
+        if (mobileBreadcrumbs) mobileBreadcrumbs.style.display = "";
+        mobileSearchActive = false;
+      }
+    });
   }
 
   mobileHeader.appendChild(upper);
@@ -278,7 +326,17 @@ function buildBreadcrumbs(parts) {
   breadcrumbsList.appendChild(homeItem);
   parts.forEach((part, index) => {
     const item = document.createElement("li");
-    if (index < parts.length - 1) {
+    if ((part === "Shop" || part === "Store") && index < parts.length - 1) {
+      const link = document.createElement("a");
+      link.href = "/src/pages/storefront.html";
+      link.textContent = "Shop";
+      item.appendChild(link);
+    } else if (part === "Account" && index < parts.length - 1) {
+      const link = document.createElement("a");
+      link.href = "/src/pages/user.html";
+      link.textContent = "Account";
+      item.appendChild(link);
+    } else if (index < parts.length - 1) {
       const link = document.createElement("a");
       link.href = "#";
       link.textContent = part;
@@ -436,11 +494,18 @@ function buildDesktopHeader() {
   const desktopSearchContainer = document.createElement("form");
   desktopSearchContainer.className = "site-search";
   desktopSearchContainer.action = "#";
+  const desktopSearchLabel = document.createElement("label");
+  desktopSearchLabel.htmlFor = "desktop-site-search-input";
+  desktopSearchLabel.className = "visually-hidden";
+  desktopSearchLabel.textContent = "Search products";
+  desktopSearchContainer.appendChild(desktopSearchLabel);
   const desktopSearchInput = document.createElement("input");
   desktopSearchInput.type = "search";
   desktopSearchInput.className = "site-search__input";
   desktopSearchInput.placeholder = "Search";
   desktopSearchInput.autocomplete = "off";
+  desktopSearchInput.id = "desktop-site-search-input";
+  desktopSearchContainer.appendChild(desktopSearchInput);
   const desktopSearchBtn = document.createElement("button");
   desktopSearchBtn.type = "submit";
   desktopSearchBtn.className = "site-search__btn";
@@ -448,7 +513,6 @@ function buildDesktopHeader() {
   desktopSearchBtnImg.src = "/public/assets/icons/icons-svg/black/search.svg";
   desktopSearchBtnImg.alt = "Search";
   desktopSearchBtn.appendChild(desktopSearchBtnImg);
-  desktopSearchContainer.appendChild(desktopSearchInput);
   desktopSearchContainer.appendChild(desktopSearchBtn);
 
   // Search handler: redirect to storefront with search... words :)
