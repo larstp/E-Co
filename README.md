@@ -1,43 +1,87 @@
-E-co: A Brand Client ProfileCompany Overview
+# PE1 - Project Exam 1 - NOROFF OCT24
 
-# E-co
+## Project Documentation: E.CO
 
-Tagline: Conscious Commerce. Effortless Experience.
+![E.CO Logo](/public/assets/img/logo/logo.webp)
 
-## Business Model 
-E-co is a modern, digitally-native e-commerce brand specializing in a diverse, curated range of high-quality products. We operate as a single, unified online platform, providing customers with a seamless and intuitive shopping experience across multiple product categories. Our core value proposition is to eliminate the complexity of modern consumerism by providing a single, trusted source for goods that enhance everyday life.
+See full Kanban in GitHub [projects](https://github.com/users/larstp/projects/8)
 
-## Company Description
-Founded in 2018, E-co was established to address the fragmentation of the online retail landscape while tackling a critical challenge: sustainable commerce. We identified a clear market need for a singular destination where consumers could find a wide array of goods—from cutting-edge technology and sophisticated fashion to essential home goods and fitness equipment—without the hassle of navigating multiple specialty stores.
+### 1. Project Overview
 
-Our strategic approach combines a data-driven product selection process with an unwavering commitment to customer satisfaction and environmental stewardship. We leverage advanced logistics and supply chain partnerships to ensure efficient, eco-friendly order fulfillment, prioritizing low-emissions shipping and minimizing packaging waste. E-co actively invests in projects that offset our carbon footprint, ensuring every delivery contributes to a greener future. E-co is more than just a store; it's a comprehensive, climate-conscious commerce solution built for the discerning, modern consumer.
+E.CO is a responsive, accessible e-commerce web application focused on sustainable and affordable shopping. Users can browse products, view details, register, log in, manage a cart, and complete a mock checkout process.
 
-### Organizational Structure & Team
-Number of Employees: Approximately 250 full-time employees.
+### 2. Setup & Installation
 
-### Key Departments
-Our team is structured to support our end-to-end e-commerce operations, including:
+- Open `index.html` in your browser, or visit the deployed site: [larstp.github.io](larstp.github.io) (available only during exam period)
+- No build steps required; all code is static and client-side.
 
-Product Sourcing & Merchandising: Dedicated to identifying and curating our diverse product offerings.
+### 3. Admin User
 
-Technology & Platform Development: The core engineering team responsible for our e-commerce platform, user experience, and back-end systems (the very systems you will be working on!).
+- **Admin login info will be provided here before submission.**
 
-Marketing & Brand Strategy: Focuses on customer acquisition, brand messaging, and promotional campaigns.
+### 4. Technologies Used
 
-Logistics & Customer Support: Manages order fulfillment, shipping, returns, and provides world-class customer service.
+- HTML5, CSS3 (no frameworks)
+- JavaScript (ES6 modules, no frameworks)
+- Figma (design & style guide)
+- GitHub Projects (planning)
+- [NOROFF E-commerce API]
 
-## Core Business Offerings
-E-co's product categories are strategically chosen to meet a broad spectrum of consumer needs. Our primary offerings include:
+### 5. Folder Structure
 
-E-co Electronics: This is our flagship category, featuring the latest in consumer technology, including laptops, smartphones, smart home devices, and audio equipment.
+- `/public/` — Static assets (images, icons, etc.)
+- `/src/` — Source code
+  - `/css/` — Stylesheets
+  - `/script/` — JavaScript modules
+  - `/pages/` — HTML pages
+  - `/components/` — JSON files for mockup storage
+- `/docs/` — Documentation and assignment files
 
-E-co Lifestyle: A dynamic collection of apparel and accessories from both established and up-and-coming designers. The focus is on contemporary style, quality craftsmanship, and versatile pieces.
+### 6. Features
 
-E-co Home & Living: A selection of products designed to improve daily life at home, ranging from kitchen gadgets and innovative cleaning tools to decorative items and unique furniture.
+- Product feed with carousel and grid
+- Product detail page with shareable link
+- User registration and login (with validation)
+- Cart management (add, remove, adjust quantity)
+- Checkout flow (address, shipping, payment selection)
+- Success/confirmation page
+- Responsive design for desktop and mobile
+- Accessibility features (labels, contrast, keyboard navigation)
+- SEO meta tags and semantic HTML
+- Loader overlay for async actions
 
-E-co Wellness: This category includes a variety of health and fitness products, from wearable tech and workout gear to nutritional supplements and self-care essentials.
+### 7. API Usage
 
-## Mission & Vision
-Mission Statement: To redefine online shopping by offering a meticulously curated selection of products and an exceptional, effortless user experience, making us the trusted single-source destination for modern consumers who value both quality and sustainability.
+- Fetches product data from the NOROFF online-store API
+- Uses endpoints for registration and login
 
-Vision Statement: To become the leading global e-commerce platform recognized for our innovative approach to retail, our unwavering commitment to quality, and our deep understanding of both consumer needs and our environmental responsibility.
+### 8. Accessibility & SEO
+
+- All forms have labels and validation feedback
+- Visually hidden labels for screen readers
+- Sufficient color contrast and focus states
+- Semantic HTML structure
+- Meta tags for SEO and social sharing
+
+### 9. Known Issues / Limitations
+
+- Checkout/payment is a mockup (no real transactions)
+- No persistent user address/payment storage (mocked in localStorage or JSON)
+- Some features (e.g., wishlist, colour filters) are non-functional or for demo only
+
+### 10. Credits
+
+- Icons: [Iconify](https://iconify.design) License: MIT. No attribution required. Commercial use is allowed
+- Images: [Unsplash](https://unsplash.com) [Pixabay](https://pixabay.com) Free to use under the [Unsplash License](https://unsplash.com/license) and Free for use under the [Pixabay Content License](https://pixabay.com/service/license-summary/)
+  - [clean-living.webp](https://unsplash.com/photos/a-bottle-of-cleaner-next-to-a-yellow-towel--OsOqpGXku0)
+  - [summer-sale.webp](https://pixabay.com/no/photos/g%C3%A5-p%C3%A5-sk%C3%B8yter-rullebrett-7403432/)
+  - [newsletter.webp](https://unsplash.com/photos/woman-in-yellow-tracksuit-standing-on-basketball-court-side-nimElTcTNyY)
+  - [technology.webp](https://unsplash.com/photos/black-jbl-corded-headphones-on-white-panel-cDrIiiptFqE)
+  - [fashion.webp](https://unsplash.com/photos/a-pair-of-black-shoes-hanging-on-a-wall-zadrrJWgUDQ)
+  - [cleaning.webp](https://unsplash.com/photos/a-bottle-of-cleaner-next-to-a-yellow-towel--OsOqpGXku0)
+- Loader CSS: [Pure CSS Loaders - loading.io](https://loading.io/css/)
+- Only other code resource I've used is help from [GitHub Copilot](https://github.com/features/copilot) (AI coding assistant) for code suggestions and explanations.
+
+### 11. Contact
+
+- Author: [larstp](https://github.com/larstp)
