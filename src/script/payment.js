@@ -145,6 +145,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const optionsList = document.createElement("ul");
   optionsList.className = "payment-options-list";
 
+  // Custom error message container
+  const messageContainer = document.createElement("div");
+  messageContainer.className = "message-container";
+  messageContainer.setAttribute("aria-live", "polite");
+
   let openFormIndex = null;
 
   paymentOptions.forEach((option, idx) => {
@@ -213,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   root.appendChild(optionsList);
+  root.appendChild(messageContainer);
 
   // Save button
   const btnSave = document.createElement("button");
@@ -220,7 +226,37 @@ document.addEventListener("DOMContentLoaded", () => {
   btnSave.className = "btn-large";
   btnSave.textContent = "Save Payment Method";
   btnSave.addEventListener("click", () => {
-    window.history.back();
+    messageContainer.textContent = "";
+    messageContainer.classList.remove("error", "success");
+    const checked = optionsList.querySelector(".payment-radio:checked");
+    if (!checked) {
+      messageContainer.textContent = "Please select a payment method.";
+      messageContainer.classList.add("error");
+      return;
+    }
+    const formContainer = checked.parentElement.parentElement.querySelector(
+      ".payment-form-container"
+    );
+    if (!formContainer || !formContainer.firstChild) {
+      messageContainer.textContent = "Please fill out the payment details.";
+      messageContainer.classList.add("error");
+      return;
+    }
+    const requiredInputs = formContainer.querySelectorAll("input[required]");
+    for (const input of requiredInputs) {
+      if (!input.value.trim()) {
+        messageContainer.textContent = `${
+          input.previousSibling && input.previousSibling.textContent
+            ? input.previousSibling.textContent
+            : input.name
+        } is required.`;
+        messageContainer.classList.add("error");
+        input.focus();
+        return;
+      }
+    }
+    messageContainer.textContent = "Payment method saved! (This is a mockup.)";
+    messageContainer.classList.add("success");
   });
   root.appendChild(btnSave);
 

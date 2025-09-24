@@ -103,6 +103,11 @@ document.addEventListener("DOMContentLoaded", () => {
   inputCountry.required = true;
   inputCountry.placeholder = "Country";
 
+  //  error message container
+  const messageContainer = document.createElement("div");
+  messageContainer.className = "message-container";
+  messageContainer.setAttribute("aria-live", "polite");
+
   // Button
   const btnSave = document.createElement("button");
   btnSave.type = "submit";
@@ -122,12 +127,52 @@ document.addEventListener("DOMContentLoaded", () => {
   form.appendChild(labelCountry);
   form.appendChild(inputCountry);
 
-  // Spacer because I'm DONE with padding UGH
-
+  // Spacer for layout
   const spacer = document.createElement("div");
   spacer.style.height = "32px";
   form.appendChild(spacer);
   form.appendChild(btnSave);
+  form.appendChild(messageContainer);
+
+  //  validation and feedback ----------------------- now less angry hihi
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    messageContainer.textContent = "";
+    messageContainer.classList.remove("error", "success");
+    if (!inputName.value.trim()) {
+      messageContainer.textContent = "Name is required.";
+      messageContainer.classList.add("error");
+      inputName.focus();
+      return;
+    }
+    if (!inputStreet.value.trim()) {
+      messageContainer.textContent = "Street is required.";
+      messageContainer.classList.add("error");
+      inputStreet.focus();
+      return;
+    }
+    if (!inputPostal.value.trim()) {
+      messageContainer.textContent = "Postal code is required.";
+      messageContainer.classList.add("error");
+      inputPostal.focus();
+      return;
+    }
+    if (!inputCity.value.trim()) {
+      messageContainer.textContent = "City is required.";
+      messageContainer.classList.add("error");
+      inputCity.focus();
+      return;
+    }
+    if (!inputCountry.value.trim()) {
+      messageContainer.textContent = "Country is required.";
+      messageContainer.classList.add("error");
+      inputCountry.focus();
+      return;
+    }
+    messageContainer.textContent =
+      "Address saved! (This is a mockup just so you know ;) )";
+    messageContainer.classList.add("success");
+  });
 
   container.appendChild(form);
   flexContainer.appendChild(container);
