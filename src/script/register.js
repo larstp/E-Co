@@ -67,17 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Phone
   const labelPhone = document.createElement("label");
   labelPhone.htmlFor = "register-phone";
-  labelPhone.textContent = "Phone";
-  const asteriskPhone = document.createElement("span");
-  asteriskPhone.className = "required-asterisk";
-  asteriskPhone.textContent = "*";
-  labelPhone.appendChild(asteriskPhone);
+  labelPhone.textContent = "Phone (optional)";
   const inputPhone = document.createElement("input");
   inputPhone.type = "text";
   inputPhone.id = "register-phone";
   inputPhone.name = "phone";
   inputPhone.autocomplete = "tel";
-  inputPhone.required = true;
   inputPhone.placeholder = "+47 123 45 678";
 
   // Password
@@ -151,6 +146,27 @@ document.addEventListener("DOMContentLoaded", () => {
     messageContainer.textContent = "";
     messageContainer.classList.remove("success", "error");
 
+    // -------------------------------------------------------------------Noroff API restrictions
+    if (!/^\w+$/.test(inputUser.value)) {
+      messageContainer.textContent =
+        "Username can only contain letters, numbers, and underscores (_).";
+      messageContainer.classList.add("error");
+      return;
+    }
+
+    if (!/^([a-zA-Z0-9_.+-]+)@stud\.noroff\.no$/.test(inputEmail.value)) {
+      messageContainer.textContent =
+        "Email must be a valid stud.noroff.no address.";
+      messageContainer.classList.add("error");
+      return;
+    }
+
+    if (inputPass.value.length < 8) {
+      messageContainer.textContent = "Password must be at least 8 characters.";
+      messageContainer.classList.add("error");
+      return;
+    }
+
     if (inputPass.value !== inputRepeat.value) {
       messageContainer.textContent = "Passwords do not match.";
       messageContainer.classList.add("error");
@@ -180,7 +196,15 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "/src/pages/log-in.html";
       }, 2000);
     } catch (error) {
-      messageContainer.textContent = error.message;
+      let msg = error.message || "Registration failed.";
+      if (
+        msg.toLowerCase().includes("already exists") ||
+        msg.toLowerCase().includes("profile already exists")
+      ) {
+        msg =
+          "That account already exists. Please log in or use a different email/username.";
+      }
+      messageContainer.textContent = msg;
       messageContainer.classList.add("error");
     } finally {
       btnCreate.disabled = false;

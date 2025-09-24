@@ -2,48 +2,49 @@
 
 export function initBreadcrumbs() {
   document.querySelectorAll("nav.breadcrumb").forEach((nav) => {
-    // Only render if empty (prevents double-render)
     if (nav.children.length > 0) return;
     let parts = [];
-    // Prefer data-breadcrumb attribute
     const data = nav.getAttribute("data-breadcrumb");
-    if (data) {
-      // Split on / or > or > (allowing both separators)
-      parts = data.split(/\s*[\/>]\s*/).filter(Boolean);
+    const isCheckout = window.location.pathname.endsWith("checkout.html");
+    if (isCheckout) {
+      parts = [
+        { label: "Cart", href: "/src/pages/cart.html" },
+        { label: "Checkout", href: null },
+      ];
+    } else if (data) {
+      parts = data
+        .split(/\s*[\/>]\s*/)
+        .filter(Boolean)
+        .map((label) => ({ label, href: null }));
     } else if (document.title) {
-      // Fallback: use document title (after | if present)
       const t = document.title.split("|")[1] || document.title;
-      parts = [t.trim()];
+      parts = [{ label: t.trim(), href: null }];
     } else {
-      // Fallback: use path
       const page = window.location.pathname
         .split("/")
         .pop()
         .replace(".html", "");
-      parts = [page.charAt(0).toUpperCase() + page.slice(1)];
+      parts = [
+        { label: page.charAt(0).toUpperCase() + page.slice(1), href: null },
+      ];
     }
-    // Build breadcrumb list
     const ol = document.createElement("ol");
     ol.className = "breadcrumb-list";
-    // Always start with Home
     const homeLi = document.createElement("li");
     const homeA = document.createElement("a");
     homeA.href = "/index.html";
     homeA.textContent = "Home";
     homeLi.appendChild(homeA);
     ol.appendChild(homeLi);
-    // Add rest
     parts.forEach((part, i) => {
       const li = document.createElement("li");
-      if (i < parts.length - 1) {
-        // Intermediate: make as link (could be improved with real URLs)
+      if (part.href && i < parts.length - 1) {
         const a = document.createElement("a");
-        a.href = "#";
-        a.textContent = part;
+        a.href = part.href;
+        a.textContent = part.label;
         li.appendChild(a);
       } else {
-        // Last: current page
-        li.textContent = part;
+        li.textContent = part.label;
         li.setAttribute("aria-current", "page");
       }
       ol.appendChild(li);

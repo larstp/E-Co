@@ -49,7 +49,7 @@
 
   .breadcrumb {
     position: relative;
-    margin-top: 65px; /* height of desktop header */
+    margin-top: 65px;
     background: none;
     z-index: 1000;
     top: 0;
@@ -236,8 +236,6 @@
     position: sticky;
     top: 80px;
   }
-
-  /* INSERT HERE*/
 }
 
 @media (min-width: 1040px) {
@@ -250,5 +248,11 @@
 @media (max-width: 357px) {
   .product-grid {
     justify-items: center;
+  }
+}
+
+@media (max-width: 899px) {
+  .breadcrumb {
+    display: none !important;
   }
 }

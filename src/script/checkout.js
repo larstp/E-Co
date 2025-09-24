@@ -53,9 +53,7 @@ function createOrderSummarySection(items) {
   return section;
 }
 
-// =================================================================
-// CHECKOUT STEP CONTENT
-// =================================================================
+// CHECKOUT powerpoint slide ish content
 
 async function createAddressBox() {
   const container = createEl("div", { class: "address-box-list" });
@@ -104,7 +102,8 @@ async function createAddressBox() {
             ...(idx === selectedIdx ? { checked: true } : {}),
           },
         });
-        // Trash icon (bottom right)
+
+        // Trash icon (bottom right HOPEFULLY)
         const trash = createEl("img", {
           class: "address-trash",
           attrs: {
@@ -113,7 +112,8 @@ async function createAddressBox() {
             tabindex: 0,
           },
         });
-        // No real delete, just mock hover/click! Dont know if we can save this to the API
+
+        // No real delete, just mock hover/click! -----------------Dont know if we can save this to the API
         trash.addEventListener("click", (e) => {
           e.stopPropagation();
         });
@@ -192,9 +192,7 @@ function createPaymentOptions() {
   return container;
 }
 
-// =================================================================
 // MOBILE CHECKOUT
-// =================================================================
 
 async function buildMobileCheckout(cartItems) {
   const mainContainer = createEl("main", {
@@ -219,7 +217,7 @@ async function buildMobileCheckout(cartItems) {
   });
   tabsContainer.append(...tabButtons);
 
-  // --- Steps Wrapper (Slideshow) ---
+  // ------------------------------------------ Steps Wrapper (Slideshow ish) ---
   const stepsWrapper = createEl("div", { class: "checkout-steps-wrapper" });
 
   // --- Step 1: Address ---
@@ -357,9 +355,7 @@ async function buildMobileCheckout(cartItems) {
   return mainContainer;
 }
 
-// =================================================================
 // DESKTOP CHECKOUT
-// =================================================================
 
 async function buildDesktopCheckout(cartItems) {
   const mainContainer = createEl("main", {
@@ -413,7 +409,7 @@ async function buildDesktopCheckout(cartItems) {
     });
 
     if (index === 0) {
-      // Address step
+      // ---------------------------------------------------Address step
       const changeAddressBtn = createEl("button", {
         class: "btn-large-white",
         text: "Change Delivery Address",
@@ -429,14 +425,14 @@ async function buildDesktopCheckout(cartItems) {
       });
       buttonContainer.append(continueBtn, changeAddressBtn);
     } else if (index === 1) {
-      // Shipping step
+      // --------------------------------------------------Shipping step
       const continueBtn = createEl("button", {
         class: "btn-large continue-btn",
         text: step.buttonText,
       });
       buttonContainer.appendChild(continueBtn);
     } else {
-      // Payment step
+      //-------------------------------------------------- Payment step
       const addPaymentBtn = createEl("button", {
         class: "btn-large-white",
         text: "Add Payment Option",
@@ -530,15 +526,6 @@ function createYourCartSection(items) {
 
 function createCartItemCard(item) {
   const card = createEl("div", { class: "cart-item-card" });
-  const imgContainer = createEl("div", { class: "cart-item-img-container" });
-  const img = createEl("img", {
-    attrs: {
-      src: item.image.url || "/public/assets/img/placeholder.jpg",
-      alt: item.image.alt || item.title,
-    },
-  });
-  imgContainer.appendChild(img);
-
   const infoContainer = createEl("div", { class: "cart-item-info-container" });
   const title = createEl("h4", { class: "cart-item-title", text: item.title });
   const price = createEl("p", {
@@ -552,13 +539,11 @@ function createCartItemCard(item) {
     text: `Qty: ${item.quantity}`,
   });
 
-  card.append(imgContainer, infoContainer, quantityDisplay);
+  card.append(infoContainer, quantityDisplay);
   return card;
 }
 
-// =================================================================
 // CONFIRMATION POP-UP
-// =================================================================
 
 function createConfirmationPopup() {
   const overlay = createEl("div", { class: "confirmation-popup-overlay" });
@@ -592,10 +577,6 @@ function createConfirmationPopup() {
   overlay.appendChild(content);
   return overlay;
 }
-
-// =================================================================
-// DOMContentLoaded
-// =================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
   (async () => {

@@ -1,10 +1,7 @@
 import { isLoggedIn } from "./user.js";
 
 // Note: I'm using caps to differentiate a bit because my brain gets fried by this...
-
-// =============================
 // Data Constants (No idea if this is a good way to do it. Internet seems to think so)
-// =============================
 
 const IS_INDEX_PAGE = window.location.pathname.endsWith("index.html");
 const IS_LOGGED_IN = isLoggedIn();
@@ -211,7 +208,6 @@ function buildMobileHeader() {
     searchContainer.setAttribute("role", "search");
     searchContainer.setAttribute("aria-label", "Site search");
     searchContainer.action = "#";
-    searchContainer.onsubmit = (e) => e.preventDefault();
     const searchInput = document.createElement("input");
     searchInput.type = "search";
     searchInput.className = "site-search__input";
@@ -228,6 +224,17 @@ function buildMobileHeader() {
     searchBtn.appendChild(searchBtnImg);
     searchContainer.appendChild(searchInput);
     searchContainer.appendChild(searchBtn);
+
+    //-------------------------------------------------------- Search handler that ACTUALLY WORKS?! :D
+    searchContainer.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const query = searchInput.value.trim();
+      if (query) {
+        window.location.href = `/src/pages/storefront.html?search=${encodeURIComponent(
+          query
+        )}`;
+      }
+    });
     lower.appendChild(searchContainer);
   } else {
     lower.classList.add("header-mobile__lower--breadcrumb");
@@ -240,7 +247,9 @@ function buildMobileHeader() {
         .map((p) => p.trim())
         .filter(Boolean);
       breadcrumbs = buildBreadcrumbs(parts);
-      breadcrumbNav.style.display = "none";
+      if (window.innerWidth < 900) {
+        breadcrumbNav.style.display = "none";
+      }
     } else {
       const pageName =
         document.title.split("|")[1]?.trim() ||
@@ -427,7 +436,6 @@ function buildDesktopHeader() {
   const desktopSearchContainer = document.createElement("form");
   desktopSearchContainer.className = "site-search";
   desktopSearchContainer.action = "#";
-  desktopSearchContainer.onsubmit = (e) => e.preventDefault();
   const desktopSearchInput = document.createElement("input");
   desktopSearchInput.type = "search";
   desktopSearchInput.className = "site-search__input";
@@ -442,6 +450,17 @@ function buildDesktopHeader() {
   desktopSearchBtn.appendChild(desktopSearchBtnImg);
   desktopSearchContainer.appendChild(desktopSearchInput);
   desktopSearchContainer.appendChild(desktopSearchBtn);
+
+  // Search handler: redirect to storefront with search... words :)
+  desktopSearchContainer.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const query = desktopSearchInput.value.trim();
+    if (query) {
+      window.location.href = `/src/pages/storefront.html?search=${encodeURIComponent(
+        query
+      )}`;
+    }
+  });
 
   // Right: Contact info (I wont make any of this work. Not part of the assignment and cant be arsed)
 
@@ -601,7 +620,7 @@ document.addEventListener("DOMContentLoaded", function () {
     inner.appendChild(catSection);
     inner.appendChild(document.createElement("hr"));
 
-    // Colours (mockup)
+    // Colours (mockup. wont make this work)
 
     const coloursHeading = document.createElement("h1");
     coloursHeading.textContent = "Colours";

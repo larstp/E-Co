@@ -152,8 +152,6 @@ html {
   color: #fff;
 }
 
-/* -------- Breadcrumbs ------------*/
-
 /* ==================== Site-wide Ad Banner (top part) ==================== */
 
 .site-ad {
@@ -1103,14 +1101,52 @@ html {
   font-family: "Roboto", Arial, sans-serif;
   font-size: 1rem;
   color: #888;
-  background: rgba(255, 0, 0, 0.2); /* DEBUG WHY CANT I SEE IT AAAAAH */
+  background: none;
   box-sizing: border-box;
   z-index: 1000;
   position: relative;
+  font-weight: 200;
 }
 
-body.landing-page .breadcrumb {
-  display: none !important;
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 200;
+}
+
+.breadcrumb-list li {
+  display: flex;
+  align-items: center;
+  color: #888;
+  font-family: inherit;
+  font-weight: 200;
+}
+
+.breadcrumb-list li:not(:last-child)::after {
+  content: "/";
+  margin: 0 8px;
+  color: #bbb;
+  font-weight: 100;
+}
+
+.breadcrumb-list a {
+  color: #888;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb-list a:hover {
+  color: #1976d2;
+}
+
+.breadcrumb-list li[aria-current="page"] {
+  color: #111;
+  font-weight: 300;
 }
 
 /* ========== FORM GLOBAL STYLES ========== */

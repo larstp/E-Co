@@ -338,6 +338,19 @@ async function loadProducts() {
             p.tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
         )
       );
+    } else if (params.has("search")) {
+      const search = params.get("search").toLowerCase();
+      initialTitle = `Search: "${params.get("search")}"`;
+      productsShown = allProducts.length;
+      renderProductsPage(
+        allProducts.filter((p) => {
+          const nameMatch = p.title && p.title.toLowerCase().includes(search);
+          const tagMatch =
+            Array.isArray(p.tags) &&
+            p.tags.some((t) => t.toLowerCase().includes(search));
+          return nameMatch || tagMatch;
+        })
+      );
     } else {
       renderProductsPage();
     }

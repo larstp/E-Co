@@ -250,13 +250,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   const breadcrumb = document.querySelector(".breadcrumb");
   if (breadcrumb) {
     breadcrumb.innerHTML = "";
-    const homeLink = createEl("a", { href: "/index.html", text: "Home" });
-    const separator = createEl("span", { text: " / " });
-    const currentPage = createEl("span", {
-      text: "Cart",
-      attrs: { "aria-current": "page" },
-    });
-    breadcrumb.append(homeLink, separator, currentPage);
+    const ol = createEl("ol", { class: "breadcrumb-list" });
+    const homeLi = createEl("li");
+    const homeA = createEl("a", { href: "/index.html", text: "Home" });
+    homeLi.appendChild(homeA);
+    ol.appendChild(homeLi);
+    const cartLi = createEl("li", { text: "Cart" });
+    cartLi.setAttribute("aria-current", "page");
+    ol.appendChild(cartLi);
+    breadcrumb.appendChild(ol);
   }
 
   renderCart();

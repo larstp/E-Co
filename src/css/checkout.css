@@ -3,6 +3,10 @@ body {
   overflow-x: hidden;
 }
 
+h3 {
+  font-size: 32px;
+}
+
 input[type="checkbox"],
 input[type="radio"] {
   accent-color: #1976d2;
@@ -93,6 +97,7 @@ input[type="radio"] {
   font-size: 2.5rem;
   margin-bottom: 0;
 }
+
 .order-summary-container h3 {
   font-family: "Bebas Neue", sans-serif;
   font-size: 2rem;
@@ -214,7 +219,7 @@ DESKTOP STYLES
 ================================================================= */
 
 .checkout-container-desktop {
-  display: none; /* Hidden by default */
+  display: none;
 }
 
 .desktop-step-container {
@@ -261,7 +266,7 @@ DESKTOP STYLES
 }
 
 .desktop-step-header h3 {
-  font-size: 1.5rem;
+  font-size: 32px;
   font-family: "Bebas Neue", sans-serif;
   margin: 0;
 }
@@ -343,10 +348,6 @@ DESKTOP STYLES
   transition: box-shadow 0.2s, border 0.2s, background 0.2s;
 }
 
-/* =================================================================
-CONFIRMATION POP-UP :D
-================================================================= */
-
 .confirmation-popup-overlay {
   position: fixed;
   top: 0px;
@@ -379,4 +380,27 @@ CONFIRMATION POP-UP :D
 .confirmation-logo {
   width: 115px;
   height: 115px;
+}
+
+.cart-item-title {
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0 0 0.2rem 0;
+}
+
+.cart-item-price,
+.cart-item-quantity {
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  margin: 0 0 0.2rem 0;
+}
+
+.cart-item-card {
+  padding: 10px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 15px;
+  background: #fff;
+  margin-bottom: 10px;
 }

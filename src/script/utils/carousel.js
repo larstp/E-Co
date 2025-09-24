@@ -1,4 +1,3 @@
-// Carousel utility for product cards
 import { fetchAllProducts } from "../api/api.js";
 import { shareUrl } from "./share.js";
 

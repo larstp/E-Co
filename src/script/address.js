@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   h1.textContent = "Create a new address";
   container.appendChild(h1);
 
-  // Form ----- (I'll name the fields that must be filled out with *)
+  // Form -------------------------------- (Double check when NOROFF API webpage wants to feckin open!)
   const form = document.createElement("form");
   form.className = "form address-form";
   form.autocomplete = "on";
