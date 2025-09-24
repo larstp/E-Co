@@ -4,15 +4,17 @@
 
 ![E.CO Logo](/public/assets/img/logo/logo.webp)
 
-See full Kanban in GitHub [projects](https://github.com/users/larstp/projects/8)
+# See full Kanban in GitHub [projects](https://github.com/users/larstp/projects/8)
 
 ### 1. Project Overview
 
 E.CO is a responsive, accessible e-commerce web application focused on sustainable and affordable shopping. Users can browse products, view details, register, log in, manage a cart, and complete a mock checkout process.
 
+See these links for Figma boards: -
+
 ### 2. Setup & Installation
 
-- Open `index.html` in your browser, or visit the deployed site: [larstp.github.io](larstp.github.io) (available only during exam period)
+- Open `index.html` in your browser, or visit the deployed site: [larstp.github.io](larstp.github.io) (available until exam is graded)
 - No build steps required; all code is static and client-side.
 
 ### 3. Admin User
@@ -25,7 +27,7 @@ E.CO is a responsive, accessible e-commerce web application focused on sustainab
 - JavaScript (ES6 modules, no frameworks)
 - Figma (design & style guide)
 - GitHub Projects (planning)
-- [NOROFF E-commerce API]
+- NOROFF E-commerce API (online-shop)
 
 ### 5. Folder Structure
 
@@ -72,7 +74,7 @@ E.CO is a responsive, accessible e-commerce web application focused on sustainab
 ### 10. Credits
 
 - Icons: [Iconify](https://iconify.design) License: MIT. No attribution required. Commercial use is allowed
-- Images: [Unsplash](https://unsplash.com) [Pixabay](https://pixabay.com) Free to use under the [Unsplash License](https://unsplash.com/license) and Free for use under the [Pixabay Content License](https://pixabay.com/service/license-summary/)
+- Images: [Unsplash](https://unsplash.com) and [Pixabay](https://pixabay.com). Free to use under the [Unsplash License](https://unsplash.com/license) and Free for use under the [Pixabay Content License](https://pixabay.com/service/license-summary/)
   - [clean-living.webp](https://unsplash.com/photos/a-bottle-of-cleaner-next-to-a-yellow-towel--OsOqpGXku0)
   - [summer-sale.webp](https://pixabay.com/no/photos/g%C3%A5-p%C3%A5-sk%C3%B8yter-rullebrett-7403432/)
   - [newsletter.webp](https://unsplash.com/photos/woman-in-yellow-tracksuit-standing-on-basketball-court-side-nimElTcTNyY)
@@ -82,6 +84,11 @@ E.CO is a responsive, accessible e-commerce web application focused on sustainab
 - Loader CSS: [Pure CSS Loaders - loading.io](https://loading.io/css/)
 - Only other code resource I've used is help from [GitHub Copilot](https://github.com/features/copilot) (AI coding assistant) for code suggestions and explanations.
 
-### 11. Contact
+### 11. Inspiration
+
+- Design: The majority of the inspiration for my websites design comes from [this](https://chop-co.netlify.app) netlify example page. I really liked the layout of the product page, and the simple yes stylish design of the landing page. I did not, however, like the animations as much. They became too... much, so you'll se little of that in my design.
+-
+
+### 12. Contact
 
 - Author: [larstp](https://github.com/larstp)
