@@ -101,19 +101,30 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Wishlist and share icons
   const iconRow = document.createElement("div");
   iconRow.className = "product-icon-row";
-  // Wishlist
   const wishlistIcon = document.createElement("img");
   wishlistIcon.className = "product-wishlist-icon";
-  wishlistIcon.src = "../../public/assets/icons/icons-svg/black/line-heart.svg";
   wishlistIcon.alt = "Add to wishlist";
   wishlistIcon.tabIndex = 0;
+  const { addToWishlist, removeFromWishlist, isWishlisted } = await import(
+    "./utils/wishlist.js"
+  );
+  function updateWishlistIcon() {
+    wishlistIcon.src = isWishlisted(product.id)
+      ? "../../public/assets/icons/icons-svg/black/filled-heart.svg"
+      : "../../public/assets/icons/icons-svg/black/line-heart.svg";
+  }
+  updateWishlistIcon();
   wishlistIcon.addEventListener("click", () => {
-    if (wishlistIcon.src.includes("line-heart")) {
-      wishlistIcon.src =
-        "../../public/assets/icons/icons-svg/black/filled-heart.svg";
+    if (isWishlisted(product.id)) {
+      removeFromWishlist(product.id);
     } else {
-      wishlistIcon.src =
-        "../../public/assets/icons/icons-svg/black/line-heart.svg";
+      addToWishlist(product);
+    }
+    updateWishlistIcon();
+  });
+  window.addEventListener("storage", (e) => {
+    if (e.key === "wishlist") {
+      updateWishlistIcon();
     }
   });
   // Share
@@ -282,7 +293,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   counterRow.appendChild(btnMinus);
   counterRow.appendChild(counterVal);
   counterRow.appendChild(btnPlus);
-  // Counter logic
   btnMinus.addEventListener("click", () => {
     let val = parseInt(counterVal.textContent);
     if (val > 1) counterVal.textContent = val - 1;
@@ -314,8 +324,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const separatorAfterAction = document.createElement("hr");
   separatorAfterAction.className = "product-separator";
   topSection.appendChild(separatorAfterAction);
-
-  // Already appended above
 
   // --- Bottom Section: Tabs and Carousel (other js file) ---
   // Container for tabs and content
@@ -417,7 +425,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   sortIcon.style.height = "24px";
   sortIcon.style.verticalAlign = "middle";
   sortBtn.appendChild(sortIcon);
-  // Dropdown (hidden by default)
   const sortDropdown = document.createElement("select");
   sortDropdown.className = "product-sort-dropdown";
   sortDropdown.style.position = "absolute";
@@ -644,7 +651,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   topSection.className = "product-top-section-desktop";
   desktopWrapper.appendChild(topSection);
 
-  // Create containers for a two-column layout
+  // Create containers for a double colombo layout
   const productTopSectionImages = document.createElement("div");
   productTopSectionImages.className = "product-top-section-images";
   const productTopSectionText = document.createElement("div");

@@ -1,5 +1,3 @@
-// Breadcrumbs utility for desktop--------------------------- (does not affect mobile header!!)
-
 export function initBreadcrumbs() {
   document.querySelectorAll("nav.breadcrumb").forEach((nav) => {
     if (nav.children.length > 0) return;

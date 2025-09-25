@@ -1,0 +1,84 @@
+main {
+  max-width: 700px;
+  margin: 2rem auto;
+}
+
+.wishlist-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wishlist-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  border-radius: 15px;
+  justify-content: center;
+}
+
+.wishlist-info-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.wishlist-img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+}
+
+.wishlist-title {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  flex: 1;
+  color: #222;
+  max-width: 100px;
+}
+
+.wishlist-price {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 1rem;
+  color: #1976d2;
+  margin-right: 1rem;
+}
+
+.wishlist-remove-btn,
+.wishlist-view-btn {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: background 0.2s, color 0.2s;
+  width: 150px;
+}
+
+.wishlist-remove-btn {
+  background: #d32f2f;
+  color: #fff;
+}
+
+.wishlist-remove-btn:hover {
+  background: #b71c1c;
+}
+
+.wishlist-view-btn {
+  background: #1976d2;
+  color: #fff;
+  text-decoration: none;
+}
+
+.wishlist-view-btn:hover {
+  background: #1565c0;
+}

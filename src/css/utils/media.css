@@ -214,7 +214,7 @@
   }
 
   .cart-item-card {
-    grid-template-columns: 60px 1fr auto;
+    grid-template-columns: 80px 1fr auto;
   }
 
   .cart-summary-wrapper {

@@ -10,7 +10,9 @@
 
 E.CO is a responsive, accessible e-commerce web application focused on sustainable and affordable shopping. Users can browse products, view details, register, log in, manage a cart, and complete a mock checkout process.
 
-See these links for Figma boards: -
+See these links for Figma boards:
+
+- INSERT HERE
 
 ### 2. Setup & Installation
 
@@ -19,7 +21,9 @@ See these links for Figma boards: -
 
 ### 3. Admin User
 
-- **Admin login info will be provided here before submission.**
+- E-Mail: eco-admin@stud.noroff.no
+- Username: eco_admin
+- Password: Password123
 
 ### 4. Technologies Used
 
@@ -74,6 +78,7 @@ See these links for Figma boards: -
 ### 10. Credits
 
 - Icons: [Iconify](https://iconify.design) License: MIT. No attribution required. Commercial use is allowed
+- Stars: [W3.org](http://www.w3.org/2000/svg)
 - Images: [Unsplash](https://unsplash.com) and [Pixabay](https://pixabay.com). Free to use under the [Unsplash License](https://unsplash.com/license) and Free for use under the [Pixabay Content License](https://pixabay.com/service/license-summary/)
   - [clean-living.webp](https://unsplash.com/photos/a-bottle-of-cleaner-next-to-a-yellow-towel--OsOqpGXku0)
   - [summer-sale.webp](https://pixabay.com/no/photos/g%C3%A5-p%C3%A5-sk%C3%B8yter-rullebrett-7403432/)
@@ -86,8 +91,7 @@ See these links for Figma boards: -
 
 ### 11. Inspiration
 
-- Design: The majority of the inspiration for my websites design comes from [this](https://chop-co.netlify.app) netlify example page. I really liked the layout of the product page, and the simple yes stylish design of the landing page. I did not, however, like the animations as much. They became too... much, so you'll se little of that in my design.
--
+- Design: The majority of the inspiration for my websites design comes from [this](https://chop-co.netlify.app) netlify example page. I really liked the layout of the product page, and the simple yet stylish design of the landing page. I did not, however, like the animations as much. They became too... much, so you'll se little of that in my design.
 
 ### 12. Contact
 

@@ -38,13 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
   form.autocomplete = "on";
 
   const labelUser = document.createElement("label");
-  labelUser.htmlFor = "login-username";
-  labelUser.textContent = "E-Mail / Username";
+  labelUser.htmlFor = "login-email";
+  labelUser.textContent = "E-Mail";
   const inputUser = document.createElement("input");
-  inputUser.type = "text";
-  inputUser.id = "login-username";
-  inputUser.name = "username";
-  inputUser.autocomplete = "username";
+  inputUser.type = "email";
+  inputUser.id = "login-email";
+  inputUser.name = "email";
+  inputUser.autocomplete = "email";
   inputUser.required = true;
   inputUser.placeholder = "john-doe@email.com";
 
@@ -83,23 +83,21 @@ document.addEventListener("DOMContentLoaded", () => {
       showLoader();
       const userData = await loginUser(credentials);
 
-      // Save to localStorage
       localStorage.setItem("accessToken", userData.accessToken);
       localStorage.setItem("userProfile", JSON.stringify(userData));
 
-      messageContainer.textContent = "Login successful! Redirecting...";
-      messageContainer.classList.add("success");
-
+      messageContainer.textContent = "";
       setTimeout(() => {
-        window.location.href = "/"; // Redirect to homepage i think
-      }, 1500);
+        hideLoader();
+        window.location.href = "/";
+      }, 3000);
     } catch (error) {
       messageContainer.textContent = error.message;
       messageContainer.classList.add("error");
+      hideLoader();
     } finally {
       btnLogin.disabled = false;
       btnLogin.textContent = "Log in";
-      hideLoader();
     }
   });
 
@@ -126,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
   root.appendChild(btnCreate);
 });
 
-import("../script/utils/footer.js").then((mod) => {
+import("./utils/footer.js").then((mod) => {
   const footer = mod.buildFooter();
   document.body.appendChild(footer);
 });

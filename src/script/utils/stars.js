@@ -1,11 +1,3 @@
-/**
- * Should create a star rating display element based on a given rating. Not sure how good it works when there are more than one review so should be checked!
- * @param {number} rating - The numerical rating (e.g., 3.5).
- * @param {number} reviewsCount - The number of reviews.
- * @param {number} [maxRating=5] - The maximum possible rating.
- * @returns {HTMLElement} A div element containing the rendered stars.
- */
-
 const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 const fullStarPath =
   "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z";

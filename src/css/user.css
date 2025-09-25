@@ -57,3 +57,13 @@
   align-items: flex-start;
   gap: 0.7rem;
 }
+
+.user-logout-section {
+  margin: auto;
+  padding-top: 60px;
+}
+
+.user-logout-section .btn-large-white {
+  background-color: #ff5252;
+  color: white;
+}

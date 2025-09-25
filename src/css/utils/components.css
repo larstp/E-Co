@@ -1206,6 +1206,32 @@ html {
   outline: none !important;
 }
 
+/* ---------------------------------Cart Counter Badge (both header) */
+.cart-counter-badge {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  min-width: 20px;
+  height: 20px;
+  background: #ff5252;
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  pointer-events: none;
+}
+
+.header-mobile__icon,
+.header-desktop__icons a {
+  position: relative;
+}
+
 /* ---------------------------- Product Cards Extra -------------------------------*/
 
 .no-scrollbar::-webkit-scrollbar {

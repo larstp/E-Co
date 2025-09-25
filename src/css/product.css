@@ -285,14 +285,6 @@ h2 {
   font-weight: 600;
 }
 
-.product-icon-row {
-  display: flex;
-  gap: 1.2rem;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-}
-
 .product-wishlist-icon,
 .product-share-icon {
   width: 32px;

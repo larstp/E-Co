@@ -139,7 +139,10 @@ function createOrderSummarySection(items) {
   });
   const user = getUserProfile();
   const userName = user?.name || "Guest";
-  deliveryInfo.append(mapIcon, `Deliver to ${userName}, ADDRESS`);
+  deliveryInfo.append(
+    mapIcon,
+    `Deliver to ${userName}, Karl Johans Gate 1, Oslo`
+  );
   section.appendChild(deliveryInfo);
 
   const changeAddressBtn = createEl("button", {
@@ -189,7 +192,7 @@ function updateOrderSummary(items, summaryDetailsElement) {
     (sum, item) => sum + (item.price - item.discountedPrice) * item.quantity,
     0
   );
-  const deliveryFee = 250.0;
+  const deliveryFee = items.length === 0 ? 0.0 : 250.0;
   const total = subtotal - discount + deliveryFee;
 
   const createRow = (label, value, valueClass = "") => {
@@ -207,10 +210,17 @@ function updateOrderSummary(items, summaryDetailsElement) {
     "discount-value"
   );
   const deliveryRow = createRow("Delivery Fee", `${deliveryFee.toFixed(2)},-`);
+  const separator = createEl("hr", { class: "summary-separator" });
   const totalRow = createRow("Total", `${total.toFixed(2)},-`);
   totalRow.classList.add("total");
 
-  summaryDetailsElement.append(subtotalRow, discountRow, deliveryRow, totalRow);
+  summaryDetailsElement.append(
+    subtotalRow,
+    discountRow,
+    deliveryRow,
+    separator,
+    totalRow
+  );
 }
 
 async function createRecommendationsSection() {

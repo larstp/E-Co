@@ -1,8 +1,8 @@
 /**
- * Creates a product card element.
  * @param {object} product - The product data.
  * @returns {HTMLElement} The product card element.
  */
+
 export function createProductCard(product) {
   const card = document.createElement("a");
   card.className = "product-link product-card-base product-card";
@@ -53,8 +53,7 @@ export function createProductCard(product) {
   btn.type = "button";
   btn.textContent = "Add to cart";
   btn.addEventListener("click", (e) => {
-    e.preventDefault(); // Prevent navigation
-    // Add to cart logic will go here
+    e.preventDefault(); 
   });
   card.appendChild(btn);
 

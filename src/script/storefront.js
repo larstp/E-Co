@@ -10,7 +10,7 @@ let allProducts = [];
 let productsShown = 0;
 const PRODUCTS_PER_PAGE = 16;
 
-// Man I needed help from chatgpt for this. I feel we have learned nothing regarding how to do this in JS.
+// Man I needed help from copilot for this. I feel we have learned nothing regarding how to do this in JS.
 
 function getOrCreateProductGrid() {
   let grid = document.getElementById("product-grid");
@@ -164,13 +164,49 @@ function createProductCard(product) {
   });
   ratingRow.appendChild(ratingDiv);
 
-  const iconRow = createEl("div", { className: "product-card-icon-row" });
+  const iconRow = createEl("div", {
+    className: "product-card-icon-row-storefront",
+  });
+
+  // Wishlist icon
+  import("./utils/wishlist.js").then(
+    ({ addToWishlist, removeFromWishlist, isWishlisted }) => {
+      const wishlistIcon = createEl("img", {
+        className: "product-card-wishlist-icon",
+        attrs: {
+          alt: "Add to wishlist",
+          tabIndex: 0,
+          style: "width:24px;height:24px;cursor:pointer;",
+        },
+      });
+      function updateWishlistIcon() {
+        wishlistIcon.src = isWishlisted(product.id)
+          ? "../../public/assets/icons/icons-svg/black/filled-heart.svg"
+          : "../../public/assets/icons/icons-svg/black/line-heart.svg";
+      }
+      updateWishlistIcon();
+      wishlistIcon.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (isWishlisted(product.id)) {
+          removeFromWishlist(product.id);
+        } else {
+          addToWishlist(product);
+        }
+        updateWishlistIcon();
+      });
+      iconRow.appendChild(wishlistIcon);
+    }
+  );
+
+  // Share icon
   const shareIcon = createEl("img", {
     className: "product-share-icon",
     attrs: {
       src: "../../public/assets/icons/icons-svg/black/share.svg",
       alt: "Share product",
       tabIndex: 0,
+      style: "width:24px;height:24px;cursor:pointer;",
     },
   });
   shareIcon.addEventListener("click", async (e) => {

@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const user = getUserProfile();
   h2.textContent = `Hi, ${user?.name || "user"}`;
   const pWelcome = document.createElement("p");
-  pWelcome.textContent = "Use this page to change your account settings";
+  pWelcome.textContent =
+    "This is a mockup of a simple user profile page. You can create addresses and payment methods, but they won't be stored.";
 
   welcomeSection.appendChild(h2);
   welcomeSection.appendChild(pWelcome);
@@ -40,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Payment section
   const paymentSection = document.createElement("section");
   paymentSection.className = "user-payment-section";
-  const h4Payment = document.createElement("h4");
+  const h4Payment = document.createElement("h3");
   h4Payment.textContent = "Payment";
   const btnPayment = document.createElement("a");
   btnPayment.className = "btn-large";
@@ -54,7 +55,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnLogout = document.createElement("button");
   btnLogout.className = "btn-large-white";
   btnLogout.textContent = "Log Out";
-  btnLogout.addEventListener("click", logout);
+  btnLogout.addEventListener("click", (e) => {
+    e.preventDefault();
+    import("./utils/loader.js").then(({ showLoader, hideLoader }) => {
+      showLoader();
+      setTimeout(() => {
+        hideLoader();
+        logout();
+      }, 2000);
+    });
+  });
   logoutSection.appendChild(btnLogout);
 
   container.appendChild(welcomeSection);

@@ -24,13 +24,11 @@ function createProductCard(product, size = "bestseller") {
   }
   link.href = `src/pages/product.html?id=${product.id}`;
 
-  // Create a container for all details for flex layout
   const detailsContainer = document.createElement("div");
   if (size === "huge") {
     detailsContainer.className = "product-details-container";
   }
 
-  // Product image
   const img = document.createElement("img");
   img.className = "product-img";
   img.src =
@@ -41,15 +39,42 @@ function createProductCard(product, size = "bestseller") {
   img.alt = product.image?.alt || product.title;
   link.appendChild(img);
 
-  // Title and Share Icon Row
   const titleRow = createEl("div", { class: "product-title-row" });
   const title = document.createElement("h2");
   title.className = "product-title";
   title.textContent = product.title;
   titleRow.appendChild(title);
 
-  // Share Icon
-  const iconsDiv = createEl("div", { class: "product-card-icon-row" });
+  const iconsDiv = createEl("div", { class: "product-icon-row" });
+  import("./utils/wishlist.js").then(
+    ({ addToWishlist, removeFromWishlist, isWishlisted }) => {
+      const wishlistIcon = createEl("img", {
+        class: "product-wishlist-icon",
+        attrs: {
+          alt: "Add to wishlist",
+          tabIndex: 0,
+          style: "width:24px;height:24px;cursor:pointer;",
+        },
+      });
+      function updateWishlistIcon() {
+        wishlistIcon.src = isWishlisted(product.id)
+          ? "../../public/assets/icons/icons-svg/black/filled-heart.svg"
+          : "../../public/assets/icons/icons-svg/black/line-heart.svg";
+      }
+      updateWishlistIcon();
+      wishlistIcon.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (isWishlisted(product.id)) {
+          removeFromWishlist(product.id);
+        } else {
+          addToWishlist(product);
+        }
+        updateWishlistIcon();
+      });
+      iconsDiv.insertBefore(wishlistIcon, iconsDiv.firstChild);
+    }
+  );
   const shareIcon = createEl("img", {
     class: "product-share-icon",
     attrs: {
@@ -79,7 +104,6 @@ function createProductCard(product, size = "bestseller") {
   }
   detailsContainer.appendChild(titleRow);
 
-  // Product tags
   if (product.tags && Array.isArray(product.tags) && product.tags.length > 0) {
     const tagsDiv = document.createElement("div");
     tagsDiv.className = "product-tags";
@@ -89,14 +113,12 @@ function createProductCard(product, size = "bestseller") {
     detailsContainer.appendChild(tagsDiv);
   }
 
-  // Spacer - only for non-huge cards now
   if (size !== "huge") {
     const spacer = document.createElement("div");
     spacer.className = "product-card-spacer";
     detailsContainer.appendChild(spacer);
   }
 
-  // Description for huge cards, Rating for others
   if (size === "huge") {
     if (product.description) {
       const description = createEl("p", {
@@ -106,12 +128,10 @@ function createProductCard(product, size = "bestseller") {
       detailsContainer.appendChild(description);
     }
   } else {
-    // Rating and share Row
     const ratingAndIconsRow = createEl("div", {
       class: "product-card-rating-row",
     });
 
-    // Rating
     let ratingValue = product.rating;
     if (product.reviews && product.reviews.length > 0) {
       ratingValue =
@@ -141,23 +161,47 @@ function createProductCard(product, size = "bestseller") {
     }
     ratingAndIconsRow.appendChild(ratingDiv);
 
-    // Review count
-    const reviewCount = product.reviews?.length || 0;
-    const reviewDiv = document.createElement("div");
-    reviewDiv.className = "review-count";
-    reviewDiv.textContent = `(${reviewCount} review${
-      reviewCount === 1 ? "" : "s"
-    })`;
-    ratingAndIconsRow.appendChild(reviewDiv);
+    // Icons container for wishlist and share
+    const iconsContainer = createEl("div", {
+      class: "product-card-icons-container",
+    });
 
-    if (size !== "huge") {
-      ratingAndIconsRow.appendChild(iconsDiv);
-    }
+    import("./utils/wishlist.js").then(
+      ({ addToWishlist, removeFromWishlist, isWishlisted }) => {
+        const wishlistIcon = createEl("img", {
+          class: "product-card-wishlist-icon",
+          attrs: {
+            alt: "Add to wishlist",
+            tabIndex: 0,
+            style: "width:24px;height:24px;cursor:pointer;",
+          },
+        });
+        function updateWishlistIcon() {
+          wishlistIcon.src = isWishlisted(product.id)
+            ? "../../public/assets/icons/icons-svg/black/filled-heart.svg"
+            : "../../public/assets/icons/icons-svg/black/line-heart.svg";
+        }
+        updateWishlistIcon();
+        wishlistIcon.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (isWishlisted(product.id)) {
+            removeFromWishlist(product.id);
+          } else {
+            addToWishlist(product);
+          }
+          updateWishlistIcon();
+        });
+        iconsContainer.appendChild(wishlistIcon);
+      }
+    );
+
+    iconsContainer.appendChild(iconsDiv);
+    ratingAndIconsRow.appendChild(iconsContainer);
 
     detailsContainer.appendChild(ratingAndIconsRow);
   }
 
-  // Prices
   const priceSpan = document.createElement("span");
   priceSpan.className = "product-price";
   if (product.discountedPrice && product.discountedPrice < product.price) {
@@ -178,7 +222,6 @@ function createProductCard(product, size = "bestseller") {
   pricesDiv.appendChild(priceSpan);
   detailsContainer.appendChild(pricesDiv);
 
-  // Add to cart button
   if (size !== "huge") {
     const btn = document.createElement("button");
     btn.className = "add-to-cart-btn btn-xsmall";
@@ -324,7 +367,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
     mediaQuery.addEventListener("change", handleBtnClass);
-    handleBtnClass(mediaQuery); // Initial check
+    handleBtnClass(mediaQuery);
 
     const rightArrow = createEl("button", {
       class: "carousel-arrow right",
@@ -388,7 +431,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderCarousel();
       });
 
-      renderCarousel(true); // Initial render
+      renderCarousel(true);
     } catch (err) {
       track.textContent = "Failed to load products.";
     }

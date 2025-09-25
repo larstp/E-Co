@@ -1,4 +1,5 @@
 import { isLoggedIn } from "./user.js";
+import { getCartCount, updateCartBadges } from "./cartCounter.js";
 
 // Note: I'm using caps to differentiate a bit because my brain gets fried by this...
 // Data Constants (No idea if this is a good way to do it. Internet seems to think so)
@@ -7,6 +8,16 @@ const IS_INDEX_PAGE = window.location.pathname.endsWith("index.html");
 const IS_LOGGED_IN = isLoggedIn();
 
 const MOBILE_UPPER_LINKS = [
+  ...(IS_LOGGED_IN
+    ? [
+        {
+          href: "/src/pages/wishlist.html",
+          icon: "/public/assets/icons/icons-svg/black/line-heart.svg",
+          alt: "Wishlist",
+          aria: "View wishlist",
+        },
+      ]
+    : []),
   {
     href: IS_LOGGED_IN ? "/src/pages/user.html" : "/src/pages/log-in.html",
     icon: "/public/assets/icons/icons-svg/black/line-user.svg",
@@ -50,11 +61,15 @@ const MOBILE_NAV_UPPER = [
 ];
 
 const MOBILE_NAV_LOWER = [
-  {
-    href: "/src/pages/wishlist.html",
-    icon: "/public/assets/icons/icons-svg/black/line-heart.svg",
-    text: "Wishlist",
-  },
+  ...(IS_LOGGED_IN
+    ? [
+        {
+          href: "/src/pages/wishlist.html",
+          icon: "/public/assets/icons/icons-svg/black/line-heart.svg",
+          text: "Wishlist",
+        },
+      ]
+    : []),
   {
     href: IS_LOGGED_IN ? "/src/pages/user.html" : "/src/pages/log-in.html",
     icon: "/public/assets/icons/icons-svg/black/line-user.svg",
@@ -71,12 +86,16 @@ const DESKTOP_NAV_ITEMS = [
 ];
 
 const DESKTOP_ICONS = [
-  {
-    href: "/src/pages/wishlist.html",
-    icon: "/public/assets/icons/icons-svg/black/line-heart.svg",
-    alt: "Wishlist",
-    aria: "View wishlist",
-  },
+  ...(IS_LOGGED_IN
+    ? [
+        {
+          href: "/src/pages/wishlist.html",
+          icon: "/public/assets/icons/icons-svg/black/line-heart.svg",
+          alt: "Wishlist",
+          aria: "View wishlist",
+        },
+      ]
+    : []),
   {
     href: IS_LOGGED_IN ? "/src/pages/user.html" : "/src/pages/log-in.html",
     icon: "/public/assets/icons/icons-svg/black/line-user.svg",
@@ -100,7 +119,35 @@ function createIconLink({ href, icon, alt, aria }) {
   img.src = icon;
   img.alt = alt;
   a.appendChild(img);
+  if (aria === "View cart") {
+    const badge = document.createElement("span");
+    badge.className = "cart-counter-badge";
+    badge.setAttribute("aria-label", "Cart item count");
+    badge.textContent = getCartCount();
+    a.appendChild(badge);
+    a._cartBadge = badge;
+  }
   return a;
+  function getCartCount() {
+    try {
+      const cart = JSON.parse(localStorage.getItem("cart"));
+      if (!Array.isArray(cart)) return 0;
+      return cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    } catch {
+      return 0;
+    }
+  }
+
+  function updateCartBadges() {
+    document
+      .querySelectorAll(
+        ".header-mobile__icon[aria-label='View cart'], .header-desktop__icons a[aria-label='View cart']"
+      )
+      .forEach((el) => {
+        const badge = el.querySelector(".cart-counter-badge");
+        if (badge) badge.textContent = getCartCount();
+      });
+  }
 }
 
 function createNavLink({ href, icon, text }) {
@@ -135,7 +182,7 @@ function buildMobileHeader() {
   const mobileHeader = document.createElement("header");
   mobileHeader.className = "header-mobile";
 
-  // Ad banner always at the top
+  // Ad banner always at the top because capitalism
   const adBanner = document.createElement("div");
   adBanner.className = "site-ad";
   adBanner.style.minHeight = "35px";
@@ -145,7 +192,14 @@ function buildMobileHeader() {
   adBanner.style.justifyContent = "center";
   if (IS_LOGGED_IN) {
     const p = document.createElement("p");
-    p.textContent = "Browse our summer sale!";
+    p.textContent = "Browse our ";
+    const saleLink = document.createElement("a");
+    saleLink.href = "/src/pages/storefront.html?sale=true";
+    saleLink.textContent = "summer sale!";
+    saleLink.style.color = "#fff";
+    saleLink.style.fontWeight = "bold";
+    saleLink.setAttribute("aria-label", "Browse summer sale");
+    p.appendChild(saleLink);
     adBanner.appendChild(p);
   } else {
     const p = document.createElement("p");
@@ -415,7 +469,14 @@ function buildDesktopHeader() {
   adBanner.style.justifyContent = "center";
   if (IS_LOGGED_IN) {
     const p = document.createElement("p");
-    p.textContent = "Browse our summer sale!";
+    p.textContent = "Browse our ";
+    const saleLink = document.createElement("a");
+    saleLink.href = "/src/pages/storefront.html?sale=true";
+    saleLink.textContent = "summer sale!";
+    saleLink.style.color = "#fff";
+    saleLink.style.fontWeight = "bold";
+    saleLink.setAttribute("aria-label", "Browse summer sale");
+    p.appendChild(saleLink);
     adBanner.appendChild(p);
   } else {
     const p = document.createElement("p");
@@ -553,6 +614,10 @@ function buildDesktopHeader() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  window.addEventListener("storage", (e) => {
+    if (e.key === "cart") updateCartBadges();
+  });
+  setTimeout(updateCartBadges, 100);
   const { mobileHeader, hamburgerBtn } = buildMobileHeader();
   const { navMenu, closeButton } = buildMobileNavMenu();
   const navOverlay = document.createElement("div");

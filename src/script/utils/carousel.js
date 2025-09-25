@@ -2,7 +2,6 @@ import { fetchAllProducts } from "../api/api.js";
 import { shareUrl } from "./share.js";
 
 export async function createProductCarousel(options = {}) {
-  // options: { title, products, maxCards }
   const section = document.createElement("section");
   section.className = "product-carousel-section";
   const carouselTitle = document.createElement("h3");
@@ -140,19 +139,26 @@ export async function createProductCarousel(options = {}) {
 
     const wishlistIcon = document.createElement("img");
     wishlistIcon.className = "product-card-wishlist-icon";
-    wishlistIcon.src =
-      "../../public/assets/icons/icons-svg/black/line-heart.svg";
-    wishlistIcon.alt = "Add to wishlist";
-    wishlistIcon.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (wishlistIcon.src.includes("line-heart")) {
-        wishlistIcon.src =
-          "../../public/assets/icons/icons-svg/black/filled-heart.svg";
-      } else {
-        wishlistIcon.src =
-          "../../public/assets/icons/icons-svg/black/line-heart.svg";
+    wishlistIcon.alt = "Add to wishlist"; // Hihihi cheeky
+    import("./wishlist.js").then(
+      ({ addToWishlist, removeFromWishlist, isWishlisted }) => {
+        function updateWishlistIcon() {
+          wishlistIcon.src = isWishlisted(prod.id)
+            ? "../../public/assets/icons/icons-svg/black/filled-heart.svg"
+            : "../../public/assets/icons/icons-svg/black/line-heart.svg";
+        }
+        updateWishlistIcon();
+        wishlistIcon.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (isWishlisted(prod.id)) {
+            removeFromWishlist(prod.id);
+          } else {
+            addToWishlist(prod);
+          }
+          updateWishlistIcon();
+        });
       }
-    });
+    );
     iconsDiv.appendChild(wishlistIcon);
 
     const shareIcon = document.createElement("img");

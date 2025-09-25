@@ -444,7 +444,6 @@ async function buildDesktopCheckout(cartItems) {
   } catch (e) {
     addressBox = createEl("p", { text: "Failed to load addresses." });
   }
-  // Prepare shipping and payment options for validation
   const shippingOptionsDesktop = createShippingOptions();
   const paymentOptionsDesktop = createPaymentOptions();
   const steps = [
@@ -566,7 +565,6 @@ async function buildDesktopCheckout(cartItems) {
           e.preventDefault();
           return;
         }
-        // Normal order flow
         const { showLoader, hideLoader } = await import("./utils/loader.js");
         showLoader();
         setTimeout(() => {
@@ -594,7 +592,7 @@ async function buildDesktopCheckout(cartItems) {
   const checkbox = createEl("input", { attrs: { type: "checkbox" } });
   newsletter.append(
     checkbox,
-    "Yes, please contact me with recommendations and offers"
+    "Please contact me with recommendations and offers"
   );
   rightColumn.appendChild(newsletter);
 

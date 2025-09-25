@@ -52,3 +52,26 @@ label {
   white-space: nowrap !important;
   border: 0 !important;
 }
+
+/* -------------------------------- General message container for all pop-up messages */
+.message-container {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 1.05rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  padding: 1rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.message-container.success {
+  background: #e6f9e6;
+  color: #197d19;
+  border: 1px solid #197d19;
+}
+
+.message-container.error {
+  background: #ffeaea;
+  color: #d32f2f;
+  border: 1px solid #d32f2f;
+}
