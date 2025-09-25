@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const emptyMsg = document.createElement("p");
     emptyMsg.textContent = "Your wishlist is empty.";
     main.appendChild(emptyMsg);
-    // Insert footer at the bottom
     import("./utils/footer.js").then((mod) => {
       const footer = mod.buildFooter();
       document.body.appendChild(footer);

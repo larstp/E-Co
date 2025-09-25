@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Main flex container
   const main = document.createElement("main");
   main.className = "contact-main";
 
-  // Left: Contact form container
   const left = document.createElement("div");
   left.className = "contact-left";
   const formSection = document.createElement("section");
@@ -16,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.createElement("form");
   form.className = "contact-form";
 
-  // Email
   const labelEmail = document.createElement("label");
   labelEmail.htmlFor = "contact-email";
   labelEmail.textContent = "Email";
@@ -27,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
   inputEmail.required = true;
   inputEmail.placeholder = "Your email address";
 
-  // Subject
   const labelSubject = document.createElement("label");
   labelSubject.htmlFor = "contact-subject";
   labelSubject.textContent = "Subject";
@@ -38,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
   inputSubject.required = true;
   inputSubject.placeholder = "Subject";
 
-  // Message
   const labelMessage = document.createElement("label");
   labelMessage.htmlFor = "contact-message";
   labelMessage.textContent = "Message";
@@ -49,13 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
   textareaMessage.placeholder = "Type your message here...";
   textareaMessage.rows = 6;
 
-  // Button
   const btnSend = document.createElement("button");
   btnSend.type = "submit";
   btnSend.className = "btn-large";
   btnSend.textContent = "Send Message";
 
-  // Message container
   const messageContainer = document.createElement("div");
   messageContainer.className = "message-container";
   messageContainer.setAttribute("aria-live", "polite");
@@ -100,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
   formSection.appendChild(form);
   left.appendChild(formSection);
 
-  // Right: Info container
   const right = document.createElement("div");
   right.className = "contact-right";
   const infoSection = document.createElement("section");
@@ -114,17 +106,14 @@ document.addEventListener("DOMContentLoaded", () => {
   infoSection.appendChild(infoP);
   right.appendChild(infoSection);
 
-  // Add both containers to main
   main.appendChild(left);
   main.appendChild(right);
-  // Insert main after breadcrumb nav if present
   const nav = document.querySelector("nav.breadcrumb");
   if (nav && nav.nextSibling) {
     nav.parentNode.insertBefore(main, nav.nextSibling);
   } else {
     document.body.append(main);
   }
-  // Insert footer at the very end
   import("./utils/footer.js").then((mod) => {
     const footer = mod.buildFooter();
     document.body.append(footer);
