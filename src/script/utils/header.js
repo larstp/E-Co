@@ -235,6 +235,8 @@ function buildMobileHeader() {
   const icons = document.createElement("div");
   icons.className = "header-mobile__icons";
   let mobileSearchIcon = null;
+  const leftIcons = document.createElement("div");
+  leftIcons.className = "header-mobile__left-icons";
   if (!IS_INDEX_PAGE) {
     mobileSearchIcon = createIconLink({
       href: "#",
@@ -242,13 +244,17 @@ function buildMobileHeader() {
       alt: "Search",
       aria: "Search",
     });
-    icons.appendChild(mobileSearchIcon);
+    leftIcons.appendChild(hamburgerBtn);
+    leftIcons.appendChild(mobileSearchIcon);
+    upper.appendChild(leftIcons);
+    upper.appendChild(logoLink);
+    upper.appendChild(icons);
+  } else {
+    upper.appendChild(hamburgerBtn);
+    upper.appendChild(logoLink);
+    upper.appendChild(icons);
   }
   MOBILE_UPPER_LINKS.forEach((link) => icons.appendChild(createIconLink(link)));
-
-  upper.appendChild(hamburgerBtn);
-  upper.appendChild(logoLink);
-  upper.appendChild(icons);
 
   // Lower header (Blue part)
   const lower = document.createElement("div");

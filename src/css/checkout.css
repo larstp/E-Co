@@ -65,7 +65,7 @@ input[type="radio"] {
   background-color: #1976d2;
 }
 
-/* --- Steps (Slideshow) --- */
+/* --------------------------------------------------------------------- Steps (Slideshow) --- */
 .checkout-steps-wrapper {
   display: flex;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -252,7 +252,7 @@ input[type="radio"] {
   vertical-align: middle;
 }
 
-/* ===========================DESKTOP STYLES=============================== */
+/* ---------------------------------------------------------------- DESKTOP STYLES-------- */
 
 .checkout-container-desktop {
   display: none;

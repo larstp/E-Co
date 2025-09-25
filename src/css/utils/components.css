@@ -2,7 +2,7 @@ html {
   overflow-y: scroll;
 }
 
-/* ========== BUTTONS ========== */
+/* ---------------------------------------------------------- BUTTONS ------- */
 
 .btn-xsmall {
   min-width: 80px;
@@ -139,7 +139,7 @@ html {
   box-shadow: 0 4px 16px rgba(211, 47, 47, 0.18);
 }
 
-/* ======================= Utility & Global Styles =================== */
+/* ------------------------------------------------------------ Utility & Global Styles ---- */
 
 .site-logo-text {
   font-family: "Bebas Neue", Arial, sans-serif;
@@ -154,7 +154,7 @@ html {
   color: #fff;
 }
 
-/* ==================== Site-wide Ad Banner (top part) ==================== */
+/* --------------------------------------------------------- Site-wide Ad Banner (top part) --- */
 
 .site-ad {
   background-color: #0d47a1;
@@ -174,7 +174,7 @@ html {
   text-decoration: underline;
 }
 
-/* ======================= Header - Mobile =================== */
+/* --------------------------------------------------------- Header - Mobile ---- */
 
 .header-mobile {
   width: 100%;
@@ -202,7 +202,6 @@ html {
   align-items: center;
   cursor: pointer;
   height: 40px;
-  width: 70px;
   z-index: 2;
 }
 
@@ -274,7 +273,14 @@ html {
   display: block;
 }
 
-/* =================== Search Bar (Shared) ======================= */
+.header-mobile__left-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --------------------------------------------------------- Search Bar (Shared) --- */
 
 .site-search {
   display: flex;
@@ -319,7 +325,7 @@ html {
   display: block;
 }
 
-/* ==================== Mobile Navigation ================== */
+/* --------------------------------------------------------- Mobile Navigation --- */
 
 .mobile-nav {
   position: fixed;
@@ -456,7 +462,7 @@ html {
   visibility: visible;
 }
 
-/* ================= Header - Desktop ================ */
+/* --------------------------------------------------------- Header - Desktop --- */
 
 .header-desktop {
   display: none;
@@ -499,7 +505,7 @@ html {
   padding: 0 60px;
 }
 
-/* Desktop Logo */
+/* --------------------------------------------------------Desktop Logo--- */
 
 .header-desktop__logo-container {
   display: flex;
@@ -514,7 +520,7 @@ html {
   height: 42px;
 }
 
-/* Desktop Navigation */
+/* ---------------------------------------------------------Desktop Navigation ---*/
 
 .header-desktop__nav-list {
   display: flex;
@@ -539,7 +545,7 @@ html {
   color: #fff;
 }
 
-/* Desktop Icons */
+/* ---------------------------------------------------------Desktop Icons--- */
 
 .header-desktop__icons {
   display: flex;
@@ -616,7 +622,7 @@ html {
   font-weight: 500;
 }
 
-/* =================== Footer - Mobile ================= */
+/* --------------------------------------------------------- Footer - Mobile --- */
 
 .site-footer {
   background-color: #0d47a1;
@@ -722,7 +728,7 @@ html {
   text-decoration: none;
 }
 
-/* =================== Footer - Desktop ================= */
+/* --------------------------------------------------------- Footer - Desktop --- */
 
 .footer-desktop {
   display: none;
@@ -817,7 +823,7 @@ html {
   color: #fff;
 }
 
-/* ================== Mobile Filter menu ==================== */
+/* --------------------------------------------------------- Mobile Filter menu --- */
 
 .mobile-filter-overlay {
   position: fixed;
@@ -952,7 +958,7 @@ html {
   margin-bottom: 1.2rem;
 }
 
-/* ================= Desktop Filter menu ================== */
+/* --------------------------------------------------------- Desktop Filter menu --- */
 
 .filter-menu-heading-row-desktop {
   display: flex;
@@ -1067,7 +1073,7 @@ html {
   margin-bottom: 1.2rem;
 }
 
-/* ===================== Mobile Breadcrumbs ================= */
+/* --------------------------------------------------------- Mobile Breadcrumbs --- */
 
 .header-mobile__breadcrumbs {
   width: 100%;
@@ -1110,7 +1116,7 @@ html {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* ========== Desktop BREADCRUMBS  ========== */
+/* ------------------------------------------------------------- Desktop BREADCRUMBS  ---- */
 
 .breadcrumb {
   width: 100%;
@@ -1168,7 +1174,7 @@ html {
   font-weight: 300;
 }
 
-/* ========== FORM GLOBAL STYLES ========== */
+/* --------------------------------------------------------- FORM GLOBAL STYLES ---- */
 
 .form {
   width: 100%;
@@ -1286,7 +1292,7 @@ html {
   font-weight: 500;
 }
 
-/* ----------- LOADER ----------------*/
+/* ------------------------------------------ LOADER ----------------*/
 
 /* ================ CSS FOR LOADER BORROWED FROM https://loading.io/css/ ================ */
 /* Their license says: 

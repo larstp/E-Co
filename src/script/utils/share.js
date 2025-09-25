@@ -1,9 +1,3 @@
-/**
- * @param {string} url -
- * @param {string} [title]
- * @param {string} [text]
- * @returns {Promise<'shared'|'copied'|'failed'>}
- */
 export async function shareUrl(url, title = "Check this out!", text = "") {
   if (navigator.share) {
     try {

@@ -1,4 +1,4 @@
-/* --- Summer Ad Section --- */
+/* ---------------------------------------------- Summer Ad Section --- */
 .landing-summer-ad {
   width: 100vw;
   height: 540px;
@@ -43,7 +43,7 @@
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 }
 
-/* --- Carousel Section --- */
+/* --------------------------------------------------------- Carousel Section --- */
 
 .carousel-controls {
   display: flex;
@@ -182,7 +182,7 @@
   font-family: "Bebas Neue", Arial, sans-serif;
 }
 
-/* --- Info Section --- */
+/* --------------------------------------------------------- Info Section --- */
 .landing-info-section {
   background: #0d47a1;
   color: #fff;
@@ -201,7 +201,7 @@
   text-align: left;
 }
 
-/* --- Category Section --- */
+/* --------------------------------------------------------- Category Section --- */
 
 .category-heading {
   padding-left: 20%;
@@ -267,7 +267,7 @@
   margin: auto;
 }
 
-/* --- Bestseller Section --- */
+/* --------------------------------------------------------- Bestseller Section --- */
 
 .bestseller-heading {
   padding-left: 20%;
@@ -314,7 +314,7 @@
   margin-bottom: 20px;
 }
 
-/* --- Newsletter Section --- */
+/* --------------------------------------------------------- Newsletter Section --- */
 
 .landing-newsletter-section {
   width: 100vw;
@@ -394,7 +394,7 @@
   z-index: 2;
 }
 
-/* --- Cleaning Ad Section --- */
+/* --------------------------------------------------------- Cleaning Ad Section --- */
 
 .cleaning-ad {
   display: none;

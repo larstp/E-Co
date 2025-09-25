@@ -46,35 +46,6 @@ function createProductCard(product, size = "bestseller") {
   titleRow.appendChild(title);
 
   const iconsDiv = createEl("div", { class: "product-icon-row" });
-  import("./utils/wishlist.js").then(
-    ({ addToWishlist, removeFromWishlist, isWishlisted }) => {
-      const wishlistIcon = createEl("img", {
-        class: "product-wishlist-icon",
-        attrs: {
-          alt: "Add to wishlist",
-          tabIndex: 0,
-          style: "width:24px;height:24px;cursor:pointer;",
-        },
-      });
-      function updateWishlistIcon() {
-        wishlistIcon.src = isWishlisted(product.id)
-          ? "../../public/assets/icons/icons-svg/black/filled-heart.svg"
-          : "../../public/assets/icons/icons-svg/black/line-heart.svg";
-      }
-      updateWishlistIcon();
-      wishlistIcon.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (isWishlisted(product.id)) {
-          removeFromWishlist(product.id);
-        } else {
-          addToWishlist(product);
-        }
-        updateWishlistIcon();
-      });
-      iconsDiv.insertBefore(wishlistIcon, iconsDiv.firstChild);
-    }
-  );
   const shareIcon = createEl("img", {
     class: "product-share-icon",
     attrs: {
@@ -168,6 +139,7 @@ function createProductCard(product, size = "bestseller") {
 
     import("./utils/wishlist.js").then(
       ({ addToWishlist, removeFromWishlist, isWishlisted }) => {
+        // Only insert one wishlist icon per card
         const wishlistIcon = createEl("img", {
           class: "product-card-wishlist-icon",
           attrs: {
@@ -192,7 +164,8 @@ function createProductCard(product, size = "bestseller") {
           }
           updateWishlistIcon();
         });
-        iconsContainer.appendChild(wishlistIcon);
+        // Insert wishlist icon before share icon in iconsDiv
+        iconsDiv.insertBefore(wishlistIcon, iconsDiv.firstChild);
       }
     );
 

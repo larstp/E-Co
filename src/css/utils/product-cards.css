@@ -1,4 +1,4 @@
-/* ================== Product Card Base Styles ================= */
+/* ----------------------------------------------------- Product Card Base Styles ----- */
 
 .product-card-base {
   background: #fff;
@@ -10,7 +10,7 @@
   text-decoration: none;
 }
 
-/* ================== Product Card (Large - Carousel) ================= */
+/* ----------------------------------------------------- Product Card (Large - Carousel) ----- */
 
 .product-card {
   min-height: 356px;
@@ -148,7 +148,7 @@
   font-weight: 600;
 }
 
-/* ================= Carousel Only Styles ================= */
+/* ----------------------------------------------------- Carousel Only Styles ----- */
 
 .product-carousel-section {
   position: relative;
@@ -194,7 +194,7 @@
   opacity: 1;
 }
 
-/* ================== Product Card (Small - Grid) ================= */
+/* ----------------------------------------------------- Product Card (Small - Grid) ----- */
 
 .product-card-small {
   width: 155px;
@@ -204,9 +204,9 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
   align-items: flex-start;
-  justify-content: space-between; /* Changed from flex-start */
+  justify-content: space-between;
   padding: 0.7rem;
-  overflow: hidden; /* Changed from visible */
+  overflow: hidden;
 }
 
 .product-card-small:hover {
@@ -348,7 +348,7 @@
   margin: 0 auto;
 }
 
-/* ================== Product Card (Huge - Carousel) ================= */
+/* --------------------------------------------------------- Product Card (Huge - Carousel) ---- */
 
 .product-card-huge {
   display: flex;
@@ -493,7 +493,7 @@
 
 .product-icon-row {
   display: flex;
-  gap: 1.2rem;
+  gap: 0.2rem;
   align-items: center;
   margin: 0;
   padding: 0;
