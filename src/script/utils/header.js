@@ -345,6 +345,7 @@ function buildMobileHeader() {
     mobileSearchIcon.addEventListener("click", (e) => {
       e.preventDefault();
       if (!mobileSearchActive) {
+        mobileSearchIcon.style.display = "none";
         const { searchContainer, closeBtn } = buildMobileSearchForm();
         if (mobileBreadcrumbs && lower.contains(mobileBreadcrumbs)) {
           mobileBreadcrumbs.style.display = "none";
@@ -353,6 +354,7 @@ function buildMobileHeader() {
         closeBtn.addEventListener("click", () => {
           searchContainer.remove();
           if (mobileBreadcrumbs) mobileBreadcrumbs.style.display = "";
+          mobileSearchIcon.style.display = "";
           mobileSearchActive = false;
         });
         mobileSearchForm = searchContainer;
@@ -362,6 +364,7 @@ function buildMobileHeader() {
           mobileSearchForm.remove();
         }
         if (mobileBreadcrumbs) mobileBreadcrumbs.style.display = "";
+        mobileSearchIcon.style.display = "";
         mobileSearchActive = false;
       }
     });
@@ -455,6 +458,35 @@ function buildMobileNavMenu() {
     li.appendChild(createNavLink(data));
     lowerLinks.appendChild(li);
   });
+  if (IS_LOGGED_IN) {
+    const logoutLi = document.createElement("li");
+    const logoutBtn = document.createElement("button");
+    logoutBtn.className = "mobile-nav__logout-btn";
+    logoutBtn.style.display = "flex";
+    logoutBtn.style.alignItems = "center";
+    logoutBtn.style.gap = "12px";
+    logoutBtn.style.background = "none";
+    logoutBtn.style.border = "none";
+    logoutBtn.style.color = "#fff";
+    logoutBtn.style.fontFamily = "Roboto, Arial, sans-serif";
+    logoutBtn.style.fontSize = "18pt";
+    logoutBtn.style.cursor = "pointer";
+    logoutBtn.style.padding = "12px";
+    logoutBtn.style.width = "260px";
+    const logoutIcon = document.createElement("img");
+    logoutIcon.src = "/public/assets/icons/icons-svg/white/exit.svg";
+    logoutIcon.alt = "Log out";
+    logoutIcon.style.width = "24px";
+    logoutIcon.style.height = "24px";
+    logoutBtn.appendChild(logoutIcon);
+    logoutBtn.appendChild(document.createTextNode("Log out"));
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("user");
+      window.location.href = "/index.html";
+    });
+    logoutLi.appendChild(logoutBtn);
+    lowerLinks.appendChild(logoutLi);
+  }
   lowerSection.appendChild(lowerLinks);
   navBody.appendChild(upperLinks);
   navBody.appendChild(lowerSection);

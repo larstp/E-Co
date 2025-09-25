@@ -29,6 +29,12 @@ main {
   min-width: 200px;
 }
 
+.wishlist-actions-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .wishlist-img {
   width: 70px;
   height: 70px;

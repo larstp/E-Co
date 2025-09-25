@@ -1,0 +1,129 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.contact-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  flex: 1 0 auto;
+  min-height: 60vh;
+  box-sizing: border-box;
+  padding: 3rem 1.5rem 0 1.5rem;
+}
+
+footer.site-footer {
+  flex-shrink: 0;
+}
+
+.contact-left,
+.contact-right {
+  flex: 1 1 340px;
+  min-width: 260px;
+  max-width: 600px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 2rem;
+}
+
+.contact-right {
+  box-shadow: none;
+}
+
+.contact-form-section {
+  margin: 0 auto;
+  max-width: 420px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-form-section h1 {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  font-size: 2.7rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  padding: 1rem;
+}
+
+.contact-form {
+  margin-top: 15px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-form label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.15rem;
+  margin-top: 0.1rem;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.contact-form input,
+.contact-form textarea {
+  margin-bottom: 1.1rem;
+  width: 100%;
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 1rem;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.btn-large {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none !important;
+  height: 48px;
+}
+
+.message-container {
+  margin-top: 1rem;
+  font-size: 1rem;
+  text-align: center;
+}
+.message-container.error {
+  color: #d32f2f;
+}
+.message-container.success {
+  color: #1976d2;
+}
+
+.contact-info-section h2 {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 0.7rem;
+  font-weight: 700;
+}
+.contact-info-section p {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 1.2rem;
+}

@@ -18,6 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const emptyMsg = document.createElement("p");
     emptyMsg.textContent = "Your wishlist is empty.";
     main.appendChild(emptyMsg);
+    // Insert footer at the bottom
+    import("./utils/footer.js").then((mod) => {
+      const footer = mod.buildFooter();
+      document.body.appendChild(footer);
+    });
     return;
   }
 
@@ -64,6 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
       li.remove();
       if (list.children.length === 0) {
         main.innerHTML = "<h2>Your Wishlist</h2><p>Your wishlist is empty.</p>";
+        import("./utils/footer.js").then((mod) => {
+          const footer = mod.buildFooter();
+          document.body.appendChild(footer);
+        });
       }
     });
     actionsContainer.appendChild(removeBtn);
@@ -79,4 +88,21 @@ document.addEventListener("DOMContentLoaded", () => {
     list.appendChild(li);
   });
   main.appendChild(list);
+
+  const emptyBtn = document.createElement("button");
+  emptyBtn.className = "btn-large-white";
+  emptyBtn.textContent = "Empty wishlist";
+  emptyBtn.style.display = "block";
+  emptyBtn.style.margin = "2rem auto 0 auto";
+  emptyBtn.style.width = "100%";
+  emptyBtn.addEventListener("click", () => {
+    localStorage.removeItem("wishlist");
+    window.location.reload();
+  });
+  main.appendChild(emptyBtn);
+
+  import("./utils/footer.js").then((mod) => {
+    const footer = mod.buildFooter();
+    document.body.appendChild(footer);
+  });
 });

@@ -51,6 +51,10 @@
   width: 100%;
 }
 
+.product-title-carousel-link {
+  text-decoration: none;
+}
+
 .product-card .product-tags {
   font-family: "Roboto", Arial, sans-serif;
   font-size: 14px;

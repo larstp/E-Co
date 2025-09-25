@@ -69,18 +69,25 @@ export async function createProductCarousel(options = {}) {
   }
 
   function createProductCard(prod) {
-    const card = document.createElement("a");
-    card.className = "product-link product-card-base product-card";
-    card.href = `product.html?id=${prod.id}`;
+    const card = document.createElement("div");
+    card.className = "product-card-base product-card";
+    const imgLink = document.createElement("a");
+    imgLink.href = `product.html?id=${prod.id}`;
+    imgLink.className = "product-img-link";
     const img = document.createElement("img");
     img.className = "product-img";
     img.src = prod.image?.url || "../public/assets/img/placeholder.jpg";
     img.alt = prod.image?.alt || prod.title;
-    card.appendChild(img);
+    imgLink.appendChild(img);
+    card.appendChild(imgLink);
+    const titleLink = document.createElement("a");
+    titleLink.className = "product-title-carousel-link";
+    titleLink.href = `product.html?id=${prod.id}`;
     const title = document.createElement("h2");
     title.className = "product-title-carousel";
     title.textContent = prod.title;
-    card.appendChild(title);
+    titleLink.appendChild(title);
+    card.appendChild(titleLink);
 
     if (prod.tags && Array.isArray(prod.tags) && prod.tags.length > 0) {
       const tagsDiv = document.createElement("div");
@@ -139,7 +146,7 @@ export async function createProductCarousel(options = {}) {
 
     const wishlistIcon = document.createElement("img");
     wishlistIcon.className = "product-card-wishlist-icon";
-    wishlistIcon.alt = "Add to wishlist"; // Hihihi cheeky
+    wishlistIcon.alt = "Add to wishlist"; //Hihihi cheeky
     import("./wishlist.js").then(
       ({ addToWishlist, removeFromWishlist, isWishlisted }) => {
         function updateWishlistIcon() {
@@ -150,6 +157,7 @@ export async function createProductCarousel(options = {}) {
         updateWishlistIcon();
         wishlistIcon.addEventListener("click", (e) => {
           e.preventDefault();
+          e.stopPropagation();
           if (isWishlisted(prod.id)) {
             removeFromWishlist(prod.id);
           } else {
@@ -167,9 +175,10 @@ export async function createProductCarousel(options = {}) {
     shareIcon.alt = "Share product";
     shareIcon.addEventListener("click", async (e) => {
       e.preventDefault();
-      const url = card.href;
-      const title = prod.title || "Product";
-      const result = await shareUrl(url, title, "Check out this product!");
+      e.stopPropagation();
+      const url = titleLink.href;
+      const titleText = prod.title || "Product";
+      const result = await shareUrl(url, titleText, "Check out this product!");
       if (result === "copied") {
         shareIcon.title = "Link copied!";
         setTimeout(() => (shareIcon.title = "Share product"), 1500);
@@ -215,6 +224,19 @@ export async function createProductCarousel(options = {}) {
     btn.className = "btn-small";
     btn.type = "button";
     btn.textContent = "Add to cart";
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      import("./cart.js").then(({ addToCart }) => {
+        addToCart(prod);
+        btn.textContent = "Added!";
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.textContent = "Add to cart";
+          btn.disabled = false;
+        }, 1000);
+      });
+    });
     card.appendChild(btn);
     return card;
   }

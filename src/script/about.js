@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const main = document.createElement("main");
   main.className = "about-main";
 
+  const leftDiv = document.createElement("div");
+  leftDiv.className = "about-main-left";
   const left = document.createElement("section");
   left.className = "about-info";
 
@@ -80,7 +82,10 @@ document.addEventListener("DOMContentLoaded", () => {
   left.appendChild(offerUl);
   left.appendChild(valuesH3);
   left.appendChild(valuesUl);
+  leftDiv.appendChild(left);
 
+  const rightDiv = document.createElement("div");
+  rightDiv.className = "about-main-right";
   const right = document.createElement("section");
   right.className = "about-logo";
   const logo = document.createElement("img");
@@ -88,8 +93,13 @@ document.addEventListener("DOMContentLoaded", () => {
   logo.alt = "E-co logo";
   logo.className = "about-logo-img";
   right.appendChild(logo);
+  rightDiv.appendChild(right);
 
-  main.appendChild(left);
-  main.appendChild(right);
-  document.body.appendChild(main);
+  main.appendChild(leftDiv);
+  main.appendChild(rightDiv);
+  document.body.append(main);
+  import("./utils/footer.js").then((mod) => {
+    const footer = mod.buildFooter();
+    document.body.append(footer);
+  });
 });
