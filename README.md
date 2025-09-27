@@ -161,7 +161,7 @@ You can also see screenshots of every design page located in the [Figma](docs\fi
 - Meta tags for SEO and social sharing
 - Error handling
 
-See screenshots of validation-tools used in the [validation](docs\validation) folder
+See screenshots of validation-tools used in the [validation](docs/validation) folder
 
 ## 9. Known Issues / Limitations
 
