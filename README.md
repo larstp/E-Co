@@ -67,9 +67,9 @@ See the [brand client profile](docs/brand-client.md) for more details.
     <th>Desktop Prototype</th>
   </tr>
   <tr>
-    <td>[Link](https://www.figma.com/proto/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=375-15624&t=E74DIbgaMJAGSgOJ-1)</td>
-    <td>[Link](https://www.figma.com/proto/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=1-6&t=E74DIbgaMJAGSgOJ-1)</td>
-    <td>[Link](https://www.figma.com/proto/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=129-431&t=E74DIbgaMJAGSgOJ-11)</td>
+    <td>https://www.figma.com/proto/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=375-15624&t=E74DIbgaMJAGSgOJ-1</td>
+    <td>https://www.figma.com/proto/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=1-6&t=E74DIbgaMJAGSgOJ-1</td>
+    <td>https://www.figma.com/proto/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=129-431&t=E74DIbgaMJAGSgOJ-11</td>
   </tr>
 </table>
 
