@@ -2,7 +2,7 @@
 
 ## Project Documentation: E.CO
 
-![E.CO Logo](/public/assets/img/logo/logo.webp) ![E.CO Text Logo](public/assets/img/logo/E-CO.png)
+![E.CO Text Logo](public/assets/img/logo/E-CO.png)
 
 ## See full Kanban in GitHub [projects](https://github.com/users/larstp/projects/8)
 
