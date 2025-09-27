@@ -141,11 +141,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const messageContainer = document.createElement("div");
   messageContainer.className = "message-container";
+  messageContainer.setAttribute("aria-live", "assertive");
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     messageContainer.textContent = "";
     messageContainer.classList.remove("success", "error");
+    if (checkboxTerms.checked) {
+      checkboxTerms.style.outline = "";
+      checkboxTerms.style.outlineOffset = "";
+    }
 
     // -------------------------------------------------------------------Noroff API restrictions
     if (!/^\w+$/.test(inputUser.value)) {
@@ -157,8 +162,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!/^([a-zA-Z0-9_.+-]+)@stud\.noroff\.no$/.test(inputEmail.value)) {
       messageContainer.textContent =
-        "Email must be a valid stud.noroff.no address.";
+        "Email must be a valid NOROFF address ending with @stud.noroff.no (e.g., yourname@stud.noroff.no).";
       messageContainer.classList.add("error");
+      inputEmail.focus();
       return;
     }
 
@@ -177,6 +183,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!checkboxTerms.checked) {
       messageContainer.textContent = "You must accept the Terms & Conditions.";
       messageContainer.classList.add("error");
+      checkboxTerms.style.outline = "2px solid red";
+      checkboxTerms.style.outlineOffset = "2px";
+      checkboxTerms.focus();
       return;
     }
 
@@ -198,7 +207,10 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "/src/pages/log-in.html";
       }, 2000);
     } catch (error) {
-      let msg = error.message || "Registration failed.";
+      let msg = error && error.message ? error.message : "Registration failed.";
+      if (error instanceof TypeError || !msg || msg === "Failed to fetch") {
+        msg = "Network error. Please try again later.";
+      }
       if (
         msg.toLowerCase().includes("already exists") ||
         msg.toLowerCase().includes("profile already exists")

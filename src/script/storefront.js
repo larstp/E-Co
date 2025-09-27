@@ -407,9 +407,13 @@ async function loadProducts() {
     while (grid.firstChild) {
       grid.removeChild(grid.firstChild);
     }
+    let msg = err && err.message ? err.message : "Failed to load products.";
+    if (err instanceof TypeError || !msg || msg === "Failed to fetch") {
+      msg = "Network error. Please try again later.";
+    }
     const errorDiv = createEl("div", {
       className: "error",
-      text: "Failed to load products. Please try again later.",
+      text: msg,
     });
     grid.appendChild(errorDiv);
   }

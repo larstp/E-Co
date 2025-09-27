@@ -257,7 +257,7 @@
 
 .product-card-small .product-tags {
   font-family: "Roboto", Arial, sans-serif;
-  font-size: 12px;
+  font-size: 16px;
   color: #666;
   margin: 0 0 0.2rem 0;
   width: 100%;
@@ -316,7 +316,7 @@
 
 .product-card-small .review-count {
   font-family: "Roboto", Arial, sans-serif;
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: #888;
   margin-bottom: 0.2rem;
   text-align: left;
@@ -370,6 +370,10 @@
   justify-content: space-between;
   height: 100%;
   flex: 1;
+}
+
+.product-details-container {
+  padding-left: 15px;
 }
 
 .product-card-huge .product-img {

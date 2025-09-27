@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let main = document.querySelector("main");
   if (!main) {
     main = document.createElement("main");
+    main.setAttribute("role", "main");
     body.appendChild(main);
   }
   main.innerHTML = "";

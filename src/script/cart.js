@@ -161,12 +161,21 @@ function createOrderSummarySection(items) {
   promoContainer.append(promoInput, applyBtn);
   section.appendChild(promoContainer);
 
+  const messageContainer = createEl("div", { class: "message-container" });
+  messageContainer.setAttribute("aria-live", "assertive");
+
   const checkoutBtn = createEl("button", {
     class: "btn-large",
     text: "Go to Checkout",
     attrs: { type: "button" },
   });
   checkoutBtn.onclick = () => {
+    if (!items || items.length === 0) {
+      messageContainer.textContent = "Your cart is empty.";
+      messageContainer.classList.remove("success");
+      messageContainer.classList.add("error");
+      return;
+    }
     const isLoggedIn = !!localStorage.getItem("accessToken");
     if (isLoggedIn) {
       window.location.href = "/src/pages/checkout.html";
@@ -175,6 +184,7 @@ function createOrderSummarySection(items) {
     }
   };
   section.appendChild(checkoutBtn);
+  section.appendChild(messageContainer);
 
   return section;
 }

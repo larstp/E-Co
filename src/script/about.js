@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const main = document.createElement("main");
   main.className = "about-main";
+  main.setAttribute("role", "main");
 
   const leftDiv = document.createElement("div");
   leftDiv.className = "about-main-left";
