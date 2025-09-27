@@ -74,7 +74,7 @@ See the [brand client profile](docs/brand-client.md) for more details.
 </table>
 
 Or visit the entire Figma [Project](https://www.figma.com/design/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=0-1&t=E74DIbgaMJAGSgOJ-1)
-###Password: PE1
+### Password: PE1
 
 You can also see screenshots of every design page located in the [Figma](docs\figma) folder
 
