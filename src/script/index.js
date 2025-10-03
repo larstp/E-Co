@@ -226,7 +226,8 @@ function createProductCard(product, size = "bestseller") {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const body = document.body;
+  const main = document.getElementById("main-content");
+  if (!main) return;
 
   // Summer Ad
   const summerAd = createEl("section", {
@@ -257,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   summerAdContent.append(summerAdText, summerAdBtn);
   summerAd.appendChild(summerAdContent);
-  body.appendChild(summerAd);
+  main.appendChild(summerAd);
 
   // Info Section
   const infoSection = createEl("section", { class: "landing-info-section" });
@@ -288,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
     infoList.appendChild(li);
   });
   infoSection.appendChild(infoList);
-  body.appendChild(infoSection);
+  main.appendChild(infoSection);
 
   async function createNewArrivalsCarousel() {
     const section = createEl("section", {
@@ -422,7 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
     class: "category-heading",
     text: "Shop by category",
   });
-  body.appendChild(categoryHeader);
+  main.appendChild(categoryHeader);
 
   const categorySection = createEl("section", {
     class: "landing-category-section",
@@ -480,7 +481,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   categorySection.appendChild(categoryList);
-  body.appendChild(categorySection);
+  main.appendChild(categorySection);
 
   // Cleaning Ad Section
   const cleaningAdSection = createEl("section", { class: "cleaning-ad" });
@@ -516,14 +517,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cleaningAdRight.append(cleaningAdHeading, p1, p2, cleaningAdBtn);
   cleaningAdSection.append(cleaningAdLeft, cleaningAdRight);
-  body.appendChild(cleaningAdSection);
+  main.appendChild(cleaningAdSection);
 
   // Bestseller Section
   const bestsellersHeading = createEl("h2", {
     class: "bestseller-heading",
     text: "Bestsellers",
   });
-  body.appendChild(bestsellersHeading);
+  main.appendChild(bestsellersHeading);
 
   const bestsellerSection = createEl("section", {
     class: "landing-bestseller-section",
@@ -545,7 +546,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   bestsellerFooter.appendChild(viewAllBtn);
   bestsellerSection.appendChild(bestsellerFooter);
-  body.appendChild(bestsellerSection);
+  main.appendChild(bestsellerSection);
 
   // Newsletter Section
   const newsletterSection = createEl("section", {
@@ -583,12 +584,7 @@ document.addEventListener("DOMContentLoaded", () => {
   newsletterForm.appendChild(subscribeBtn);
   newsletterContent.appendChild(newsletterForm);
   newsletterSection.appendChild(newsletterContent);
-  body.appendChild(newsletterSection);
-
-  import("./utils/footer.js").then((mod) => {
-    const footer = mod.buildFooter();
-    document.body.appendChild(footer);
-  });
+  main.appendChild(newsletterSection);
 
   fetchAllProducts()
     .then((products) => {
@@ -610,7 +606,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     })
     .catch((err) => {
-      //I have no idea if this is how youre supposed to show error messages. Clicking inspect on random websites seems to confirm it but there were several different ways of doing it
       const bestsellerGrid = document.querySelector(".bestseller-grid");
       if (bestsellerGrid)
         bestsellerGrid.textContent = "Failed to load products.";
