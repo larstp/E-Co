@@ -2,7 +2,7 @@ import { isLoggedIn, getUserProfile, logout } from "./utils/user.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   if (!isLoggedIn()) {
-    window.location.href = "/src/pages/log-in.html";
+    window.location.href = "./src/pages/log-in.html";
     return;
   }
 

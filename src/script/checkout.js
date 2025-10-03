@@ -61,7 +61,7 @@ async function createAddressBox() {
   let selectedIdx = parseInt(localStorage.getItem("selectedAddressIdx")) || 0;
   let showAll = false;
   try {
-    const res = await fetch("/src/components/address.json");
+    const res = await fetch("./src/components/address.json");
     addresses = await res.json();
   } catch (e) {
     container.append(createEl("p", { text: "Failed to load addresses." }));
@@ -106,7 +106,7 @@ async function createAddressBox() {
         const trash = createEl("img", {
           class: "address-trash",
           attrs: {
-            src: "/public/assets/icons/icons-svg/black/trash.svg",
+            src: "./public/assets/icons/icons-svg/black/trash.svg",
             alt: "Delete address (mock)",
             tabindex: 0,
           },
@@ -164,14 +164,14 @@ async function createAddressBox() {
       const plusIcon = createEl("img", {
         class: "add-address-plus-icon",
         attrs: {
-          src: "/public/assets/icons/icons-svg/black/plus.svg",
+          src: "./public/assets/icons/icons-svg/black/plus.svg",
           alt: "Add new address",
         },
       });
       addBox.appendChild(addLabel);
       addBox.appendChild(plusIcon);
       addBox.addEventListener("click", () => {
-        window.location.href = "/src/pages/address.html";
+        window.location.href = "./src/pages/address.html";
       });
       container.appendChild(addBox);
     }
@@ -368,7 +368,7 @@ async function buildMobileCheckout(cartItems) {
     placeOrderBtn
   );
   paymentStep.querySelector(".btn-large-white").onclick = () =>
-    (window.location.href = "/src/pages/payment.html");
+    (window.location.href = "./src/pages/payment.html");
 
   stepsWrapper.append(addressStep, shippingStep, paymentStep);
   mainContainer.append(tabsContainer, stepsWrapper);
@@ -526,7 +526,7 @@ async function buildDesktopCheckout(cartItems) {
         text: "Add Payment Option",
       });
       addPaymentBtn.onclick = () =>
-        (window.location.href = "/src/pages/payment.html");
+        (window.location.href = "./src/pages/payment.html");
       const placeOrderBtn = createEl("button", {
         class: "btn-large",
         text: step.buttonText,
@@ -600,7 +600,7 @@ async function buildDesktopCheckout(cartItems) {
     class: "btn-large",
     text: "Back to store",
   });
-  backBtn.onclick = () => (window.location.href = "/");
+  backBtn.onclick = () => (window.location.href = "./index.html");
   rightColumn.appendChild(backBtn);
 
   // --- Locking Logic -------------------------------------------------------------- Check if works
@@ -680,7 +680,7 @@ function createConfirmationPopup() {
   const checkIcon = createEl("img", {
     class: "confirmation-icon",
     attrs: {
-      src: "/public/assets/icons/icons-svg/payment/check.svg",
+      src: "./public/assets/icons/icons-svg/payment/check.svg",
       alt: "Order confirmed",
     },
   });
@@ -688,13 +688,13 @@ function createConfirmationPopup() {
   const homeButton = createEl("button", { class: "btn-large", text: "Home" });
   homeButton.addEventListener("click", () => {
     localStorage.removeItem("cart");
-    window.location.href = "/";
+    window.location.href = "./index.html";
   });
 
   const logo = createEl("img", {
     class: "confirmation-logo",
     attrs: {
-      src: "/public/assets/img/logo/logo.webp",
+      src: "./public/assets/img/logo/logo.webp",
       alt: "E.CO Logo",
     },
   });

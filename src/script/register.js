@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "Registration successful! Redirecting to login...";
       messageContainer.classList.add("success");
       setTimeout(() => {
-        window.location.href = "/src/pages/log-in.html";
+        window.location.href = "./src/pages/log-in.html";
       }, 2000);
     } catch (error) {
       let msg = error && error.message ? error.message : "Registration failed.";

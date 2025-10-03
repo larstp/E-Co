@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     infoContainer.className = "wishlist-info-container";
 
     const img = document.createElement("img");
-    img.src = item.image?.url || "/public/assets/img/placeholder.jpg";
+    img.src = item.image?.url || "./public/assets/img/placeholder.jpg";
     img.alt = item.image?.alt || item.title;
     img.className = "wishlist-img";
     infoContainer.appendChild(img);

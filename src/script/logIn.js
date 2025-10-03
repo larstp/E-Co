@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       messageContainer.textContent = "";
       setTimeout(() => {
         hideLoader();
-        window.location.href = "/";
+        window.location.href = "./index.html";
       }, 3000);
     } catch (error) {
       messageContainer.textContent = error.message;
