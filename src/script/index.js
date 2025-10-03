@@ -22,7 +22,7 @@ function createProductCard(product, size = "bestseller") {
   } else {
     link.classList.add("product-card-small");
   }
-  link.href = `src/pages/product.html?id=${product.id}`;
+  link.href = `./src/pages/product.html?id=${product.id}`;
 
   const detailsContainer = document.createElement("div");
   if (size === "huge") {
@@ -49,7 +49,7 @@ function createProductCard(product, size = "bestseller") {
   const shareIcon = createEl("img", {
     class: "product-share-icon",
     attrs: {
-      src: "/public/assets/icons/icons-svg/black/share.svg",
+      src: "./public/assets/icons/icons-svg/black/share.svg",
       alt: "Share product",
     },
   });
@@ -150,8 +150,8 @@ function createProductCard(product, size = "bestseller") {
         });
         function updateWishlistIcon() {
           wishlistIcon.src = isWishlisted(product.id)
-            ? "../../public/assets/icons/icons-svg/black/filled-heart.svg"
-            : "../../public/assets/icons/icons-svg/black/line-heart.svg";
+            ? "./public/assets/icons/icons-svg/black/filled-heart.svg"
+            : "./public/assets/icons/icons-svg/black/line-heart.svg";
         }
         updateWishlistIcon();
         wishlistIcon.addEventListener("click", (e) => {
@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const summerAd = createEl("section", {
     class: "landing-summer-ad",
     attrs: {
-      style: "background-image: url('../public/assets/img/summer-sale.webp')",
+      style: "background-image: url('./public/assets/img/summer-sale.webp')",
     },
   });
   const summerAdContent = createEl("div", { class: "summer-ad-content" });
@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   summerAdBtn.addEventListener(
     "click",
-    () => (window.location.href = "/src/pages/storefront.html?sale")
+    () => (window.location.href = "./src/pages/storefront.html?sale")
   );
   summerAdContent.append(summerAdText, summerAdBtn);
   summerAd.appendChild(summerAdContent);
@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     const leftArrowImg = createEl("img", {
       attrs: {
-        src: "/public/assets/icons/icons-svg/black/left.svg",
+        src: "./public/assets/icons/icons-svg/black/left.svg",
         alt: "Previous",
       },
     });
@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     viewAllBtn.addEventListener(
       "click",
-      () => (window.location.href = "/src/pages/storefront.html?new")
+      () => (window.location.href = "./src/pages/storefront.html?new")
     );
 
     const mediaQuery = window.matchMedia("(min-width: 900px)");
@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     const rightArrowImg = createEl("img", {
       attrs: {
-        src: "/public/assets/icons/icons-svg/black/right.svg",
+        src: "./public/assets/icons/icons-svg/black/right.svg",
         alt: "Next",
       },
     });
@@ -450,7 +450,7 @@ document.addEventListener("DOMContentLoaded", () => {
     categoryData.forEach((cat) => {
       const card = document.createElement("a");
       card.className = "category-card";
-      card.href = `../src/pages/storefront.html?tag=${encodeURIComponent(
+      card.href = `./src/pages/storefront.html?tag=${encodeURIComponent(
         cat.category
       )}`;
       card.setAttribute("role", "button");
@@ -471,7 +471,7 @@ document.addEventListener("DOMContentLoaded", () => {
         img.src = product.image.url || product.imageUrl || product.image;
         img.alt = product.image.alt || cat.name;
       } else {
-        img.src = "../public/assets/img/placeholder.jpg";
+        img.src = "./public/assets/img/placeholder.jpg";
         img.alt = cat.name;
       }
       img.style.marginLeft = "auto";
@@ -488,7 +488,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cleaningAdLeft = createEl("div", { class: "cleaning-ad-left" });
   const cleaningAdImg = createEl("img", {
     attrs: {
-      src: "/public/assets/img/clean-living.webp",
+      src: "./public/assets/img/clean-living.webp",
       alt: "Clean living products",
     },
   });
@@ -512,7 +512,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   cleaningAdBtn.addEventListener(
     "click",
-    () => (window.location.href = "/src/pages/storefront.html?tag=beauty")
+    () => (window.location.href = "./src/pages/storefront.html?tag=beauty")
   );
 
   cleaningAdRight.append(cleaningAdHeading, p1, p2, cleaningAdBtn);
@@ -542,7 +542,7 @@ document.addEventListener("DOMContentLoaded", () => {
   viewAllBtn.textContent = "View All";
   viewAllBtn.type = "button";
   viewAllBtn.addEventListener("click", () => {
-    window.location.href = "../src/pages/storefront.html";
+    window.location.href = "./src/pages/storefront.html";
   });
   bestsellerFooter.appendChild(viewAllBtn);
   bestsellerSection.appendChild(bestsellerFooter);
@@ -552,7 +552,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const newsletterSection = createEl("section", {
     class: "landing-newsletter-section",
     attrs: {
-      style: "background-image: url('../public/assets/img/newsletter.webp')",
+      style: "background-image: url('./public/assets/img/newsletter.webp')",
     },
   });
   const newsletterContent = createEl("div", { class: "newsletter-content" });

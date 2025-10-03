@@ -1,3 +1,19 @@
+// Helper: get prefix for relative paths
+function getPathPrefix() {
+  // If current path is /index.html or /, use './', else '../'
+  const path = window.location.pathname;
+  if (
+    path.endsWith("/index.html") ||
+    path === "/" ||
+    path === "/E-Co/" ||
+    path.endsWith("/E-Co/index.html")
+  ) {
+    return "./";
+  } else {
+    return "../";
+  }
+}
+
 import { isLoggedIn } from "./user.js";
 import { getCartCount, updateCartBadges } from "./cartCounter.js";
 
@@ -7,26 +23,29 @@ import { getCartCount, updateCartBadges } from "./cartCounter.js";
 const IS_INDEX_PAGE = window.location.pathname.endsWith("index.html");
 const IS_LOGGED_IN = isLoggedIn();
 
+const prefix = getPathPrefix();
 const MOBILE_UPPER_LINKS = [
   ...(IS_LOGGED_IN
     ? [
         {
-          href: "/src/pages/wishlist.html",
-          icon: "/public/assets/icons/icons-svg/black/line-heart.svg",
+          href: `${prefix}src/pages/wishlist.html`,
+          icon: `${prefix}public/assets/icons/icons-svg/black/line-heart.svg`,
           alt: "Wishlist",
           aria: "View wishlist",
         },
       ]
     : []),
   {
-    href: IS_LOGGED_IN ? "/src/pages/user.html" : "/src/pages/log-in.html",
-    icon: "/public/assets/icons/icons-svg/black/line-user.svg",
+    href: IS_LOGGED_IN
+      ? `${prefix}src/pages/user.html`
+      : `${prefix}src/pages/log-in.html`,
+    icon: `${prefix}public/assets/icons/icons-svg/black/line-user.svg`,
     alt: "User Account",
     aria: "User account",
   },
   {
-    href: "/src/pages/cart.html",
-    icon: "/public/assets/icons/icons-svg/black/line-cart.svg",
+    href: `${prefix}src/pages/cart.html`,
+    icon: `${prefix}public/assets/icons/icons-svg/black/line-cart.svg`,
     alt: "Cart",
     aria: "View cart",
   },
@@ -34,28 +53,28 @@ const MOBILE_UPPER_LINKS = [
 
 const MOBILE_NAV_UPPER = [
   {
-    href: "/index.html",
-    icon: "/public/assets/icons/icons-svg/black/line-home.svg",
+    href: `${prefix}index.html`,
+    icon: `${prefix}public/assets/icons/icons-svg/black/line-home.svg`,
     text: "Home",
   },
   {
-    href: "/src/pages/storefront.html",
-    icon: "/public/assets/icons/icons-svg/black/line-shopping.svg",
+    href: `${prefix}src/pages/storefront.html`,
+    icon: `${prefix}public/assets/icons/icons-svg/black/line-shopping.svg`,
     text: "Shop",
   },
   {
-    href: "/src/pages/storefront.html?sale=true",
-    icon: "/public/assets/icons/icons-svg/black/line-sale.svg",
+    href: `${prefix}src/pages/storefront.html?sale=true`,
+    icon: `${prefix}public/assets/icons/icons-svg/black/line-sale.svg`,
     text: "Sale",
   },
   {
-    href: "/src/pages/about.html",
-    icon: "/public/assets/icons/icons-svg/black/info.svg",
+    href: `${prefix}src/pages/about.html`,
+    icon: `${prefix}public/assets/icons/icons-svg/black/info.svg`,
     text: "About",
   },
   {
-    href: "/src/pages/contact.html",
-    icon: "/public/assets/icons/icons-svg/black/headphones.svg",
+    href: `${prefix}src/pages/contact.html`,
+    icon: `${prefix}public/assets/icons/icons-svg/black/headphones.svg`,
     text: "Contact",
   },
 ];
@@ -64,47 +83,51 @@ const MOBILE_NAV_LOWER = [
   ...(IS_LOGGED_IN
     ? [
         {
-          href: "/src/pages/wishlist.html",
-          icon: "/public/assets/icons/icons-svg/black/line-heart.svg",
+          href: `${prefix}src/pages/wishlist.html`,
+          icon: `${prefix}public/assets/icons/icons-svg/black/line-heart.svg`,
           text: "Wishlist",
         },
       ]
     : []),
   {
-    href: IS_LOGGED_IN ? "/src/pages/user.html" : "/src/pages/log-in.html",
-    icon: "/public/assets/icons/icons-svg/black/line-user.svg",
+    href: IS_LOGGED_IN
+      ? `${prefix}src/pages/user.html`
+      : `${prefix}src/pages/log-in.html`,
+    icon: `${prefix}public/assets/icons/icons-svg/black/line-user.svg`,
     text: IS_LOGGED_IN ? "Account" : "Log In",
   },
 ];
 
 const DESKTOP_NAV_ITEMS = [
-  { text: "Home", href: "/index.html" },
-  { text: "Shop", href: "/src/pages/storefront.html" },
-  { text: "Sale", href: "/src/pages/storefront.html?sale=true" },
-  { text: "About", href: "/src/pages/about.html" },
-  { text: "Contact", href: "/src/pages/contact.html" },
+  { text: "Home", href: `${prefix}index.html` },
+  { text: "Shop", href: `${prefix}src/pages/storefront.html` },
+  { text: "Sale", href: `${prefix}src/pages/storefront.html?sale=true` },
+  { text: "About", href: `${prefix}src/pages/about.html` },
+  { text: "Contact", href: `${prefix}src/pages/contact.html` },
 ];
 
 const DESKTOP_ICONS = [
   ...(IS_LOGGED_IN
     ? [
         {
-          href: "/src/pages/wishlist.html",
-          icon: "/public/assets/icons/icons-svg/black/line-heart.svg",
+          href: `${prefix}src/pages/wishlist.html`,
+          icon: `${prefix}public/assets/icons/icons-svg/black/line-heart.svg`,
           alt: "Wishlist",
           aria: "View wishlist",
         },
       ]
     : []),
   {
-    href: IS_LOGGED_IN ? "/src/pages/user.html" : "/src/pages/log-in.html",
-    icon: "/public/assets/icons/icons-svg/black/line-user.svg",
+    href: IS_LOGGED_IN
+      ? `${prefix}src/pages/user.html`
+      : `${prefix}src/pages/log-in.html`,
+    icon: `${prefix}public/assets/icons/icons-svg/black/line-user.svg`,
     alt: "User Account",
     aria: "User account",
   },
   {
-    href: "/src/pages/cart.html",
-    icon: "/public/assets/icons/icons-svg/black/line-cart.svg",
+    href: `${prefix}src/pages/cart.html`,
+    icon: `${prefix}public/assets/icons/icons-svg/black/line-cart.svg`,
     alt: "Cart",
     aria: "View cart",
   },
@@ -220,14 +243,14 @@ function buildMobileHeader() {
   hamburgerBtn.className = "header-mobile__hamburger";
   hamburgerBtn.setAttribute("aria-label", "Open menu");
   const hamburgerImg = document.createElement("img");
-  hamburgerImg.src = "/public/assets/icons/icons-svg/black/hamburger.svg";
+  hamburgerImg.src = `${prefix}public/assets/icons/icons-svg/black/hamburger.svg`;
   hamburgerImg.alt = "Menu";
   hamburgerBtn.appendChild(hamburgerImg);
 
   const logoLink = createLogo({
     tag: "a",
     className: "header-mobile__logo site-logo-text",
-    href: "/index.html",
+    href: `${prefix}index.html`,
     text: "E.CO",
     aria: "Go to homepage",
   });
@@ -240,7 +263,7 @@ function buildMobileHeader() {
   if (!IS_INDEX_PAGE) {
     mobileSearchIcon = createIconLink({
       href: "#",
-      icon: "/public/assets/icons/icons-svg/black/search.svg",
+      icon: `${prefix}public/assets/icons/icons-svg/black/search.svg`,
       alt: "Search",
       aria: "Search",
     });
@@ -284,7 +307,7 @@ function buildMobileHeader() {
     searchBtn.className = "site-search__btn";
     searchBtn.setAttribute("aria-label", "Submit search");
     const searchBtnImg = document.createElement("img");
-    searchBtnImg.src = "/public/assets/icons/icons-svg/black/search.svg";
+    searchBtnImg.src = `${prefix}public/assets/icons/icons-svg/black/search.svg`;
     searchBtnImg.alt = "Search";
     searchBtn.appendChild(searchBtnImg);
     searchContainer.appendChild(searchBtn);
@@ -293,7 +316,7 @@ function buildMobileHeader() {
     closeBtn.className = "mobile-search-close-btn";
     closeBtn.setAttribute("aria-label", "Close search");
     const closeIcon = document.createElement("img");
-    closeIcon.src = "/public/assets/icons/icons-svg/black/x.svg";
+    closeIcon.src = `${prefix}public/assets/icons/icons-svg/black/x.svg`;
     closeIcon.alt = "Close";
     closeBtn.appendChild(closeIcon);
     searchContainer.appendChild(closeBtn);
@@ -301,7 +324,7 @@ function buildMobileHeader() {
       e.preventDefault();
       const query = searchInput.value.trim();
       if (query) {
-        window.location.href = `/src/pages/storefront.html?search=${encodeURIComponent(
+        window.location.href = `${prefix}src/pages/storefront.html?search=${encodeURIComponent(
           query
         )}`;
       }
@@ -383,7 +406,7 @@ function buildBreadcrumbs(parts) {
   breadcrumbsList.className = "header-mobile__breadcrumbs-list";
   const homeItem = document.createElement("li");
   const homeLink = document.createElement("a");
-  homeLink.href = "/index.html";
+  homeLink.href = `${prefix}index.html`;
   homeLink.textContent = "Home";
   homeItem.appendChild(homeLink);
   breadcrumbsList.appendChild(homeItem);
@@ -391,12 +414,12 @@ function buildBreadcrumbs(parts) {
     const item = document.createElement("li");
     if ((part === "Shop" || part === "Store") && index < parts.length - 1) {
       const link = document.createElement("a");
-      link.href = "/src/pages/storefront.html";
+      link.href = `${prefix}src/pages/storefront.html`;
       link.textContent = "Shop";
       item.appendChild(link);
     } else if (part === "Account" && index < parts.length - 1) {
       const link = document.createElement("a");
-      link.href = "/src/pages/user.html";
+      link.href = `${prefix}src/pages/user.html`;
       link.textContent = "Account";
       item.appendChild(link);
     } else if (index < parts.length - 1) {
@@ -423,13 +446,13 @@ function buildMobileNavMenu() {
   closeButton.className = "mobile-nav__close";
   closeButton.setAttribute("aria-label", "Close menu");
   const closeButtonImg = document.createElement("img");
-  closeButtonImg.src = "/public/assets/icons/icons-svg/black/x.svg";
+  closeButtonImg.src = `${prefix}public/assets/icons/icons-svg/black/x.svg`;
   closeButtonImg.alt = "Close";
   closeButton.appendChild(closeButtonImg);
   const navLogo = document.createElement("div");
   navLogo.className = "mobile-nav__logo";
   const navLogoImg = document.createElement("img");
-  navLogoImg.src = "/public/assets/img/logo/logo.webp";
+  navLogoImg.src = `${prefix}public/assets/img/logo/logo.webp`;
   navLogoImg.alt = "E.CO logo";
   const navLogoH1 = createLogo({
     tag: "h1",
@@ -474,7 +497,7 @@ function buildMobileNavMenu() {
     logoutBtn.style.padding = "12px";
     logoutBtn.style.width = "260px";
     const logoutIcon = document.createElement("img");
-    logoutIcon.src = "/public/assets/icons/icons-svg/white/exit.svg";
+    logoutIcon.src = `${prefix}public/assets/icons/icons-svg/white/exit.svg`;
     logoutIcon.alt = "Log out";
     logoutIcon.style.width = "24px";
     logoutIcon.style.height = "24px";
@@ -482,7 +505,7 @@ function buildMobileNavMenu() {
     logoutBtn.appendChild(document.createTextNode("Log out"));
     logoutBtn.addEventListener("click", () => {
       localStorage.removeItem("user");
-      window.location.href = "/index.html";
+      window.location.href = `${prefix}index.html`;
     });
     logoutLi.appendChild(logoutBtn);
     lowerLinks.appendChild(logoutLi);
@@ -530,9 +553,9 @@ function buildDesktopHeader() {
   desktopUpper.className = "header-desktop__upper";
   const desktopLogoContainer = document.createElement("a");
   desktopLogoContainer.className = "header-desktop__logo-container";
-  desktopLogoContainer.href = "/index.html";
+  desktopLogoContainer.href = `${prefix}index.html`;
   const desktopLogoImg = document.createElement("img");
-  desktopLogoImg.src = "/public/assets/img/logo/logo.webp";
+  desktopLogoImg.src = `${prefix}public/assets/img/logo/logo.webp`;
   desktopLogoImg.alt = "E.CO Logo";
   desktopLogoImg.className = "header-desktop__logo-img";
   const desktopLogoText = createLogo({
@@ -575,13 +598,12 @@ function buildDesktopHeader() {
   const categoryBrowser = document.createElement("button");
   categoryBrowser.className = "header-desktop__category-browser";
   const categoryIcon = document.createElement("img");
-  categoryIcon.src =
-    "/public/assets/icons/icons-svg/black/desktop-hamburger.svg";
+  categoryIcon.src = `${prefix}public/assets/icons/icons-svg/black/desktop-hamburger.svg`;
   categoryIcon.alt = "Categories";
   const categoryText = document.createElement("span");
   categoryText.textContent = "Browse by category";
   const categoryArrow = document.createElement("img");
-  categoryArrow.src = "/public/assets/icons/icons-svg/black/down-arrow.svg";
+  categoryArrow.src = `${prefix}public/assets/icons/icons-svg/black/down-arrow.svg`;
   categoryArrow.alt = "";
   categoryArrow.className = "header-desktop__category-arrow";
   categoryBrowser.appendChild(categoryIcon);
@@ -609,7 +631,7 @@ function buildDesktopHeader() {
   desktopSearchBtn.type = "submit";
   desktopSearchBtn.className = "site-search__btn";
   const desktopSearchBtnImg = document.createElement("img");
-  desktopSearchBtnImg.src = "/public/assets/icons/icons-svg/black/search.svg";
+  desktopSearchBtnImg.src = `${prefix}public/assets/icons/icons-svg/black/search.svg`;
   desktopSearchBtnImg.alt = "Search";
   desktopSearchBtn.appendChild(desktopSearchBtnImg);
   desktopSearchContainer.appendChild(desktopSearchBtn);
@@ -630,7 +652,7 @@ function buildDesktopHeader() {
   const contactInfo = document.createElement("div");
   contactInfo.className = "header-desktop__contact-info";
   const contactIcon = document.createElement("img");
-  contactIcon.src = "/public/assets/icons/icons-svg/black/line-phone.svg";
+  contactIcon.src = `${prefix}public/assets/icons/icons-svg/black/line-phone.svg`;
   contactIcon.alt = "";
   const contactTextContainer = document.createElement("div");
   contactTextContainer.className = "header-desktop__contact-text-container";
@@ -725,7 +747,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeBtn = document.createElement("button");
     closeBtn.className = "filter-menu-close-btn-desktop";
     const closeIcon = document.createElement("img");
-    closeIcon.src = "/public/assets/icons/icons-svg/black/x.svg";
+    closeIcon.src = `${prefix}public/assets/icons/icons-svg/black/x.svg`;
     closeIcon.alt = "Close filters menu";
     closeBtn.appendChild(closeIcon);
     closeBtn.addEventListener("click", closeDesktopFilterMenu);
@@ -747,7 +769,7 @@ document.addEventListener("DOMContentLoaded", function () {
     saleBtn.style.color = "#d32f2f";
     saleBtn.addEventListener("click", () => {
       if (!window.location.pathname.endsWith("storefront.html")) {
-        window.location.href = "/src/pages/storefront.html?sale=true";
+        window.location.href = `${prefix}src/pages/storefront.html?sale=true`;
       } else {
         window.location.search = "?sale=true";
       }
@@ -762,7 +784,7 @@ document.addEventListener("DOMContentLoaded", function () {
     newBtn.textContent = "New Arrivals";
     newBtn.addEventListener("click", () => {
       if (!window.location.pathname.endsWith("storefront.html")) {
-        window.location.href = "/src/pages/storefront.html?new=true";
+        window.location.href = `${prefix}src/pages/storefront.html?new=true`;
       } else {
         window.location.search = "?new=true";
       }
@@ -777,7 +799,7 @@ document.addEventListener("DOMContentLoaded", function () {
     popBtn.textContent = "Most Popular";
     popBtn.addEventListener("click", () => {
       if (!window.location.pathname.endsWith("storefront.html")) {
-        window.location.href = "/src/pages/storefront.html?popular=true";
+        window.location.href = `${prefix}src/pages/storefront.html?popular=true`;
       } else {
         window.location.search = "?popular=true";
       }
@@ -834,7 +856,7 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.textContent = capTag;
       btn.addEventListener("click", () => {
         if (!window.location.pathname.endsWith("storefront.html")) {
-          window.location.href = `/src/pages/storefront.html?tag=${encodeURIComponent(
+          window.location.href = `${prefix}src/pages/storefront.html?tag=${encodeURIComponent(
             tag
           )}`;
         } else {

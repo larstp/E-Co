@@ -6,7 +6,7 @@ export function initBreadcrumbs() {
     const isCheckout = window.location.pathname.endsWith("checkout.html");
     if (isCheckout) {
       parts = [
-        { label: "Cart", href: "/src/pages/cart.html" },
+        { label: "Cart", href: "./src/pages/cart.html" },
         { label: "Checkout", href: null },
       ];
     } else if (data) {
@@ -15,10 +15,10 @@ export function initBreadcrumbs() {
         .filter(Boolean)
         .map((label) => {
           if (label === "Shop" || label === "Store") {
-            return { label: "Shop", href: "/src/pages/storefront.html" };
+            return { label: "Shop", href: "./src/pages/storefront.html" };
           }
           if (label === "Account") {
-            return { label: "Account", href: "/src/pages/user.html" };
+            return { label: "Account", href: "./src/pages/user.html" };
           }
           return { label, href: null };
         });
@@ -38,7 +38,7 @@ export function initBreadcrumbs() {
     ol.className = "breadcrumb-list";
     const homeLi = document.createElement("li");
     const homeA = document.createElement("a");
-    homeA.href = "/index.html";
+    homeA.href = "./index.html";
     homeA.textContent = "Home";
     homeLi.appendChild(homeA);
     ol.appendChild(homeLi);

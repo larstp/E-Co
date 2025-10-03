@@ -37,7 +37,7 @@ function getOrCreateProductGrid() {
     sortBtn.className = "storefront-sort-btn";
     sortBtn.setAttribute("aria-label", "Sort products");
     const sortIcon = document.createElement("img");
-    sortIcon.src = "/public/assets/icons/icons-svg/black/sort.svg";
+    sortIcon.src = "./public/assets/icons/icons-svg/black/sort.svg";
     sortIcon.alt = "Sort";
     sortIcon.className = "storefront-sort-icon";
     sortBtn.appendChild(sortIcon);
