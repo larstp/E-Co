@@ -61,20 +61,20 @@ See the [brand client profile](docs/brand-client.md) for more details.
 ### Figma:
 
 <table>
-  <tr>
-    <th>Style Guide</th>
-    <th>Mobile Prototype</th>
-    <th>Desktop Prototype</th>
-  </tr>
-  <tr>
-    <td>https://www.figma.com/proto/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=375-15624&t=E74DIbgaMJAGSgOJ-1</td>
-    <td>https://www.figma.com/proto/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=1-6&t=E74DIbgaMJAGSgOJ-1</td>
-    <td>https://www.figma.com/proto/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=129-431&t=E74DIbgaMJAGSgOJ-11</td>
-  </tr>
+  <tr>
+    <th>Style Guide</th>
+    <th>Mobile Prototype</th>
+    <th>Desktop Prototype</th>
+  </tr>
+  <tr>
+    <td><a href="https://www.figma.com/proto/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=375-15624&t=E74DIbgaMJAGSgOJ-1">View Style Guide</a></td>
+    <td><a href="https://www.figma.com/proto/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=1-6&t=E74DIbgaMJAGSgOJ-1">View Mobile Prototype</a></td>
+    <td><a href="https://www.figma.com/proto/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=129-431&t=E74DIbgaMJAGSgOJ-11">View Desktop Prototype</a></td>
+  </tr>
 </table>
 
 Or visit the entire Figma [Project](https://www.figma.com/design/iqyOtjJ0QlyAbuGwsgfPdK/Project-Exam-1?node-id=0-1&t=E74DIbgaMJAGSgOJ-1)
-Password: PE1
+### Password: PE1
 
 You can also see screenshots of every design page located in the [Figma](docs\figma) folder
 
@@ -161,7 +161,7 @@ You can also see screenshots of every design page located in the [Figma](docs\fi
 - Meta tags for SEO and social sharing
 - Error handling
 
-See screenshots of validation-tools used in the [validation](docs\validation) folder
+See screenshots of validation-tools used in the [validation](docs/validation) folder
 
 ## 9. Known Issues / Limitations
 
