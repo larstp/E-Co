@@ -1,6 +1,7 @@
 import { fetchAllProducts } from "./api/api.js";
 import { shareUrl } from "./utils/share.js";
 import { addToCart } from "./utils/cart.js";
+import { buildFooter } from "./utils/footer.js";
 
 function createEl(tag, options = {}) {
   const el = document.createElement(tag);
@@ -611,3 +612,10 @@ document.addEventListener("DOMContentLoaded", () => {
         bestsellerGrid.textContent = "Failed to load products.";
     });
 });
+
+const siteFooter = document.getElementById("site-footer");
+if (siteFooter) {
+  const footer = buildFooter();
+  footer.id = "site-footer";
+  siteFooter.replaceWith(footer);
+}

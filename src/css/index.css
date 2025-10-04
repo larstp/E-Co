@@ -214,6 +214,7 @@
   padding: 1.2rem 0.5rem;
   align-self: center;
   max-width: 600px;
+  margin-inline: auto;
 }
 .landing-category-section h2 {
   font-family: "Bebas Neue", Arial, sans-serif;
@@ -276,6 +277,7 @@
 .landing-bestseller-section {
   background: #1976d2;
   color: #fff;
+  padding: 25px;
 }
 
 .bestseller-grid {

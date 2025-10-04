@@ -1,24 +1,25 @@
-// Helper: get prefix for relative paths
-function getPathPrefix() {
-  const path = window.location.pathname;
-  if (
-    path.endsWith("/index.html") ||
-    path === "/" ||
-    path === "/E-Co/" ||
-    path.endsWith("/E-Co/index.html")
-  ) {
-    return "./";
+const IS_ROOT_PAGE =
+  window.location.pathname.endsWith("/index.html") ||
+  window.location.pathname === "/" ||
+  window.location.pathname === "/E-Co/" ||
+  window.location.pathname.endsWith("/E-Co/index.html");
+
+function getFooterPath(target) {
+  if (IS_ROOT_PAGE) {
+    return `./${target}`;
   } else {
-    return "../";
+    if (target.startsWith("src/pages/")) {
+      return target.replace("src/pages/", "");
+    }
+    return `../../${target}`;
   }
 }
 
 // Constants (to make stuff easier to reuse)
 
-const prefix = getPathPrefix();
 const FOOTER_NAV_ITEMS = [
-  { text: "About us", href: `${prefix}src/pages/about.html` },
-  { text: "Contact", href: `${prefix}src/pages/contact.html` },
+  { text: "About us", href: getFooterPath("src/pages/about.html") },
+  { text: "Contact", href: getFooterPath("src/pages/contact.html") },
   { text: "Return Policy", href: "#" },
   { text: "E.Co Partners", href: "#" },
 ];
@@ -49,7 +50,7 @@ function createFooterNavItem({ text, href }, isDesktop = false) {
   const label = document.createElement("span");
   label.textContent = text;
   const icon = document.createElement("img");
-  icon.src = `${prefix}public/assets/icons/icons-svg/black/plus.svg`;
+  icon.src = getFooterPath("public/assets/icons/icons-svg/black/plus.svg");
   icon.alt = "Expand";
   if (isDesktop) icon.className = "footer-desktop__nav-icon";
   itemContainer.appendChild(label);
@@ -66,7 +67,7 @@ function createFooterSocialIcon({ name, href }, isDesktop = false) {
   link.target = "_blank";
   link.rel = "noopener noreferrer"; // I have no idea if this works??
   const icon = document.createElement("img");
-  icon.src = `${prefix}public/assets/icons/icons-svg/white/${name}.svg`;
+  icon.src = getFooterPath(`public/assets/icons/icons-svg/white/${name}.svg`);
   icon.alt = `${name} logo`;
   link.appendChild(icon);
   return link;
@@ -154,7 +155,7 @@ function buildDesktopFooter() {
   const desktopCenter = document.createElement("div");
   desktopCenter.className = "footer-desktop__center";
   const desktopLogoImg = document.createElement("img");
-  desktopLogoImg.src = `${prefix}public/assets/img/logo/logo.webp`;
+  desktopLogoImg.src = getFooterPath("public/assets/img/logo/logo.webp");
   desktopLogoImg.alt = "E.CO Logo";
   desktopLogoImg.className = "footer-desktop__logo-img";
   desktopCenter.appendChild(desktopLogoImg);
