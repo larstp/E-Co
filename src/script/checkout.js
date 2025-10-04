@@ -680,7 +680,7 @@ function createConfirmationPopup() {
   const checkIcon = createEl("img", {
     class: "confirmation-icon",
     attrs: {
-      src: "./public/assets/icons/icons-svg/payment/check.svg",
+      src: "../public/assets/icons/icons-svg/payment/check.svg",
       alt: "Order confirmed",
     },
   });
@@ -694,7 +694,7 @@ function createConfirmationPopup() {
   const logo = createEl("img", {
     class: "confirmation-logo",
     attrs: {
-      src: "./public/assets/img/logo/logo.webp",
+      src: "../public/assets/img/logo/logo.webp",
       alt: "E.CO Logo",
     },
   });

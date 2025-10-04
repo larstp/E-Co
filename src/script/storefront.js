@@ -37,7 +37,7 @@ function getOrCreateProductGrid() {
     sortBtn.className = "storefront-sort-btn";
     sortBtn.setAttribute("aria-label", "Sort products");
     const sortIcon = document.createElement("img");
-    sortIcon.src = "./public/assets/icons/icons-svg/black/sort.svg";
+    sortIcon.src = "../public/assets/icons/icons-svg/black/sort.svg";
     sortIcon.alt = "Sort";
     sortIcon.className = "storefront-sort-icon";
     sortBtn.appendChild(sortIcon);
@@ -181,8 +181,8 @@ function createProductCard(product) {
       });
       function updateWishlistIcon() {
         wishlistIcon.src = isWishlisted(product.id)
-          ? "../../public/assets/icons/icons-svg/black/filled-heart.svg"
-          : "../../public/assets/icons/icons-svg/black/line-heart.svg";
+          ? "../public/assets/icons/icons-svg/black/filled-heart.svg"
+          : "../public/assets/icons/icons-svg/black/line-heart.svg";
       }
       updateWishlistIcon();
       wishlistIcon.addEventListener("click", (e) => {
@@ -203,7 +203,7 @@ function createProductCard(product) {
   const shareIcon = createEl("img", {
     className: "product-share-icon",
     attrs: {
-      src: "../../public/assets/icons/icons-svg/black/share.svg",
+      src: "../public/assets/icons/icons-svg/black/share.svg",
       alt: "Share product",
       tabIndex: 0,
       style: "width:24px;height:24px;cursor:pointer;",

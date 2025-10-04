@@ -175,40 +175,21 @@ document.addEventListener("DOMContentLoaded", () => {
   container.appendChild(form);
   flexContainer.appendChild(container);
 
-  // GOOGLE MAPS API if it works. ---------------------- Test on GitHub Pages. Doesn't work in npm live server
-
   const mapWrapper = document.createElement("div");
   mapWrapper.className = "address-map-wrapper";
-
-  const gmpMap = document.createElement("gmp-map");
-  gmpMap.setAttribute("center", "59.9139,10.7522");
-  gmpMap.setAttribute("zoom", "12");
-  gmpMap.setAttribute("map-id", "DEMO_MAP_ID");
-  gmpMap.style.width = "350px";
-  gmpMap.style.height = "400px";
-  gmpMap.style.borderRadius = "25px";
-  gmpMap.setAttribute("loading", "async");
-
-  const gmpAdvancedMarker = document.createElement("gmp-advanced-marker");
-  gmpAdvancedMarker.setAttribute("position", "59.9139,10.7522");
-  gmpAdvancedMarker.setAttribute("title", "Oslo");
-
-  gmpMap.appendChild(gmpAdvancedMarker);
-  mapWrapper.appendChild(gmpMap);
-
+  const iframe = document.createElement("iframe");
+  iframe.src =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7992.512448471522!2d10.756177007904084!3d59.94660872660287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46416e1a46dfd989%3A0x7232661852a89a8b!2sNydalsveien%2016%2C%200484%20Oslo!5e0!3m2!1sen!2sno!4v1739882828838!5m2!1sen!2sno";
+  iframe.width = "390";
+  iframe.height = "390";
+  iframe.style.border = "0";
+  iframe.style.borderRadius = "25px";
+  iframe.setAttribute("allowfullscreen", "");
+  iframe.setAttribute("loading", "lazy");
+  iframe.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+  mapWrapper.appendChild(iframe);
   flexContainer.appendChild(mapWrapper);
-
   main.appendChild(flexContainer);
-
-  if (!document.getElementById("google-maps-api")) {
-    const script = document.createElement("script");
-    script.id = "google-maps-api";
-    script.async = true;
-    script.setAttribute("loading", "async");
-    script.src =
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyCJjm1cj6il__JSEZEsPNvop2a0VZ77YIc&libraries=maps,marker&v=beta";
-    document.head.appendChild(script);
-  }
 });
 
 import("../script/utils/footer.js").then((mod) => {
