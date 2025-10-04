@@ -43,6 +43,8 @@
 
 </details>
 
+</details>
+
 ---
 
 ## 1. Project Overview
