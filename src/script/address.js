@@ -1,3 +1,5 @@
+import { displayMessage } from "./utils/displayMessage.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const main = document.querySelector("main");
   if (!main) return;
@@ -137,41 +139,37 @@ document.addEventListener("DOMContentLoaded", () => {
   //  validation and feedback ----------------------- now less angry hihi
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    messageContainer.textContent = "";
-    messageContainer.classList.remove("error", "success");
+
     if (!inputName.value.trim()) {
-      messageContainer.textContent = "Name is required.";
-      messageContainer.classList.add("error");
+      displayMessage(".message-container", "Name is required.", "error");
       inputName.focus();
       return;
     }
     if (!inputStreet.value.trim()) {
-      messageContainer.textContent = "Street is required.";
-      messageContainer.classList.add("error");
+      displayMessage(".message-container", "Street is required.", "error");
       inputStreet.focus();
       return;
     }
     if (!inputPostal.value.trim()) {
-      messageContainer.textContent = "Postal code is required.";
-      messageContainer.classList.add("error");
+      displayMessage(".message-container", "Postal code is required.", "error");
       inputPostal.focus();
       return;
     }
     if (!inputCity.value.trim()) {
-      messageContainer.textContent = "City is required.";
-      messageContainer.classList.add("error");
+      displayMessage(".message-container", "City is required.", "error");
       inputCity.focus();
       return;
     }
     if (!inputCountry.value.trim()) {
-      messageContainer.textContent = "Country is required.";
-      messageContainer.classList.add("error");
+      displayMessage(".message-container", "Country is required.", "error");
       inputCountry.focus();
       return;
     }
-    messageContainer.textContent =
-      "Address saved! (This is a mockup just so you know ;) )";
-    messageContainer.classList.add("success");
+    displayMessage(
+      ".message-container",
+      "Address saved! (This is a mockup just so you know ;) )",
+      "success"
+    );
   });
 
   container.appendChild(form);

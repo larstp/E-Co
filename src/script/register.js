@@ -1,5 +1,6 @@
 import { registerUser } from "./api/api.js";
 import { showLoader, hideLoader } from "./utils/loader.js";
+import { displayMessage } from "./utils/displayMessage.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("register-container");
@@ -145,8 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    messageContainer.textContent = "";
-    messageContainer.classList.remove("success", "error");
+
     if (checkboxTerms.checked) {
       checkboxTerms.style.outline = "";
       checkboxTerms.style.outlineOffset = "";
@@ -154,35 +154,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // -------------------------------------------------------------------Noroff API restrictions
     if (!/^\w+$/.test(inputUser.value)) {
-      messageContainer.textContent =
-        "Username can only contain letters, numbers, and underscores (_).";
-      messageContainer.classList.add("error");
+      displayMessage(
+        ".message-container",
+        "Username can only contain letters, numbers, and underscores (_).",
+        "error"
+      );
       return;
     }
 
     if (!/^([a-zA-Z0-9_.+-]+)@stud\.noroff\.no$/.test(inputEmail.value)) {
-      messageContainer.textContent =
-        "Email must be a valid NOROFF address ending with @stud.noroff.no (e.g., yourname@stud.noroff.no).";
-      messageContainer.classList.add("error");
+      displayMessage(
+        ".message-container",
+        "Email must be a valid NOROFF address ending with @stud.noroff.no (e.g., yourname@stud.noroff.no).",
+        "error"
+      );
       inputEmail.focus();
       return;
     }
 
     if (inputPass.value.length < 8) {
-      messageContainer.textContent = "Password must be at least 8 characters.";
-      messageContainer.classList.add("error");
+      displayMessage(
+        ".message-container",
+        "Password must be at least 8 characters.",
+        "error"
+      );
       return;
     }
 
     if (inputPass.value !== inputRepeat.value) {
-      messageContainer.textContent = "Passwords do not match.";
-      messageContainer.classList.add("error");
+      displayMessage(".message-container", "Passwords do not match.", "error");
       return;
     }
 
     if (!checkboxTerms.checked) {
-      messageContainer.textContent = "You must accept the Terms & Conditions.";
-      messageContainer.classList.add("error");
+      displayMessage(
+        ".message-container",
+        "You must accept the Terms & Conditions.",
+        "error"
+      );
       checkboxTerms.style.outline = "2px solid red";
       checkboxTerms.style.outlineOffset = "2px";
       checkboxTerms.focus();
@@ -200,9 +209,11 @@ document.addEventListener("DOMContentLoaded", () => {
       btnCreate.textContent = "Creating account...";
       showLoader();
       await registerUser(userData);
-      messageContainer.textContent =
-        "Registration successful! Redirecting to login...";
-      messageContainer.classList.add("success");
+      displayMessage(
+        ".message-container",
+        "Registration successful! Redirecting to login...",
+        "success"
+      );
       setTimeout(() => {
         window.location.href = "./src/pages/log-in.html";
       }, 2000);
@@ -218,8 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
         msg =
           "That account already exists. Please log in or use a different email/username.";
       }
-      messageContainer.textContent = msg;
-      messageContainer.classList.add("error");
+      displayMessage(".message-container", msg, "error");
     } finally {
       btnCreate.disabled = false;
       btnCreate.textContent = "Create account";

@@ -282,7 +282,7 @@
 
 .bestseller-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   width: 100%;
   max-width: 770px;
   margin: 20px auto 2rem auto;

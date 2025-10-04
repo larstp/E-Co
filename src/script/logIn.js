@@ -1,5 +1,6 @@
 import { loginUser } from "./api/api.js";
 import { showLoader, hideLoader } from "./utils/loader.js";
+import { displayMessage } from "./utils/displayMessage.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("login-container");
@@ -69,8 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    messageContainer.textContent = "";
-    messageContainer.classList.remove("success", "error");
 
     const credentials = {
       email: inputUser.value,
@@ -86,14 +85,17 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("accessToken", userData.accessToken);
       localStorage.setItem("userProfile", JSON.stringify(userData));
 
-      messageContainer.textContent = "";
+      displayMessage(
+        ".message-container",
+        "Login successful! Redirecting...",
+        "success"
+      );
       setTimeout(() => {
         hideLoader();
         window.location.href = "./index.html";
-      }, 3000);
+      }, 2000);
     } catch (error) {
-      messageContainer.textContent = error.message;
-      messageContainer.classList.add("error");
+      displayMessage(".message-container", error.message, "error");
       hideLoader();
     } finally {
       btnLogin.disabled = false;
