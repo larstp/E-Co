@@ -9,7 +9,7 @@
 ### Contents:
 
 <details>
-  <summary>See contents of README.</summary>
+  <summary>Table of Contents</summary>
   
   [1. Project Overview](#1-project-overview)
 
