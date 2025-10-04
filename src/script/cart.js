@@ -46,15 +46,15 @@ function createCartItemCard(item) {
   if (item.discountedPrice < item.price) {
     const oldPrice = createEl("span", {
       class: "old-price",
-      text: `${item.price.toFixed(2)},-`,
+      text: `${item.price.toFixed(0)},-`,
     });
     const discounted = createEl("span", {
       class: "discounted-price",
-      text: ` ${item.discountedPrice.toFixed(2)},-`,
+      text: ` ${item.discountedPrice.toFixed(0)},-`,
     });
     price.append(oldPrice, discounted);
   } else {
-    price.textContent = `${item.price.toFixed(2)},-`;
+    price.textContent = `${item.price.toFixed(0)},-`;
   }
   infoContainer.append(title, tags, price);
 

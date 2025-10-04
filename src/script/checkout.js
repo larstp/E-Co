@@ -39,13 +39,13 @@ function createOrderSummarySection(items) {
   };
 
   summaryDetails.append(
-    createRow("Subtotal", `${subtotal.toFixed(2)},-`),
-    createRow("Discount", `-${discount.toFixed(2)},-`, "discount-value"),
-    createRow("Delivery Fee", `${deliveryFee.toFixed(2)},-`),
+    createRow("Subtotal", `${subtotal.toFixed(0)},-`),
+    createRow("Discount", `-${discount.toFixed(0)},-`, "discount-value"),
+    createRow("Delivery Fee", `${deliveryFee.toFixed(0)},-`),
     createEl("hr", { class: "separator" })
   );
 
-  const totalRow = createRow("Total", `${total.toFixed(2)},-`);
+  const totalRow = createRow("Total", `${total.toFixed(0)},-`);
   totalRow.classList.add("total");
   summaryDetails.appendChild(totalRow);
 
@@ -656,7 +656,7 @@ function createCartItemCard(item) {
   const title = createEl("h4", { class: "cart-item-title", text: item.title });
   const price = createEl("p", {
     class: "cart-item-price",
-    text: `${item.price.toFixed(2)},-`,
+    text: `${item.price.toFixed(0)},-`,
   });
   infoContainer.append(title, price);
 

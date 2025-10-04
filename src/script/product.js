@@ -86,15 +86,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (product.discountedPrice < product.price) {
     const oldPrice = document.createElement("span");
     oldPrice.className = "old-price";
-    oldPrice.textContent = `${product.price.toFixed(2)},-`;
+    oldPrice.textContent = `${product.price.toFixed(0)},-`;
     const discountedPrice = document.createElement("span");
     discountedPrice.className = "discounted-price";
-    discountedPrice.textContent = `${product.discountedPrice.toFixed(2)},-`;
+    discountedPrice.textContent = `${product.discountedPrice.toFixed(0)},-`;
     price.appendChild(oldPrice);
     price.appendChild(document.createTextNode(" "));
     price.appendChild(discountedPrice);
   } else {
-    price.textContent = `${product.price.toFixed(2)},-`;
+    price.textContent = `${product.price.toFixed(0)},-`;
   }
   priceIconRow.appendChild(price);
 
@@ -704,15 +704,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (product.discountedPrice < product.price) {
     const oldPrice = document.createElement("span");
     oldPrice.className = "old-price";
-    oldPrice.textContent = `${product.price.toFixed(2)},-`;
+    oldPrice.textContent = `${product.price.toFixed(0)},-`;
     const discountedPrice = document.createElement("span");
     discountedPrice.className = "discounted-price";
-    discountedPrice.textContent = `${product.discountedPrice.toFixed(2)},-`;
+    discountedPrice.textContent = `${product.discountedPrice.toFixed(0)},-`;
     price.appendChild(oldPrice);
     price.appendChild(document.createTextNode(" "));
     price.appendChild(discountedPrice);
   } else {
-    price.textContent = `${product.price.toFixed(2)},-`;
+    price.textContent = `${product.price.toFixed(0)},-`;
   }
   priceIconRow.appendChild(price);
 

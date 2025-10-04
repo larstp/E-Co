@@ -242,18 +242,18 @@ function createProductCard(product) {
     priceSpan.appendChild(
       createEl("span", {
         className: "old-price",
-        text: `${product.price.toFixed(2)},-`,
+        text: `${product.price.toFixed(0)},-`,
       })
     );
     priceSpan.appendChild(document.createTextNode(" "));
     priceSpan.appendChild(
       createEl("span", {
         className: "discounted-price",
-        text: `${product.discountedPrice.toFixed(2)},-`,
+        text: `${product.discountedPrice.toFixed(0)},-`,
       })
     );
   } else {
-    priceSpan.textContent = `${product.price.toFixed(2)},-`;
+    priceSpan.textContent = `${product.price.toFixed(0)},-`;
   }
   const pricesDiv = createEl("div", {
     className: "product-prices",

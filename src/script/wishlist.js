@@ -51,8 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
     price.className = "wishlist-price";
     price.textContent =
       item.discountedPrice < item.price
-        ? `${item.discountedPrice.toFixed(2)},-`
-        : `${item.price.toFixed(2)},-`;
+        ? `${item.discountedPrice.toFixed(0)},-`
+        : `${item.price.toFixed(0)},-`;
     infoContainer.appendChild(price);
 
     li.appendChild(infoContainer);

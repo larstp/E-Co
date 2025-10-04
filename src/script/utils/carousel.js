@@ -206,15 +206,15 @@ export async function createProductCarousel(options = {}) {
     if (prod.discountedPrice && prod.discountedPrice < prod.price) {
       const oldPrice = document.createElement("span");
       oldPrice.className = "old-price-carousel";
-      oldPrice.textContent = `${prod.price.toFixed(2)},-`;
+      oldPrice.textContent = `${prod.price.toFixed(0)},-`;
       priceSpan.appendChild(oldPrice);
       priceSpan.appendChild(document.createTextNode(" "));
       const discounted = document.createElement("span");
       discounted.className = "discounted-price-carousel";
-      discounted.textContent = `${prod.discountedPrice.toFixed(2)},-`;
+      discounted.textContent = `${prod.discountedPrice.toFixed(0)},-`;
       priceSpan.appendChild(discounted);
     } else {
-      priceSpan.textContent = `${prod.price.toFixed(2)},-`;
+      priceSpan.textContent = `${prod.price.toFixed(0)},-`;
     }
     const pricesDiv = document.createElement("div");
     pricesDiv.className = "product-prices";

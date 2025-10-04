@@ -28,15 +28,15 @@ export function createProductCard(product) {
   if (product.discountedPrice && product.discountedPrice < product.price) {
     const oldPrice = document.createElement("span");
     oldPrice.className = "old-price-carousel";
-    oldPrice.textContent = `${product.price.toFixed(2)},-`;
+    oldPrice.textContent = `${product.price.toFixed(0)},-`;
     priceSpan.appendChild(oldPrice);
     priceSpan.appendChild(document.createTextNode(" "));
     const discounted = document.createElement("span");
     discounted.className = "discounted-price-carousel";
-    discounted.textContent = `${product.discountedPrice.toFixed(2)},-`;
+    discounted.textContent = `${product.discountedPrice.toFixed(0)},-`;
     priceSpan.appendChild(discounted);
   } else {
-    priceSpan.textContent = `${product.price.toFixed(2)},-`;
+    priceSpan.textContent = `${product.price.toFixed(0)},-`;
   }
   const pricesDiv = document.createElement("div");
   pricesDiv.className = "product-prices";
