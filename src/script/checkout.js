@@ -61,7 +61,7 @@ async function createAddressBox() {
   let selectedIdx = parseInt(localStorage.getItem("selectedAddressIdx")) || 0;
   let showAll = false;
   try {
-    const res = await fetch("./src/components/address.json");
+    const res = await fetch("../../src/components/address.json");
     addresses = await res.json();
   } catch (e) {
     container.append(createEl("p", { text: "Failed to load addresses." }));
@@ -688,7 +688,7 @@ function createConfirmationPopup() {
   const homeButton = createEl("button", { class: "btn-large", text: "Home" });
   homeButton.addEventListener("click", () => {
     localStorage.removeItem("cart");
-    window.location.href = "./index.html";
+    window.location.href = "../../index.html";
   });
 
   const logo = createEl("img", {

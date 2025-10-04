@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const right = document.createElement("section");
   right.className = "about-logo";
   const logo = document.createElement("img");
-  logo.src = "/public/assets/img/logo/logo.webp";
+  logo.src = "../../public/assets/img/logo/logo.webp";
   logo.alt = "E-co logo";
   logo.className = "about-logo-img";
   right.appendChild(logo);

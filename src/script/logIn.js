@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       setTimeout(() => {
         hideLoader();
-        window.location.href = "./index.html";
+        window.location.href = "../../index.html";
       }, 2000);
     } catch (error) {
       displayMessage(".message-container", error.message, "error");

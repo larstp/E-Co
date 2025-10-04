@@ -29,7 +29,7 @@ function createCartItemCard(item) {
   const imgContainer = createEl("div", { class: "cart-item-img-container" });
   const img = createEl("img", {
     attrs: {
-      src: item.image.url || "/public/assets/img/placeholder.jpg",
+      src: item.image.url || "../../public/assets/img/placeholder.jpg",
       alt: item.image.alt || item.title,
     },
   });
@@ -65,7 +65,7 @@ function createCartItemCard(item) {
   const deleteBtn = createEl("button", { class: "delete-item-btn" });
   const deleteIcon = createEl("img", {
     attrs: {
-      src: "/public/assets/icons/icons-svg/black/trash.svg",
+      src: "../../public/assets/icons/icons-svg/black/trash.svg",
       alt: "Remove item",
     },
   });
@@ -135,7 +135,7 @@ function createOrderSummarySection(items) {
 
   const deliveryInfo = createEl("div", { class: "delivery-info" });
   const mapIcon = createEl("img", {
-    attrs: { src: "/public/assets/icons/icons-svg/black/map.svg" },
+    attrs: { src: "../../public/assets/icons/icons-svg/black/map.svg" },
   });
   const user = getUserProfile();
   const userName = user?.name || "Guest";
@@ -178,9 +178,9 @@ function createOrderSummarySection(items) {
     }
     const isLoggedIn = !!localStorage.getItem("accessToken");
     if (isLoggedIn) {
-      window.location.href = "/src/pages/checkout.html";
+      window.location.href = "checkout.html";
     } else {
-      window.location.href = "/src/pages/log-in.html";
+      window.location.href = "log-in.html";
     }
   };
   section.appendChild(checkoutBtn);
