@@ -8,7 +8,10 @@
 
 ### Contents:
 
-[1. Project Overview](#1-project-overview)
+<details>
+  <summary>See contents of README.</summary>
+  
+  [1. Project Overview](#1-project-overview)
 
 - [Project Links](#project-links)
 - [Figma Links](#figma-prototypes)
@@ -37,6 +40,9 @@
 [11. Inspiration](#11-inspiration)
 
 [12. Contact](#12-contact)
+
+</details>
+
 
 ---
 
