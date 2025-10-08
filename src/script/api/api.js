@@ -1,6 +1,6 @@
+import { API_KEY } from "./config.js";
 const API_BASE = "https://v2.api.noroff.dev";
 const PRODUCTS_ENDPOINT = "/online-shop";
-const API_KEY = "9f463d01-0fdc-41b4-8262-5fd8306ffdfb";
 
 export async function fetchAllProducts() {
   try {
