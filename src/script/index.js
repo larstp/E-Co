@@ -261,7 +261,11 @@ document.addEventListener("DOMContentLoaded", () => {
   summerAd.appendChild(summerAdContent);
   main.appendChild(summerAd);
 
-  // Info Section
+  setTimeout(() => {
+    summerAd.classList.add("show-overlay");
+    summerAdContent.classList.add("show-content");
+  }, 2000);
+
   const infoSection = createEl("section", { class: "landing-info-section" });
   const infoList = createEl("ul", { class: "info-list" });
   [
