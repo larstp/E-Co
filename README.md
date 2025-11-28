@@ -3,7 +3,7 @@
 ## Project Documentation: E.CO
 
 <p align="center">
-  <img src="public/assets/img/logo/E-CO.png" alt="ECO logo" width="150" />
+  <img src="public/assets/img/logo/E-CO.png" alt="ECO logo" width="450" />
 </p>
 
 ## See full Kanban in GitHub [projects](https://github.com/users/larstp/projects/8)
