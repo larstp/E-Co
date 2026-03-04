@@ -40,19 +40,19 @@ function createFooterNavItem({ text, href }, isDesktop = false) {
   const li = document.createElement("li");
   const a = document.createElement("a");
   a.href = href;
-  a.className = isDesktop ? "" : "footer-mobile__nav-link";
-  if (isDesktop && href === "#")
-    a.classList.add("footer-desktop__nav-link--no-link");
+  a.className = isDesktop ? "" : "no-underline text-inherit block";
+  if (isDesktop && href === "#") a.classList.add("cursor-pointer");
   const itemContainer = document.createElement(isDesktop ? "span" : "div");
-  itemContainer.className = isDesktop ? "" : "footer-mobile__nav-item";
-  if (!isDesktop && href === "#")
-    itemContainer.classList.add("footer-mobile__nav-item--no-link");
+  itemContainer.className = isDesktop
+    ? ""
+    : "flex justify-between items-center text-base [&>img]:brightness-0 [&>img]:invert";
+  if (!isDesktop && href === "#") itemContainer.classList.add("cursor-pointer");
   const label = document.createElement("span");
   label.textContent = text;
   const icon = document.createElement("img");
   icon.src = getFooterPath("public/assets/icons/icons-svg/black/plus.svg");
   icon.alt = "Expand";
-  if (isDesktop) icon.className = "footer-desktop__nav-icon";
+  if (isDesktop) icon.className = "brightness-0 invert w-4 h-4";
   itemContainer.appendChild(label);
   itemContainer.appendChild(icon);
   a.appendChild(itemContainer);
@@ -75,7 +75,8 @@ function createFooterSocialIcon({ name, href }, isDesktop = false) {
 
 function createFooterLogo(tag = "h1") {
   const logo = document.createElement(tag);
-  logo.className = "site-logo-text";
+  logo.className =
+    "font-bebas text-[2.2rem] text-white leading-none font-normal no-underline";
   logo.textContent = "E.CO";
   return logo;
 }
@@ -84,43 +85,47 @@ function createFooterLogo(tag = "h1") {
 
 function buildMobileFooter() {
   const mobileFooter = document.createElement("div");
-  mobileFooter.className = "footer-mobile";
+  mobileFooter.className = "lg:hidden";
 
   // Upper part above the line thingy
 
   const upperPart = document.createElement("div");
-  upperPart.className = "site-footer__upper";
+  upperPart.className = "w-full max-w-[340px]";
   const navList = document.createElement("ul");
-  navList.className = "footer-mobile__nav-list";
+  navList.className = "list-none p-0 m-0 [&_li]:list-none";
   FOOTER_NAV_ITEMS.forEach((item) =>
-    navList.appendChild(createFooterNavItem(item))
+    navList.appendChild(createFooterNavItem(item)),
   );
   upperPart.appendChild(navList);
 
   // Line thingy!
 
   const separator = document.createElement("hr");
-  separator.className = "site-footer__separator";
+  separator.className =
+    "border-none h-px bg-white/30 w-full max-w-[340px] my-4";
 
   // Lower part below the line thingy
 
   const lowerPart = document.createElement("div");
-  lowerPart.className = "site-footer__lower";
+  lowerPart.className =
+    "w-full max-w-[340px] flex flex-col items-center text-center";
   const socialSection = document.createElement("div");
-  socialSection.className = "footer-mobile__social-section";
+  socialSection.className =
+    "flex flex-row items-center gap-4 w-full justify-between";
   socialSection.appendChild(createFooterLogo("h1"));
   const socialIcons = document.createElement("div");
-  socialIcons.className = "footer-mobile__social-icons";
+  socialIcons.className = "flex gap-4 [&_a]:block [&_img]:w-6 [&_img]:h-6";
   FOOTER_SOCIAL.forEach((data) =>
-    socialIcons.appendChild(createFooterSocialIcon(data))
+    socialIcons.appendChild(createFooterSocialIcon(data)),
   );
   socialSection.appendChild(socialIcons);
   const legalSection = document.createElement("div");
-  legalSection.className = "footer-mobile__legal-section";
+  legalSection.className =
+    "flex flex-row items-center gap-[90px] mt-6 text-sm justify-between";
   const privacyLink = document.createElement("a");
   privacyLink.href = FOOTER_LEGAL.privacy.href;
   privacyLink.textContent = FOOTER_LEGAL.privacy.text;
-  privacyLink.className = "footer-mobile__legal-link";
+  privacyLink.className = "cursor-pointer no-underline text-white";
   const copyright = document.createElement("span");
   copyright.textContent = FOOTER_LEGAL.copyright;
   legalSection.appendChild(privacyLink);
@@ -135,40 +140,43 @@ function buildMobileFooter() {
 
 function buildDesktopFooter() {
   const desktopFooter = document.createElement("div");
-  desktopFooter.className = "footer-desktop";
+  desktopFooter.className =
+    "hidden lg:flex lg:w-full lg:flex-col lg:items-center";
   const desktopUpper = document.createElement("div");
-  desktopUpper.className = "site-footer__upper";
+  desktopUpper.className =
+    "flex justify-between items-center w-full max-w-[1200px] py-10";
 
   // Left: Nav elements
 
   const desktopNav = document.createElement("nav");
-  desktopNav.className = "footer-desktop__nav";
+  desktopNav.className = "";
   const desktopNavList = document.createElement("ul");
-  desktopNavList.className = "footer-desktop__nav-list";
+  desktopNavList.className =
+    "list-none p-0 m-0 [&_a]:text-white [&_a]:no-underline [&_a]:text-base [&_a]:leading-8 [&_a]:flex [&_a]:items-center [&_a]:justify-between [&_a]:gap-4";
   FOOTER_NAV_ITEMS.forEach((item) =>
-    desktopNavList.appendChild(createFooterNavItem(item, true))
+    desktopNavList.appendChild(createFooterNavItem(item, true)),
   );
   desktopNav.appendChild(desktopNavList);
 
   // Center: img Logo ------------------------------------------------------(CHANGE THIS?)
 
   const desktopCenter = document.createElement("div");
-  desktopCenter.className = "footer-desktop__center";
+  desktopCenter.className = "text-center";
   const desktopLogoImg = document.createElement("img");
   desktopLogoImg.src = getFooterPath("public/assets/img/logo/logo.webp");
   desktopLogoImg.alt = "E.CO Logo";
-  desktopLogoImg.className = "footer-desktop__logo-img";
+  desktopLogoImg.className = "w-[100px] h-[100px] brightness-0 invert";
   desktopCenter.appendChild(desktopLogoImg);
 
   // Right: Text Logo + Socials
 
   const desktopRight = document.createElement("div");
-  desktopRight.className = "footer-desktop__right";
+  desktopRight.className = "flex flex-col items-end gap-4";
   desktopRight.appendChild(createFooterLogo("h1"));
   const desktopSocialIcons = document.createElement("div");
-  desktopSocialIcons.className = "footer-desktop__social-icons";
+  desktopSocialIcons.className = "flex gap-4 [&_img]:w-6 [&_img]:h-6";
   FOOTER_SOCIAL.forEach((data) =>
-    desktopSocialIcons.appendChild(createFooterSocialIcon(data, true))
+    desktopSocialIcons.appendChild(createFooterSocialIcon(data, true)),
   );
   desktopRight.appendChild(desktopSocialIcons);
   desktopUpper.appendChild(desktopNav);
@@ -178,18 +186,19 @@ function buildDesktopFooter() {
   // Line thingy again!
 
   const desktopSeparator = document.createElement("hr");
-  desktopSeparator.className = "site-footer__separator";
+  desktopSeparator.className =
+    "border-none h-px bg-white/30 w-full max-w-[1200px] my-4";
 
   // Lower part below the line thingy
 
   const desktopLower = document.createElement("div");
-  desktopLower.className = "site-footer__lower";
+  desktopLower.className = "w-full max-w-[1200px] py-6";
   const desktopLegal = document.createElement("div");
-  desktopLegal.className = "footer-desktop__legal-section";
+  desktopLegal.className = "flex justify-around w-full text-sm";
   const desktopPrivacyLink = document.createElement("a");
   desktopPrivacyLink.href = FOOTER_LEGAL.privacy.href;
   desktopPrivacyLink.textContent = FOOTER_LEGAL.privacy.text;
-  desktopPrivacyLink.className = "footer-desktop__legal-link";
+  desktopPrivacyLink.className = "cursor-pointer no-underline text-white";
   const desktopCopyright = document.createElement("span");
   desktopCopyright.textContent = FOOTER_LEGAL.copyright;
   desktopLegal.appendChild(desktopPrivacyLink);
@@ -203,7 +212,8 @@ function buildDesktopFooter() {
 
 export function buildFooter() {
   const footer = document.createElement("footer");
-  footer.className = "site-footer";
+  footer.className =
+    "bg-brand-blue text-white flex flex-col items-center p-6 font-roboto mt-auto";
   footer.appendChild(buildMobileFooter());
   footer.appendChild(buildDesktopFooter());
   return footer;

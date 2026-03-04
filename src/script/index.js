@@ -196,7 +196,8 @@ function createProductCard(product, size = "bestseller") {
 
   if (size !== "huge") {
     const btn = document.createElement("button");
-    btn.className = "add-to-cart-btn btn-xsmall";
+    btn.className =
+      "add-to-cart-btn min-w-20 h-9 px-4 rounded-full bg-blue-600 text-white text-sm font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg";
     btn.type = "button";
     btn.textContent = "Add to cart";
     btn.addEventListener("click", (e) => {
@@ -247,7 +248,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }),
   );
   const summerAdBtn = createEl("button", {
-    class: "btn-small",
+    class:
+      "min-w-20 h-12 px-6 rounded-full bg-blue-600 text-white font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg",
     text: "Shop Now",
   });
   summerAdBtn.addEventListener(
@@ -337,9 +339,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const mediaQuery = window.matchMedia("(min-width: 900px)");
     function handleBtnClass(mq) {
       if (mq.matches) {
-        viewAllBtn.className = "btn-large";
+        viewAllBtn.className =
+          "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg";
       } else {
-        viewAllBtn.className = "btn-small";
+        viewAllBtn.className =
+          "min-w-20 h-12 px-6 rounded-full bg-blue-600 text-white font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg";
       }
     }
     mediaQuery.addEventListener("change", handleBtnClass);
@@ -427,9 +431,13 @@ document.addEventListener("DOMContentLoaded", () => {
   main.appendChild(categoryHeader);
 
   const categorySection = createEl("section", {
-    class: "landing-category-section",
+    class:
+      "bg-white text-gray-900 mx-[0.7rem] mb-6 px-2 py-5 self-center max-w-[600px] mx-auto lg:max-w-[1200px]",
   });
-  const categoryList = createEl("div", { class: "category-list" });
+  const categoryList = createEl("div", {
+    class:
+      "flex flex-col gap-4 items-center box-border px-5 lg:flex-row lg:justify-center lg:gap-6",
+  });
   const categoryData = [
     {
       name: "Beauty",
@@ -450,17 +458,17 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchAllProducts().then((products) => {
     categoryData.forEach((cat) => {
       const card = document.createElement("a");
-      card.className = "category-card";
+      card.className =
+        "flex items-center justify-between bg-white w-full max-w-[550px] lg:max-w-[350px] h-[125px] border border-gray-200 rounded-[10px] p-3 pr-5 gap-6 shadow-[0_1px_4px_rgba(25,118,210,0.04)] cursor-pointer transition-all duration-[180ms] no-underline text-inherit hover:shadow-[0_4px_16px_rgba(25,118,210,0.13)] hover:-translate-y-0.5 hover:scale-[1.03]";
       card.href = `./src/pages/storefront.html?tag=${encodeURIComponent(
         cat.category,
       )}`;
       card.setAttribute("role", "button");
-      card.style.display = "flex";
-      card.style.alignItems = "center";
-      card.style.justifyContent = "space-between";
-      card.style.textDecoration = "none";
-      card.style.color = "inherit";
-      const btn = createEl("span", { class: "btn-small", text: cat.name });
+      const btn = createEl("span", {
+        class:
+          "min-w-20 h-12 px-6 rounded-full bg-blue-600 text-white font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg",
+        text: cat.name,
+      });
       card.appendChild(btn);
       const img = document.createElement("img");
       const product = products.find((p) => p.id === cat.productId);
@@ -475,8 +483,8 @@ document.addEventListener("DOMContentLoaded", () => {
         img.src = "./public/assets/img/placeholder.jpg";
         img.alt = cat.name;
       }
-      img.style.marginLeft = "auto";
-      img.style.objectFit = "cover";
+      img.className =
+        "w-[120px] h-[120px] object-cover rounded-lg bg-gray-100 ml-auto";
       card.appendChild(img);
       categoryList.appendChild(card);
     });
@@ -507,7 +515,8 @@ document.addEventListener("DOMContentLoaded", () => {
     text: "Refresh your home with this bio-enzymatic odor and spot remover. Made with non-toxic, plant-based ingredients, it's safe for your family and pets. Tackle even the toughest messes without harsh chemicals. \n\nShop our sale section today and discover the power of a truly clean home.",
   });
   const cleaningAdBtn = createEl("button", {
-    class: "btn-large-white",
+    class:
+      "w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-gray-100 text-gray-900 text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-gray-200 hover:shadow-lg",
     text: "Shop Sale",
   });
   cleaningAdBtn.addEventListener(
@@ -537,7 +546,8 @@ document.addEventListener("DOMContentLoaded", () => {
   bestSellerText.textContent = "Check out our best seller section";
   bestsellerFooter.appendChild(bestSellerText);
   const viewAllBtn = document.createElement("button");
-  viewAllBtn.className = "btn-large-white";
+  viewAllBtn.className =
+    "w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-gray-100 text-gray-900 text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-gray-200 hover:shadow-lg";
   viewAllBtn.textContent = "View All";
   viewAllBtn.type = "button";
   viewAllBtn.addEventListener("click", () => {
@@ -577,7 +587,8 @@ document.addEventListener("DOMContentLoaded", () => {
   newsletterForm.appendChild(emailInput);
   const subscribeBtn = document.createElement("button");
   subscribeBtn.type = "submit";
-  subscribeBtn.className = "btn-small";
+  subscribeBtn.className =
+    "min-w-20 h-12 px-6 rounded-full bg-blue-600 text-white font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg";
   subscribeBtn.textContent = "Subscribe";
   newsletterForm.appendChild(subscribeBtn);
   newsletterContent.appendChild(newsletterForm);

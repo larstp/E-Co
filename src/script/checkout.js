@@ -251,12 +251,14 @@ async function buildMobileCheckout(cartItems) {
     addressBox,
     createOrderSummarySection(cartItems),
     createEl("button", {
-      class: "btn-large continue-btn",
+      class:
+        "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg continue-btn",
       text: "Continue",
       attrs: { "data-next-step": 2 },
     }),
     createEl("button", {
-      class: "btn-large-white",
+      class:
+        "w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-gray-100 text-gray-900 text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-gray-200 hover:shadow-lg",
       text: "Change Delivery Address",
       attrs: { id: "change-address-btn-mobile" },
     }),
@@ -272,7 +274,8 @@ async function buildMobileCheckout(cartItems) {
   });
   const shippingOptions = createShippingOptions();
   const shippingContinueBtn = createEl("button", {
-    class: "btn-large continue-btn",
+    class:
+      "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg continue-btn",
     text: "Continue",
     attrs: { "data-next-step": 3 },
   });
@@ -308,7 +311,8 @@ async function buildMobileCheckout(cartItems) {
   });
   const paymentOptions = createPaymentOptions();
   const placeOrderBtn = createEl("button", {
-    class: "btn-large",
+    class:
+      "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg",
     text: "Place Order",
   });
   function updatePlaceOrderBtn() {
@@ -321,10 +325,12 @@ async function buildMobileCheckout(cartItems) {
       selected.nextSibling.textContent.trim() === "Vipps"
     ) {
       placeOrderBtn.textContent = "Go to Vipps";
-      placeOrderBtn.className = "btn-contrast";
+      placeOrderBtn.className =
+        "w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-orange-500 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-orange-600 hover:shadow-lg";
     } else {
       placeOrderBtn.textContent = "Place Order";
-      placeOrderBtn.className = "btn-large";
+      placeOrderBtn.className =
+        "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg";
     }
   }
   paymentOptions.addEventListener("change", updatePlaceOrderBtn);
@@ -351,13 +357,15 @@ async function buildMobileCheckout(cartItems) {
     paymentOptions,
     createOrderSummarySection(cartItems),
     createEl("button", {
-      class: "btn-large-white",
+      class:
+        "w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-gray-100 text-gray-900 text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-gray-200 hover:shadow-lg",
       text: "Add Payment Option",
     }),
     placeOrderBtn,
   );
-  paymentStep.querySelector(".btn-large-white").onclick = () =>
-    (window.location.href = "./src/pages/payment.html");
+  paymentStep.querySelector(
+    ".w-\\[312px\\].max-w-\\[312px\\].h-12.px-8.rounded-full.bg-gray-100",
+  ).onclick = () => (window.location.href = "./src/pages/payment.html");
 
   stepsWrapper.append(addressStep, shippingStep, paymentStep);
   mainContainer.append(tabsContainer, stepsWrapper);
@@ -468,7 +476,8 @@ async function buildDesktopCheckout(cartItems) {
 
     if (index === 0) {
       const changeAddressBtn = createEl("button", {
-        class: "btn-large-white",
+        class:
+          "w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-gray-100 text-gray-900 text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-gray-200 hover:shadow-lg",
         text: "Change Delivery Address",
         attrs: { id: "change-address-btn-desktop" },
       });
@@ -477,13 +486,15 @@ async function buildDesktopCheckout(cartItems) {
           addressBox.showAllAddresses();
       };
       const continueBtn = createEl("button", {
-        class: "btn-large continue-btn",
+        class:
+          "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg continue-btn",
         text: step.buttonText,
       });
       buttonContainer.append(continueBtn, changeAddressBtn);
     } else if (index === 1) {
       const continueBtn = createEl("button", {
-        class: "btn-large continue-btn",
+        class:
+          "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg continue-btn",
         text: step.buttonText,
       });
       continueBtn.addEventListener("click", (e) => {
@@ -504,13 +515,15 @@ async function buildDesktopCheckout(cartItems) {
       buttonContainer.appendChild(continueBtn);
     } else {
       const addPaymentBtn = createEl("button", {
-        class: "btn-large-white",
+        class:
+          "w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-gray-100 text-gray-900 text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-gray-200 hover:shadow-lg",
         text: "Add Payment Option",
       });
       addPaymentBtn.onclick = () =>
         (window.location.href = "./src/pages/payment.html");
       const placeOrderBtn = createEl("button", {
-        class: "btn-large",
+        class:
+          "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg",
         text: step.buttonText,
       });
       function updatePlaceOrderBtnDesktop() {
@@ -523,10 +536,12 @@ async function buildDesktopCheckout(cartItems) {
           selected.nextSibling.textContent.trim() === "Vipps"
         ) {
           placeOrderBtn.textContent = "Go to Vipps";
-          placeOrderBtn.className = "btn-contrast";
+          placeOrderBtn.className =
+            "w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-orange-500 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-orange-600 hover:shadow-lg";
         } else {
           placeOrderBtn.textContent = "Place Order";
-          placeOrderBtn.className = "btn-large";
+          placeOrderBtn.className =
+            "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg";
         }
       }
       paymentOptionsDesktop.addEventListener(
@@ -577,7 +592,8 @@ async function buildDesktopCheckout(cartItems) {
   rightColumn.appendChild(newsletter);
 
   const backBtn = createEl("button", {
-    class: "btn-large",
+    class:
+      "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg",
     text: "Back to store",
   });
   backBtn.onclick = () => (window.location.href = "./index.html");
@@ -661,7 +677,11 @@ function createConfirmationPopup() {
     },
   });
 
-  const homeButton = createEl("button", { class: "btn-large", text: "Home" });
+  const homeButton = createEl("button", {
+    class:
+      "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg",
+    text: "Home",
+  });
   homeButton.addEventListener("click", () => {
     localStorage.removeItem("cart");
     window.location.href = "../../index.html";

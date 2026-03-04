@@ -84,14 +84,6 @@ input[type="radio"] {
   opacity: 1;
 }
 
-.checkout-step > .btn-large,
-.checkout-step > .btn-large-white {
-  width: 100%;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .checkout-step h3 {
   font-family: "Bebas Neue", sans-serif;
   font-size: 2.5rem;
@@ -150,7 +142,9 @@ input[type="radio"] {
   position: relative;
   font-family: "Roboto", sans-serif;
   cursor: pointer;
-  transition: box-shadow 0.2s, border 0.2s;
+  transition:
+    box-shadow 0.2s,
+    border 0.2s;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -232,7 +226,9 @@ input[type="radio"] {
   margin-bottom: 0.2rem;
   padding: 0 1.5rem;
   box-shadow: none;
-  transition: background 0.18s, border 0.18s;
+  transition:
+    background 0.18s,
+    border 0.18s;
 }
 .add-new-address-box:hover,
 .add-new-address-box:focus {
@@ -264,7 +260,9 @@ input[type="radio"] {
   padding: 2rem;
   margin-bottom: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: opacity 0.3s, filter 0.3s;
+  transition:
+    opacity 0.3s,
+    filter 0.3s;
 }
 
 .desktop-step-container.disabled {
@@ -339,10 +337,14 @@ input[type="radio"] {
 
 .address-box {
   cursor: pointer;
-  transition: box-shadow 0.2s, border 0.2s;
+  transition:
+    box-shadow 0.2s,
+    border 0.2s;
 }
 .address-box:hover {
-  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.1), 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 16px rgba(25, 118, 210, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.08);
   border: 1.5px solid #1976d2;
 }
 
@@ -360,7 +362,9 @@ input[type="radio"] {
   width: 24px;
   height: 24px;
   opacity: 0.7;
-  transition: opacity 0.18s, transform 0.18s;
+  transition:
+    opacity 0.18s,
+    transform 0.18s;
   cursor: pointer;
 }
 
@@ -370,17 +374,27 @@ input[type="radio"] {
 }
 
 .shipping-option:hover {
-  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 16px rgba(25, 118, 210, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.06);
   border: 1.5px solid #1976d2;
   background: #f5faff;
-  transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+  transition:
+    box-shadow 0.2s,
+    border 0.2s,
+    background 0.2s;
 }
 
 .payment-option:hover {
-  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 16px rgba(25, 118, 210, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.06);
   border: 1.5px solid #1976d2;
   background: #f5faff;
-  transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+  transition:
+    box-shadow 0.2s,
+    border 0.2s,
+    background 0.2s;
 }
 
 .confirmation-popup-overlay {

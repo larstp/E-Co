@@ -102,7 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const btnSave = document.createElement("button");
   btnSave.type = "submit";
-  btnSave.className = "btn-large";
+  btnSave.className =
+    "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg";
   btnSave.textContent = "Save address";
 
   form.appendChild(labelName);

@@ -143,7 +143,8 @@ function createOrderSummarySection(items) {
   section.appendChild(deliveryInfo);
 
   const changeAddressBtn = createEl("button", {
-    class: "btn-large-white",
+    class:
+      "w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-gray-100 text-gray-900 text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-gray-200 hover:shadow-lg",
     text: "Change Delivery Address",
   });
   changeAddressBtn.onclick = () =>
@@ -154,7 +155,11 @@ function createOrderSummarySection(items) {
   const promoInput = createEl("input", {
     attrs: { type: "text", placeholder: "Add promo code" },
   });
-  const applyBtn = createEl("button", { class: "btn-small", text: "Apply" });
+  const applyBtn = createEl("button", {
+    class:
+      "min-w-20 h-12 px-6 rounded-full bg-blue-600 text-white font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg",
+    text: "Apply",
+  });
   promoContainer.append(promoInput, applyBtn);
   section.appendChild(promoContainer);
 
@@ -162,7 +167,8 @@ function createOrderSummarySection(items) {
   messageContainer.setAttribute("aria-live", "assertive");
 
   const checkoutBtn = createEl("button", {
-    class: "btn-large",
+    class:
+      "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg",
     text: "Go to Checkout",
     attrs: { type: "button" },
   });

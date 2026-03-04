@@ -47,7 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const btnSend = document.createElement("button");
   btnSend.type = "submit";
-  btnSend.className = "btn-large";
+  btnSend.className =
+    "w-[312px] min-w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-blue-600 text-white text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg";
   btnSend.textContent = "Send Message";
 
   const messageContainer = document.createElement("div");

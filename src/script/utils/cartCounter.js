@@ -9,16 +9,12 @@ export function getCartCount() {
 }
 
 export function updateCartBadges() {
-  document
-    .querySelectorAll(
-      ".header-mobile__icon[aria-label='View cart'], .header-desktop__icons a[aria-label='View cart']"
-    )
-    .forEach((el) => {
-      const badge = el.querySelector(".cart-counter-badge");
-      if (badge) {
-        const count = getCartCount();
-        badge.textContent = count;
-        badge.style.display = count > 0 ? "flex" : "none";
-      }
-    });
+  document.querySelectorAll("a[aria-label='View cart']").forEach((el) => {
+    const badge = el.querySelector("[aria-label='Cart item count']");
+    if (badge) {
+      const count = getCartCount();
+      badge.textContent = count;
+      badge.style.display = count > 0 ? "flex" : "none";
+    }
+  });
 }

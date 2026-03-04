@@ -92,12 +92,7 @@ footer.site-footer {
   min-height: 120px;
 }
 
-.btn-large {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.contact-info-section {
   text-align: center;
   text-decoration: none !important;
   height: 48px;

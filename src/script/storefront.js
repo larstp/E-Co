@@ -20,7 +20,7 @@ function getOrCreateProductGrid() {
       container = document.createElement("div");
       container.id = "storefront-container";
       container.className = "storefront-container";
-      const footer = document.querySelector("footer.site-footer");
+      const footer = document.querySelector("footer");
       if (footer) {
         document.body.insertBefore(container, footer);
       } else {
@@ -196,7 +196,7 @@ function createProductCard(product) {
         updateWishlistIcon();
       });
       iconRow.appendChild(wishlistIcon);
-    }
+    },
   );
 
   // Share icon
@@ -243,14 +243,14 @@ function createProductCard(product) {
       createEl("span", {
         className: "old-price",
         text: `${product.price.toFixed(0)},-`,
-      })
+      }),
     );
     priceSpan.appendChild(document.createTextNode(" "));
     priceSpan.appendChild(
       createEl("span", {
         className: "discounted-price",
         text: `${product.discountedPrice.toFixed(0)},-`,
-      })
+      }),
     );
   } else {
     priceSpan.textContent = `${product.price.toFixed(0)},-`;
@@ -279,7 +279,7 @@ function createProductCard(product) {
   });
 
   [img, title, tagsDiv, ratingRow, reviewDiv, pricesDiv, btn].forEach((el) =>
-    link.appendChild(el)
+    link.appendChild(el),
   );
 
   return link;
@@ -297,20 +297,25 @@ function renderProductsPage(products = null) {
   });
   grid.appendChild(fragment);
 
-  const oldCta = document.querySelector(".load-more-CTA");
+  const oldCta = document.getElementById(
+    "load-more-products-btn",
+  )?.parentElement;
   if (oldCta) oldCta.remove();
 
   if (productsShown < (products ? products.length : allProducts.length)) {
-    const ctaDiv = createEl("div", { className: "load-more-CTA" });
+    const ctaDiv = createEl("div", {
+      className: "flex justify-center items-center py-[30px] w-full",
+    });
     const loadMoreBtn = createEl("button", {
-      className: "btn-large",
+      className:
+        "w-[312px] max-w-[312px] h-12 px-8 rounded-full bg-gray-100 text-gray-900 text-lg font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-gray-200 hover:shadow-lg",
       attrs: { id: "load-more-products-btn", type: "button" },
       text: "Load more products",
     });
     loadMoreBtn.addEventListener("click", () => {
       productsShown = Math.min(
         productsShown + PRODUCTS_PER_PAGE,
-        products ? products.length : allProducts.length
+        products ? products.length : allProducts.length,
       );
       renderProductsPage(products);
     });
@@ -324,14 +329,14 @@ async function loadProducts() {
     showLoader();
     allProducts = await fetchAllProducts();
     allCategories = Array.from(
-      new Set(allProducts.map((p) => p.category).filter(Boolean))
+      new Set(allProducts.map((p) => p.category).filter(Boolean)),
     );
     allTags = Array.from(
       new Set(
         allProducts
           .flatMap((p) => (Array.isArray(p.tags) ? p.tags : []))
-          .filter(Boolean)
-      )
+          .filter(Boolean),
+      ),
     );
     productsShown = Math.min(PRODUCTS_PER_PAGE, allProducts.length);
     const params = new URLSearchParams(window.location.search);
@@ -340,19 +345,19 @@ async function loadProducts() {
       initialTitle = "SALE!";
       productsShown = allProducts.length;
       renderProductsPage(
-        allProducts.filter((p) => p.discountedPrice < p.price)
+        allProducts.filter((p) => p.discountedPrice < p.price),
       );
     } else if (params.has("new")) {
       initialTitle = "New Arrivals";
       productsShown = allProducts.length;
       renderProductsPage(
-        allProducts.filter((p) => !p.rating || p.rating === 0)
+        allProducts.filter((p) => !p.rating || p.rating === 0),
       );
     } else if (params.has("popular")) {
       initialTitle = "Most Popular";
       productsShown = allProducts.length;
       renderProductsPage(
-        [...allProducts].sort((a, b) => (b.rating || 0) - (a.rating || 0))
+        [...allProducts].sort((a, b) => (b.rating || 0) - (a.rating || 0)),
       );
     } else if (params.has("category")) {
       const cat = params.get("category");
@@ -362,8 +367,8 @@ async function loadProducts() {
         allProducts.filter(
           (p) =>
             Array.isArray(p.tags) &&
-            p.tags.map((t) => t.toLowerCase()).includes(cat.toLowerCase())
-        )
+            p.tags.map((t) => t.toLowerCase()).includes(cat.toLowerCase()),
+        ),
       );
     } else if (params.has("tag")) {
       const tag = params.get("tag");
@@ -373,8 +378,8 @@ async function loadProducts() {
         allProducts.filter(
           (p) =>
             Array.isArray(p.tags) &&
-            p.tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
-        )
+            p.tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase()),
+        ),
       );
     } else if (params.has("search")) {
       const search = params.get("search").toLowerCase();
@@ -387,7 +392,7 @@ async function loadProducts() {
             Array.isArray(p.tags) &&
             p.tags.some((t) => t.toLowerCase().includes(search));
           return nameMatch || tagMatch;
-        })
+        }),
       );
     } else {
       renderProductsPage();
@@ -419,9 +424,12 @@ async function loadProducts() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", loadProducts);
-
-import("./utils/footer.js").then((mod) => {
-  const footer = mod.buildFooter();
+document.addEventListener("DOMContentLoaded", async () => {
+  // Load footer first to ensure proper positioning
+  const footerMod = await import("./utils/footer.js");
+  const footer = footerMod.buildFooter();
   document.body.appendChild(footer);
+
+  // Then load products
+  await loadProducts();
 });

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,23 +30,11 @@
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="../css/output.css" />
-    
+
     <!-- Legacy CSS -->
     <link rel="stylesheet" href="../css/utils/style.css" />
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="../css/output.css" />
-    
-    <!-- Legacy CSS -->
     <link rel="stylesheet" href="../css/utils/components.css" />
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="../css/output.css" />
-    
-    <!-- Legacy CSS -->
     <link rel="stylesheet" href="../css/address.css" />
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="../css/output.css" />
-    
-    <!-- Legacy CSS -->
     <link rel="stylesheet" href="../css/utils/media.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,7 +48,10 @@
     <script type="module" src="../script/address.js"></script>
   </head>
   <body>
-    <nav class="breadcrumb" data-breadcrumb="Account / Address"></nav>
+    <nav
+      class="hidden lg:block w-full max-w-[1200px] mx-auto py-[0.7rem] px-0 font-roboto text-base text-gray-600 relative font-extralight lg:mt-[65px] lg:mx-0 lg:pl-8 lg:text-[1.05rem] lg:text-gray-700"
+      data-breadcrumb="Account / Address"
+    ></nav>
     <main id="address-container" class="address-container"></main>
     <script type="module">
       import { initBreadcrumbs } from "../script/utils/breadcrumbs.js";

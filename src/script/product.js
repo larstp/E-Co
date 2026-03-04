@@ -67,7 +67,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const btnAdd = document.createElement("button");
   btnAdd.type = "button";
-  btnAdd.className = "btn-small product-add-to-cart-btn";
+  btnAdd.className =
+    "min-w-20 h-12 px-6 rounded-full bg-blue-600 text-white font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg product-add-to-cart-btn";
   btnAdd.textContent = "Add to cart";
   btnAdd.addEventListener("click", () => {
     const quantity = counter.getValue();
@@ -156,7 +157,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const btnAdd = document.createElement("button");
   btnAdd.type = "button";
-  btnAdd.className = "btn-small product-add-to-cart-btn";
+  btnAdd.className =
+    "min-w-20 h-12 px-6 rounded-full bg-blue-600 text-white font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg product-add-to-cart-btn";
   btnAdd.textContent = "Add to cart";
   btnAdd.addEventListener("click", () => {
     const quantity = counter.getValue();

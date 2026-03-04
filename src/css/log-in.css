@@ -2,17 +2,7 @@ label {
   font-weight: 300;
 }
 
-.btn-large-white {
-  width: 100%;
-  max-width: 250px;
-}
-
-.btn-large-white {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.login-register-container {
   text-align: center;
   text-decoration: none !important;
   height: 48px;

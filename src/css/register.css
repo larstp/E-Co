@@ -1,14 +1,3 @@
-.btn-large {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  text-decoration: none !important;
-  height: 48px;
-}
-
 .register-container {
   max-width: 350px;
   margin: 40px auto;

@@ -38,14 +38,6 @@
   display: block;
 }
 
-.load-more-CTA {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px 0;
-  width: 100%;
-}
-
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));

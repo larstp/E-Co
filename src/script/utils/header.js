@@ -138,7 +138,8 @@ const DESKTOP_ICONS = [
 function createIconLink({ href, icon, alt, aria }) {
   const a = document.createElement("a");
   a.href = href;
-  a.className = "header-mobile__icon";
+  a.className =
+    "flex items-center justify-center w-10 h-10 rounded-full bg-transparent border-none cursor-pointer no-underline relative";
   if (aria) a.setAttribute("aria-label", aria);
   const img = document.createElement("img");
   img.src = icon;
@@ -146,7 +147,8 @@ function createIconLink({ href, icon, alt, aria }) {
   a.appendChild(img);
   if (aria === "View cart") {
     const badge = document.createElement("span");
-    badge.className = "cart-counter-badge";
+    badge.className =
+      "absolute -top-[7px] -right-[7px] min-w-[20px] h-[20px] bg-red-400 text-white text-[0.95rem] font-roboto font-bold rounded-full flex items-center justify-center z-[2] shadow-md pointer-events-none";
     badge.setAttribute("aria-label", "Cart item count");
     badge.textContent = getCartCount();
     a.appendChild(badge);
@@ -164,14 +166,10 @@ function createIconLink({ href, icon, alt, aria }) {
   }
 
   function updateCartBadges() {
-    document
-      .querySelectorAll(
-        ".header-mobile__icon[aria-label='View cart'], .header-desktop__icons a[aria-label='View cart']",
-      )
-      .forEach((el) => {
-        const badge = el.querySelector(".cart-counter-badge");
-        if (badge) badge.textContent = getCartCount();
-      });
+    document.querySelectorAll("a[aria-label='View cart']").forEach((el) => {
+      const badge = el.querySelector("[aria-label='Cart item count']");
+      if (badge) badge.textContent = getCartCount();
+    });
   }
 }
 
@@ -190,7 +188,7 @@ function createNavLink({ href, icon, text }) {
 
 function createLogo({
   tag = "a",
-  className = "site-logo-text",
+  className = "font-bebas text-[2.2rem] text-black leading-none font-normal no-underline",
   href = null,
   text = "E.CO",
   aria = null,
@@ -205,30 +203,29 @@ function createLogo({
 
 function buildMobileHeader() {
   const mobileHeader = document.createElement("header");
-  mobileHeader.className = "header-mobile";
+  mobileHeader.className =
+    "lg:hidden w-full shadow-[0_2px_8px_rgba(0,0,0,0.04)] font-roboto";
 
   // Ad banner always at the top because capitalism
   const adBanner = document.createElement("div");
-  adBanner.className = "site-ad";
-  adBanner.style.minHeight = "35px";
-  adBanner.style.height = "35px";
-  adBanner.style.display = "flex";
-  adBanner.style.alignItems = "center";
-  adBanner.style.justifyContent = "center";
+  adBanner.className =
+    "bg-brand-blue text-white text-center h-[35px] flex items-center justify-center text-sm";
   if (IS_LOGGED_IN) {
     const p = document.createElement("p");
+    p.className = "m-0";
     p.textContent = "Browse our ";
     const saleLink = document.createElement("a");
+    saleLink.className = "text-white underline font-bold";
     saleLink.href = getNavLink("src/pages/storefront.html?sale=true");
     saleLink.textContent = "summer sale!";
-    saleLink.style.color = "#fff";
-    saleLink.style.fontWeight = "bold";
     saleLink.setAttribute("aria-label", "Browse summer sale");
     p.appendChild(saleLink);
     adBanner.appendChild(p);
   } else {
     const p = document.createElement("p");
+    p.className = "m-0";
     const a = document.createElement("a");
+    a.className = "text-white underline";
     a.href = getNavLink("src/pages/register.html");
     a.textContent = "Sign up now";
     p.appendChild(a);
@@ -239,10 +236,12 @@ function buildMobileHeader() {
 
   // Upper header (White part)
   const upper = document.createElement("div");
-  upper.className = "header-mobile__upper";
+  upper.className =
+    "flex items-center justify-between h-[65px] bg-white px-4 relative";
 
   const hamburgerBtn = document.createElement("button");
-  hamburgerBtn.className = "header-mobile__hamburger";
+  hamburgerBtn.className =
+    "bg-transparent border-none p-0 m-0 flex items-center cursor-pointer h-10 z-[2]";
   hamburgerBtn.setAttribute("aria-label", "Open menu");
   const hamburgerImg = document.createElement("img");
   hamburgerImg.src = getNavLink(
@@ -253,17 +252,18 @@ function buildMobileHeader() {
 
   const logoLink = createLogo({
     tag: "a",
-    className: "header-mobile__logo site-logo-text",
+    className:
+      "no-underline h-full flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[1] font-bebas text-[2.2rem] text-black leading-none font-normal",
     href: getNavLink("index.html"),
     text: "E.CO",
     aria: "Go to homepage",
   });
 
   const icons = document.createElement("div");
-  icons.className = "header-mobile__icons";
+  icons.className = "flex gap-2 z-[2] min-w-[70px] justify-end";
   let mobileSearchIcon = null;
   const leftIcons = document.createElement("div");
-  leftIcons.className = "header-mobile__left-icons";
+  leftIcons.className = "flex flex-row items-center gap-2";
   if (!IS_ROOT_PAGE) {
     mobileSearchIcon = createIconLink({
       href: "#",
@@ -285,11 +285,13 @@ function buildMobileHeader() {
 
   // Lower header (Blue part)
   const lower = document.createElement("div");
-  lower.className = "header-mobile__lower";
+  lower.className =
+    "h-[65px] bg-blue-600 flex items-center justify-center px-4";
 
   function buildMobileSearchForm() {
     const searchContainer = document.createElement("form");
-    searchContainer.className = "site-search mobile-toggle-search";
+    searchContainer.className =
+      "flex items-center w-full max-w-[670px] h-10 bg-white rounded-[20px] overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.04)] mobile-toggle-search";
     searchContainer.setAttribute("role", "search");
     searchContainer.setAttribute("aria-label", "Site search");
     searchContainer.action = "#";
@@ -300,7 +302,8 @@ function buildMobileHeader() {
     searchContainer.appendChild(searchLabel);
     const searchInput = document.createElement("input");
     searchInput.type = "search";
-    searchInput.className = "site-search__input";
+    searchInput.className =
+      "flex-1 h-full border-none px-4 text-base bg-transparent text-gray-800 outline-none placeholder:text-gray-500 placeholder:opacity-100";
     searchInput.placeholder = "Search";
     searchInput.setAttribute("aria-label", "Search");
     searchInput.autocomplete = "off";
@@ -308,7 +311,8 @@ function buildMobileHeader() {
     searchContainer.appendChild(searchInput);
     const searchBtn = document.createElement("button");
     searchBtn.type = "submit";
-    searchBtn.className = "site-search__btn";
+    searchBtn.className =
+      "bg-transparent border-none w-12 h-full flex items-center justify-center cursor-pointer";
     searchBtn.setAttribute("aria-label", "Submit search");
     const searchBtnImg = document.createElement("img");
     searchBtnImg.src = getNavLink(
@@ -319,7 +323,8 @@ function buildMobileHeader() {
     searchContainer.appendChild(searchBtn);
     const closeBtn = document.createElement("button");
     closeBtn.type = "button";
-    closeBtn.className = "mobile-search-close-btn";
+    closeBtn.className =
+      "bg-transparent border-none p-1 ml-2 mr-2 cursor-pointer flex items-center [&>img]:w-5 [&>img]:h-5 [&>img]:block";
     closeBtn.setAttribute("aria-label", "Close search");
     const closeIcon = document.createElement("img");
     closeIcon.src = getNavLink("public/assets/icons/icons-svg/black/x.svg");
@@ -347,8 +352,8 @@ function buildMobileHeader() {
     const { searchContainer } = buildMobileSearchForm();
     lower.appendChild(searchContainer);
   } else {
-    lower.classList.add("header-mobile__lower--breadcrumb");
-    const breadcrumbNav = document.querySelector("nav.breadcrumb");
+    lower.classList.add("justify-start");
+    const breadcrumbNav = document.querySelector("nav[data-breadcrumb]");
     let breadcrumbs;
     if (breadcrumbNav && breadcrumbNav.dataset.breadcrumb) {
       const breadcrumbData = breadcrumbNav.dataset.breadcrumb;
@@ -406,10 +411,11 @@ function buildMobileHeader() {
 
 function buildBreadcrumbs(parts) {
   const breadcrumbs = document.createElement("nav");
-  breadcrumbs.className = "header-mobile__breadcrumbs";
+  breadcrumbs.className = "w-full max-w-[670px] text-white pl-2";
   breadcrumbs.setAttribute("aria-label", "Breadcrumb");
   const breadcrumbsList = document.createElement("ol");
-  breadcrumbsList.className = "header-mobile__breadcrumbs-list";
+  breadcrumbsList.className =
+    "flex items-center list-none m-0 p-0 text-sm [&_li]:flex [&_li]:items-center [&_li:not(:last-child)]:after:content-['/'] [&_li:not(:last-child)]:after:mx-2 [&_li:not(:last-child)]:after:text-white/70 [&_a]:text-white [&_a]:no-underline [&_a]:transition-opacity [&_a]:duration-200 [&_a:hover]:opacity-80 [&_li[aria-current='page']]:text-white/70";
   const homeItem = document.createElement("li");
   const homeLink = document.createElement("a");
   homeLink.href = getNavLink("index.html");
@@ -445,24 +451,28 @@ function buildBreadcrumbs(parts) {
 
 function buildMobileNavMenu() {
   const navMenu = document.createElement("nav");
-  navMenu.className = "mobile-nav";
+  navMenu.className =
+    "fixed top-0 -left-[300px] w-[300px] h-full bg-white shadow-[2px_0_10px_rgba(0,0,0,0.1)] z-[1000] transition-[left] duration-300 ease-in-out flex flex-col [&.is-open]:left-0 [&.is-open]:rounded-br-[15px]";
   const navHeader = document.createElement("div");
-  navHeader.className = "mobile-nav__header";
+  navHeader.className = "p-4 text-center border-b border-gray-200";
   const closeButton = document.createElement("button");
-  closeButton.className = "mobile-nav__close";
+  closeButton.className =
+    "absolute top-4 left-4 bg-transparent border-none cursor-pointer";
   closeButton.setAttribute("aria-label", "Close menu");
   const closeButtonImg = document.createElement("img");
   closeButtonImg.src = getNavLink("public/assets/icons/icons-svg/black/x.svg");
   closeButtonImg.alt = "Close";
   closeButton.appendChild(closeButtonImg);
   const navLogo = document.createElement("div");
-  navLogo.className = "mobile-nav__logo";
+  navLogo.className =
+    "mt-5 [&>img]:w-[100px] [&>img]:h-[100px] [&_.font-bebas]:text-[2rem] [&_.font-bebas]:mt-2";
   const navLogoImg = document.createElement("img");
   navLogoImg.src = getNavLink("public/assets/img/logo/logo.webp");
   navLogoImg.alt = "E.CO logo";
   const navLogoH1 = createLogo({
     tag: "h1",
-    className: "site-logo-text",
+    className:
+      "font-bebas text-[2.2rem] text-black leading-none font-normal no-underline",
     text: "E.CO",
   });
   navLogo.appendChild(navLogoImg);
@@ -470,18 +480,21 @@ function buildMobileNavMenu() {
   navHeader.appendChild(closeButton);
   navHeader.appendChild(navLogo);
   const navBody = document.createElement("div");
-  navBody.className = "mobile-nav__body";
+  navBody.className = "flex flex-col flex-grow pt-4";
   const upperLinks = document.createElement("ul");
-  upperLinks.className = "mobile-nav__links";
+  upperLinks.className =
+    "list-none m-0 px-4 [&_li]:mb-2 [&_a]:flex [&_a]:items-center [&_a]:gap-3 [&_a]:p-3 [&_a]:no-underline [&_a]:text-gray-800 [&_a]:font-roboto [&_a]:text-[18pt] [&_a]:rounded-tl-[10px] [&_a]:transition-all [&_a]:duration-200 [&_a]:w-[260px] [&_a>img]:w-6 [&_a>img]:h-6 [&_a>img]:transition-[filter] [&_a>img]:duration-200 [&_a:hover]:bg-blue-600 [&_a:hover]:text-white [&_a:hover>img]:brightness-0 [&_a:hover>img]:invert";
   MOBILE_NAV_UPPER.forEach((data) => {
     const li = document.createElement("li");
     li.appendChild(createNavLink(data));
     upperLinks.appendChild(li);
   });
   const lowerSection = document.createElement("div");
-  lowerSection.className = "mobile-nav__lower-section";
+  lowerSection.className =
+    "bg-blue-600 mt-2 flex-grow py-4 rounded-br-[15px] [&_.list-none_a]:text-white [&_.list-none_a>img]:brightness-0 [&_.list-none_a>img]:invert [&_.list-none_a:hover]:bg-white [&_.list-none_a:hover]:text-black [&_.list-none_a:hover>img]:brightness-100 [&_.list-none_a:hover>img]:invert-0";
   const lowerLinks = document.createElement("ul");
-  lowerLinks.className = "mobile-nav__links";
+  lowerLinks.className =
+    "list-none m-0 px-4 [&_li]:mb-2 [&_a]:flex [&_a]:items-center [&_a]:gap-3 [&_a]:p-3 [&_a]:no-underline [&_a]:text-gray-800 [&_a]:font-roboto [&_a]:text-[18pt] [&_a]:rounded-tl-[10px] [&_a]:transition-all [&_a]:duration-200 [&_a]:w-[260px] [&_a>img]:w-6 [&_a>img]:h-6 [&_a>img]:transition-[filter] [&_a>img]:duration-200 [&_a:hover]:bg-blue-600 [&_a:hover]:text-white [&_a:hover>img]:brightness-0 [&_a:hover>img]:invert";
   MOBILE_NAV_LOWER.forEach((data) => {
     const li = document.createElement("li");
     li.appendChild(createNavLink(data));
@@ -490,17 +503,8 @@ function buildMobileNavMenu() {
   if (IS_LOGGED_IN) {
     const logoutLi = document.createElement("li");
     const logoutBtn = document.createElement("button");
-    logoutBtn.className = "mobile-nav__logout-btn";
-    logoutBtn.style.display = "flex";
-    logoutBtn.style.alignItems = "center";
-    logoutBtn.style.gap = "12px";
-    logoutBtn.style.background = "none";
-    logoutBtn.style.border = "none";
-    logoutBtn.style.color = "#fff";
-    logoutBtn.style.fontFamily = "Roboto, Arial, sans-serif";
-    logoutBtn.style.fontSize = "18pt";
-    logoutBtn.style.cursor = "pointer";
-    logoutBtn.style.padding = "12px";
+    logoutBtn.className =
+      "flex items-center gap-3 bg-transparent border-none text-white font-roboto text-[18pt] cursor-pointer p-3";
     logoutBtn.style.width = "260px";
     const logoutIcon = document.createElement("img");
     logoutIcon.src = getNavLink("public/assets/icons/icons-svg/white/exit.svg");
@@ -526,28 +530,26 @@ function buildMobileNavMenu() {
 
 function buildDesktopHeader() {
   const desktopHeader = document.createElement("header");
-  desktopHeader.className = "header-desktop";
+  desktopHeader.className = "hidden lg:flex w-full flex-col font-roboto";
   const adBanner = document.createElement("div");
-  adBanner.className = "site-ad";
-  adBanner.style.minHeight = "35px";
-  adBanner.style.height = "35px";
-  adBanner.style.display = "flex";
-  adBanner.style.alignItems = "center";
-  adBanner.style.justifyContent = "center";
+  adBanner.className =
+    "bg-brand-blue text-white text-center h-[35px] flex items-center justify-center text-sm";
   if (IS_LOGGED_IN) {
     const p = document.createElement("p");
+    p.className = "m-0";
     p.textContent = "Browse our ";
     const saleLink = document.createElement("a");
+    saleLink.className = "text-white underline font-bold";
     saleLink.href = getNavLink("src/pages/storefront.html?sale=true");
     saleLink.textContent = "summer sale!";
-    saleLink.style.color = "#fff";
-    saleLink.style.fontWeight = "bold";
     saleLink.setAttribute("aria-label", "Browse summer sale");
     p.appendChild(saleLink);
     adBanner.appendChild(p);
   } else {
     const p = document.createElement("p");
+    p.className = "m-0";
     const a = document.createElement("a");
+    a.className = "text-white underline";
     a.href = getNavLink("src/pages/register.html");
     a.textContent = "Sign up now";
     p.appendChild(a);
@@ -556,25 +558,29 @@ function buildDesktopHeader() {
   }
   desktopHeader.appendChild(adBanner);
   const desktopUpper = document.createElement("div");
-  desktopUpper.className = "header-desktop__upper";
+  desktopUpper.className =
+    "h-[65px] flex items-center px-6 w-full min-w-0 box-border bg-white justify-between shadow-[0_2px_8px_rgba(0,0,0,0.04)]";
   const desktopLogoContainer = document.createElement("a");
-  desktopLogoContainer.className = "header-desktop__logo-container";
+  desktopLogoContainer.className =
+    "flex items-center gap-2 no-underline text-inherit";
   desktopLogoContainer.href = getNavLink("index.html");
   const desktopLogoImg = document.createElement("img");
   desktopLogoImg.src = getNavLink("public/assets/img/logo/logo.webp");
   desktopLogoImg.alt = "E.CO Logo";
-  desktopLogoImg.className = "header-desktop__logo-img";
+  desktopLogoImg.className = "w-[42px] h-[42px]";
   const desktopLogoText = createLogo({
     tag: "span",
-    className: "header-desktop__logo-text site-logo-text",
+    className:
+      "font-bebas text-[2.2rem] text-black leading-none font-normal no-underline",
     text: "E.CO",
   });
   desktopLogoContainer.appendChild(desktopLogoImg);
   desktopLogoContainer.appendChild(desktopLogoText);
   const desktopNav = document.createElement("nav");
-  desktopNav.className = "header-desktop__nav";
+  desktopNav.className = "flex";
   const desktopNavList = document.createElement("ul");
-  desktopNavList.className = "header-desktop__nav-list";
+  desktopNavList.className =
+    "flex list-none m-0 p-0 gap-8 [&_a]:no-underline [&_a]:text-gray-800 [&_a]:text-[15pt] [&_a]:font-normal [&_a]:py-2 [&_a]:px-3 [&_a]:rounded-lg [&_a]:transition-all [&_a]:duration-200 [&_a:hover]:bg-blue-600 [&_a:hover]:text-white";
   DESKTOP_NAV_ITEMS.forEach((item) => {
     const li = document.createElement("li");
     const a = document.createElement("a");
@@ -585,7 +591,8 @@ function buildDesktopHeader() {
   });
   desktopNav.appendChild(desktopNavList);
   const desktopIcons = document.createElement("div");
-  desktopIcons.className = "header-desktop__icons";
+  desktopIcons.className =
+    "flex items-center gap-2 [&_a]:flex [&_a]:items-center [&_a]:justify-center [&_a]:w-10 [&_a]:h-10 [&_a]:rounded-full [&_a]:transition-colors [&_a]:duration-200 [&_a:hover]:bg-blue-600 [&_a>img]:w-6 [&_a>img]:h-6 [&_a:hover>img]:brightness-0 [&_a:hover>img]:invert";
   DESKTOP_ICONS.forEach((data) =>
     desktopIcons.appendChild(createIconLink(data)),
   );
@@ -597,12 +604,15 @@ function buildDesktopHeader() {
   // Lower
 
   const desktopLower = document.createElement("div");
-  desktopLower.className = "header-desktop__lower";
+  desktopLower.className =
+    "h-[65px] flex items-center px-6 w-full min-w-0 box-border bg-blue-600 justify-between text-white px-[60px]";
 
   // Left: Category browser (I'll try to make this work, no promises)
 
   const categoryBrowser = document.createElement("button");
-  categoryBrowser.className = "header-desktop__category-browser";
+  categoryBrowser.className =
+    "flex items-center gap-2 bg-transparent border-none text-inherit font-inherit text-base cursor-pointer [&>img]:brightness-0 [&>img]:invert [&>img]:w-6 [&>img]:h-6 [&>img]:inline-block";
+  categoryBrowser.setAttribute("data-category-browser", "");
   const categoryIcon = document.createElement("img");
   categoryIcon.src = getNavLink(
     "public/assets/icons/icons-svg/black/desktop-hamburger.svg",
@@ -615,7 +625,7 @@ function buildDesktopHeader() {
     "public/assets/icons/icons-svg/black/down-arrow.svg",
   );
   categoryArrow.alt = "";
-  categoryArrow.className = "header-desktop__category-arrow";
+  categoryArrow.className = "w-[10px] h-[10px]";
   categoryBrowser.appendChild(categoryIcon);
   categoryBrowser.appendChild(categoryText);
   categoryBrowser.appendChild(categoryArrow);
@@ -623,7 +633,8 @@ function buildDesktopHeader() {
   // Center: Search bar (I'll try to make this work as well maybe)
 
   const desktopSearchContainer = document.createElement("form");
-  desktopSearchContainer.className = "site-search";
+  desktopSearchContainer.className =
+    "flex items-center w-full max-w-[670px] h-10 bg-white rounded-[20px] overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.04)]";
   desktopSearchContainer.action = "#";
   const desktopSearchLabel = document.createElement("label");
   desktopSearchLabel.htmlFor = "desktop-site-search-input";
@@ -632,14 +643,16 @@ function buildDesktopHeader() {
   desktopSearchContainer.appendChild(desktopSearchLabel);
   const desktopSearchInput = document.createElement("input");
   desktopSearchInput.type = "search";
-  desktopSearchInput.className = "site-search__input";
+  desktopSearchInput.className =
+    "flex-1 h-full border-none px-4 text-base bg-transparent text-gray-800 outline-none placeholder:text-gray-500 placeholder:opacity-100";
   desktopSearchInput.placeholder = "Search";
   desktopSearchInput.autocomplete = "off";
   desktopSearchInput.id = "desktop-site-search-input";
   desktopSearchContainer.appendChild(desktopSearchInput);
   const desktopSearchBtn = document.createElement("button");
   desktopSearchBtn.type = "submit";
-  desktopSearchBtn.className = "site-search__btn";
+  desktopSearchBtn.className =
+    "bg-transparent border-none w-12 h-full flex items-center justify-center cursor-pointer";
   const desktopSearchBtnImg = document.createElement("img");
   desktopSearchBtnImg.src = getNavLink(
     "public/assets/icons/icons-svg/black/search.svg",
@@ -660,19 +673,20 @@ function buildDesktopHeader() {
   });
 
   const contactInfo = document.createElement("div");
-  contactInfo.className = "header-desktop__contact-info";
+  contactInfo.className =
+    "flex items-center gap-2 [&>img]:brightness-0 [&>img]:invert [&>img]:w-6 [&>img]:h-6 [&>img]:inline-block";
   const contactIcon = document.createElement("img");
   contactIcon.src = getNavLink(
     "public/assets/icons/icons-svg/black/line-phone.svg",
   );
   contactIcon.alt = "";
   const contactTextContainer = document.createElement("div");
-  contactTextContainer.className = "header-desktop__contact-text-container";
+  contactTextContainer.className = "flex flex-col";
   const contactText = document.createElement("span");
-  contactText.className = "header-desktop__contact-text";
+  contactText.className = "text-[10pt]";
   contactText.textContent = "Questions? Give us a call!";
   const contactNumber = document.createElement("span");
-  contactNumber.className = "header-desktop__contact-number";
+  contactNumber.className = "text-[11pt] text-red-400 font-medium";
   contactNumber.textContent = "+47 45612378";
   contactTextContainer.appendChild(contactText);
   contactTextContainer.appendChild(contactNumber);
@@ -693,13 +707,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const { mobileHeader, hamburgerBtn } = buildMobileHeader();
   const { navMenu, closeButton } = buildMobileNavMenu();
   const navOverlay = document.createElement("div");
-  navOverlay.className = "mobile-nav-overlay";
+  navOverlay.className =
+    "fixed top-0 left-0 w-full h-[120%] bg-black/50 z-[999] opacity-0 invisible transition-[opacity,visibility] duration-300 [&.is-open]:opacity-100 [&.is-open]:visible";
 
   // Hamburger menu (mobile)
   const openMenu = () => {
     navMenu.classList.add("is-open");
     navOverlay.classList.add("is-open");
-    const adBannerEl = document.querySelector(".site-ad");
+    const adBannerEl = document.querySelector(".bg-brand-blue");
     const adBannerHeight = adBannerEl ? adBannerEl.offsetHeight : 0;
     navMenu.style.top = `${adBannerHeight}px`;
     navMenu.style.height = `calc(100% - ${adBannerHeight}px)`;
@@ -733,7 +748,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   document.addEventListener("click", function (e) {
-    const target = e.target.closest(".header-desktop__category-browser");
+    const target = e.target.closest("[data-category-browser]");
     if (target) {
       if (desktopFilterMenu.classList.contains("is-open")) {
         closeDesktopFilterMenu();

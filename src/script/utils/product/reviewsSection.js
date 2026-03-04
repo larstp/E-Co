@@ -58,7 +58,8 @@ export function createReviewsSection(product) {
   sortBtnWrapper.appendChild(sortDropdown);
 
   const writeReviewBtn = document.createElement("button");
-  writeReviewBtn.className = "btn-small";
+  writeReviewBtn.className =
+    "min-w-20 h-12 px-6 rounded-full bg-blue-600 text-white font-semibold border-none shadow-md inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-all duration-150 hover:bg-blue-700 hover:shadow-lg";
   writeReviewBtn.type = "button";
   writeReviewBtn.textContent = "Write a Review";
   reviewsHeader.append(reviewsH3, reviewsCount, sortBtnWrapper, writeReviewBtn);

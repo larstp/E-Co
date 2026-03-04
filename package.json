@@ -1,0 +1,30 @@
+{
+  "name": "e-co",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <img src=\"public/assets/img/logo/E-CO.png\" alt=\"ECO logo\" width=\"450\" />\r </p>",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i ./src/css/tailwind.input.css -o ./src/css/output.css --minify",
+    "watch": "tailwindcss -i ./src/css/tailwind.input.css -o ./src/css/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larstp/E-Co.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/larstp/E-Co/issues"
+  },
+  "homepage": "https://github.com/larstp/E-Co#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19"
+  }
+}
