@@ -38,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
   form.className = "form register-form";
   form.autocomplete = "on";
 
-  // E-Mail
   const labelEmail = document.createElement("label");
   labelEmail.htmlFor = "register-email";
   labelEmail.textContent = "E-Mail";
@@ -54,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
   inputEmail.required = true;
   inputEmail.placeholder = "john-doe@email.com";
 
-  // Username
   const labelUser = document.createElement("label");
   labelUser.htmlFor = "register-username";
   labelUser.textContent = "Username";
@@ -66,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
   inputUser.required = true;
   inputUser.placeholder = "johnny-boy";
 
-  // Phone
   const labelPhone = document.createElement("label");
   labelPhone.htmlFor = "register-phone";
   labelPhone.textContent = "Phone (optional)";
@@ -77,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
   inputPhone.autocomplete = "tel";
   inputPhone.placeholder = "+47 123 45 678";
 
-  // Password
   const labelPass = document.createElement("label");
   labelPass.htmlFor = "register-password";
   labelPass.textContent = "Password";
@@ -93,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
   inputPass.required = true;
   inputPass.placeholder = "*******";
 
-  // Repeat Password
   const labelRepeat = document.createElement("label");
   labelRepeat.htmlFor = "register-repeat-password";
   labelRepeat.textContent = "Repeat Password";
@@ -109,7 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
   inputRepeat.required = true;
   inputRepeat.placeholder = "*******";
 
-  // Checkboxes
   const checkboxTermsContainer = document.createElement("div");
   checkboxTermsContainer.className = "register-checkbox-container";
   const checkboxTerms = document.createElement("input");
@@ -134,7 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
   checkboxNewsletterContainer.appendChild(checkboxNewsletter);
   checkboxNewsletterContainer.appendChild(labelNewsletter);
 
-  // Button
   const btnCreate = document.createElement("button");
   btnCreate.type = "submit";
   btnCreate.className = "btn-large";
@@ -152,12 +145,11 @@ document.addEventListener("DOMContentLoaded", () => {
       checkboxTerms.style.outlineOffset = "";
     }
 
-    // -------------------------------------------------------------------Noroff API restrictions
     if (!/^\w+$/.test(inputUser.value)) {
       displayMessage(
         ".message-container",
         "Username can only contain letters, numbers, and underscores (_).",
-        "error"
+        "error",
       );
       return;
     }
@@ -166,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
       displayMessage(
         ".message-container",
         "Email must be a valid NOROFF address ending with @stud.noroff.no (e.g., yourname@stud.noroff.no).",
-        "error"
+        "error",
       );
       inputEmail.focus();
       return;
@@ -176,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
       displayMessage(
         ".message-container",
         "Password must be at least 8 characters.",
-        "error"
+        "error",
       );
       return;
     }
@@ -190,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
       displayMessage(
         ".message-container",
         "You must accept the Terms & Conditions.",
-        "error"
+        "error",
       );
       checkboxTerms.style.outline = "2px solid red";
       checkboxTerms.style.outlineOffset = "2px";
@@ -212,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
       displayMessage(
         ".message-container",
         "Registration successful! Redirecting to login...",
-        "success"
+        "success",
       );
       setTimeout(() => {
         window.location.href = "./src/pages/log-in.html";

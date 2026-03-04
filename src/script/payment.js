@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("payment-container");
   if (!root) return;
 
-  // Heading
   const h1 = document.createElement("h1");
   h1.textContent = "Add new payment method";
   root.appendChild(h1);
@@ -19,8 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const container = document.createElement("div");
         container.className = "payment-form-fields";
 
-        // Card number
-
         const labelNum = document.createElement("label");
         labelNum.htmlFor = "card-number";
         labelNum.textContent = "Card Number";
@@ -30,8 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
         inputNum.name = "card-number";
         inputNum.placeholder = "1234 5678 9012 3456";
         inputNum.required = true;
-
-        // Name on card
 
         const labelName = document.createElement("label");
         labelName.htmlFor = "card-name";
@@ -43,8 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
         inputName.placeholder = "John Doe";
         inputName.required = true;
 
-        // Expieieyiery
-
         const labelExp = document.createElement("label");
         labelExp.htmlFor = "card-expiry";
         labelExp.textContent = "Expiry Date";
@@ -54,8 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
         inputExp.name = "card-expiry";
         inputExp.placeholder = "MM/YY";
         inputExp.required = true;
-
-        // CVC (sec code)
 
         const labelCvc = document.createElement("label");
         labelCvc.htmlFor = "card-cvc";
@@ -74,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
           labelExp,
           inputExp,
           labelCvc,
-          inputCvc
+          inputCvc,
         );
         return container;
       },
@@ -141,11 +132,9 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   ];
 
-  // Payment options list
   const optionsList = document.createElement("ul");
   optionsList.className = "payment-options-list";
 
-  // Custom error message container
   const messageContainer = document.createElement("div");
   messageContainer.className = "message-container";
   messageContainer.setAttribute("aria-live", "polite");
@@ -162,19 +151,16 @@ document.addEventListener("DOMContentLoaded", () => {
     row.style.alignItems = "center";
     row.style.width = "100%";
 
-    // Checkbox (acts as toggle hopefully)
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.id = `payment-${option.id}`;
     checkbox.className = "payment-radio";
 
-    // Label
     const label = document.createElement("label");
     label.htmlFor = checkbox.id;
     label.className = "payment-label";
     label.textContent = option.label;
 
-    // Icons
     option.icons.forEach((iconSrc) => {
       const icon = document.createElement("img");
       icon.src = iconSrc;
@@ -187,7 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
     row.appendChild(label);
     li.appendChild(row);
 
-    // Form container (SHOULD be hidden if I can MAKE THIS WORK AAH)
     const formContainer = document.createElement("div");
     formContainer.className = "payment-form-container";
     formContainer.style.display = "none";
@@ -220,7 +205,6 @@ document.addEventListener("DOMContentLoaded", () => {
   root.appendChild(optionsList);
   root.appendChild(messageContainer);
 
-  // Save button
   const btnSave = document.createElement("button");
   btnSave.type = "button";
   btnSave.className = "btn-large";
@@ -235,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     const formContainer = checked.parentElement.parentElement.querySelector(
-      ".payment-form-container"
+      ".payment-form-container",
     );
     if (!formContainer || !formContainer.firstChild) {
       messageContainer.textContent = "Please fill out the payment details.";
@@ -259,8 +243,6 @@ document.addEventListener("DOMContentLoaded", () => {
     messageContainer.classList.add("success");
   });
   root.appendChild(btnSave);
-
-  // This section is a mockup of how it would be if the user had saved different payment methods. Its pulling from the JSON file in /components
 
   fetch("../components/payment-options.json")
     .then((res) => res.json())

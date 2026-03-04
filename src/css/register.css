@@ -1,5 +1,3 @@
-/* -- I have to do separate button styling for some pages -- */
-
 .btn-large {
   margin-left: auto;
   margin-right: auto;
@@ -10,7 +8,6 @@
   text-decoration: none !important;
   height: 48px;
 }
-
 
 .register-container {
   max-width: 350px;

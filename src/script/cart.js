@@ -25,7 +25,6 @@ function createEl(tag, options = {}) {
 function createCartItemCard(item) {
   const card = createEl("div", { class: "cart-item-card" });
 
-  // 1. Image Container
   const imgContainer = createEl("div", { class: "cart-item-img-container" });
   const img = createEl("img", {
     attrs: {
@@ -35,7 +34,6 @@ function createCartItemCard(item) {
   });
   imgContainer.appendChild(img);
 
-  // 2. Info Container
   const infoContainer = createEl("div", { class: "cart-item-info-container" });
   const title = createEl("h4", { class: "cart-item-title", text: item.title });
   const tags = createEl("p", {
@@ -58,7 +56,6 @@ function createCartItemCard(item) {
   }
   infoContainer.append(title, tags, price);
 
-  // 3. Buttons etc. container
   const actionsContainer = createEl("div", {
     class: "cart-item-actions-container",
   });
@@ -141,7 +138,7 @@ function createOrderSummarySection(items) {
   const userName = user?.name || "Guest";
   deliveryInfo.append(
     mapIcon,
-    `Deliver to ${userName}, Karl Johans Gate 1, Oslo`
+    `Deliver to ${userName}, Karl Johans Gate 1, Oslo`,
   );
   section.appendChild(deliveryInfo);
 
@@ -196,11 +193,11 @@ function updateOrderSummary(items, summaryDetailsElement) {
 
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
   const discount = items.reduce(
     (sum, item) => sum + (item.price - item.discountedPrice) * item.quantity,
-    0
+    0,
   );
   const deliveryFee = items.length === 0 ? 0.0 : 250.0;
   const total = subtotal - discount + deliveryFee;
@@ -217,7 +214,7 @@ function updateOrderSummary(items, summaryDetailsElement) {
   const discountRow = createRow(
     "Discount",
     `-${discount.toFixed(2)},-`,
-    "discount-value"
+    "discount-value",
   );
   const deliveryRow = createRow("Delivery Fee", `${deliveryFee.toFixed(2)},-`);
   const separator = createEl("hr", { class: "summary-separator" });
@@ -229,7 +226,7 @@ function updateOrderSummary(items, summaryDetailsElement) {
     discountRow,
     deliveryRow,
     separator,
-    totalRow
+    totalRow,
   );
 }
 
@@ -249,7 +246,7 @@ function renderCart() {
     document.body.insertBefore(
       mainContainer,
       document.querySelector(".recommendations-section") ||
-        document.querySelector("footer")
+        document.querySelector("footer"),
     );
   }
   mainContainer.innerHTML = "";

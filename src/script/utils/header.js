@@ -26,7 +26,7 @@ const MOBILE_UPPER_LINKS = [
         {
           href: getNavLink("src/pages/wishlist.html"),
           icon: getNavLink(
-            "public/assets/icons/icons-svg/black/line-heart.svg"
+            "public/assets/icons/icons-svg/black/line-heart.svg",
           ),
           alt: "Wishlist",
           aria: "View wishlist",
@@ -83,7 +83,7 @@ const MOBILE_NAV_LOWER = [
         {
           href: getNavLink("src/pages/wishlist.html"),
           icon: getNavLink(
-            "public/assets/icons/icons-svg/black/line-heart.svg"
+            "public/assets/icons/icons-svg/black/line-heart.svg",
           ),
           text: "Wishlist",
         },
@@ -112,7 +112,7 @@ const DESKTOP_ICONS = [
         {
           href: getNavLink("src/pages/wishlist.html"),
           icon: getNavLink(
-            "public/assets/icons/icons-svg/black/line-heart.svg"
+            "public/assets/icons/icons-svg/black/line-heart.svg",
           ),
           alt: "Wishlist",
           aria: "View wishlist",
@@ -166,7 +166,7 @@ function createIconLink({ href, icon, alt, aria }) {
   function updateCartBadges() {
     document
       .querySelectorAll(
-        ".header-mobile__icon[aria-label='View cart'], .header-desktop__icons a[aria-label='View cart']"
+        ".header-mobile__icon[aria-label='View cart'], .header-desktop__icons a[aria-label='View cart']",
       )
       .forEach((el) => {
         const badge = el.querySelector(".cart-counter-badge");
@@ -246,7 +246,7 @@ function buildMobileHeader() {
   hamburgerBtn.setAttribute("aria-label", "Open menu");
   const hamburgerImg = document.createElement("img");
   hamburgerImg.src = getNavLink(
-    "public/assets/icons/icons-svg/black/hamburger.svg"
+    "public/assets/icons/icons-svg/black/hamburger.svg",
   );
   hamburgerImg.alt = "Menu";
   hamburgerBtn.appendChild(hamburgerImg);
@@ -312,7 +312,7 @@ function buildMobileHeader() {
     searchBtn.setAttribute("aria-label", "Submit search");
     const searchBtnImg = document.createElement("img");
     searchBtnImg.src = getNavLink(
-      "public/assets/icons/icons-svg/black/search.svg"
+      "public/assets/icons/icons-svg/black/search.svg",
     );
     searchBtnImg.alt = "Search";
     searchBtn.appendChild(searchBtnImg);
@@ -331,7 +331,7 @@ function buildMobileHeader() {
       const query = searchInput.value.trim();
       if (query) {
         window.location.href = getNavLink(
-          `src/pages/storefront.html?search=${encodeURIComponent(query)}`
+          `src/pages/storefront.html?search=${encodeURIComponent(query)}`,
         );
       }
     });
@@ -587,7 +587,7 @@ function buildDesktopHeader() {
   const desktopIcons = document.createElement("div");
   desktopIcons.className = "header-desktop__icons";
   DESKTOP_ICONS.forEach((data) =>
-    desktopIcons.appendChild(createIconLink(data))
+    desktopIcons.appendChild(createIconLink(data)),
   );
   desktopUpper.appendChild(desktopLogoContainer);
   desktopUpper.appendChild(desktopNav);
@@ -605,14 +605,14 @@ function buildDesktopHeader() {
   categoryBrowser.className = "header-desktop__category-browser";
   const categoryIcon = document.createElement("img");
   categoryIcon.src = getNavLink(
-    "public/assets/icons/icons-svg/black/desktop-hamburger.svg"
+    "public/assets/icons/icons-svg/black/desktop-hamburger.svg",
   );
   categoryIcon.alt = "Categories";
   const categoryText = document.createElement("span");
   categoryText.textContent = "Browse by category";
   const categoryArrow = document.createElement("img");
   categoryArrow.src = getNavLink(
-    "public/assets/icons/icons-svg/black/down-arrow.svg"
+    "public/assets/icons/icons-svg/black/down-arrow.svg",
   );
   categoryArrow.alt = "";
   categoryArrow.className = "header-desktop__category-arrow";
@@ -642,7 +642,7 @@ function buildDesktopHeader() {
   desktopSearchBtn.className = "site-search__btn";
   const desktopSearchBtnImg = document.createElement("img");
   desktopSearchBtnImg.src = getNavLink(
-    "public/assets/icons/icons-svg/black/search.svg"
+    "public/assets/icons/icons-svg/black/search.svg",
   );
   desktopSearchBtnImg.alt = "Search";
   desktopSearchBtn.appendChild(desktopSearchBtnImg);
@@ -654,18 +654,16 @@ function buildDesktopHeader() {
     const query = desktopSearchInput.value.trim();
     if (query) {
       window.location.href = getNavLink(
-        `src/pages/storefront.html?search=${encodeURIComponent(query)}`
+        `src/pages/storefront.html?search=${encodeURIComponent(query)}`,
       );
     }
   });
-
-  // Right: Contact info (I wont make any of this work. Not part of the assignment and cant be arsed)
 
   const contactInfo = document.createElement("div");
   contactInfo.className = "header-desktop__contact-info";
   const contactIcon = document.createElement("img");
   contactIcon.src = getNavLink(
-    "public/assets/icons/icons-svg/black/line-phone.svg"
+    "public/assets/icons/icons-svg/black/line-phone.svg",
   );
   contactIcon.alt = "";
   const contactTextContainer = document.createElement("div");
@@ -714,7 +712,6 @@ document.addEventListener("DOMContentLoaded", function () {
   closeButton.addEventListener("click", closeMenu);
   navOverlay.addEventListener("click", closeMenu);
 
-  // Desktop filter menu (hamburger from left, no overlay. Hopefully it works as intended because I'm done fidgeting with this...)
   const desktopFilterMenu = document.createElement("div");
   desktopFilterMenu.className = "desktop-filter-menu";
   const desktopFilterMenuInner = document.createElement("div");
@@ -748,7 +745,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function renderDesktopFilterMenu(categories = [], tags = []) {
     const inner = desktopFilterMenu.querySelector(
-      ".desktop-filter-menu__inner"
+      ".desktop-filter-menu__inner",
     );
     while (inner.firstChild) {
       inner.removeChild(inner.firstChild);
@@ -784,7 +781,7 @@ document.addEventListener("DOMContentLoaded", function () {
     saleBtn.addEventListener("click", () => {
       if (!window.location.pathname.endsWith("storefront.html")) {
         window.location.href = getNavLink(
-          "src/pages/storefront.html?sale=true"
+          "src/pages/storefront.html?sale=true",
         );
       } else {
         window.location.search = "?sale=true";
@@ -816,7 +813,7 @@ document.addEventListener("DOMContentLoaded", function () {
     popBtn.addEventListener("click", () => {
       if (!window.location.pathname.endsWith("storefront.html")) {
         window.location.href = getNavLink(
-          "src/pages/storefront.html?popular=true"
+          "src/pages/storefront.html?popular=true",
         );
       } else {
         window.location.search = "?popular=true";
@@ -875,7 +872,7 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.addEventListener("click", () => {
         if (!window.location.pathname.endsWith("storefront.html")) {
           window.location.href = getNavLink(
-            `src/pages/storefront.html?tag=${encodeURIComponent(tag)}`
+            `src/pages/storefront.html?tag=${encodeURIComponent(tag)}`,
           );
         } else {
           window.location.search = `?tag=${encodeURIComponent(tag)}`;
@@ -891,7 +888,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchAllProducts().then((products) => {
       const tagsSet = new Set();
       products.forEach((p) =>
-        Array.isArray(p.tags) ? p.tags.forEach((t) => tagsSet.add(t)) : null
+        Array.isArray(p.tags) ? p.tags.forEach((t) => tagsSet.add(t)) : null,
       );
       renderDesktopFilterMenu([], Array.from(tagsSet));
     });

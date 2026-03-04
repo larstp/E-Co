@@ -146,7 +146,7 @@ export async function createProductCarousel(options = {}) {
 
     const wishlistIcon = document.createElement("img");
     wishlistIcon.className = "product-card-wishlist-icon";
-    wishlistIcon.alt = "Add to wishlist"; //Hihihi cheeky
+    wishlistIcon.alt = "Add to wishlist";
     import("./wishlist.js").then(
       ({ addToWishlist, removeFromWishlist, isWishlisted }) => {
         function updateWishlistIcon() {
@@ -165,7 +165,7 @@ export async function createProductCarousel(options = {}) {
           }
           updateWishlistIcon();
         });
-      }
+      },
     );
     iconsDiv.appendChild(wishlistIcon);
 

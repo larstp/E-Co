@@ -20,11 +20,11 @@ function createOrderSummarySection(items) {
 
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
   const discount = items.reduce(
     (sum, item) => sum + (item.price - item.discountedPrice) * item.quantity,
-    0
+    0,
   );
   const deliveryFee = 250.0;
   const total = subtotal - discount + deliveryFee;
@@ -33,7 +33,7 @@ function createOrderSummarySection(items) {
     const row = createEl("div", { class: "summary-row" });
     row.append(
       createEl("span", { text: label }),
-      createEl("span", { text: value, class: valueClass })
+      createEl("span", { text: value, class: valueClass }),
     );
     return row;
   };
@@ -42,7 +42,7 @@ function createOrderSummarySection(items) {
     createRow("Subtotal", `${subtotal.toFixed(0)},-`),
     createRow("Discount", `-${discount.toFixed(0)},-`, "discount-value"),
     createRow("Delivery Fee", `${deliveryFee.toFixed(0)},-`),
-    createEl("hr", { class: "separator" })
+    createEl("hr", { class: "separator" }),
   );
 
   const totalRow = createRow("Total", `${total.toFixed(0)},-`);
@@ -52,8 +52,6 @@ function createOrderSummarySection(items) {
   section.appendChild(summaryDetails);
   return section;
 }
-
-// CHECKOUT powerpoint slide ish content
 
 async function createAddressBox() {
   const container = createEl("div", { class: "address-box-list" });
@@ -85,7 +83,7 @@ async function createAddressBox() {
           text: addr.street + (addr.apt ? ", " + addr.apt : ""),
         }),
         createEl("p", { text: `${addr.postal} ${addr.city}` }),
-        createEl("p", { text: addr.country })
+        createEl("p", { text: addr.country }),
       );
       box.append(label);
       container.appendChild(box);
@@ -102,7 +100,6 @@ async function createAddressBox() {
             ...(idx === selectedIdx ? { checked: true } : {}),
           },
         });
-        // Trash icon (bottom right HOPEFULLY)
         const trash = createEl("img", {
           class: "address-trash",
           attrs: {
@@ -111,7 +108,6 @@ async function createAddressBox() {
             tabindex: 0,
           },
         });
-        // No real delete, just mock hover/click! -----------------Dont know if we can save this to the API
         trash.addEventListener("click", (e) => {
           e.stopPropagation();
         });
@@ -143,7 +139,7 @@ async function createAddressBox() {
             text: addr.street + (addr.apt ? ", " + addr.apt : ""),
           }),
           createEl("p", { text: `${addr.postal} ${addr.city}` }),
-          createEl("p", { text: addr.country })
+          createEl("p", { text: addr.country }),
         );
         box.append(label, radio, trash);
         container.appendChild(box);
@@ -216,14 +212,11 @@ function createPaymentOptions() {
   return container;
 }
 
-// MOBILE CHECKOUT
-
 async function buildMobileCheckout(cartItems) {
   const mainContainer = createEl("main", {
     class: "checkout-container-mobile",
   });
 
-  // --- Progress Tabs ---
   const tabsContainer = createEl("div", { class: "checkout-tabs" });
   const tabNames = ["Address", "Shipping", "Payment"];
   const progressLines = [];
@@ -241,10 +234,8 @@ async function buildMobileCheckout(cartItems) {
   });
   tabsContainer.append(...tabButtons);
 
-  // ------------------------------------------ Steps Wrapper (Slideshow ish) ---
   const stepsWrapper = createEl("div", { class: "checkout-steps-wrapper" });
 
-  // --- Step 1: Address ---
   const addressStep = createEl("div", {
     class: "checkout-step active-step",
     attrs: { "data-step": 1 },
@@ -268,14 +259,13 @@ async function buildMobileCheckout(cartItems) {
       class: "btn-large-white",
       text: "Change Delivery Address",
       attrs: { id: "change-address-btn-mobile" },
-    })
+    }),
   );
   addressStep.querySelector("#change-address-btn-mobile").onclick = () => {
     if (addressBox && addressBox.showAllAddresses)
       addressBox.showAllAddresses();
   };
 
-  // --- Step 2: Shipping ---
   const shippingStep = createEl("div", {
     class: "checkout-step",
     attrs: { "data-step": 2 },
@@ -288,7 +278,7 @@ async function buildMobileCheckout(cartItems) {
   });
   shippingContinueBtn.addEventListener("click", (e) => {
     const selected = shippingOptions.querySelector(
-      'input[type="radio"]:checked'
+      'input[type="radio"]:checked',
     );
     if (!selected) {
       shippingContinueBtn.disabled = true;
@@ -309,10 +299,9 @@ async function buildMobileCheckout(cartItems) {
       class: "shipping-note",
       text: "* Parcel will be delivered to nearest pickup point if it cannot fit in the mailbox",
     }),
-    shippingContinueBtn
+    shippingContinueBtn,
   );
 
-  // --- Step 3: Payment ---
   const paymentStep = createEl("div", {
     class: "checkout-step",
     attrs: { "data-step": 3 },
@@ -324,7 +313,7 @@ async function buildMobileCheckout(cartItems) {
   });
   function updatePlaceOrderBtn() {
     const selected = paymentOptions.querySelector(
-      'input[type="radio"]:checked'
+      'input[type="radio"]:checked',
     );
     if (
       selected &&
@@ -341,7 +330,7 @@ async function buildMobileCheckout(cartItems) {
   paymentOptions.addEventListener("change", updatePlaceOrderBtn);
   placeOrderBtn.addEventListener("click", (e) => {
     const selected = paymentOptions.querySelector(
-      'input[type="radio"]:checked'
+      'input[type="radio"]:checked',
     );
     if (!selected) {
       placeOrderBtn.disabled = true;
@@ -365,7 +354,7 @@ async function buildMobileCheckout(cartItems) {
       class: "btn-large-white",
       text: "Add Payment Option",
     }),
-    placeOrderBtn
+    placeOrderBtn,
   );
   paymentStep.querySelector(".btn-large-white").onclick = () =>
     (window.location.href = "./src/pages/payment.html");
@@ -373,7 +362,6 @@ async function buildMobileCheckout(cartItems) {
   stepsWrapper.append(addressStep, shippingStep, paymentStep);
   mainContainer.append(tabsContainer, stepsWrapper);
 
-  // --- Navigation  ---
   let currentStep = 1;
 
   function updateTabs() {
@@ -426,8 +414,6 @@ async function buildMobileCheckout(cartItems) {
   return mainContainer;
 }
 
-// DESKTOP CHECKOUT
-
 async function buildDesktopCheckout(cartItems) {
   const mainContainer = createEl("main", {
     class: "checkout-container-desktop",
@@ -435,7 +421,6 @@ async function buildDesktopCheckout(cartItems) {
   const leftColumn = createEl("div", { class: "checkout-desktop-left" });
   const rightColumn = createEl("div", { class: "checkout-desktop-right" });
 
-  // --- Left Column ---
   leftColumn.appendChild(createEl("h2", { text: "Checkout" }));
 
   let addressBox;
@@ -482,7 +467,6 @@ async function buildDesktopCheckout(cartItems) {
     });
 
     if (index === 0) {
-      // ---------------------------------------------------Address step
       const changeAddressBtn = createEl("button", {
         class: "btn-large-white",
         text: "Change Delivery Address",
@@ -498,14 +482,13 @@ async function buildDesktopCheckout(cartItems) {
       });
       buttonContainer.append(continueBtn, changeAddressBtn);
     } else if (index === 1) {
-      // --------------------------------------------------Shipping step
       const continueBtn = createEl("button", {
         class: "btn-large continue-btn",
         text: step.buttonText,
       });
       continueBtn.addEventListener("click", (e) => {
         const selected = shippingOptionsDesktop.querySelector(
-          'input[type="radio"]:checked'
+          'input[type="radio"]:checked',
         );
         if (!selected) {
           continueBtn.disabled = true;
@@ -520,7 +503,6 @@ async function buildDesktopCheckout(cartItems) {
       });
       buttonContainer.appendChild(continueBtn);
     } else {
-      //-------------------------------------------------- Payment step
       const addPaymentBtn = createEl("button", {
         class: "btn-large-white",
         text: "Add Payment Option",
@@ -533,7 +515,7 @@ async function buildDesktopCheckout(cartItems) {
       });
       function updatePlaceOrderBtnDesktop() {
         const selected = paymentOptionsDesktop.querySelector(
-          'input[type="radio"]:checked'
+          'input[type="radio"]:checked',
         );
         if (
           selected &&
@@ -549,11 +531,11 @@ async function buildDesktopCheckout(cartItems) {
       }
       paymentOptionsDesktop.addEventListener(
         "change",
-        updatePlaceOrderBtnDesktop
+        updatePlaceOrderBtnDesktop,
       );
       placeOrderBtn.addEventListener("click", async (e) => {
         const selected = paymentOptionsDesktop.querySelector(
-          'input[type="radio"]:checked'
+          'input[type="radio"]:checked',
         );
         if (!selected) {
           placeOrderBtn.disabled = true;
@@ -583,8 +565,6 @@ async function buildDesktopCheckout(cartItems) {
     leftColumn.appendChild(stepContainer);
   });
 
-  // ------------------------------ Right Column -------------------------
-
   rightColumn.appendChild(createYourCartSection(cartItems));
   rightColumn.appendChild(createOrderSummarySection(cartItems));
 
@@ -592,7 +572,7 @@ async function buildDesktopCheckout(cartItems) {
   const checkbox = createEl("input", { attrs: { type: "checkbox" } });
   newsletter.append(
     checkbox,
-    "Please contact me with recommendations and offers"
+    "Please contact me with recommendations and offers",
   );
   rightColumn.appendChild(newsletter);
 
@@ -603,7 +583,6 @@ async function buildDesktopCheckout(cartItems) {
   backBtn.onclick = () => (window.location.href = "./index.html");
   rightColumn.appendChild(backBtn);
 
-  // --- Locking Logic -------------------------------------------------------------- Check if works
   let currentStep = 1;
   const stepContainers = leftColumn.querySelectorAll(".desktop-step-container");
 
@@ -634,7 +613,6 @@ async function buildDesktopCheckout(cartItems) {
   return mainContainer;
 }
 
-// --- Functions for Right Column (from cart.js) ------------------------------- !!
 function createYourCartSection(items) {
   const section = createEl("div", { class: "your-cart-container" });
   const heading = createEl("h3", { text: "Your Cart" });
@@ -668,8 +646,6 @@ function createCartItemCard(item) {
   card.append(infoContainer, quantityDisplay);
   return card;
 }
-
-// CONFIRMATION POP-UP
 
 function createConfirmationPopup() {
   const overlay = createEl("div", { class: "confirmation-popup-overlay" });

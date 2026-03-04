@@ -1,4 +1,3 @@
-/* ---------------------------------------------- Summer Ad Section --- */
 .landing-summer-ad {
   width: 100vw;
   height: 540px;
@@ -54,8 +53,6 @@
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 }
 
-/* --------------------------------------------------------- Carousel Section --- */
-
 .carousel-controls {
   display: flex;
   flex-direction: row;
@@ -103,7 +100,9 @@
   position: relative;
   margin-top: -120px !important;
   z-index: 2;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18), 0 1.5px 8px 0 rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.18),
+    0 1.5px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
 .landing-carousel-section {
@@ -111,7 +110,9 @@
   border-radius: 1.5rem;
   margin: -120px auto 2.5rem auto;
   padding: 2.5rem 0.5rem 1.2rem 0.5rem;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18), 0 1.5px 8px 0 rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.18),
+    0 1.5px 8px 0 rgba(0, 0, 0, 0.1);
   display: flex;
   max-width: 1070px;
   max-height: 660px;
@@ -193,7 +194,6 @@
   font-family: "Bebas Neue", Arial, sans-serif;
 }
 
-/* --------------------------------------------------------- Info Section --- */
 .landing-info-section {
   background: #0d47a1;
   color: #fff;
@@ -211,8 +211,6 @@
   font-size: 1rem;
   text-align: left;
 }
-
-/* --------------------------------------------------------- Category Section --- */
 
 .category-heading {
   padding-left: 20%;
@@ -256,7 +254,9 @@
   gap: 1.5rem;
   box-shadow: 0 1px 4px rgba(25, 118, 210, 0.04);
   cursor: pointer;
-  transition: box-shadow 0.18s, transform 0.18s;
+  transition:
+    box-shadow 0.18s,
+    transform 0.18s;
   text-decoration: none;
 }
 .category-card:hover {
@@ -278,8 +278,6 @@
   min-width: 0;
   margin: auto;
 }
-
-/* --------------------------------------------------------- Bestseller Section --- */
 
 .bestseller-heading {
   padding-left: 20%;
@@ -326,8 +324,6 @@
 .bestseller-footer .btn-large-white {
   margin-bottom: 20px;
 }
-
-/* --------------------------------------------------------- Newsletter Section --- */
 
 .landing-newsletter-section {
   width: 100vw;
@@ -382,7 +378,6 @@
 }
 
 .newsletter-form input[type="email"] {
-  /* I just did this since it shouldn't be functional anyway */
   padding: 0.7rem 1.2rem;
   border-radius: 25px;
   border: 1px solid #ccc;
@@ -406,8 +401,6 @@
   position: relative;
   z-index: 2;
 }
-
-/* --------------------------------------------------------- Cleaning Ad Section --- */
 
 .cleaning-ad {
   display: none;

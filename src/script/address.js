@@ -7,20 +7,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const flexContainer = document.createElement("div");
   flexContainer.className = "address-flex-container";
 
-  // Address form section
   const container = document.createElement("section");
 
-  // Heading
   const h1 = document.createElement("h1");
   h1.textContent = "Create a new address";
   container.appendChild(h1);
 
-  // Form -------------------------------- (Double check when NOROFF API webpage wants to feckin open!)
   const form = document.createElement("form");
   form.className = "form address-form";
   form.autocomplete = "on";
 
-  // Name*
   const labelName = document.createElement("label");
   labelName.htmlFor = "address-name";
   labelName.textContent = "Name";
@@ -35,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
   inputName.required = true;
   inputName.placeholder = "Full Name";
 
-  // Street*
   const labelStreet = document.createElement("label");
   labelStreet.htmlFor = "address-street";
   labelStreet.textContent = "Street";
@@ -50,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
   inputStreet.required = true;
   inputStreet.placeholder = "Street Address";
 
-  // Apt.
   const labelApt = document.createElement("label");
   labelApt.htmlFor = "address-apt";
   labelApt.textContent = "Apt.";
@@ -60,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
   inputApt.name = "apt";
   inputApt.placeholder = "Apartment, suite, etc. (optional)";
 
-  // Postal Code*
   const labelPostal = document.createElement("label");
   labelPostal.htmlFor = "address-postal";
   labelPostal.textContent = "Postal Code";
@@ -75,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
   inputPostal.required = true;
   inputPostal.placeholder = "1234";
 
-  // City*
   const labelCity = document.createElement("label");
   labelCity.htmlFor = "address-city";
   labelCity.textContent = "City";
@@ -90,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
   inputCity.required = true;
   inputCity.placeholder = "City";
 
-  // Country*
   const labelCountry = document.createElement("label");
   labelCountry.htmlFor = "address-country";
   labelCountry.textContent = "Country";
@@ -105,12 +96,10 @@ document.addEventListener("DOMContentLoaded", () => {
   inputCountry.required = true;
   inputCountry.placeholder = "Country";
 
-  //  error message container
   const messageContainer = document.createElement("div");
   messageContainer.className = "message-container";
   messageContainer.setAttribute("aria-live", "polite");
 
-  // Button
   const btnSave = document.createElement("button");
   btnSave.type = "submit";
   btnSave.className = "btn-large";
@@ -129,14 +118,12 @@ document.addEventListener("DOMContentLoaded", () => {
   form.appendChild(labelCountry);
   form.appendChild(inputCountry);
 
-  // Spacer for layout
   const spacer = document.createElement("div");
   spacer.style.height = "32px";
   form.appendChild(spacer);
   form.appendChild(btnSave);
   form.appendChild(messageContainer);
 
-  //  validation and feedback ----------------------- now less angry hihi
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -168,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     displayMessage(
       ".message-container",
       "Address saved! (This is a mockup just so you know ;) )",
-      "success"
+      "success",
     );
   });
 

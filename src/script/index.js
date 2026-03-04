@@ -133,7 +133,6 @@ function createProductCard(product, size = "bestseller") {
     }
     ratingAndIconsRow.appendChild(ratingDiv);
 
-    // Icons container for wishlist and share
     const iconsContainer = createEl("div", {
       class: "product-card-icons-container",
     });
@@ -165,9 +164,8 @@ function createProductCard(product, size = "bestseller") {
           }
           updateWishlistIcon();
         });
-        // Insert wishlist icon before share icon in iconsDiv
         iconsDiv.insertBefore(wishlistIcon, iconsDiv.firstChild);
-      }
+      },
     );
 
     iconsContainer.appendChild(iconsDiv);
@@ -230,7 +228,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const main = document.getElementById("main-content");
   if (!main) return;
 
-  // Summer Ad
   const summerAd = createEl("section", {
     class: "landing-summer-ad",
     attrs: {
@@ -242,12 +239,12 @@ document.addEventListener("DOMContentLoaded", () => {
   summerAdText.appendChild(
     createEl("h1", {
       text: "SUMMER SALE!",
-    })
+    }),
   );
   summerAdText.appendChild(
     createEl("summer-ad-text", {
       text: 'Get up to 80% off with the code "ecosummer"',
-    })
+    }),
   );
   const summerAdBtn = createEl("button", {
     class: "btn-small",
@@ -255,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   summerAdBtn.addEventListener(
     "click",
-    () => (window.location.href = "./src/pages/storefront.html?sale")
+    () => (window.location.href = "./src/pages/storefront.html?sale"),
   );
   summerAdContent.append(summerAdText, summerAdBtn);
   summerAd.appendChild(summerAdContent);
@@ -301,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
       class: "landing-carousel-section carousel-popout",
     });
     section.appendChild(
-      createEl("h2", { class: "carousel-heading", text: "New Arrivals" })
+      createEl("h2", { class: "carousel-heading", text: "New Arrivals" }),
     );
     const carouselContainer = createEl("div", { class: "carousel-container" });
     const track = createEl("div", { class: "carousel-track no-scrollbar" });
@@ -334,7 +331,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     viewAllBtn.addEventListener(
       "click",
-      () => (window.location.href = "./src/pages/storefront.html?new")
+      () => (window.location.href = "./src/pages/storefront.html?new"),
     );
 
     const mediaQuery = window.matchMedia("(min-width: 900px)");
@@ -423,7 +420,6 @@ document.addEventListener("DOMContentLoaded", () => {
     infoSection.insertBefore(carousel, infoSection.firstChild);
   });
 
-  // Shop By Category
   const categoryHeader = createEl("h2", {
     class: "category-heading",
     text: "Shop by category",
@@ -456,7 +452,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = document.createElement("a");
       card.className = "category-card";
       card.href = `./src/pages/storefront.html?tag=${encodeURIComponent(
-        cat.category
+        cat.category,
       )}`;
       card.setAttribute("role", "button");
       card.style.display = "flex";
@@ -488,7 +484,6 @@ document.addEventListener("DOMContentLoaded", () => {
   categorySection.appendChild(categoryList);
   main.appendChild(categorySection);
 
-  // Cleaning Ad Section
   const cleaningAdSection = createEl("section", { class: "cleaning-ad" });
   const cleaningAdLeft = createEl("div", { class: "cleaning-ad-left" });
   const cleaningAdImg = createEl("img", {
@@ -517,14 +512,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   cleaningAdBtn.addEventListener(
     "click",
-    () => (window.location.href = "./src/pages/storefront.html?tag=beauty")
+    () => (window.location.href = "./src/pages/storefront.html?tag=beauty"),
   );
 
   cleaningAdRight.append(cleaningAdHeading, p1, p2, cleaningAdBtn);
   cleaningAdSection.append(cleaningAdLeft, cleaningAdRight);
   main.appendChild(cleaningAdSection);
 
-  // Bestseller Section
   const bestsellersHeading = createEl("h2", {
     class: "bestseller-heading",
     text: "Bestsellers",
@@ -553,7 +547,6 @@ document.addEventListener("DOMContentLoaded", () => {
   bestsellerSection.appendChild(bestsellerFooter);
   main.appendChild(bestsellerSection);
 
-  // Newsletter Section
   const newsletterSection = createEl("section", {
     class: "landing-newsletter-section",
     attrs: {
@@ -562,10 +555,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const newsletterContent = createEl("div", { class: "newsletter-content" });
   newsletterContent.appendChild(
-    createEl("h2", { class: "newsletter-heading", text: "Into fashion?" })
+    createEl("h2", { class: "newsletter-heading", text: "Into fashion?" }),
   );
   newsletterContent.appendChild(
-    createEl("h4", { text: "Subscribe to our newsletter" })
+    createEl("h4", { text: "Subscribe to our newsletter" }),
   );
   const newsletterText = createEl("p", {
     text: "and stay updated on all our latest deals and offers",
@@ -593,7 +586,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetchAllProducts()
     .then((products) => {
-      // Bestsellers
       const bestsellers = products
         .filter((p) => p.reviews && p.reviews.length > 0)
         .map((p) => ({
